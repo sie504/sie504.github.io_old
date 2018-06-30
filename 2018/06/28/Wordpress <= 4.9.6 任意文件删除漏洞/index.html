@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="翻译https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution背景介绍Wordpress是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞">
+<meta name="description" content="wordpress 任意文件删除漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Wordpress 任意文件删除">
 <meta property="og:url" content="http://yoursite.com/2018/06/28/Wordpress <= 4.9.6 任意文件删除漏洞/index.html">
 <meta property="og:site_name" content="Sec-note">
-<meta property="og:description" content="翻译https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution背景介绍Wordpress是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞">
+<meta property="og:description" content="wordpress 任意文件删除漏洞">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/91545652.jpg">
 <meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/81545083.jpg">
@@ -96,10 +96,10 @@
 <meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/75307871.jpg">
 <meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-28/80117267.jpg">
 <meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/19731694.jpg">
-<meta property="og:updated_time" content="2018-06-30T03:48:02.665Z">
+<meta property="og:updated_time" content="2018-06-30T04:18:21.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wordpress 任意文件删除">
-<meta name="twitter:description" content="翻译https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution背景介绍Wordpress是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞">
+<meta name="twitter:description" content="wordpress 任意文件删除漏洞">
 <meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-6-27/91545652.jpg">
 
 
@@ -352,7 +352,9 @@
       
 
       
-        <h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><h2 id="https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution"><a href="#https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution" class="headerlink" title="https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution"></a><a href="https://blog.ripstech.com/2018/wordpress-file-delete-to-code-execution/" target="_blank" rel="noopener">https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution</a></h2><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p><code>Wordpress</code>是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞，该漏洞可能会导致攻击者执行任意代码。7个月之前已经向Wordpress安全团队报告了这个漏洞，到如今仍然没有修复。自从提交之后，没有进行任何的补丁和其他措施，漫长地等待，我们还是决定把这个漏洞公开。</p>
+        <p>wordpress 任意文件删除漏洞</p>
+<a id="more"></a>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><h2 id="https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution"><a href="#https-github-com-SecWiki-CMS-Hunter-WARNING-WordPress-File-Delete-to-Code-Execution" class="headerlink" title="https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution"></a><a href="https://blog.ripstech.com/2018/wordpress-file-delete-to-code-execution/" target="_blank" rel="noopener">https://github.com/SecWiki/CMS-Hunter WARNING: WordPress File Delete to Code Execution</a></h2><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p><code>Wordpress</code>是世界上最受欢迎的一个CMS，根据资料显示，约有30%的网站在使用它。正是树大招风，它也成为黑客攻击研究的一个有趣目标。在这篇博客中将分析Wordpress核心代码中，一个经过认证的任意文件删除漏洞，该漏洞可能会导致攻击者执行任意代码。7个月之前已经向Wordpress安全团队报告了这个漏洞，到如今仍然没有修复。自从提交之后，没有进行任何的补丁和其他措施，漫长地等待，我们还是决定把这个漏洞公开。</p>
 <h2 id="受影响的版本"><a href="#受影响的版本" class="headerlink" title="受影响的版本"></a>受影响的版本</h2><p>在分析这个漏洞的时候，暂时没有补丁来防御该漏洞。所以通杀全版本，包括当前的4.9.6版本，都容易受到该漏洞的影响。</p>
 <p>为了能成功利用这个漏洞，需要有一个小条件。攻击者需要先有一个编辑和删除媒体文件的权限，可能得是其中的一个用户。该漏洞可以通过一个低权限或作者用户来升级到高权限的特权，或者通过其他的漏洞/错误配置。</p>
 <h2 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h2><p>利用此漏洞可以使攻击者删除Wordpress安装中任何文件(PHP进程用户在服务器上有权限删除的任何文件)。除了删除整个Wordpress安装文件外，如果没有备份可能会导致严重后果。攻击者可以利用任意文件删除功能绕过一些安全措施并在Web服务器上执行任意代码。更确切的说，可以删除以下文件：</p>
