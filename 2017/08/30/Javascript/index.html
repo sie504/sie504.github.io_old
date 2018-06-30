@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Javascript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端基础知识 – Javascript">
+<meta name="keywords" content="Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript 基础知识">
+<meta property="og:url" content="http://yoursite.com/2017/08/30/Javascript/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="前端基础知识 – Javascript">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-18/38760905.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-18/97632395.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-23/8904827.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-25/16521438.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-28/63343689.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-28/93068620.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-17/79123031.jpg">
+<meta property="og:updated_time" content="2018-01-10T09:51:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript 基础知识">
+<meta name="twitter:description" content="前端基础知识 – Javascript">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-18/38760905.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/30/Javascript/"/>
+
+
+
+
+
+  <title>Javascript 基础知识 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/Javascript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript 基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T13:20:46+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端基础知识 – <code>Javascript</code></p>
+<a id="more"></a>
+<p>20170816</p>
+<p>基于对象和事件驱动的客户端脚本语言。</p>
+<p>注释   //  单行注释    /**/ 多行注释</p>
+<p>区分大小写，分号结束</p>
+<p>标识符：不能以数字开头</p>
+<p>变量：松散型</p>
+<p>变量声明前面必须有： var</p>
+<p>一次声明多个变量</p>
+<ul>
+<li><p>数据类型 typeof</p>
+<p>  Undefined Null Boolean Number String </p>
+</li>
+</ul>
+<p>变量本身没有类型，类型取决于值。。</p>
+<pre><code>console.log() 在控制台中打印
+console.log( typeof name) typeof检测数据类型
+</code></pre><ul>
+<li>Undefined</li>
+</ul>
+<p>声明但没有给变量赋值。。</p>
+<ul>
+<li>null</li>
+</ul>
+<p>一个空对象指针，undefined值是派生自null值的，所有undefined==null 的结果是true</p>
+<ul>
+<li>Number</li>
+</ul>
+<p>整数，浮点数</p>
+<p>NaN 非数值 <code>18 - &quot;abc&quot;</code></p>
+<p>任何涉及NaN的操作都会返回NaN。 NaN与任何值都不相等。包括NaN本身。</p>
+<p>isNaN 检测n是否是非数值。。对接收的数值，先尝试转换为数值，在检测是否为非数值。</p>
+<ul>
+<li><p>数值转换</p>
+<p>  id = “16”<br>  id = Number(id)<br>  console.log(typeof id)</p>
+</li>
+<li><p>parseInt() 转换 </p>
+</li>
+</ul>
+<p>必须以数字开头才可以转换   16abc — 16</p>
+<ul>
+<li>parseFloat()     </li>
+</ul>
+<p>第一个小数字有效</p>
+<pre><code>id = &quot;16.12.13abc&quot;
+console.log(parseInt(id))
+console.log(parseFloat(id))
+
+16
+16.12
+</code></pre><ul>
+<li>string</li>
+</ul>
+<p>由零个或者多个16为Unicode字符组成的字符序列</p>
+<p>必须放在 “ ‘ 之内</p>
+<p>toString String</p>
+<pre><code>str.toString() 将str转换为字符串
+ var abc = 11111；
+var aaa = abc.toString();
+console.log(typeof aaa)
+</code></pre><ul>
+<li>Boolean </li>
+</ul>
+<p>真假</p>
+<p>除0之外的所有数字，转换为布尔类型都为true</p>
+<p>除了 “”空的所有字符，转换为布尔值都为 true</p>
+<p>null和undefined 转换布尔类型为false</p>
+<p>1-5<br>20170817</p>
+<ul>
+<li>表达式</li>
+</ul>
+<p>操作符。。</p>
+<p>隐形类型转换</p>
+<p>++num1    先返回增加后的值</p>
+<p>x3不是48的原因是，调用 x2–，先用其原始值30</p>
+<pre><code>    var x1 = 20,
+        x2 = 30,
+        x3 = --x1+x2--;
+
+    console.log(x1);    //19
+     console.log(x2);   // 29
+      console.log(x3);  // 49
+
+
+a+=5  a=a+5
+
+===  同时比较数据类型是否相等
+x = 10
+y = &quot;10&quot;
+</code></pre><ul>
+<li>三元操作符</li>
+</ul>
+<p>条件?执行代码1: 执行代码2</p>
+<p>如果条件成立，执行代码1，否则执行代码2</p>
+<pre><code> var soce = 90;
+var result=(soce&gt;=60)?&quot;及格&quot;:&quot;不及格&quot;;
+console.log(result)
+
+1.html:14 及格
+</code></pre><ul>
+<li><p>逻辑操作符</p>
+<p>  console.log( 80 &amp;&amp; 55);<br>  console.log(“hello” &amp;&amp; 65 &amp;&amp; “abc”)</p>
+<p>  55       abc</p>
+<p>&amp;&amp;</p>
+</li>
+</ul>
+<p>如果第一个操作数隐式类型转换后为true，则返回第二个操作数。。</p>
+<p>如果第一个操作数隐式类型转换后为flase，则返回第一个操作数。。</p>
+<p>只要有一个操作数是null，则返回null</p>
+<p>只要有一个操作数是NaN，则返回NaN</p>
+<p>只要有一个操作数是undefined，则返回undefined</p>
+<p>||  </p>
+<pre><code>var m;
+console.log(65 || &quot;&quot; || &quot;abc&quot;);
+console.log(0 || 88 || &quot;&quot; || &quot;abc&quot;)
+console.log(&quot;&quot; || m); // undefined
+console.log(&quot;abc&quot;*30 || 55-&quot;def&quot;)
+
+65
+88
+undefined
+NaN
+</code></pre><p>如果第一个操作数隐式类型转换后为true，则返回第一个操作数。。</p>
+<p>如果第一个操作数隐式类型转换后为flase，则返回第二个操作数。。</p>
+<p>如果两个操作数都是null，则返回null</p>
+<p>如果两个操作数都是NaN，则返回NaN</p>
+<p>如果两个操作数都是undefined，则返回undefined</p>
+<ul>
+<li><p>条件语句</p>
+<pre><code>if elseif else
+
+alert() 弹出警号对话框
+
+&lt;script&gt;
+//声明
+
+var age = 15;
+if(age&lt;18){
+    alert(&quot;好好学习&quot;);
+}
+
+&lt;/script&gt;
+</code></pre></li>
+<li><p>if 语句的嵌套</p>
+<pre><code>&lt;script&gt;
+   //声明
+
+   var password = prompt(&quot;请设置您的密码&quot;);
+   //判断密码的长度，如果不是6位，否则
+   if(password.length!=6){
+       alert(&quot;请输入6位的数字密码&quot;);
+   }else{
+       //判断密码类型，数字和非数字
+       if(isNaN(password) == true){
+           alert(&quot;密码必须是数字&quot;)
+       }else{
+           alert(&quot;密码输入正确！&quot;)
+       }
+   }
+</code></pre></li>
+<li><p>switch</p>
+</li>
+</ul>
+<p>0818</p>
+<ul>
+<li><p>循环</p>
+<p>  for、<br>  for (var i=1;i&lt;=100;i++){</p>
+<pre><code>document.write(i + &apos;&lt;br/&gt;&apos;);      &lt;br/&gt; 换行
+</code></pre></li>
+</ul>
+<ul>
+<li>循环嵌套</li>
+</ul>
+<p>外层必须为真，才可以执行内层。。直到内层的条件为假才去执行外层。。。</p>
+<pre><code>&lt;script&gt;
+    //声明
+    for (var i=1;i&lt;=3;++i){
+       document.write(i+&apos;&lt;br/&gt;&apos;);
+       document.write(&apos;&lt;hr&gt;&apos;);
+       for(var j=1;j&lt;=5;j++){
+        document.write(j+&apos;&lt;br/&gt;&apos;);
+
+       }
+    }
+
+    &lt;/script&gt;
+</code></pre><ul>
+<li><p>while  do while</p>
+<pre><code>var j = 1
+   do{
+       if(j%2==0){
+           console.log(j);
+       }
+       j++;
+   }while(j&lt;=10);
+</code></pre></li>
+</ul>
+<p>while</p>
+<pre><code>var sum=0, n=1;
+    while(n&lt;=100){
+        sum+=n;
+        n++;
+    }
+    console.log(sum);
+</code></pre><ul>
+<li><p>break continue</p>
+<pre><code>var num=0;
+    for(var i=1;i&lt;10;i++){
+    // 如果i是5的倍数，退出
+    if(i%5==0){        //如果不是5的倍数，就不执行break，所以console.log(i)继续执行
+        break;
+    }
+    console.log(i); //1,2,3,4
+    }
+</code></pre></li>
+<li><p>函数    经常反复执行的封装在一起</p>
+<p>  function functionName()</p>
+<pre><code>&lt;script&gt;
+//声明一个函数
+function myFun(){
+    alert(&quot;I am a function&quot;);
+}
+myFun();
+&lt;/script&gt;
+</code></pre></li>
+<li><p>函数返回值 return</p>
+<pre><code>&lt;script&gt;
+    //声明一个函数
+    function add(n1,n2){
+        var sum = n1 + n2;
+        return sum;
+    }
+
+    console.log(add(3,5));
+    alert(add(3,5));
+
+    &lt;/script&gt;
+</code></pre></li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-18/38760905.jpg" alt=""></p>
+<ul>
+<li>函数参数 arguments 是一个数值包含参数（js的特性）</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-18/97632395.jpg" alt=""></p>
+<pre><code>&lt;script&gt;
+    //声明一个函数
+    function add(){
+        console.log(arguments.length);    //3
+        console.log(arguments[0]) //索引从零开始的正整数  1
+    }
+    add(1,2,3)
+
+    &lt;/script&gt;
+</code></pre><ul>
+<li><p>函数练习，不管这个数组多长，都可以。。</p>
+<pre><code>&lt;script&gt;
+    //求任意一组数的平均值
+    function getAvg(){
+        var sum = 0,len=arguments.length,i;
+        for (i=0;i&lt;len;i++){
+            //console.log(arguments[i]);
+            sum += arguments[i];
+        }
+        return sum/len;
+    }
+    var avg = getAvg(5,6,7,8,9); //调用的赋值一个名称
+    console.log(avg);
+
+    &lt;/script&gt;
+</code></pre></li>
+</ul>
+<p>这个类似python 的 *</p>
+<pre><code>def my_sum(*arg):
+    return sum(arg)/len(arg)
+
+&gt;&gt;&gt; def my_avg(*arg):
+    return sum(arg)/len(arg)
+
+    my_avg(1,2,3)
+    2
+</code></pre><ul>
+<li><p>内置对象  0821</p>
+</li>
+<li><p>Array: 数组存储一组数据。。length</p>
+</li>
+</ul>
+<p>数组的创建，读取，长度，遍历。。</p>
+<pre><code>创建 Array   : new Array()      
+或者 字面量。。。
+cols = [&quot;red&quot;,&quot;yellow&quot;,&quot;green&quot;]
+</code></pre><p>两种方法</p>
+<pre><code>var nums = new Array(1,3,6,9);
+console.log(nums);
+var cols = [&quot;red&quot;,&quot;yellow&quot;,&quot;green&quot;];
+</code></pre><p>数组的读写</p>
+<pre><code>cols[0] 从0开始
+</code></pre><p>数组可以声明一个对象，或者直接赋值[]，读取一样可以进行从下标开始读取。数组长度，length。。arr.length，长度是从最后一个索引开始的。。</p>
+<pre><code>var cols = [&quot;red&quot;,&quot;yellow&quot;,&quot;green&quot;];
+cols[99] = &quot;orange&quot;;
+console.log(cols);
+console.log(cols.length);
+</code></pre><p>结果</p>
+<pre><code>(100) [&quot;red&quot;, &quot;yellow&quot;, &quot;green&quot;, undefined × 96, &quot;orange&quot;]
+100
+</code></pre><p>遍历</p>
+<pre><code>for(var i=0;i&lt;cols.length;i++){
+        console.log(cols[i]);
+    }
+</code></pre><ul>
+<li><p>数组方法 栈方法 push() unshift() pop() shift()</p>
+</li>
+<li><p>push() 把值添加到尾部</p>
+<p>  ayyayObject.push(newele1,newele2,…neweX)<br>  功能： 把它的参数顺序添加到arrayObject的尾部<br>  返回值：把指定的值添加到数组后的新长度。。</p>
+</li>
+</ul>
+<p>案例1</p>
+<pre><code>var nums = new Array(1,3,6,9);
+var len = nums.push(2,3,4);
+console.log(len);     // 7
+</code></pre><ul>
+<li><p>unshift() 把值添加到首部</p>
+<pre><code> var nums = new Array(1,3,6,9);
+var len = nums.unshift(2,3,4);
+console.log(len);
+console.log(nums);
+</code></pre><p>结果</p>
+<pre><code>7
+(7) [2, 3, 4, 1, 3, 6, 9]
+</code></pre></li>
+<li><p>pop 删除</p>
+<pre><code>语法： arrayObject.pop()
+功能： 删除arrayObject中的最后的一个元素
+返回值：被删除的那个元素
+</code></pre></li>
+<li><p>shift 删除最前面的一个元素</p>
+</li>
+<li><p>join 数组转换为字符串。。</p>
+<pre><code>语法：arrayObject.join(separator)
+功能： 用于把数组中的所有元素放入一个字符串
+返回值：字符串
+</code></pre></li>
+</ul>
+<p>案例1</p>
+<pre><code>var nums = [2,3,4];
+var str = nums.join();
+console.log(str);
+</code></pre><ul>
+<li><p>reverse()</p>
+<p>  语法： stringObject.reverse()<br>  功能： 用于颠倒数组中的元素顺序<br>  返回值： 数组</p>
+</li>
+</ul>
+<p>案例：</p>
+<pre><code>var  strs = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;];
+var newstr = strs.reverse()
+console.log(newstr);
+var newstr1 = strs.reverse().join()
+console.log(newstr1);
+
+(4) [&quot;d&quot;, &quot;c&quot;, &quot;b&quot;, &quot;a&quot;]
+a,b,c,d
+</code></pre><ul>
+<li><p>排序 sort()   //按字符串比较的</p>
+<p>  数组中的每一项都是数值，sort()方法比较的也是字符串<br>  sort()方法可以接收一个比较函数作为参数</p>
+</li>
+</ul>
+<p>案例</p>
+<pre><code>var arr = [2,5,1,77,66,99];
+arr.sort(function(a,b) {return b-a}); //降序
+console.log(arr);   //
+</code></pre><ul>
+<li>concat()     连接两个或多个数组</li>
+</ul>
+<pre><code>var arr = [2,5,1,77,66,99];
+var arr2 = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;];
+var arr3 = arr.concat(arr2);
+console.log(arr3);
+</code></pre><ul>
+<li><p>slice 截取</p>
+<p>  从已有的数组中返回选定的元素<br>  0 1 2 3 4 下标  end 结束的位置-1</p>
+</li>
+</ul>
+<p>一个思想。。如果 start为负数，那就从这个负数加上这个数组的长度计算。。这个和python的有类似。。</p>
+<pre><code>var arr = [2,5,1,77,66,99];
+var newarr = arr.slice(-5,3); // 1,3
+console.log(newarr);
+</code></pre><p>实现 b数组对a的复制。。</p>
+<p>第一种</p>
+<pre><code>var a = [2,5,1,77];
+   b = new Array();
+   for(var i=0;i&lt;a.length;i++){
+        b.push(a[i]);
+   }
+   console.log(b);
+</code></pre><p>第二种</p>
+<pre><code> var a = [2,5,1,77];
+var b = [].concat(a);   //数组。。
+console.log(b);
+</code></pre><p>第三种</p>
+<pre><code>var a = [2,5,1,77];
+  var b = a.slice(0);
+  console.log(b);
+</code></pre><ul>
+<li><p>splice 删除，插入、替换</p>
+<p>  删除<br>  arrayObject.splice(index,count)<br>  功能<br>  删除从index处开始的零个或多个元素<br>  返回值<br>  含有被删除的元素的数组<br>  count是要删除的项目数量，如果为0，就不删除项目，不设置，则删除从index开始的所有值</p>
+</li>
+</ul>
+<p>删除</p>
+<pre><code>var a = [2,5,1,77];
+   var b = a.splice(1,2);
+   console.log(b);     // 5,1
+</code></pre><p>插入 </p>
+<pre><code>arrayObject.splice(index,0,item1,item2...itemX)
+功能： 在指定位置插入值
+参数
+index 起始位置
+0 要删除的项数
+index1...indexX 要插入的项
+</code></pre><p>案例</p>
+<pre><code>var a = [2,5,1,77];
+  var b = a.splice(2,0,&quot;i&quot;,99);
+  console.log(a);
+(6) [2, 5, &quot;i&quot;, 99, 1, 77]
+</code></pre><p>替换</p>
+<pre><code>替换 
+arrayObject.splice(index,count,item1...itemX)
+功能： 
+在指定位置插入值，且同时删除任意数量的项
+参数
+index 起始位置
+count 要删除的项数
+item1..itemX 要插入的项
+返回值：从原始数组中删除的项
+</code></pre><p>先删除，再插入</p>
+<pre><code>   var a = [2,5,1,77];
+   var b = a.splice(1,2,&quot;x&quot;,&quot;y&quot;,&quot;x&quot;);
+   console.log(b);
+   console.log(a);
+
+(2) [5, 1]
+[2, &quot;x&quot;, &quot;y&quot;, &quot;x&quot;, 77]
+</code></pre><p>indexOf()</p>
+<pre><code>语法：
+arrayObject.indexOf(searchvalue,startINdex)
+功能：
+从数组的开头开始向后查找
+参数
+searchvalue 必须，要查找的项
+startIndex 可选，起始位置的索引
+返回值
+number，查找的项在数组中的位置，没有找到返回-1
+</code></pre><p>案例：</p>
+<pre><code>  var a = [2,5,1,77];
+var pos = a.indexOf(1);
+console.log(pos); //2
+</code></pre><p>lastIndexof()   从末尾查找。。。。</p>
+<p>用一个函数实现Indexof</p>
+<pre><code> function ArrayIndex(arr,value){
+for(var i=0;i&lt;a.length;i++){
+ if(arr[i] ===value){
+     return i;
+ }
+}
+return -1;
+}
+var pos = ArrayIndex(a,5);  //函数调用的时候，把它的结果赋值一个参数
+console.log(pos);    
+</code></pre><h4 id="4-3-String-0822"><a href="#4-3-String-0822" class="headerlink" title="4-3 String 0822"></a>4-3 String 0822</h4><p>字符串，取某个特定的子串，查找某个子串的位置，查看某个位置的子串，截取，从开始到结束，截取几个，字符串转换为数组，替换，大小写。。</p>
+<p>字符串</p>
+<ul>
+<li>charAt() 与 charCodeAt()</li>
+</ul>
+<p>charAt()</p>
+<pre><code>语法：
+stringObject.charAt(index)
+功能：
+返回stringObject中的index位置的字符
+</code></pre><p>案例</p>
+<pre><code>var str = &quot;hello world&quot;;
+  console.log(str.charAt(0)); // h
+</code></pre><p>charCodeAt()</p>
+<pre><code>语法：
+stringObject.charCodeAt(index)
+功能：
+返回stringObject中的index位置字符的字符编码
+</code></pre><p>案例，返回的是编码</p>
+<pre><code>var str = &quot;hello world&quot;;
+console.log(str.charCodeAt(0));    // 104
+</code></pre><ul>
+<li><p>indexOf()</p>
+<pre><code>语法：
+stringObject.indexOf(&quot;o&quot;) 
+功能：
+从一个字符串中搜索给定的子字符串，返回字符串的位置
+返回值：数值
+说明：如果没有找到该字符串，则返回 -1.
+</code></pre></li>
+</ul>
+<p>案例：</p>
+<pre><code> var email = &quot;python@sina.com&quot;;
+console.log(email.indexOf(&quot;@&quot;)); // 6
+</code></pre><ul>
+<li><p>lastIndexOf() </p>
+<pre><code>语法：
+stringObject.lastIndexOf(&quot;o&quot;) 
+功能：
+从一个字符串中搜索给定的子字符串，从右边开始。。返回字符串的位置
+返回值：数值
+说明：如果没有找到该字符串，则返回 -1.
+</code></pre></li>
+<li><p>slice </p>
+<pre><code>语法：
+stringObject.slice(start,end)
+功能：截取子字符串
+说明：
+start 必需，指定子字符串开始位置
+end，可选，表示到哪里结束，end本身不截取
+当参数为负数时，会将传入的负值和字符串的长度相加
+</code></pre></li>
+</ul>
+<p>案例：</p>
+<pre><code>var str = &quot;hello world&quot;;
+// 截取 orl
+console.log(str.slice(7,10)); // orl
+</code></pre><ul>
+<li><p>substring()</p>
+<pre><code>语法和slice完全一样、、
+当参数为负数时，自动将参数转换为0
+substring()会将较小的数作为开始位置，将较大的数作为结束位置
+</code></pre></li>
+</ul>
+<p>案例：</p>
+<pre><code> var str = &quot;hello world&quot;;
+    // 截取 orl
+    console.log(str.substring(7,10));
+
+ var str = &quot;hello world&quot;;
+// 截取 orl
+console.log(str.substring(2,-5)); // (0,2) he
+</code></pre><ul>
+<li><p>substr()   截取的长度</p>
+<pre><code>语法：
+stringObject.substr(start,len)
+功能：
+截取子字符串
+参数说明：
+start 必需，指定子字符串的开始位置
+len 可选，表示截取的字符总数，省略时截取至字符串的末尾
+start为负数时候，会将传入的负值和字符串的长度相加
+len为负数式，返回空字符串
+</code></pre></li>
+</ul>
+<p>案例，获取扩展名</p>
+<pre><code>&lt;script&gt;
+    // 获取扩展名
+    var url = &quot;http://baidu.com/index.html&quot;;
+    function getFileFormat(url){
+        //获取.在url中出现的位置，从右边开始
+        var pos = url.lastIndexOf(&quot;.&quot;);
+        // console.log(pos);  22
+        return url.substr(pos);
+    }
+        var formatName = getFileFormat(url);
+        console.log(formatName);
+    &lt;/script&gt;        
+    // .html
+</code></pre><ul>
+<li><p>split()   字符串转换为数组</p>
+<pre><code>语法：
+stringObject.split(separator)
+功能：
+把一个字符串分隔成字符串数组
+返回值： Array
+说明：
+separator: 必须，分隔符
+</code></pre></li>
+</ul>
+<p>案例</p>
+<pre><code>var str = &quot;welcome-to-beijing&quot;;
+//使用split将str转换为数组
+var str1 = str.split(&quot;-&quot;);
+console.log(str1);
+// [&quot;welcome&quot;, &quot;to&quot;, &quot;beijing&quot;]
+</code></pre><ul>
+<li><p>replace() </p>
+<pre><code>语法：stringObject.replave(regex/substr,replacement)
+功能：
+在字符串中用一些字符替换另一些字符，或替换一个和正则表达式匹配的子串
+返回值： String
+参数：
+regexp 必需
+replacement 必需，一个字符串值
+</code></pre></li>
+<li><p>toUpperCase toLowerCase</p>
+</li>
+</ul>
+<p>案例，驼峰形式。。 将字符串拆分为数组，遍历数组，改变除第一个单词之外的所有单词的首字母，拼接字符串并返回。。</p>
+<pre><code>&lt;script&gt;
+    function camelback(str){
+        // 通过-这个分隔符将str拆分为数组
+        var arr = str.split(&quot;-&quot;);
+        var newstr = arr[0];
+        // console.log(arr); //(3) [&quot;border&quot;, &quot;left&quot;, &quot;color&quot;]
+        for (var i=1,len=arr.length;i&lt;len;i++){
+            var world = arr[i];
+            //console.log(world);
+            //将每一个单词的首字母转换为大写，连接剩余字符
+            newstr += world.charAt(0).toUpperCase()+world.substr(1);
+            //console.log(newstr);
+
+            }
+             return newstr;
+    }
+    var camelbackFormat = camelback(&quot;border-left-color&quot;);
+    console.log(camelbackFormat);
+
+    &lt;/script&gt;
+</code></pre><p>结果</p>
+<pre><code>borderLeftColor
+</code></pre><p>Math  </p>
+<p>Date    </p>
+<h4 id="DOM-0823"><a href="#DOM-0823" class="headerlink" title="DOM 0823"></a>DOM 0823</h4><p>javascript由ECMAScript(语法)、Browser Objects(DOM BOM) 特性组成。</p>
+<p>*DOM查找方法(通过ID，标签名称)取出来可以设置样式。。动态设置</p>
+<ul>
+<li>document.getElementById</li>
+</ul>
+<p>根据一个id获取元素</p>
+<pre><code>语法：document.getElementById(&quot;id&quot;)
+功能：返回对拥有指定ID的第一个对象的引用
+返回值：DOM对象
+说明： id为DOM元素上id属性的值
+</code></pre><p>案例</p>
+<pre><code>&lt;div class=&quot;box&quot; id=&quot;box&quot;&gt;
+  元素
+  &lt;/div&gt;
+
+    &lt;script&gt;
+    //获取id为box的这个元素
+    var box=document.getElementById(&quot;box&quot;);
+    console.log(box);
+   &lt;/script&gt;     //元素
+</code></pre><p>结果</p>
+<pre><code>元素 // 在屏幕打印出元素
+</code></pre><ul>
+<li>document.getElementsByTagName(“tag”)</li>
+</ul>
+<p>按照标签来进行查找，比如 li</p>
+<pre><code>语法：document.getElementsByTagName(&quot;tag&quot;)
+功能： 返回一个对所有tag标签引用的集合
+返回值：数组
+说明： tag为要获取的标签名称
+</code></pre><p>案例</p>
+<pre><code> &lt;ul id=&quot;list1&quot;&gt;
+&lt;li&gt;123&lt;/li&gt;
+&lt;li&gt;456&lt;/li&gt;
+&lt;li&gt;789&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;script&gt;
+  // 获取页面中的所有的li
+  var lis = document.getElementsByTagName(&quot;li&quot;);
+  console.log(lis);
+ 结果： [li, li, li]
+</code></pre><p>可以某个id下的标签</p>
+<pre><code>document.getElementById(&quot;list&quot;).document.getElementsByTagName(&quot;li&quot;)
+</code></pre><ul>
+<li><p>设置元素样式</p>
+<pre><code>语法：ele.style.styleName = styleValue
+功能： 设置ele元素的CSS样式
+说明：
+ele为要设置样式的DOM对象
+styleName 为要设置的样式名称
+styleValue为设置的样式值
+属性是复合形式的话，采用驼峰形式比如 fontWeight
+</code></pre></li>
+</ul>
+<p>案例1</p>
+<pre><code>&lt;div class=&quot;box&quot; id=&quot;box&quot;&gt;
+   元素
+   &lt;/div&gt;
+
+     &lt;script&gt;
+     // 获取id为box的这个元素的文字颜色
+     var lis = document.getElementById(&quot;box&quot;);
+     box.style.color=&apos;#f00&apos;;
+</code></pre><p>设置样式必须是一个dom对象。。</p>
+<pre><code>&lt;ul id=&quot;list&quot;&gt;
+        &lt;li&gt;111111&lt;/li&gt;
+        &lt;li&gt;222222&lt;/li&gt;
+        &lt;li&gt;3333333&lt;/li&gt;
+        &lt;li&gt;4444444&lt;/li&gt;
+   &lt;/ul&gt;
+     &lt;script&gt;
+     // 获取id为box的这个元素的文字颜色
+     var lis = document.getElementById(&quot;box&quot;);
+     box.style.color=&apos;#f00&apos;;
+
+     var lis = document.getElementById(&quot;list&quot;).getElementsByTagName(&quot;li&quot;);
+     //遍历每一个li
+     for(var i=0,len=lis.length;i&lt;len;i++){
+        lis[i].style.color =&apos;#00f&apos;;
+        if(i==0){
+            lis[i].style.backgroundColor = &quot;#ccc&quot;;
+        }
+        else if(i==1){
+            lis[i].style.backgroundColor = &quot;#666&quot;;
+        }
+        else if(i==2){
+            lis[i].style.backgroundColor = &quot;#999&quot;;
+        }
+        else {
+            lis[i].style.backgroundColor = &quot;#333&quot;;
+        }
+     }
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-23/8904827.jpg" alt=""></p>
+<ul>
+<li>innerHTML 获取和设置标签之间的文本和html内容</li>
+</ul>
+<pre><code>语法： ele.innerHTML
+功能： 返回ele元素开始和结束标签之间的HTML
+语法： eld.innerHTML = &quot;html&quot;
+功能： 设置ele元素开始和结束标签之间的HTML内容为html
+</code></pre><p>案例</p>
+<pre><code>&lt;ul id=&quot;list&quot;&gt;
+        &lt;li&gt;&lt;i&gt;111111&lt;/i&gt;&lt;/li&gt;
+        &lt;li&gt;222222&lt;/li&gt;
+        &lt;li&gt;3333333&lt;/li&gt;
+        &lt;li&gt;4444444&lt;/li&gt;
+   &lt;/ul&gt;
+     &lt;script&gt;
+
+
+     var lis = document.getElementById(&quot;list&quot;).getElementsByTagName(&quot;li&quot;);
+     //遍历每一个li
+     for(var i=0,len=lis.length;i&lt;len;i++){
+        console.log(lis[i].innerHTML);
+     }
+</code></pre><p>结果</p>
+<pre><code>    &lt;i&gt;111111&lt;/i&gt;
+1.html:25 222222
+1.html:25 3333333
+1.html:25 4444444
+</code></pre><ul>
+<li><p>className  给一个元素添加类。。动态覆盖本身的。。</p>
+<p>  语法:ele.className<br>  功能： 返回ele元素的class属性<br>  语法： ele.className = “cls”<br>  功能：设置ele元素的class属性为 cls</p>
+</li>
+</ul>
+<p>案例：把current添加进去了</p>
+<pre><code>&lt;style&gt;
+        .current{background:#ccc;color:#f00;}
+    &lt;/style&gt;
+var lis = document.getElementById(&quot;list&quot;).getElementsByTagName(&quot;li&quot;);
+     //遍历每一个li
+     for(var i=0,len=lis.length;i&lt;len;i++){
+        console.log(lis[i].innerHTML);
+        lis[1].className=&quot;current&quot;;
+     }
+</code></pre><ul>
+<li><p>获取属性</p>
+<pre><code>语法： ele.getAttribute(&apos;attribute&apos;)
+功能：获取ele元素的attribute属性
+说明： ele是要操作的dom对象
+    attribute是要获取的html属性
+</code></pre></li>
+</ul>
+<p>案例 标签自带的属性直接就可以获取了。。标签自定义属性用getAttribute</p>
+<pre><code>&lt;p id=&quot;text&quot; align=&quot;center&quot; data-type=&quot;title&quot;&gt;文本&lt;/p&gt;
+   &lt;script&gt;
+        var p = document.getElementById(&quot;text&quot;);
+        console.log(p.getAttribute(&apos;data-type&apos;));
+        console.log(p.align); // center
+   &lt;/script&gt;
+    // 输出结果为 title
+</code></pre><ul>
+<li><p>设置属性</p>
+<pre><code>语法： ele.getAttribute(&apos;attribute&apos;,&apos;value&apos;)
+功能：在ele元素上设置属性
+说明： ele是要操作的dom对象
+    attribute为要设置的属性名称
+    value为设置的attribute属性的值
+</code></pre></li>
+</ul>
+<p>案例</p>
+<pre><code>p.setAttribute(&apos;data-color&apos;,&quot;red&quot;);
+</code></pre><ul>
+<li><p>删除属性</p>
+<pre><code>语法： ele.removeAttribute(&apos;attribute&apos;)
+功能：删除ele元素的attribute属性
+说明： ele是要操作的dom对象
+    attribute是要删除的html属性名称
+</code></pre></li>
+</ul>
+<h4 id="javascript事件"><a href="#javascript事件" class="headerlink" title="javascript事件"></a>javascript事件</h4><p>通过事件进行交互。</p>
+<p>事件就是文档或浏览器窗口中发生的一些特定的交互瞬间。。</p>
+<ul>
+<li>html事件</li>
+</ul>
+<p>直接在HTML元素标签内添加事件，执行脚本</p>
+<pre><code>语法： &lt;tag 事件= &quot;执行脚本&quot;&gt; &lt;/tag&gt;
+功能： 在HTML元素绑定事件
+说明：执行脚本可以是一个函数调用
+</code></pre><p>案例1</p>
+<pre><code> &lt;input type=&quot;button&quot; value=&quot;弹出&quot; onclick=&quot;alert(&apos;我是按钮&apos;)&quot;&gt; 
+绑定了一个点击按钮触发的事件
+</code></pre><p>案例2，， 指定函数</p>
+<p>开始按钮本身是蓝色，鼠标点击变为红色，离开返回蓝色。。调用函数来。。注意this的用法。。。</p>
+<pre><code>    &lt;style&gt;
+        .btn{width:140px;heigth:30px;line-height:30px;background:#00f;font-size&quot;14px;text-align:center;border-radius:5px;margin-top:30px;}
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+   &lt;input type=&quot;button&quot; value=&quot;弹出&quot; onclick=&quot;alert(&apos;我是按钮&apos;)&quot;&gt;
+   &lt;!-- this 对div事件的引用--&gt;
+   &lt;div id=&quot;btn&quot; class=&quot;btn&quot; onmouseover=&quot;mouseoverFn(this)&quot; onmouseout=&quot;mouseoutFn(this)&quot;&gt;开始&lt;/div&gt;
+   &lt;script&gt;
+        function mouseoverFn(btn){
+            //鼠标划过的时候，按钮的背景编程红色
+            btn.style.background=&quot;#f00&quot;;
+        }
+        function mouseoutFn(btn){
+            btn.style.background=&quot;#00f&quot;;
+        }
+   &lt;/script&gt;
+</code></pre><ul>
+<li>this指向</li>
+</ul>
+<p>在事件触发的函数中，this是对该DOM对象的引用</p>
+<ul>
+<li>6-2 DOM0级事件 0824</li>
+</ul>
+<p>1:通过DOM获取HTML元素</p>
+<p>2：(获取HTML元素) 事件=执行脚本</p>
+<pre><code>语法： ele.事件=执行脚本
+功能： 在DOM对象上绑定事件
+说明：执行脚本可以是一个匿名函数，也可以是一个函数的调用
+</code></pre><p>案例：</p>
+<p>可以看到使用getElementById()获取DOM元素。。 </p>
+<pre><code>&lt;style&gt;
+        .lock{width:140px;heigth:30px;line-height:30px;background:#00f;font-size&quot;14px;text-align:center;border-radius:5px;margin-top:30px;}
+        .unlock{width:140px;heigth:30px;line-height:30px;background:#666;font-size&quot;14px;text-align:center;border-radius:5px;margin-top:30px;}
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+   &lt;input type=&quot;button&quot; value=&quot;弹出&quot; onclick=&quot;alert(&apos;我是按钮&apos;)&quot;&gt;
+   &lt;!-- this 对div事件的引用--&gt;
+   &lt;div class=&quot;lock&quot; id=&quot;btn&quot; &gt;绑定&lt;/div&gt;
+   &lt;script&gt;
+        // 获取按钮
+        var btn=document.getElementById(&quot;btn&quot;);
+        // 给按钮绑定事件,this是对该DOM元素的引用
+        btn.onclick=function(){
+            // 判断如果按钮是锁定，则显示解锁，否则显示锁定
+            if(this.className==&quot;lock&quot;){
+                this.className=&quot;unclock&quot;;
+                this.innerHTML=&quot;解锁&quot;;
+            }else{
+                this.className=&quot;lock&quot;;
+                this.innerHTML=&quot;锁定&quot;;
+            }
+        }
+
+   &lt;/script&gt;
+</code></pre><p>不建议使用HTML事件原因</p>
+<ol>
+<li>多元素绑定相同事件时，效率低</li>
+<li>不建议在HTML元素中写JavaScript代码</li>
+</ol>
+<h5 id="6-3-事件类型-0825"><a href="#6-3-事件类型-0825" class="headerlink" title="6-3 事件类型 0825"></a>6-3 事件类型 0825</h5><p>事件类型</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-25/16521438.jpg" alt=""></p>
+<pre><code>onload 页面的内容全部加载后执行js代码
+onfoucs 事件用于 input标签 type为text、password  textarea标签
+onblur 
+onchange 事件，一般用于 select checkbox radion 上
+</code></pre><p>获得焦点时候触发，离开触发。。焦点事件。。value获取值</p>
+<pre><code>&lt;style&gt;
+        .box{
+            padding:50px;
+        }
+        .left,.tip{
+            float:left;
+        }
+        .left{
+            margin-right:10px;
+        }
+        .tip{display:none;font-size:14px;}
+         &lt;/style&gt;
+        &lt;script&gt;
+            window.onload=function(){
+            // 获取文本框和提示框
+            var phone = document.getElementById(&quot;phone&quot;),
+               tip = document.getElementById(&quot;tip&quot;);
+            // 给文本框绑定激活事件
+            phone.onfocus=function(){
+            //让tip显示出来
+                tip.style.display=&apos;block&apos;;
+
+            }
+            //给文本框绑定失去焦点事件
+            phone.onblur = function(){
+                //获取文本框的值,value用于获取表单元素的值
+                //console.log(this);
+                var phoneVal = this.value;
+                //console.log(phoneVal);
+                //检测手机号码是否为11数字且不为非数字
+                // 如果输入正确，则显示对号图标，否则显示错号
+                if(phoneVal.length == 11 &amp;&amp; isNaN(phoneVal)==false){
+                    tip.innerHTML=&apos;&lt;img src=&quot;img/right.png&quot;&gt;&apos;;
+                }else{
+                    tip.innerHTML=&apos;&lt;img src=&quot;img/error.png&quot;&gt;&apos;;
+                }
+            }
+            }
+        &lt;/script&gt;
+
+&lt;/head&gt;    
+
+&lt;body&gt;   
+    &lt;div class=&quot;box&quot;&gt;
+        &lt;div class=&quot;left&quot;&gt;
+        &lt;input type=&quot;text&quot; id=&quot;phone&quot; placeholder=&quot;请输入手机号&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;tip&quot; id=&quot;tip&quot;&gt;
+           请输入有效的手机号码
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p>onchange 事件</p>
+<pre><code>    &lt;script&gt;
+        //页面加载
+        window.onload = init;
+        // 初始化
+        function init(){
+            // 获取下来菜单
+            var menu = document.getElementById(&quot;menu&quot;);
+            //给菜单绑定change事件
+            menu.onchange=function(){
+               // console.log(&quot;abc&quot;);
+               //var bgcolor = this.value;
+               var bgcolor = menu.options[menu.selectedIndex].value;
+               //console.log(bgcolor);
+               // 如果bgcolor为空，则下面的不执行
+               if(bgcolor ==&quot;&quot;) {
+                document.body.style.background=&quot;#fff&quot;;
+               }else{
+               //设置body的 背景颜色
+               document.body.style.background=bgcolor;
+            }
+            }
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+
+
+&lt;body&gt;
+    &lt;div class=&quot;box&quot;&gt;
+        请选择喜欢的背景颜色
+        &lt;select name=&quot;&quot; id=&quot;menu&quot;&gt;
+        &lt;option value=&quot;&quot;&gt;请选择&lt;/option&gt;
+        &lt;option value=&quot;#f00&quot;&gt;红色&lt;/option&gt;
+        &lt;option value=&quot;#0f0&quot;&gt;绿色&lt;/option&gt;
+        &lt;option value=&quot;#00f&quot;&gt;蓝色&lt;/option&gt;
+        &lt;option value=&quot;#ff0&quot;&gt;黄色&lt;/option&gt;
+        &lt;option value=&quot;#ccc&quot;&gt;灰色&lt;/option&gt;
+
+        &lt;/sclect&gt;
+
+    &lt;/div&gt;
+
+&lt;/body&gt;        
+</code></pre><p>事件的绑定</p>
+<pre><code>&lt;body&gt;
+
+    &lt;div class=&quot;box&quot; id=&quot;bo&quot;&gt;拖动&lt;/div&gt;
+    &lt;script&gt;
+    var box = document.getElementById(&quot;bo&quot;);
+    //绑定按下的事件
+    box.onmousedown=function(){
+        console.log(&quot;我被按下了&quot;);
+    }
+    //绑定移动事件
+    box.onmousemove =function(){
+        console.log(&quot;我被移动了&quot;);
+    }
+    //浏览器窗口尺寸大小发生改变时
+
+
+    &lt;/script&gt;
+ &lt;/body&gt;
+</code></pre><p>设置id，然后获取其中的id。对这个id所在的标签进行一个事件的设置。。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>javascript 事件的学习。获取html中的标签做出对应的操作。<br>事件很多，比如点击，提交，聚焦，离开聚焦等，鼠标在按钮上按下时触发，移动事件，松开事件，点击事件，浏览器窗口大小改变式，拖动事件。。</p>
+<p>标签中要设置id，然后script获取其中的id，就是对这个标签做相应的操作。。</p>
+<p>解析从上到下。。 <code>&lt;script&gt;</code>放在最后。</p>
+<p>####6-4  0828 键盘事件与keyCOde属性</p>
+<pre><code>onkeydown: 在用户按下一个键盘按键时发生
+onkeypress: 在键盘按键按下并释放一个键时发生
+onkeyup 在键盘按键被松开时发生
+keyCode 
+</code></pre><p>小案例，一个文本框评论的时候，剩余多少个字。</p>
+<pre><code>&lt;body&gt;
+    &lt;div&gt;
+        &lt;p class=&quot;text&quot;&gt;您还可以输入&lt;span&gt;&lt;em  id=&quot;count&quot;&gt;30&lt;/em&gt;/30&lt;/span&gt;&lt;/p&gt;
+        &lt;div class=&quot;input&quot;&gt;
+            &lt;textarea name=&quot;&quot; id=&quot;text&quot; cols=&quot;70&quot; rows=&quot;4&quot;&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // 获取文本框
+        var text=document.getElementById(&quot;text&quot;);
+        var total = 30;
+        var count=document.getElementById(&quot;count&quot;);
+        // 绑定键盘事件
+        document.onkeyup=function(){
+        // 获取文本框值的长度
+        var len = text.value.length;
+        // 剩余多少个字
+        var allow=total-len;
+        count.innerHTML=allow;
+        }
+
+    &lt;/script&gt;
+ &lt;/body&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-28/63343689.jpg" alt=""></p>
+<h5 id="bom"><a href="#bom" class="headerlink" title="bom"></a>bom</h5><p>BOM(brower object model)浏览器对象模型</p>
+<p>BOM对象有<code>window、navigator、screen、history、location、document、event</code></p>
+<p>window(全局对象)是浏览器的一个实例，在浏览器中，window对象有双重角色，它既是通过JavaScript访问浏览器窗口的一个接口，又是ECMAScript规定的Global对象。Global对象–全局对象。</p>
+<pre><code>所有的全局变量和全局方法都被归在window上
+</code></pre><p>window对象的方法</p>
+<pre><code>语法： window.alert(&quot;content&quot;)
+功能： 显示带有一段消息和一个确认按钮的警告框
+语法： window.confirm(&quot;message&quot;)
+功能： 显示一个带有指定消息和OK及取消按钮的对话框
+返回值：如果用户点击确定按钮，则confirm() 返回 true 布尔值
+        如果用户点击取消按钮，则confirm() 返回 false
+</code></pre><ul>
+<li>alert</li>
+</ul>
+<ul>
+<li><p>confirm确认对话框</p>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;box&quot;&gt;
+        &lt;span&gt;iphone8&lt;/span&gt;
+        &lt;input type=&quot;button&quot; value=&quot;删除&quot; id=&quot;btn&quot;&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+       //confirm
+       // 获取按钮
+       var btn=document.getElementById(&quot;btn&quot;);
+       btn.onclick=function(){
+            //弹出对话框
+            var result = window.confirm(&quot;您确定要删除吗？&quot;);
+            // console.log(result); 确定 true
+            if(result) {
+                document.getElementById(&quot;box&quot;).style.display=&quot;none&quot;; //隐藏起来
+            }
+       }
+    &lt;/script&gt;
+
+ &lt;/body&gt;
+</code></pre></li>
+<li><p>prompt 。 用户输入</p>
+<p> 语法： window.prompt(“text,defaultText”)<br> 参数说明：<br> text： 要在对话框中显示纯文本<br> defaultText: 默认的输入文本<br> 返回值：如果用户点击提示框的取消按钮，则返回null</p>
+<pre><code>如果用户点击确认按钮，则返回输入字段当前显示的文本
+</code></pre></li>
+</ul>
+<ul>
+<li><p>open</p>
+<p>  语法：window.open(pageURL,name,parameters)<br>  功能：打开一个新的浏览器窗口或查找一个已命名的窗口<br>  参数说明：</p>
+<pre><code>pageURL 子窗口路径
+name 子窗口句柄
+parameters 窗口参数（各参数用逗号分隔）
+</code></pre></li>
+</ul>
+<p>打开一个html的时候，打开一个子窗口。。</p>
+<ul>
+<li><p>close 关闭子窗口</p>
+</li>
+<li><p>定时器</p>
+<p>  javascript是单线程语言，就是所执行的代码必须按照顺序。。</p>
+</li>
+<li><p>超时调用</p>
+<p> 语法： setTimeout(code,millisec)<br> 功能： 在指定的毫秒数后调用函数或计算表达式<br> 参数说明：</p>
+<pre><code>code 要调用的函数或要执行的jaavascript
+millisec 在执行代码前需要等待的毫秒数
+</code></pre><p> 说明： setTimeout() 只执行code一次，如果要多次调用，可以让code自身再次调用setTimeout()</p>
+</li>
+</ul>
+<p>案例</p>
+<pre><code>&lt;script&gt;
+    //setTimeout(&quot;alert(&apos;hello&apos;)&quot;,4000);
+    var fnCall=function(){
+        alert(&quot;world&quot;); // 自定义函数
+    }
+    setTimeout(function(){
+        alert(&quot;hello&quot;);      //匿名函数
+    },2000)
+
+    setTimeout(fnCall,5000);
+&lt;/script&gt;
+</code></pre><ul>
+<li><p>取消超时调用</p>
+<p>  语法： clearTimeout(id_of_settimeout)<br>  功能： 取消由 setTimeout()方法设置的timeout<br>  参数说明：</p>
+<pre><code>id_of_settimeout : 由setTimeout()返回的ID值，该值标识要取消的延迟执行代码块
+</code></pre></li>
+</ul>
+<p>案例</p>
+<pre><code>var timeout1 = setTimeout(function(){
+       alert(&quot;hello&quot;);      //匿名函数
+   },2000)
+
+  clearTimeout(timeout1);
+</code></pre><ul>
+<li><p>间歇调用</p>
+<p>  语法：setInterval(code,millisec)<br>  功能： 每个指定的时间执行一次代码<br>  参数说明：</p>
+<pre><code>code 要调用的韩式或要执行的代码串
+millisec 周期性执行或调用code之间的时间间隔，以毫秒计算
+</code></pre></li>
+</ul>
+<ul>
+<li><p>取消间歇调用</p>
+<p>  clearInterval(id)</p>
+</li>
+</ul>
+<p>案例     </p>
+<pre><code> &lt;script&gt;
+    var inter1 = setInterval(function(){
+        console.log(&quot;您好&quot;);
+    },1000)
+    //10秒之后停止打印
+    setTimeout(function(){
+        clearInterval(inter1);
+    },10000);
+&lt;/script&gt;
+</code></pre><p>总案例</p>
+<pre><code>&lt;script&gt;
+       var  num = 1, max = 10, timer=null;
+       // 每隔1秒num递增一次，直到num的值等于max清除
+       timer = setInterval(function(){
+           num++;
+           if(num&gt;max){
+               clearInterval(timer);
+           }
+           console.log(num);
+       },1000)
+   &lt;/script&gt;
+</code></pre><p>可以使用超时调用来实现上面的功能</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-28/93068620.jpg" alt=""></p>
+<pre><code>&lt;script&gt;
+        var  num = 1, max = 10, timer=null;
+        // 每隔1秒num递增一次，直到num的值等于max清除
+        function inCrementNum(){
+            console.log(num);
+            num ++;
+            if(num&lt;=max){
+                setTimeout(inCrementNum,1000);
+            }else{
+                clearTimeout(timer);
+            }
+        }
+        timer = setTimeout(inCrementNum,1000);
+    &lt;/script&gt;
+</code></pre><ul>
+<li>7-2 0829 BOM – location</li>
+</ul>
+<p>location对象提供了当前窗口中加载的文档有关的信息，还提供一些导航的功能，它既有window对象的属性，也是document对象的属性。</p>
+<pre><code>语法：location.href
+功能：返回当前加载页面的完整URL
+说明：location.href 与 window.location.href 等价
+语法 location.hash 
+功能： 返回URL的hash，#号的内容。。如果不包含则返回空字符串
+语法： location.host
+功能： 返回服务器名称和端口号
+语法： location.hostname
+功能： 返回不带端口号的服务器名称
+语法： location.pathname
+功能： 返回URL中的目录和文件名
+语法： location.port
+功能： 返回URL中指定的端口号，如果没有则返回空字符串
+语法： location.protocol
+功能： 返回页面使用的协议
+语法： location.search
+功能： 返回URL的查询字符串，这个字符串以问号开头
+</code></pre><p>位置操作</p>
+<pre><code>改变浏览器位置的方法
+location.href 属性
+location对象其他属性也可以改变URL
+location.hash
+location.search
+语法： location.replace(url)
+功能：重定向URL
+说明：使用location.replace不会在历史记录中生成新记录
+replace 回退按钮将不可使用。。。
+location.reload()
+语法： location.reload()
+功能： 重新加载当前显示的页面
+说明： location.reload()有可能从缓存中加载
+        location.reload(true) 从服务器重新加载
+        建议放在代码最后面
+</code></pre><p>replace</p>
+<pre><code> &lt;script&gt;
+     setTimeout(function(){
+         //location.href=&apos;select.html&apos;;
+         // window.location=&apos;select&apos;
+         location.replace(&apos;select.html&apos;);
+     },1000)
+
+&lt;/script&gt;
+</code></pre><h5 id="history"><a href="#history" class="headerlink" title="history"></a>history</h5><pre><code>语法： history.back()
+功能： 回到历史记录的上一步
+说明：相当于使用了 history.go(-1)
+语法： history.go(-n)
+功能： 回到历史记录的前n步
+语法： history.go(n)
+功能： 回到历史记录的后n步
+语法： location.forward()
+功能： 回到历史记录的下一步
+说明：相当于使用history.go(1)
+</code></pre><p>后退</p>
+<pre><code>&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;后退&quot; id=&quot;btn&quot;&gt;&lt;/p&gt;
+    &lt;script&gt;
+        var btn = document.getElementById(&quot;btn&quot;);
+        //点击btn按钮回到历史记录的上一部
+        btn.onclick=function(){
+            history.back();
+        }
+    &lt;/script&gt;
+</code></pre><p>history</p>
+<p>index9.html</p>
+<pre><code>&lt;body&gt;
+   &lt;a href=&quot;index10.html&quot;&gt;index10.html&lt;/a&gt;
+   &lt;p&gt;这是index9.html&lt;/p&gt;
+
+ &lt;/body&gt;
+</code></pre><p>index10.html</p>
+<pre><code>&lt;a href=&quot;index11.html&quot;&gt;index11.html&lt;/a&gt;
+ &lt;/head&gt;   
+
+ &lt;body&gt;
+  &lt;p&gt;这是index10.html&lt;/p&gt;
+</code></pre><p>index11.html</p>
+<pre><code>&lt;p&gt;&lt;input type=&quot;button&quot; value=&quot;后退&quot; id=&quot;btn&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+        var btn = document.getElementById(&quot;btn&quot;);
+        //点击btn按钮回到历史记录的上一部
+        btn.onclick=function(){
+            //history.back();
+            history.go(-1);
+        }
+  &lt;/script&gt;
+</code></pre><p>在index11.html的时候，go(-1) 返回的是 index10.html, go(-2)返回的是index9.html</p>
+<ul>
+<li><p>forward</p>
+<p>  location.forward()<br>  回到历史记录的下一步<br>  相当于使用了history.go(1)</p>
+</li>
+</ul>
+<p>按照顺序进行排序。。go -1 后退 1 前进</p>
+<ul>
+<li>7-4 0830 navigator</li>
+</ul>
+<pre><code>userAgent 识别浏览器名称、版本、引擎以及操作系统等信息的内容
+var a = navigator.userAgent;
+alert(a);
+</code></pre><p>函数封装..getBrower() 来验证是什么浏览器。字符串函数来判断其中的内容，输入是什么浏览器。。</p>
+<pre><code>&lt;script&gt;
+   //检测浏览器类型
+   function getBrower(){
+   // 获取userAgent属性
+   var explore = navigator.userAgent.toLowerCase(),brower;
+   if(explore.indexOf(&quot;mise&quot;)&gt;-1){
+    brower = &quot;IE&quot;;
+   }else if(explore.indexOf(&quot;chrome&quot;)&gt;-1){
+        brower = &quot;chrome&quot;;
+   }else if  (explore.indexOf(&quot;safari&quot;)&gt;-1){
+        brower = &quot;safari&quot;;
+   }
+   return brower;
+   }
+   var ex = getBrower();
+   alert(&quot;您当前使用的是: &quot;+ex+&quot; 浏览器&quot;);
+</code></pre><ul>
+<li><p>screem</p>
+<p>  语法：scree.availWidth<br>  功能： 返回可用的屏幕宽度<br>  语法： screen.avaiHeight<br>  功能： 返回可用的屏幕高度</p>
+</li>
+</ul>
+<p>窗口文档的高度和宽度， innerHeight innerWidth</p>
+<p>屏幕的高度和宽度 availHeight availWidth</p>
+<p>案例</p>
+<pre><code>&lt;script&gt;
+   console.log(&quot;页面宽:&quot; + screen.availWidth);
+   console.log(&quot;页面高:&quot; + screen.availHeight);
+
+       &lt;/script&gt;
+
+     console.log(&quot;page宽:&quot; + window.innerWidth);
+       console.log(&quot;page高:&quot; + window.innerHeight);
+</code></pre><h4 id="javsscript"><a href="#javsscript" class="headerlink" title="javsscript"></a>javsscript</h4><pre><code>alert 弹出对话框
+prompt 弹出输入框，点击确定，返回输入内容，点击取消，返回null
+string.length 获取string的长度
+isNaN 检测是否是数字
+new Date().getDay() 星期
+document.write(&quot;内容&quot;) 向浏览器输出内容
+变量+字符串
+</code></pre><p>案例：</p>
+<p>案例</p>
+<pre><code>var age=prompt(&quot;请输入您的年龄&quot;);
+console.log(age);
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-17/79123031.jpg" alt=""></p>
+<hr>
+<p>indexOf() 方法返回某个指定的字符串值在字符串中首次出现的位置，如果没有出现过，返回-1.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/16/Flask_login/" rel="next" title="Flask 登录过程">
+                <i class="fa fa-chevron-left"></i> Flask 登录过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/04/XXE漏洞学习/" rel="prev" title="XXE 漏洞学习">
+                XXE 漏洞学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-String-0822"><span class="nav-number">1.</span> <span class="nav-text">4-3 String 0822</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM-0823"><span class="nav-number">2.</span> <span class="nav-text">DOM 0823</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#javascript事件"><span class="nav-number">3.</span> <span class="nav-text">javascript事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-事件类型-0825"><span class="nav-number">3.1.</span> <span class="nav-text">6-3 事件类型 0825</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#bom"><span class="nav-number">3.3.</span> <span class="nav-text">bom</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#history"><span class="nav-number">3.4.</span> <span class="nav-text">history</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#javsscript"><span class="nav-number">4.</span> <span class="nav-text">javsscript</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

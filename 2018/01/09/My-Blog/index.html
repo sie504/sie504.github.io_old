@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hexo," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="2017年2月份在bitcron平台上开了一个技术博客，付费注册了一个账户，然后在10月份注册了一个域名，开始写一些技术博客。新的一年了，尝试在Github上再建一个Blog玩玩。">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github+hexo">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/My-Blog/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="2017年2月份在bitcron平台上开了一个技术博客，付费注册了一个账户，然后在10月份注册了一个域名，开始写一些技术博客。新的一年了，尝试在Github上再建一个Blog玩玩。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-01-17T10:00:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Github+hexo">
+<meta name="twitter:description" content="2017年2月份在bitcron平台上开了一个技术博客，付费注册了一个账户，然后在10月份注册了一个域名，开始写一些技术博客。新的一年了，尝试在Github上再建一个Blog玩玩。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/09/My-Blog/"/>
+
+
+
+
+
+  <title>Github+hexo | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/My-Blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Github+hexo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-09T18:47:07+08:00">
+                2018-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术研究/" itemprop="url" rel="index">
+                    <span itemprop="name">技术研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>2017年2月份在<code>bitcron</code>平台上开了一个技术博客，付费注册了一个账户，然后在10月份注册了一个域名，开始写一些技术博客。新的一年了，尝试在<code>Github</code>上再建一个<code>Blog</code>玩玩。</p>
+<a id="more"></a>
+<h5 id="Github-hexo"><a href="#Github-hexo" class="headerlink" title="Github + hexo"></a>Github + hexo</h5><ul>
+<li>. 安装 <code>Git Bash</code></li>
+</ul>
+<ol start="2">
+<li>安装 Node JS</li>
+<li>安装 hexo  在<code>gitbash</code>中用<code>npm</code>工具安装就可以的。<br> <code>npm install hexo-cli -g</code> 。 <code>hexo -v</code> 版本</li>
+<li><p>初始化 创建博客目录  </p>
+<p> <code>hexo init sie504.github.io</code> <code>。</code>cd sie504.github.io<code>。</code>npm install`</p>
+</li>
+<li><p>生成静态页面</p>
+<p><code>hexo clean</code>。 <code>hexo g</code></p>
+</li>
+<li><p>运行</p>
+<p> <code>hexo s -p 4001</code></p>
+</li>
+<li><p>发布文章</p>
+<p> <code>hexo new test</code></p>
+</li>
+</ol>
+<p>此时会在<code>source/_posts</code>目录下生成<code>test.md</code>文件。生成一下，查看效果。</p>
+<pre><code>`hexo clean`。 `hexo g` 。 `hexo s`
+</code></pre><ul>
+<li><p>上传到<code>github</code></p>
+<p>  先安装 <code>npm install hexo-deployer-git --save</code>。(这样才可以将自己的文章部署到github)</p>
+</li>
+<li><p>网站配置<code>git</code></p>
+</li>
+</ul>
+<p>在网站的<code>_config.yml</code>中配置deploy。</p>
+<pre><code>deploy:
+    type: git
+    repo: &lt;reposity url&gt;
+    brranch: [branch]    
+</code></pre><ul>
+<li><p>执行命令（建议每次都要按照以下步骤部署）</p>
+<p>  <code>hexo clean</code> 。 <code>hexo g</code> 。 <code>hexo d</code></p>
+</li>
+</ul>
+<h5 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h5><p>将相应的主题下载到<code>themes</code>目录下面。并修改<code>_config.yml</code>里面的主题对应内容。</p>
+<p>选择了一个主题之后，可以对这个主题进行再次设置，喜欢什么样的，就设置什么样的。</p>
+<p><strong>主题配置文件</strong>，搜索<code>scheme</code>。</p>
+<pre><code># Schemes
+#scheme: Muse
+#scheme: Mist
+scheme: Pisces
+#scheme: Gemini
+</code></pre><p><strong>设置阅读全文</strong></p>
+<pre><code>在首页显示一篇文章的部分内容，并提供一个链接跳转到全文页面是一个常见的需求。 NexT 提供三种方式来控制文章在首页的显示方式。 也就是说，在首页显示文章的摘录并显示 阅读全文 按钮，可以通过以下方法：
+
+在文章中使用 &lt;!-- more --&gt; 手动进行截断，Hexo 提供的方式 推荐
+在文章的 front-matter 中添加 description，并提供文章摘录
+自动形成摘要，在 主题配置文件 中添加：
+</code></pre><h5 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h5><p>hexo g</p>
+<pre><code>生成静态文件的时候，在写的md里面不能含有程序使用的标签。&lt; &gt; { } ] &lt;div&gt; &lt;url&gt;等。
+</code></pre><p>如果使用的话，在代码块中使用。</p>
+<p>hexo d</p>
+<pre><code>FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/do
+cs/troubleshooting.html
+Error: spawn git ENOENT
+</code></pre><p>hexo d</p>
+<pre><code>Error: fatal: Not a git repository (or any of the parent directories): .git
+
+at ChildProcess.&lt;anonymous&gt; (E:\sie504\sie504.github.io\node_modules\hexo-ut
+il\lib\spawn.js:37:17)
+</code></pre><p>在<code>git</code>终端执行命令。先删除<code>.deploy_git</code></p>
+<p>又遇到了错误。</p>
+<pre><code>Error: fatal: The remote end hung up unexpectedly
+fatal: The remote end hung up unexpectedly
+error: RPC failed; curl 56 SSL read: error:00000000:lib(0):func(0):reason(0), er
+rno 10053
+Everything up-to-date
+</code></pre><p>解决方法</p>
+<pre><code>git config http.postBuffer 524288000
+</code></pre><p><code>Github pages</code>是<code>github</code>提供给用户来展示个人或者项目主页的静态网页系统。每个用户可以使用自己的<code>github</code>项目创建，上传静态页面的<code>html</code>文件，<code>github</code>会帮你自动更新你的页面。</p>
+<p><code>hexo</code>是一个用来生成静态界面的框架，使用<code>hexo</code>可以直接用<code>markdown</code>写文章。</p>
+<p><code>md--hexo--html--</code> </p>
+<p>问题3</p>
+<pre><code>Error: Cannot find module &apos;cheerio&apos;
+at Function.Module._resolveFilename (module.js:337:15)
+at Function.Module._load (module.js:287:25)
+</code></pre><h5 id="标签和分类"><a href="#标签和分类" class="headerlink" title="标签和分类"></a>标签和分类</h5><p>标签是对一篇文章的记号，使用tag标识，分类是将其归到一个大类中，这个类中会有很多的性质相似的内容。</p>
+<p>标签，方便搜索。</p>
+<ul>
+<li><p>确认站点配置文件有</p>
+<p>  tag_dir: tags</p>
+</li>
+<li><p>确认主题配置文件有</p>
+<p>  tags: tags</p>
+</li>
+</ul>
+<p>分类，给文章归档。</p>
+<ul>
+<li><p>确认站点配置文件有</p>
+<p>  category_dir: categories</p>
+</li>
+<li><p>确认主题配置文件有</p>
+<p>  categories: /categories</p>
+</li>
+</ul>
+<p>站点配置文件有</p>
+<pre><code>archive_dir: archives
+category_dir: categories
+</code></pre><p>主题配置文件</p>
+<pre><code>tags: /tags/ || tags
+  categories: /categories/ || th
+</code></pre><ul>
+<li>如何使用标签和分类</li>
+</ul>
+<p>新建tags页面</p>
+<pre><code>hexo new page tags
+</code></pre><p>此时会在<code>source/</code>下生成<code>tag/index.md</code>文件</p>
+<p>修改<code>source/tag/index.md</code></p>
+<pre><code>---
+title: tags
+date: 2018-01-05 16:20:01
+type: &quot;tags&quot;
+comments: false
+---
+</code></pre><p>在文章中添加tags:</p>
+<pre><code>---
+title: Struts2 漏洞简单汇总
+date: 2018-01-09 18:13:23
+tags:
+        - 漏洞学习(标签1)
+        - 标签2
+---
+</code></pre><p>同样分类和标签做的步骤一样。</p>
+<pre><code>hexo new page categories
+</code></pre><p>修改 <code>source/categories/index.md</code></p>
+<pre><code>---
+title: categories
+date: 2018-01-05 16:24:24
+type: &quot;categories&quot;
+comments: false
+---
+</code></pre><p>使用分类。</p>
+<h5 id="多PC同步管理博客"><a href="#多PC同步管理博客" class="headerlink" title="多PC同步管理博客"></a>多PC同步管理博客</h5><p>纠结这个问题。把博客本地的内容记得备份就可以了。</p>
+<h5 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h5><p>可以在<a href="https://www.namesilo.com/index.php" target="_blank" rel="noopener">namesilo</a>注册一个域名，使用国内的<code>DNSpod</code>解析服务器，然后在<code>namesilo</code>的后台修改<code>DNS</code>配置就行了，将其修改为<code>DNSpod</code>的，然后将其中的<code>A</code>和<code>www</code>记录修改为自己<code>Gihub Page</code>的ip地址。如何得到呢？<code>ping sie504.github.io</code>，得到的就是。最后在自己的初始化博客的文件夹里，新建一个<code>CNAME</code>文件，里面填写自己的域名，同步一下就可以用自己的域名访问在<code>Github</code>搭建的博客了。</p>
+<h6 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h6><p><a href="https://thief.one/2017/03/03/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/" target="_blank" rel="noopener">Hexo搭建博客教程</a></p>
+<p><a href="https://github.com/limedroid/HexoLearning" target="_blank" rel="noopener">Hexo 博客搭建指南</a></p>
+<p><a href="http://www.cnblogs.com/visugar/p/6821777.html" target="_blank" rel="noopener">hexo从零开始到搭建完整</a></p>
+<p><a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="noopener">写作</a></p>
+<p><a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">配置</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">GitHub+Hexo 搭建个人网站详细教程</a></p>
+<p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/09/Struts2-xxx/" rel="next" title="Struts2 漏洞简单汇总">
+                <i class="fa fa-chevron-left"></i> Struts2 漏洞简单汇总
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/10/iis-shortname/" rel="prev" title="iis-shortname">
+                iis-shortname <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Github-hexo"><span class="nav-number">1.</span> <span class="nav-text">Github + hexo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更换主题"><span class="nav-number">2.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#出现的问题"><span class="nav-number">3.</span> <span class="nav-text">出现的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标签和分类"><span class="nav-number">4.</span> <span class="nav-text">标签和分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多PC同步管理博客"><span class="nav-number">5.</span> <span class="nav-text">多PC同步管理博客</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绑定域名"><span class="nav-number">6.</span> <span class="nav-text">绑定域名</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#参考"><span class="nav-number">6.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

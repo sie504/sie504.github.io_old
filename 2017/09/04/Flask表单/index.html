@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flask," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flask表单">
+<meta name="keywords" content="Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask 表单">
+<meta property="og:url" content="http://yoursite.com/2017/09/04/Flask表单/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Flask表单">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-14/61408317.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-3/82082288.jpg">
+<meta property="og:updated_time" content="2018-02-05T08:12:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask 表单">
+<meta name="twitter:description" content="Flask表单">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-14/61408317.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/04/Flask表单/"/>
+
+
+
+
+
+  <title>Flask 表单 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/04/Flask表单/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask 表单</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-04T15:54:24+08:00">
+                2017-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Web开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Flask</code>表单</p>
+<a id="more"></a>
+<p><a href="https://zhuanlan.zhihu.com/p/23605845" target="_blank" rel="noopener">Flask表单：表单数据的验证与处理</a></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-14/61408317.jpg" alt=""></p>
+<p>模型admin、表单LoginForm、请求方法 GET、POST、访问控制 无</p>
+<pre><code>http://127.0.0.1:5000/admin/login/
+</code></pre><p>验证的字段有那些，帐号和密码。。</p>
+<p>使用表单认证。。。</p>
+<ul>
+<li>表单认证 flask_wtf。。。这个需要学习</li>
+</ul>
+<p><a href="http://www.ttlsa.com/python/python-flask-wtf-and-wtforms/" target="_blank" rel="noopener">1</a></p>
+<p><a href="https://wtforms.readthedocs.io/en/latest/" target="_blank" rel="noopener">手册</a></p>
+<p>比如定义一个登录的表单。。其中的class 和html中的一致。。</p>
+<pre><code>from flask_wtf import FlaskForm
+from wtforms import StringField,PasswordField,SubmitField #表单类型
+from wtforms.validators import DataRequired  #验证字段
+
+class LoginForm(FlaskForm):      #定义表单类
+    &quot;&quot;&quot;管理员登录表单&quot;&quot;&quot;
+    account = StringField(
+        label=&quot;帐号&quot;,
+        validators=[
+            DataRequired(&quot;请输入帐号!&quot;)
+        ],
+        description=&quot;帐号&quot;,
+        render_kw={
+            &quot;class&quot;:&quot;form-control&quot;,
+            &quot;placeholder&quot;:&quot;请输入账号&quot;,
+            &quot;required&quot;:&quot;required&quot;
+        }
+
+    )
+    pwd = PasswordField(
+        label=&quot;密码&quot;,
+        validators=[
+            DataRequired(&quot;请输入密码!&quot;)
+        ],
+        render_kw={
+            &quot;class&quot;: &quot;form-control&quot;,
+            &quot;placeholder&quot;: &quot;请输入密码&quot;,
+            &quot;required&quot;: &quot;required&quot;
+        }
+    )
+    submit = SubmitField(
+        &apos;登录&apos;,
+        render_kw = {
+            &quot;class&quot;:&quot;btn btn-primary btn-block btn-flat&quot;,
+        }
+    )
+</code></pre><p>把表单处理好之后，需要在view里面进行设置、、</p>
+<p>首先导入，实例化，和html的相结合。。</p>
+<p>首先html中的<code>input</code>可以去掉。。用什么替换。。 </p>
+<pre><code>{{ form.account }}
+</code></pre><p>访问表单可以自动生成</p>
+<pre><code>&lt;input class=&quot;form-control&quot; id=&quot;account&quot; name=&quot;account&quot; placeholder=&quot;请输入账号&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+</code></pre><p>在表单下添加</p>
+<pre><code>{{ form.csrf_token }}
+</code></pre><p>在前端访问时候可以看到 csrf的保护</p>
+<pre><code>&lt;input id=&quot;csrf_token&quot; name=&quot;csrf_token&quot; type=&quot;hidden&quot; value=&quot;IjM5Mjk5NmU4NWRkMDc1NWFlMzhkYmJjNTM1MWU2YmMwMTFkNjBiNmIi.DHMAfA.aNKDXI2d9tXTwoFJ5H7mmcXEaqc&quot;&gt;
+</code></pre><p>定义好之后，视图的处理，在view中</p>
+<p>显示错误信息。。</p>
+<p>验证登录密码之类的信息。。</p>
+<pre><code>flash是一个消息的闪现
+
+登录密码错误的话，显示密码错误，重新返回登录页面。。
+正确的话，建立一个session会话。。
+</code></pre><ul>
+<li>标签管理 0816</li>
+</ul>
+<p>首先定义表单</p>
+<pre><code>class TagForm(FlaskForm):
+    name = StringField(
+        label=&quot;名称&quot;,
+        validators=[
+            DataRequired(&apos;请输入标签!&apos;)
+        ],
+        description=&quot;标签&quot;,
+        render_kw={
+            &quot;class&quot;: &quot;form-control&quot;,
+            &quot;id&quot;: &quot;input_name&quot;,
+            &quot;placeholder&quot;: &quot;请输入标签名称！&quot;
+        }
+    )
+
+    submit = SubmitField(
+        &apos;添加&apos;,
+        render_kw={
+            &quot;class&quot;: &quot;btn btn-primary&quot;,
+        }
+    )
+</code></pre><p>然后传入view中<br>先实例化，然后传入到参数中。</p>
+<p>在前端的<code>input</code>进行修改，进行表单的实现。</p>
+<p>有表单的地方，可能就会和数据库的结合。</p>
+<pre><code>#数据的获取
+if form.validate_on_submit():
+    data = form.data
+</code></pre><p>在前端的错误信息的显示。。</p>
+<pre><code>{% for err in form.name.errors %}
+                        <div class="col-md-12">
+                        <font style="color:red">{{ err }}</font>
+                    </div>
+
+
+错误信息
+
+		{% for err in form.字段.errors %}
+
+		<div class="col-md-12">
+                        <font style="color:red">{{ err }}</font>
+                    </div>
+		{% endfor %}
+</code></pre><p>这个错误信息，是在表单定义中的</p>
+<pre><code>validators=[
+           DataRequired(&apos;请输入标签!&apos;)
+       ],
+</code></pre><ul>
+<li>唯一性的确认</li>
+</ul>
+<pre><code>tag = Tag.query.filter_by(name=data[&quot;name&quot;]).count() #数量的统计
+        if tag == 1:
+            flash(&quot;名称已经存在&quot;)
+            return redirect(url_for(&apos;admin.tag_add&apos;))
+</code></pre><ul>
+<li><p><a href="http://docs.jinkan.org/docs/flask/patterns/flashing.html" target="_blank" rel="noopener">flash 消息闪现</a></p>
+<p>闪烁，对结果的一个提示，这个也会在前端显示出来。。<code>get_flashed_messages()</code></p>
+</li>
+</ul>
+<pre><code>{% for msg in get_flashed_messages() %}
+	 {% endfor %}      
+</code></pre><ul>
+<li>入库</li>
+</ul>
+<pre><code>tag = Tag(
+        name=data[&quot;name&quot;]
+    )
+    db.session.add(tag)
+    db.session.commit()
+    flash(&quot;添加标签成功！&quot;, &quot;ok&quot;)
+    return redirect(url_for(&apos;admin.tag_add&apos;))
+</code></pre><h4 id="表单，提取数据，判断，前端错误消息显示、入库"><a href="#表单，提取数据，判断，前端错误消息显示、入库" class="headerlink" title="表单，提取数据，判断，前端错误消息显示、入库"></a>表单，提取数据，判断，前端错误消息显示、入库</h4><p>这几个基本的操作步骤要理解了，这样碰见其他的类似操作，流程化就可以来了。。</p>
+<p>1：根据前端具体的表单，定义表单类。。其中的<code>name、label、validators、description、render_kw（样式内容）</code></p>
+<p>2：在views对应的视图导入表单类，实例化，在前端进行替换，使用定义的表单生成相应的input，csrf的防御。</p>
+<p>3:进行数据的验证，是否重复等一些列逻辑的处理</p>
+<p>4：入库</p>
+<p>5：后端处理，在前端的错误信息的提示，时刻存在的。</p>
+<h4 id="表单中的数据类型"><a href="#表单中的数据类型" class="headerlink" title="表单中的数据类型"></a>表单中的数据类型</h4><pre><code>__all__ = (
+    &apos;BooleanField&apos;, &apos;DecimalField&apos;, &apos;DateField&apos;, &apos;DateTimeField&apos;, &apos;FieldList&apos;,
+    &apos;FloatField&apos;, &apos;FormField&apos;, &apos;IntegerField&apos;, &apos;RadioField&apos;, &apos;SelectField&apos;,
+    &apos;SelectMultipleField&apos;, &apos;StringField&apos;,
+)
+</code></pre><p>比如上传文件类型 </p>
+<h4 id="0823-获取数据"><a href="#0823-获取数据" class="headerlink" title="0823 获取数据"></a>0823 获取数据</h4><p>WTForms提供的静态方法.data返回一个以字段名(filed name)和字段值(field value)作为键值对的字典。。</p>
+<p><code>DataRequired</code> 验证器只是简单地检查相应域提交的数据是否是空</p>
+<h4 id="0903"><a href="#0903" class="headerlink" title="0903"></a>0903</h4><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-3/82082288.jpg" alt=""></p>
+<h4 id="接收表单数据"><a href="#接收表单数据" class="headerlink" title="接收表单数据"></a>接收表单数据</h4><p><code>validate_on_submit</code></p>
+<h4 id="数据库的设置-0904"><a href="#数据库的设置-0904" class="headerlink" title="数据库的设置  0904"></a>数据库的设置  0904</h4><pre><code>&apos;primary_key&apos;
+A_I Auto_increment 自动增加
+</code></pre><p>删除很好的，只要把请求的id在数据库中查找进行删除，。。</p>
+<p>修改就有一定一定的问题了。。。</p>
+<pre><code>def auth_edit(id=None):
+    form = AuthForm()
+    auth = Auth.query.get_or_404(id)
+    if form.validate_on_submit():
+        data = form.data
+        auth.url = data[&quot;url&quot;]
+        auth.name = data[&quot;name&quot;]
+        db.session.add(auth)
+        db.session.commit()
+        flash(&quot;修改权限成功!&quot;, &quot;ok&quot;)
+        redirect(url_for(&apos;admin.auth_edit&apos;,id=id))
+    return render_template(&quot;admin/auth_edit.html&quot;,form=form,auth=auth)  #将auth传递到前端，是展示的时候有提示
+</code></pre><p>修改也会有设计到表单的处理，那就处理一下。接收表单，对其中修改的id，进行查找，获取其中的数据，将原始数据传递到前端，需要对其中的修改的数据进行接收并重新的存储提交到数据库。</p>
+<p>#### </p>
+<p>表单中涉及多选框的时候，用那一个字段 SelectMultipleField</p>
+<p>一个错误，html表单里面的一个错误。。</p>
+<pre><code>&lt;form role=&quot;form&quot; method=&quot;post&quot;&gt;  元素之间没有逗号的。。。浪费了很多时间
+</code></pre><p>多选框的在表单的定义，以及在后端的取出和前端的展示。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flask/" rel="tag"># Flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/04/XXE漏洞学习/" rel="next" title="XXE 漏洞学习">
+                <i class="fa fa-chevron-left"></i> XXE 漏洞学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/11/PHP反序列化/" rel="prev" title="PHP反序列化">
+                PHP反序列化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#表单，提取数据，判断，前端错误消息显示、入库"><span class="nav-number">1.</span> <span class="nav-text">表单，提取数据，判断，前端错误消息显示、入库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单中的数据类型"><span class="nav-number">2.</span> <span class="nav-text">表单中的数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0823-获取数据"><span class="nav-number">3.</span> <span class="nav-text">0823 获取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0903"><span class="nav-number">4.</span> <span class="nav-text">0903</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接收表单数据"><span class="nav-number">5.</span> <span class="nav-text">接收表单数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库的设置-0904"><span class="nav-number">6.</span> <span class="nav-text">数据库的设置  0904</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

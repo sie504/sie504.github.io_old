@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iis-shortname," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接触到很多用户反馈的问题，说是被扫描到了IIS短文件漏洞，参考一些文章，学习一下其中的原理，如何进行更好的防御。">
+<meta name="keywords" content="iis-shortname">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iis-shortname">
+<meta property="og:url" content="http://yoursite.com/2018/01/10/iis-shortname/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="接触到很多用户反馈的问题，说是被扫描到了IIS短文件漏洞，参考一些文章，学习一下其中的原理，如何进行更好的防御。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-01-10T09:12:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iis-shortname">
+<meta name="twitter:description" content="接触到很多用户反馈的问题，说是被扫描到了IIS短文件漏洞，参考一些文章，学习一下其中的原理，如何进行更好的防御。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/10/iis-shortname/"/>
+
+
+
+
+
+  <title>iis-shortname | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/10/iis-shortname/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iis-shortname</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T10:43:04+08:00">
+                2018-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全研究/" itemprop="url" rel="index">
+                    <span itemprop="name">安全研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接触到很多用户反馈的问题，说是被扫描到了<code>IIS</code>短文件漏洞，参考一些文章，学习一下其中的原理，如何进行更好的防御。</p>
+<a id="more"></a>
+<h5 id="漏洞原因"><a href="#漏洞原因" class="headerlink" title="漏洞原因"></a>漏洞原因</h5><p>参考<a href="http://www.lijiejie.com/iis-win8-3-shortname-brute/" target="_blank" rel="noopener">IIS短文件名暴力猜解漏洞分析</a></p>
+<p>为了兼容16位<code>MS-DOS</code>程序，<code>Windows</code>为文件名较长的文件(和文件夹)生成了对应的<code>windows 8.3短文件名</code></p>
+<p><a href="https://baike.baidu.com/item/8.3%E6%A0%BC%E5%BC%8F" target="_blank" rel="noopener">8.3格式</a></p>
+<p><code>8.3</code>格式通常是指较旧的<code>Windows</code>操作系统或DOS的文件命名限制。8指文件名最大长度为8，3指扩展名最大长度为3。</p>
+<p>若不符合以上限制则会以”~”作延长名称如”Program Files”会变成”Progra~1”<br>若同一文件夹有相似的名称，末端的数值则会自动递增</p>
+<p>返回<code>Bad request</code>错误的话，说明不存在该文件或者目录。<br>返回<code>404</code>，则代表存在该文件或者目录。</p>
+<p>短文件名的规律：前6个字符+<code>~1-9</code>+扩展名前三位</p>
+<p>比如在<code>E\test</code>创建一个文件<code>1234556789.html</code></p>
+<pre><code> E:\test&gt;dir /x
+ 驱动器 E 中的卷是 文档
+ 卷的序列号是 000D-D35E
+
+ E:\test 的目录
+
+2018/01/10  15:39    &lt;DIR&gt;                       .
+2018/01/10  15:39    &lt;DIR&gt;                       ..
+2018/01/10  15:36                 0 123455~1.HTM 1234556789.html
+               1 个文件              0 字节
+               2 个目录 30,344,765,440 可用字节
+</code></pre><p>其结果为<code>123455~1.HTM</code></p>
+<p>该文件名的特征：</p>
+<ul>
+<li>文件名的前六个字符直接显示，后续的用<code>~1</code>指代。其中的数字1还可以递增，如果存在多个文件名类似的文件(名称前6为必须相同，且后缀名的前3位必须相同)</li>
+<li>后缀名最长只有3位，多余的被截断。</li>
+</ul>
+<p>环境：启用<code>.net</code>的<code>IIS</code>暴力列举短文件名。</p>
+<ul>
+<li>访问构造的某个存在的短文件名，会返回404</li>
+<li>访问构造的某个不存在的短文件名，返回400</li>
+</ul>
+<h5 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><p>需要使用通配符<code>*</code>。在<code>windows</code>中，<code>*</code>可以匹配n个字符，n可以为0。</p>
+<p>利用的最后面为什么会加<code>/.aspx</code>。</p>
+<p>论文中这样说的。</p>
+<blockquote>
+<p>“validlong.extx” in 8.3 format would be “VALIDL~1.EXT”. I used “/.aspx” to redirect the request to .Net framework to getaclearerresponse. However, I found out it is possible to use other extensions n  different  scenarios.  Further,the asterisk sign (“*”)andquestion mark (“?”) can also be used to check the validityof one letter in the file or the extension name.</p>
+</blockquote>
+<blockquote>
+<p>I used “/.aspx” to redirect the request to .Net framework to getaclearerresponse. </p>
+<p>我使用“/.aspx”将请求重定向到.Net框架，以便通用。</p>
+</blockquote>
+<h5 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h5><ol>
+<li>升级.net framework</li>
+</ol>
+<ol>
+<li><p>修改注册表键值：</p>
+<p> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</p>
+<p> 修改NtfsDisable8dot3NameCreation为1。</p>
+</li>
+</ol>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://www.lijiejie.com/iis-win8-3-shortname-brute/" target="_blank" rel="noopener">IIS短文件名暴力猜解漏洞分析</a></p>
+<p><a href="https://code.google.com/archive/p/iis-shortname-scanner-poc/" target="_blank" rel="noopener">iis-shortname-scanner-poc</a></p>
+<p><a href="https://www.exploit-db.com/docs/english/19527-microsoft-iis-tilde-character-short-filefolder-name-disclosure.pdf" target="_blank" rel="noopener">Paper-Microsoft IIS Tilde Character Short File/Folder Name Disclosure</a></p>
+<p><a href="https://nmap.org/nsedoc/scripts/http-iis-short-name-brute.html" target="_blank" rel="noopener">Nmap—http-iis-short-name-brute</a></p>
+<p><a href="https://www.secpulse.com/archives/9086.html" target="_blank" rel="noopener">完美时空某分站短文件名泄露</a></p>
+<p><a href="http://www.freebuf.com/articles/4908.html" target="_blank" rel="noopener">IIS短文件/文件夹漏洞(汇总整理)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iis-shortname/" rel="tag"># iis-shortname</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/09/My-Blog/" rel="next" title="Github+hexo">
+                <i class="fa fa-chevron-left"></i> Github+hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/11/SQLi_shell/" rel="prev" title="SQL注入写shell不成功后">
+                SQL注入写shell不成功后 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞原因"><span class="nav-number">1.</span> <span class="nav-text">漏洞原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞修复"><span class="nav-number">3.</span> <span class="nav-text">漏洞修复</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

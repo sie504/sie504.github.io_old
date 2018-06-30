@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PHP基础知识学习。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 基础知识">
+<meta property="og:url" content="http://yoursite.com/2017/09/26/PHP-note/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="PHP基础知识学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-29/5160777.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-11/65630831.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-11/70960394.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-12/25026138.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-12/54116729.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-17/86751290.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-18/86074354.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-18/2617173.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-23/23025898.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-24/84532427.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/32942182.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/83685680.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/27155153.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/86297380.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/5441968.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/74848165.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/76455274.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-30/88529263.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-8/59969222.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-8/85398739.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-9/78295063.jpg">
+<meta property="og:updated_time" content="2018-03-13T09:38:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 基础知识">
+<meta name="twitter:description" content="PHP基础知识学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-29/5160777.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/26/PHP-note/"/>
+
+
+
+
+
+  <title>PHP 基础知识 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/26/PHP-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP 基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-26T13:20:46+08:00">
+                2017-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>PHP</code>基础知识学习。</p>
+<a id="more"></a>
+<h5 id="PHP手册"><a href="#PHP手册" class="headerlink" title="PHP手册"></a><a href="https://secure.php.net/manual/zh/" target="_blank" rel="noopener">PHP手册</a></h5><h5 id="0926-变量和数据类型"><a href="#0926-变量和数据类型" class="headerlink" title="0926 变量和数据类型"></a>0926 变量和数据类型</h5><p><strong>数量类型、复合类型(数组、对象)、特殊类型</strong></p>
+<p>var_dump($a);   打印变量的详细信息</p>
+<p>浏览器十进制显示</p>
+<p>0x 十六进制</p>
+<p><strong>浮点型</strong></p>
+<p>float</p>
+<pre><code>header(&quot;Content-type:text/html;charset=utf-8&quot;);
+告诉浏览器以什么编码方式解析什么类型的文档，防止中文乱码
+</code></pre><p><strong>字符串</strong></p>
+<p>string</p>
+<p><strong>单引号中字符串的变量不解析，双引号可以</strong></p>
+<pre><code>&lt;?php
+
+$f = &apos;doddodo&apos;;
+
+echo &apos;$f&apos;,&apos;&lt;br/&gt;&apos;;
+echo &quot;$f&quot;;
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>$f
+doddodo
+</code></pre><p>转义符号</p>
+<pre><code>\n 换行
+\r 回车
+\t 水平制表符
+
+
+__单引号只解析\` \\`,双引号解析全部的转义字符__
+
+&lt;?php
+
+$f = &apos;!\r@\n#\t%a\\b\`\$de&apos;;
+$g = &quot;!\r@\n#\t%a\\b\`\$de&quot;;
+echo  $f,&apos;&lt;br/&gt;&apos;;
+echo $g,&apos;&lt;br/&gt;&apos;;
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>!\r@\n#\t%a\b\`\$de
+! @ #    %a\b\`$de
+</code></pre><p><a href="https://zhidao.baidu.com/question/518312912081988045.html" target="_blank" rel="noopener">php中如何换行</a></p>
+<p>php引擎在解析变量的时候会尽量的向后取合法字符，以为取得越多，这个变量的含义越明确。</p>
+<p><strong>{}</strong></p>
+<pre><code>{$变量名称}  不用加空格
+</code></pre><p>0927  字符串可以增删替换</p>
+<pre><code>{} 字符串 $string = &apos;abcedf&apos;
+    $string{0}  根据下标找字符
+</code></pre><p>demo</p>
+<pre><code>&lt;?php
+
+$string = &apos;abdef&apos;;
+echo $string;
+echo &apos;&lt;br/&gt;&apos;;
+//删除，就把这个位置替换为空
+$string{0} = &apos;&apos;;
+echo $string;
+echo &apos;&lt;br/&gt;&apos;;
+
+$string{5} = &apos;g&apos;;
+echo $string;
+echo &apos;&lt;br/&gt;&apos;;
+
+?&gt;
+</code></pre><p><strong>heredoc</strong></p>
+<p>相当于 双引号</p>
+<p>大段落</p>
+<pre><code>以 &lt;&lt;&lt;EOF 开始 EOF; 结束  没有缩进
+</code></pre><p><strong>复合类型</strong></p>
+<blockquote>
+<p>数组  array()</p>
+<p>对象 new Class()</p>
+</blockquote>
+<blockquote>
+<p>资源 </p>
+</blockquote>
+<blockquote>
+<p>经过unset的值为null</p>
+</blockquote>
+<blockquote>
+<p>unset() 销毁对象</p>
+</blockquote>
+<p><strong>数据类型转换</strong></p>
+<blockquote>
+<p>自动转换</p>
+</blockquote>
+<blockquote>
+<p>强制转换</p>
+</blockquote>
+<p><strong>其他类型转换为数值型</strong></p>
+<pre><code>true -&gt; 1 false -&gt; 0 null -&gt; 0 
+如果字符串以非法数值开始，直接转换为0
+如果字符串以合法数值开始，一直取到第一个非法数值结束
+</code></pre><p>对象不能转换为字符串</p>
+<p><strong>其他类型转换为布尔型</strong></p>
+<pre><code>if(条件){
+
+}else{
+
+}
+</code></pre><blockquote>
+<p>0 -&gt; false</p>
+</blockquote>
+<blockquote>
+<p>0.0 -&gt; false</p>
+</blockquote>
+<blockquote>
+<p>空字符串 ‘’ ‘0’ –&gt; false</p>
+</blockquote>
+<blockquote>
+<p>null -&gt; false</p>
+</blockquote>
+<blockquote>
+<p>空数组 array() -&gt; false</p>
+</blockquote>
+<p>3-3</p>
+<p>0929</p>
+<p><strong>数据类型临时转换</strong></p>
+<pre><code>通过小括号
+
+(int)$
+
+(unset)$  临时转换为空
+</code></pre><p>通过系统函数转换</p>
+<pre><code>intval()
+floatval()
+realval()
+boolval()
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-29/5160777.jpg" alt=""></p>
+<p><strong>数据类型永久转换</strong></p>
+<pre><code>settype()
+gettype() 获取变量类型
+</code></pre><p><a href="http://php.net/manual/zh/ref.var.php" target="_blank" rel="noopener">变量函数</a></p>
+<p>通过变量函数检测变量类型。。</p>
+<pre><code>is_int()
+is_float()
+</code></pre><h5 id="常量"><a href="#常量" class="headerlink" title="常量"></a><a href="http://php.net/manual/zh/reserved.constants.php#reserved.constants.core" target="_blank" rel="noopener">常量</a></h5><p>一个简单值的标识符</p>
+<ul>
+<li><p>系统常量(php_version,)</p>
+</li>
+<li><p>自定义常量 </p>
+<p>  define const</p>
+<p>  const 定义常量</p>
+<p>  constant 获取常量的值</p>
+<p>  defined() 检测常量是否存在</p>
+<p>  print_r() 打印数组的信息</p>
+<p>  get_defined_constants() 获取所有已定义的常量</p>
+</li>
+</ul>
+<p>测试</p>
+<pre><code>&lt;?php
+
+echo PHP_VERSION;
+
+echo &apos;&lt;br/&gt;&apos;;
+
+echo PHP_OS;
+
+echo &apos;&lt;br/&gt;&apos;;
+
+define(&apos;TEST&apos;,&apos;come on&apos;);
+
+echo TEST;
+
+//常量已经定义不能改变
+
+define(&apos;TEST&apos;,&apos;come php&apos;);
+
+echo TEST;
+echo &apos;&lt;br/&gt;&apos;;
+const  SEC = &apos;PHP&apos;;
+
+echo SEC,&apos;&lt;br&gt;&apos;;
+
+echo constant(&apos;PHP_VERSION&apos;);
+
+echo &apos;&lt;hr/&gt;&apos;;
+
+print_r(get_defined_constants());
+
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>5.4.45&lt;br/&gt;WINNT&lt;br/&gt;come on&lt;br /&gt;
+&lt;b&gt;Notice&lt;/b&gt;:  Constant TEST already defined in &lt;b&gt;D:\phpStudy\WWW\php\1.php&lt;/b&gt; on line &lt;b&gt;17&lt;/b&gt;&lt;br /&gt;
+come on&lt;br/&gt;PHP&lt;br&gt;5.4.45&lt;hr/&gt;Array
+(
+    [E_ERROR] =&gt; 1
+    [E_RECOVERABLE_ERROR] =&gt; 4096
+    [E_WARNING] =&gt; 2
+    [E_PARSE] =&gt; 4
+    [E_NOTICE] =&gt; 8
+    [E_STRICT] =&gt; 2048
+    [E_DEPRECATED] =&gt; 8192
+    [E_CORE_ERROR] =&gt; 16
+    [E_CORE_WARNING] =&gt; 32
+    [E_COMPILE_ERROR] =&gt; 64
+    [E_COMPILE_WARNING] =&gt; 128
+    [E_USER_ERROR] =&gt; 256
+    [E_USER_WARNING] =&gt; 512
+    [E_USER_NOTICE] =&gt; 1024
+    [E_USER_DEPRECATED] =&gt; 16384
+    [E_ALL] =&gt; 32767
+</code></pre><p>区分大小写</p>
+<p>1-5</p>
+<p>魔术常量</p>
+<pre><code>__LINE__ __FILE__ __DIR__ __CLASS__ 
+
+    &lt;?php
+
+echo __LINE__;
+echo &apos;&lt;br/&gt;&apos;;
+
+echo __FILE__;
+echo &apos;&lt;br/&gt;&apos;;
+
+echo __DIR__;
+
+
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>3
+D:\phpStudy\WWW\php\1.php
+D:\phpStudy\WWW\php
+</code></pre><p><strong>PHP预定义变量</strong></p>
+<p>所有预定义变量都是全局变量</p>
+<pre><code>$GLOBAL/$_SERVERS/$_ENV/$_COOKIE/$_SESSION/$FILE/$_GET/$_POST 主要接收表单
+</code></pre><p>$_POST[名称]</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;form action=&apos;test.php&apos; method=&apos;post&apos;&gt;
+
+    &lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;&quot; placeholder=&quot;请输入合法字符&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;submit&quot;&gt;
+&lt;/form&gt;
+
+&lt;/html&gt;
+</code></pre><p>POST接收数据</p>
+<pre><code>&lt;?php
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+
+echo &apos;用户名:&apos;,$_POST[&apos;username&apos;],&apos;&lt;br/&gt;&apos;;
+</code></pre><p>name=”username”.$_POST接收表单以post形式发送过来的数据，$_POST[‘name’]</p>
+<p><strong><code>$_GET</code></strong></p>
+<p>主要接受以?形式传递的数据。</p>
+<p><strong><code>$_REQUEST</code></strong></p>
+<pre><code>$_GET、$_POST都可以
+</code></pre><h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a><a href="http://php.net/manual/zh/language.operators.php" target="_blank" rel="noopener">运算符</a></h5><p>0930</p>
+<p>1011</p>
+<p>只有值的东西都可以叫做表达式。</p>
+<p>浮点型支持递增递减，布尔型不支持，null，字符串支持递增，不支持递减</p>
+<pre><code>++、-- 前缀和后缀
+$str = &apos;b1&apos;;
+echo ++$str;
+//b2
+
+
+ord($str) 得到指定字符串的ASCII值
+chr($ascii) 根据ASCII得到对应的的字符串
+</code></pre><p>测试</p>
+<pre><code>$str = &apos;b&apos;;
+echo ord($str);
+echo &apos;&lt;br/&gt;&apos;;
+
+echo chr(98);
+
+结果
+98
+b
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-11/65630831.jpg" alt=""></p>
+<p><strong>字符连接 .</strong></p>
+<pre><code>&lt;?php
+
+$str1 = &apos;hello &apos;;
+$str2 = &apos;world&apos;;
+echo $str1,$str2;
+echo &apos;&lt;br/&gt;&apos;;
+$newStr1 = $str1.$str2;
+echo $newStr1;
+echo &apos;&lt;br/&gt;&apos;;
+
+$newStr2 = $str1.&apos;~&apos;.$str2.&apos;!&apos;;
+echo $newStr2;
+
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>hello world
+hello world
+hello ~world!
+</code></pre><p><strong>赋值运算符</strong></p>
+<pre><code>mt_rand() 随机数
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-11/70960394.jpg" alt=""></p>
+<p><a href="http://php.net/manual/zh/language.operators.comparison.php" target="_blank" rel="noopener"><strong>比较运算符</strong></a></p>
+<pre><code>== 值
+=== 值 类型
+</code></pre><p>1012</p>
+<p><strong>逻辑运算符</strong></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-12/25026138.jpg" alt=""></p>
+<p><strong>错误抑制符</strong></p>
+<p>抑制错误输出，通过@符号加到会产生错误的表达式之前</p>
+<pre><code>&lt;?php
+
+$a = 2;
+@settype($a,&apos;test&apos;);
+@var_dump($test);
+</code></pre><p><strong>三元运算符</strong></p>
+<pre><code>exp1?exp2:exp3
+如果exp1正确，输出exp2，否则输出exp3
+</code></pre><h4 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a><a href="https://secure.php.net/manual/zh/language.control-structures.php" target="_blank" rel="noopener">流程控制</a></h4><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-12/54116729.jpg" alt=""></p>
+<p>不同语言的基本的流程处理是类似的，if、elseif、else、</p>
+<pre><code>max() 最大值
+</code></pre><p>1013</p>
+<pre><code>if elseif else
+switch() case
+</code></pre><p>测试</p>
+<pre><code>&lt;?php
+//年月日 星期
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+date_default_timezone_set(&apos;PRC&apos;);
+$day=3;
+if($day==1){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期一&lt;br/&gt;&apos;;
+}elseif($day==2){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期二&lt;br/&gt;&apos;;
+}elseif($day==3){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期三&lt;br/&gt;&apos;;
+}elseif($day==4){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期四&lt;br/&gt;&apos;;
+}elseif($day==5){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期五&lt;br/&gt;&apos;;
+}elseif($day==6){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期六&lt;br/&gt;&apos;;
+}elseif($day==0){
+    echo date(&quot;Y年m月d日&quot;).&apos; 星期日&lt;br/&gt;&apos;;
+}else{
+    echo &apos;非法日期&lt;br/&gt;&apos;;
+}
+
+
+// date($format,$time) 格式化日期时间
+// date_default_timezone_set($timezone) 设置时区
+// date_default_timezone_get($timezone) 得到默认时区
+//time() 得到当前的时间戳
+/*
+Y:4位的年份
+m:2位月份
+d:2位的日
+H:2位的小时
+i:2位的分钟
+s:2位秒数
+w:返回一周内的前几天 0-6(0代表星期日)
+*/
+echo @date(&quot;Y年m月d日 H:i:s&quot;);
+echo &apos;&lt;br/&gt;&apos;;
+
+echo @date_default_timezone_get();
+echo &apos;&lt;br/&gt;&apos;;
+
+echo @date(&quot;Y/m/d&quot;,time());
+
+echo &apos;&lt;hr/&gt;&apos;;
+
+//得到当前一周的第几天
+$day = date(&apos;w&apos;);
+
+if($day==0){
+    $str = &apos;星期日&apos;;
+}elseif($day==1){
+    $str = &apos;星期一&apos;;
+}elseif($day==2){
+    $str = &apos;星期二&apos;;
+}elseif($day ==3){
+    $str = &apos;星期三&apos;;
+}elseif($day==4){
+    $str = &apos;星期四&apos;;
+}elseif($day==5){
+    $str = &apos;星期五&apos;;
+}elseif($day==6){
+    $str = &apos;星期六&apos;;
+}
+
+echo date(&apos;Y年m月d日 &apos;).$str;
+
+echo &apos;&lt;hr/&gt;&apos;;
+
+
+$day = date(&apos;w&apos;);
+switch($day){
+    case 0:
+    $res = &apos;日&apos;;
+    break;
+    case 1:
+    $res = &apos;一&apos;;
+    break;
+    case 2:
+    $res = &apos;二&apos;;
+    break;
+    case 3:
+    $res = &apos;三&apos;;
+    case 4:
+    $res = &apos;四&apos;;
+    break;
+    case 5:
+    $res = &apos;五&apos;;
+    break;
+    case 6:
+    $res = &apos;六&apos;;
+    break;
+
+}
+
+$dateStr = date(&quot;Y年m月d日 星期{$res}&quot;);
+echo $dateStr;
+</code></pre><p>结果</p>
+<pre><code>2017年10月13日 星期三
+2017年10月13日 13:36:55
+PRC
+2017/10/13
+2017年10月13日 星期五
+2017年10月13日 星期五
+</code></pre><p>1-10</p>
+<p>1017</p>
+<pre><code>eixt() 程序终止执行
+die()
+</code></pre><p><a href="http://php.net/manual/zh/function.error-reporting.php" target="_blank" rel="noopener">error_reporting</a></p>
+<p>计算器。。在Web页面展示出来，使用到<code>select</code>其中的if条件判断很是需要。</p>
+<p>if的嵌套，条件语句，以及{}</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Test&lt;/title&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;计算器&lt;/h1&gt;
+    &lt;form action=&quot;#&quot; method=&quot;post&quot;&gt;
+    num1:&lt;input type=&quot;text&quot; name=&quot;num1&quot; id=&quot;&quot;&gt;
+    &lt;select  class=&quot;&quot; name=&quot;op&quot;&gt;
+        &lt;option value=&quot;+&quot;&gt;+&lt;/option&gt;
+        &lt;option value=&quot;-&quot;&gt;-&lt;/option&gt;
+        &lt;option value=&quot;*&quot;&gt;*&lt;/option&gt;
+        &lt;option value=&quot;/&quot;&gt;/&lt;/option&gt;
+        &lt;option value=&quot;%&quot;&gt;%&lt;/option&gt;
+    &lt;/select&gt;
+    num2: &lt;input type=&quot;text&quot; name=&quot;num2&quot; id=&quot;&quot;&gt;
+    &lt;hr/&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;act&quot; value=&quot;计算&quot;&gt;
+    &lt;/form&gt;
+    &lt;?php
+    error_reporting(E_ALL&amp;~E_NOTICE);
+    //接收数据
+    $act = $_POST[&apos;act&apos;];
+    if($act){
+    $num1 = $_POST[&apos;num1&apos;];
+    $num2 = $_POST[&apos;num2&apos;];
+    $op = $_POST[&apos;op&apos;];
+    //根据不同的操作符完成不同的选择
+    if(is_numeric($num1)&amp;&amp;is_numeric($num2)){
+        if($op==&apos;+&apos;){
+        $res = $num1+$num2;
+    }elseif($op==&apos;-&apos;){
+        $res = $num1-$num2 ;
+    }elseif($op==&apos;*&apos;){
+        $res = $num1*$num2;
+    }elseif($op==&apos;/&apos;){
+        //判断$num2是否为0
+        if($num2!=0){
+            $res = $num1/$num2;
+        }
+        //exit() 或die()程序终止执行
+        exit(&apos;0不能当作除数&apos;);
+    }elseif($op==&apos;%&apos;){
+        $res = $num1%$num2;
+    }else{
+    echo &apos;非法操作&lt;br/&gt;&apos;;
+    }
+    echo &quot;运算结果为: &lt;br/&gt;{$num1}{$op}{$num2}={$res}&quot;;
+    }else{
+        echo &apos;非法操作数&lt;br/&gt;&apos;;
+    }
+    }
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-17/86751290.jpg" alt=""></p>
+<p>1018</p>
+<p>9x9</p>
+<pre><code>echo &apos;&lt;table border=&quot;1&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;80%&quot;&gt;&apos;;
+for($i=1;$i&lt;=9;$i++){
+    echo &apos;&lt;tr&gt;&apos;;
+    for($j=1;$j&lt;=$i;$j++){
+        echo &quot;&lt;td&gt;{$j}&amp;times;{$i}=&quot;.($i*$j).&quot;&lt;/td&gt;&quot;;
+    }
+    echo &apos;&lt;/tr&gt;&apos;;
+    }
+    echo &apos;&lt;/table&gt;&apos;;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-18/86074354.jpg" alt=""></p>
+<p>goto语句，但是不能跳入循环，可以跳出循环</p>
+<pre><code>&lt;?php
+
+echo &apos;starting...&lt;br/&gt;&apos;;
+
+echo &apos;&lt;hr/&gt;&apos;;
+
+goto TEST;
+
+echo &apos;this is a test&lt;br/&gt;&apos;;
+
+TEST: //TEST标识符
+echo &apos;hello php&lt;br/&gt;&apos;;
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>starting...
+
+----------
+
+hello php
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-18/2617173.jpg" alt=""></p>
+<h5 id="PHP函数库"><a href="#PHP函数库" class="headerlink" title="PHP函数库"></a>PHP函数库</h5><h5 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h5><p>定义–调用–</p>
+<p>函数的参数，返回值，return。</p>
+<p>变量：</p>
+<p>局部变量(动态，静态static)，全局变量(函数外部)。</p>
+<pre><code>&amp;$a 取地址
+</code></pre><p>参数的默认值</p>
+<p>可变参数列表 </p>
+<pre><code>func_num_args()    # 获取传递参数的数量
+func_get_args()        #获取传递参数的内容
+</code></pre><p>参数的类型</p>
+<pre><code>array 数组、对象、callable
+</code></pre><p>可变函数</p>
+<pre><code>is_callable()
+function_exists()
+</code></pre><p>函数的嵌套</p>
+<p>递归调用</p>
+<pre><code>&lt;?php
+function sum($n,$m){
+    if($m &lt;= $n){
+        return $n;
+    }
+    // $n + ($n + 1) + ... + ($m - 1) + $m 
+    return sum($n,$m - 1) + $m;
+}
+echo sum(1,100);
+
+// sum(1,100) =&gt; sum(1,99) .... =&gt; sum(1,1) 
+// if ，回溯    
+</code></pre><p>另一个</p>
+<pre><code>&lt;?php
+// 1,1,2,3,5,8
+function fbn($n){
+    if($n &lt;= 2){
+        return 1;
+    }
+    return fbn($n-1) + fbn($n-2);
+}
+echo fbn(6);
+
+// fbn(6) =&gt; fbn(5) =&gt; fbn(4) ... =&gt; fbn(2)
+</code></pre><p>匿名函数</p>
+<p>1020</p>
+<h5 id="系统函数"><a href="#系统函数" class="headerlink" title="系统函数"></a>系统函数</h5><p>内置函数</p>
+<h5 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a><a href="https://secure.php.net/manual/zh/ref.strings.php" target="_blank" rel="noopener">字符串函数</a></h5><p>utf8 汉字3个字节</p>
+<pre><code>strlen函数    用于获取字符串长度
+strtolower    将字符串转换为小写
+strtoupper    将字符串转换为大写
+ucfirst 将句子首字母转换为大写
+ucwords 将每个单词的首字母转换为大写
+str_replace 字符串替换 
+str_replace(&apos;a&apos;,&apos;b&apos;,&apos;java&apos;) 将java中的a替换为b
+str_ireplace 字符串替换，不区分大小写
+htmlspecialchars 预定义的字符串转换为HTML实体
+ltrim 删除字符串开始位置的空格或其他字符
+rtrim 结束为止
+trim 实现删除字符串开始和结束位置空格或其他字符
+字符串位置相关的函数
+strpos 将返回一个字符在另一个字符第一次出现的位置
+stripos 将返回一个字符在另一个字符第一次出现的位置 忽略大小写
+strrpos 将返回一个字符在另一个字符最后一次出现的位置
+strripos 将返回一个字符在另一个字符最后一次出现的位置 忽略大小写
+字符串截取函数
+substr 截取字符串 substr(string,start,length)
+strstr 搜索一个字符串在另一个字符串中第一次出现的位置，区分大小写，返回字符串中其余部分
+stristr
+strrstr 搜索一个字符串在另一个字符串中最后一次出现的位置，区分大小写，返回字符串中其余部分
+strrev 反转字符串 abc --》 cba
+md5 字符串加密
+str_shuffle 随机打乱字符串
+explode 使用一个字符串分隔另一个字符串---python split
+implode 将一个一位数组的值转换为字符串。数组的连接
+sprintf 格式化字符串
+</code></pre><h6 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a><a href="https://secure.php.net/manual/zh/ref.math.php" target="_blank" rel="noopener">数学函数</a></h6><pre><code>floor 舍一 3.01 --&gt; 2
+ceil 进1 3.01 --》 4
+pow() 幂运算
+sqrt 平方根
+max    最大值
+min    最小值
+rand    随机数 rand(40,90)
+mt_rand    一个跟好的随机数
+round 实现四舍五入
+number_format 将以千位分隔符方式格式化数字
+fmod 除数的浮点数 7.8 /3 ==&gt; 1.8
+</code></pre><h6 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a><a href="https://secure.php.net/manual/zh/ref.datetime.php" target="_blank" rel="noopener">日期函数</a></h6><pre><code>date()   两个参数
+date_default_timezone_set 默认设置时区 亚洲
+date_default_timezone_get 获取默认时区
+time() 时间戳 返回当前Unix时间戳
+strtotime()    获取想要时间的时间戳
+first day of ?? 某月第一天
+microtime 返回当前Unix时间戳和微秒数，计算一个程序执行的时间
+uniqid 生成唯一ID
+getdate 可以获取日期、时间信息
+</code></pre><h6 id="数组初始"><a href="#数组初始" class="headerlink" title="数组初始"></a><a href="https://secure.php.net/manual/zh/book.array.php" target="_blank" rel="noopener">数组初始</a></h6><p>定义数组</p>
+<ol>
+<li>通过array()形式创建</li>
+<li>通过[]形式创建</li>
+<li>通过range()和compact()创建</li>
+<li>通过define()定义常量数组</li>
+</ol>
+<p>索引数组</p>
+<pre><code>array(
+3 =&gt; &apos;a&apos;,
+5 =&gt; &apos;b&apos;
+);
+</code></pre><p>关联数组(字典)</p>
+<pre><code>array(
+&apos;username&apos;=&gt;&apos;king&apos;,
+&apos;age&apos;=&gt;12
+
+)
+</code></pre><p>如果已有下标为负数，则新添加下标从0开始</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-23/23025898.jpg" alt=""></p>
+<p>二维数组。二维索引+关联的形式(数据库中查询出的记录就是这种方式)</p>
+<pre><code>array(
+    &apos;users&apos;=&gt;(&apos;king&apos;,&apos;queen&apos;),
+    &apos;age&apos;=&gt;array(12,34,56)
+);
+</code></pre><p>数组，n维。</p>
+<pre><code>const
+define
+</code></pre><p><strong>使用数组</strong></p>
+<p>取出其中的数据。增删改查数组的数据。。</p>
+<pre><code>键名--键值    键地址    
+unset() 删除一个数组里的元素
+</code></pre><p><strong>其他类型转换数组</strong></p>
+<p>临时转换、永久转换</p>
+<pre><code>(array)$var
+
++ 合并数组
+</code></pre><h6 id="数组的应用"><a href="#数组的应用" class="headerlink" title="数组的应用"></a><a href="https://secure.php.net/manual/zh/ref.array.php" target="_blank" rel="noopener">数组的应用</a></h6><p>1024</p>
+<p>遍历数组。</p>
+<p>for</p>
+<pre><code>&lt;?php
+echo &apos;&lt;pre&gt;&apos;;
+$arr = range(&apos;a&apos;,&apos;z&apos;);
+//print_r($arr);
+//echo $arr[0];
+
+for($i=0,$count=count($arr)-1;$i&lt;=$count;$i++){
+    echo $arr[$i],&apos;&lt;br/&gt;&apos;;
+}
+echo &apos;&lt;/pre&gt;&apos;;
+
+?&gt;
+</code></pre><p>foreach 遍历一维二维。不同版本有改变</p>
+<pre><code>&lt;?php
+
+// foreach两种形式
+
+$arr = [
+    5=&gt;&apos;a&apos;,
+    12=&gt;&apos;b&apos;,
+    -123=&gt;&apos;c&apos;
+];
+foreach($arr as $v){
+    echo $v,&apos;&lt;br/&gt;&apos;;
+}
+</code></pre><p>结果</p>
+<pre><code>a
+b
+c
+</code></pre><p>键值</p>
+<pre><code>foreach($arr as $k=&gt;$v){
+    echo $k,&apos;--&apos;,$v,&apos;&lt;br/&gt;&apos;;
+</code></pre><p>结果</p>
+<pre><code>5--a
+12--b
+-123--c
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-24/84532427.jpg" alt=""></p>
+<pre><code>key($array) 得到当前指针所在位置的键名
+
+current($array) 得到当前指针所在位置的键值
+
+next()
+
+prev() 前一个
+
+reset() 开始
+
+end() 结束
+</code></pre><p>1025</p>
+<pre><code>each
+list
+</code></pre><h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>cookie是服务器发送到用户浏览器并保存在浏览器上的数据，它会在浏览器下一次发起请求时被携带并发送到服务器上。</p>
+<p>HTTP cookie是HTTP表头的组成部分</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/32942182.jpg" alt=""></p>
+<p>作用。</p>
+<ol>
+<li>会话状态管理</li>
+<li>个性化设置（用户自定义设置）</li>
+<li><p>浏览器行为跟踪</p>
+<p> setcookie</p>
+</li>
+</ol>
+<h5 id="数组函数"><a href="#数组函数" class="headerlink" title="数组函数"></a><a href="https://secure.php.net/manual/zh/ref.array.php" target="_blank" rel="noopener">数组函数</a></h5><h5 id="可视化前端页面设置"><a href="#可视化前端页面设置" class="headerlink" title="可视化前端页面设置"></a>可视化前端页面设置</h5><pre><code>http://www.layoutit.com/
+
+http://www.layoutit.cn/
+</code></pre><h5 id="会话控制"><a href="#会话控制" class="headerlink" title="会话控制"></a>会话控制</h5><p>什么是session</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/83685680.jpg" alt=""></p>
+<p>为什么使用session</p>
+<pre><code>session_start()
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/27155153.jpg" alt=""></p>
+<p>session 工作原理</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/86297380.jpg" alt=""></p>
+<p>告诉服务器我是谁，然后服务器读取对应的文件。还会存储到cookie中。</p>
+<p>sessionID 会话标识符</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/5441968.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/74848165.jpg" alt=""></p>
+<h5 id="session函数"><a href="#session函数" class="headerlink" title="session函数"></a><a href="https://secure.php.net/manual/zh/ref.session.php" target="_blank" rel="noopener">session函数</a></h5><pre><code>session_start(); 启动新会话或者重启现有会话
+session_id 获取/设置当前会话ID
+session_destroy 销毁一个会话的全部数据
+</code></pre><p>案例</p>
+<pre><code>&lt;?php
+header(&apos;content-type&quot;text/html;charset=utf-8&apos;);
+session_start();
+$_SESSION[&apos;username&apos;] = &apos;mooc PHP&apos;;
+</code></pre><p>会在服务器中生成一个session文件</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/76455274.jpg" alt=""></p>
+<pre><code>sess_a83e785b9b37p996t74j88vdm4    
+</code></pre><p>1-7</p>
+<p>1030</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-30/88529263.jpg" alt=""></p>
+<h5 id="文件函数"><a href="#文件函数" class="headerlink" title="文件函数"></a><a href="https://secure.php.net/manual/zh/ref.filesystem.php" target="_blank" rel="noopener">文件函数</a></h5><pre><code>&lt;?php
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+date_default_timezone_set(&apos;PRC&apos;);
+$filename = &quot;./1.txt&quot;;
+
+//filetype($filename): 获取文件的类型
+echo &apos;文件类型为:&apos;,filetype($filename),&apos;&lt;br/&gt;&apos;;
+
+//filesize 文件大小,返回字节
+echo &apos;文件大小为:&apos;,filesize($filename),&apos;&lt;br/&gt;&apos;;
+//读取文件创建时间
+echo &apos;文件创建时间为:&apos;,filectime($filename),&apos;&lt;br/&gt;&apos;;
+echo @date(&apos;Y年m月d日 H:i:s&apos;,filectime($filename)),&apos;&lt;br/&gt;&apos;;
+//filemtime($filename) 文件的修改事件
+echo &apos;文件的修改时间:&apos;,date(&quot;Y/m/d H:i:s&quot;,filemtime($filename)),&apos;&lt;br/&gt;&apos;;
+echo &apos;文件的节点:&apos;,fileinode($filename),&apos;&lt;/br&gt;&apos;;
+//检测文件是否可读，可写，可执行is_readable(),is_writeable(),is_executable()
+var_dump(
+    is_readable($filename),
+    is_writable($filename),
+    is_executable($filename)
+);
+echo &apos;&lt;br&gt;&apos;;
+//is_file 检测是否为文件
+var_dump(is_file($filename));
+</code></pre><p>结果</p>
+<pre><code>文件类型为:file
+文件大小为:23
+文件创建时间为:1509350917
+2017年10月30日 16:08:37
+文件的修改时间:2017/10/30 16:08:54
+文件的节点:0
+bool(true) bool(true) bool(false) 
+bool(true)
+</code></pre><p>1031</p>
+<pre><code>文件后缀
+文件创建时间
+文件是否存在
+文件重命名
+复制
+剪切
+</code></pre><p>1101</p>
+<pre><code>file_get_contents  读取
+file_put_contents 写入
+类似python中的
+with as
+</code></pre><p>文件常用操作函数的封装</p>
+<p>allow_url_fopen</p>
+<p>1-9</p>
+<p>2-7</p>
+<p>文件的下载函数</p>
+<pre><code>href 
+</code></pre><h5 id="压缩与归档扩展"><a href="#压缩与归档扩展" class="headerlink" title="压缩与归档扩展"></a><a href="https://secure.php.net/manual/zh/refs.compression.php" target="_blank" rel="noopener">压缩与归档扩展</a></h5><pre><code>异常处理，首先判断文件是否存在之类的问题
+使用if判断
+</code></pre><h5 id="URL-函数"><a href="#URL-函数" class="headerlink" title="URL 函数"></a><a href="http://php.net/manual/zh/ref.url.php" target="_blank" rel="noopener">URL 函数</a></h5><h5 id="数据库扩展"><a href="#数据库扩展" class="headerlink" title="数据库扩展"></a><a href="https://secure.php.net/manual/zh/refs.database.php" target="_blank" rel="noopener">数据库扩展</a></h5><h5 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a><a href="https://secure.php.net/manual/zh/set.mysqlinfo.php" target="_blank" rel="noopener">Mysql</a></h5><p>PHP操作数据库的三种方式</p>
+<pre><code>Mysql： 非永久连接，性能比较低
+MySQLi:永久连接，减轻服务器压力，支持支MySQL
+PDO: 能实现MySQLi的常用功能，支持大部分数据库
+</code></pre><p><code>php.ini</code>中有设置，连接的设置。</p>
+<p><strong>MySQL连接数据库</strong></p>
+<pre><code>1：连接数据库   mysql -uroot -p12344
+mysql_connect($server,$username,$passwd)
+2:选择数据库     use db;
+mysql_select_db($database_name)
+3:设置字符集 set names utf8
+mysql_set_charset($charset)
+4: mysql_query($query)
+5: 查询，需要将结果返回出来。 ,mysql_fetch_
+</code></pre><p>mysql</p>
+<pre><code>&lt;?php
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+//连接数据库
+$link = mysql_connect(&apos;localhost&apos;,&apos;root&apos;,&apos;root&apos;) or die(&apos;数据库连接错误&apos;);
+
+//var_dump($link);
+
+mysql_select_db(&apos;waf&apos;) or die(&apos;选择的数据库不存在&apos;);
+
+//设置字符集
+mysql_set_charset(&apos;utf8&apos;);
+
+//添加数据
+//$result = mysql_query(&quot;insert into news values(3,&apos;java&apos;,&apos;Learn Java&apos;)&quot;);
+
+//修改 update users set name=&quot;&quot; where id=1;
+
+//查询，返回结果资源应该返回给mysql_fetch_array()
+
+$result = mysql_query(&quot;select * from news&quot;);
+// $line = mysql_fetch_row($result);
+// $line = mysql_fetch_assoc($result);
+while($line = mysql_fetch_array($result)){
+    $data[] = $line;
+}
+var_dump($data);
+//var_dump($result);
+
+//关闭连接
+mysql_close($link);
+</code></pre><p><a href="https://secure.php.net/manual/zh/book.mysqli.php" target="_blank" rel="noopener"><strong>MySQLi</strong></a></p>
+<pre><code>1:面向过程方式连接数据库
+$connect = mysqli_connect(&apos;host&apos;,&apos;username&apos;,&apos;password&apos;,&apos;database&apos;);
+2:执行SQL语句
+$result = mysqli_query($connect,$sql);
+3:获取结果集
+mysqli_fetch_all($result);
+</code></pre><p>测试代码</p>
+<pre><code>&lt;?php
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+$conn = mysqli_connect(&apos;localhost&apos;,&apos;root&apos;,&apos;root&apos;,&apos;test&apos;);
+mysqli_query($conn,&apos;set names utf8&apos;);
+
+$sql = &apos;select * from news&apos;;
+$result = mysqli_query($conn,$sql);
+$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
+var_dump($data);
+mysqli_close($conn);
+</code></pre><p>浏览器乱码的情况</p>
+<pre><code>header(&apos;content-type:text/html;charset=utf-8&apos;);
+</code></pre><h5 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h5><p>20171108</p>
+<pre><code>数据库
+判断数据库是否存在
+create database if not exists waf;
+show warnings;
+指定编码方式
+charcter set &apos;utf8&apos;
+show create database imooc_o2o;  显示编码方式
+修改编码方式
+alter database test default character set &apos;utf8&apos;;
+得到当前打开的数据库
+select database()
+数据库操作的时候，也先判断一下是否存在
+创建表
+engine=存储引擎
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-8/59969222.jpg" alt=""></p>
+<p>数据类型</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-8/85398739.jpg" alt=""></p>
+<pre><code>create table if not exists user(
+
+)engine=innodb charset=utf8;
+</code></pre><p>功能显示</p>
+<pre><code>mysql&gt; ? show
+Name: &apos;SHOW&apos;
+Description:
+SHOW has many forms that provide information about databases, tables,
+columns, or status information about the server. This section describes
+those following:
+
+SHOW AUTHORS
+SHOW {BINARY | MASTER} LOGS
+SHOW BINLOG EVENTS [IN &apos;log_name&apos;] [FROM pos] [LIMIT [offset,] row_count]
+SHOW CHARACTER SET [like_or_where]
+SHOW COLLATION [like_or_where]
+SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where]
+</code></pre><p>查看数据表的信息</p>
+<pre><code>show create table tal_name
+show create table o2o_category;
+desc table 表结构
+drop table 删除表
+</code></pre><p>约束条件</p>
+<pre><code>unsigened  无符号，没有负数
+not null 非空约束。插入的数据必须给值
+primary key 主键
+unique key 唯一性
+auto_increment
+foreign key 外键
+</code></pre><p>表结构相关操作</p>
+<pre><code>alter table tal_name add 字段名称 字段属性 
+drop 字段名称
+</code></pre><p>修改、字段属性</p>
+<pre><code>alter table table_name modify 字段名称 字段属性 
+</code></pre><p>添加主键</p>
+<pre><code>alter table table_name add primary_key(字段)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-9/78295063.jpg" alt=""></p>
+<h5 id="mysql存储引擎"><a href="#mysql存储引擎" class="headerlink" title="mysql存储引擎"></a>mysql存储引擎</h5><pre><code>MyISAM 存储引擎
+单表支持的最大的数据量2的64次方记录
+每个表最多可以建立64个索引
+
+innoDB 存储引擎
+设计遵循ACID，支持事务，具有从服务崩溃中恢复能力，最大保护用户的数据
+支持外键，
+</code></pre><p>给字段，表起别名。<code>as</code></p>
+<pre><code>where
+比较运算符  &lt; &gt; &gt;=
+区间 between 1 and 3
+指定集合 [not]in
+逻辑运算符 and or
+like
+% 任意长度的字符
+分组
+group by 
+聚合函数
+count、sum.max等
+having 字句对分组结果进行二次筛选
+order by  id 排序  ASC DESC
+limit 限制结果集 limit 0,5 从0开始，取5条
+多表查询
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/21/Tomcat/" rel="next" title="Tomcat CVE-2017-12615 远程代码执行漏洞">
+                <i class="fa fa-chevron-left"></i> Tomcat CVE-2017-12615 远程代码执行漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/26/目录遍历漏洞浅析/" rel="prev" title="目录遍历漏洞浅析">
+                目录遍历漏洞浅析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#PHP手册"><span class="nav-number">1.</span> <span class="nav-text">PHP手册</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0926-变量和数据类型"><span class="nav-number">2.</span> <span class="nav-text">0926 变量和数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常量"><span class="nav-number">3.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运算符"><span class="nav-number">4.</span> <span class="nav-text">运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程控制"><span class="nav-number"></span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PHP函数库"><span class="nav-number">1.</span> <span class="nav-text">PHP函数库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义函数"><span class="nav-number">2.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统函数"><span class="nav-number">3.</span> <span class="nav-text">系统函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串函数"><span class="nav-number">4.</span> <span class="nav-text">字符串函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#数学函数"><span class="nav-number">4.1.</span> <span class="nav-text">数学函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#日期函数"><span class="nav-number">4.2.</span> <span class="nav-text">日期函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#数组初始"><span class="nav-number">4.3.</span> <span class="nav-text">数组初始</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#数组的应用"><span class="nav-number">4.4.</span> <span class="nav-text">数组的应用</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cookie"><span class="nav-number">5.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组函数"><span class="nav-number">6.</span> <span class="nav-text">数组函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可视化前端页面设置"><span class="nav-number">7.</span> <span class="nav-text">可视化前端页面设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#会话控制"><span class="nav-number">8.</span> <span class="nav-text">会话控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#session函数"><span class="nav-number">9.</span> <span class="nav-text">session函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件函数"><span class="nav-number">10.</span> <span class="nav-text">文件函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#压缩与归档扩展"><span class="nav-number">11.</span> <span class="nav-text">压缩与归档扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#URL-函数"><span class="nav-number">12.</span> <span class="nav-text">URL 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库扩展"><span class="nav-number">13.</span> <span class="nav-text">数据库扩展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mysql"><span class="nav-number">14.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库"><span class="nav-number">15.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql存储引擎"><span class="nav-number">16.</span> <span class="nav-text">mysql存储引擎</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="收集网上分享的技术文章，对不同的研究内容进行汇集整理。持续更新。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web安全资料汇集">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/Web_collect/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="收集网上分享的技术文章，对不同的研究内容进行汇集整理。持续更新。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-16T07:27:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web安全资料汇集">
+<meta name="twitter:description" content="收集网上分享的技术文章，对不同的研究内容进行汇集整理。持续更新。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/Web_collect/"/>
+
+
+
+
+
+  <title>Web安全资料汇集 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/Web_collect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web安全资料汇集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T18:13:23+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全资料汇集/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全资料汇集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>收集网上分享的技术文章，对不同的研究内容进行汇集整理。持续更新。</p>
+<a id="more"></a>
+<h4 id="他山之石"><a href="#他山之石" class="headerlink" title="他山之石"></a>他山之石</h4><p><a href="https://github.com/tom0li/collection-document" target="_blank" rel="noopener">优质 安全文章 收藏  </a></p>
+<p><a href="https://github.com/CHYbeta/Web-Security-Learning" target="_blank" rel="noopener">Web-Security-Learning</a></p>
+<h4 id="逻辑漏洞资料"><a href="#逻辑漏洞资料" class="headerlink" title="逻辑漏洞资料"></a>逻辑漏洞资料</h4><p>逻辑漏洞是指由于程序逻辑不严或逻辑复杂，导致一些逻辑分支不能够正常处理或处理错误。</p>
+<ol>
+<li>任意密码修改</li>
+<li>越权访问</li>
+<li>密码找回</li>
+<li>支付金额</li>
+<li>等…</li>
+</ol>
+<p><a href="https://xz.aliyun.com/t/2011" target="_blank" rel="noopener">Web安全 – 逻辑漏洞讲解</a></p>
+<p><a href="http://www.freebuf.com/vuls/151196.html" target="_blank" rel="noopener">分享一个近期遇到的逻辑漏洞案例</a></p>
+<p><a href="https://tom0li.github.io/2017/07/17/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%B0%8F%E7%BB%93/" target="_blank" rel="noopener">逻辑漏洞小结</a></p>
+<p><a href="http://cb.drops.wiki/drops/tips-727.html" target="_blank" rel="noopener">我的越权之道</a></p>
+<p><a href="https://mp.weixin.qq.com/s/Lynmqd_ieEoNJ3mmyv9eQQ" target="_blank" rel="noopener">逻辑漏洞之密码重置</a></p>
+<p><a href="https://mp.weixin.qq.com/s/w22omfxO8vU6XzixXWmBxg" target="_blank" rel="noopener">逻辑漏洞之支付漏洞</a></p>
+<p><a href="http://cb.drops.wiki/drops/web-5048.html" target="_blank" rel="noopener">密码找回逻辑漏洞总结</a></p>
+<p><a href="http://cb.drops.wiki/drops/papers-1957.html" target="_blank" rel="noopener">代码审计之逻辑上传漏洞挖掘</a></p>
+<p><a href="http://cb.drops.wiki/drops/papers-1418.html" target="_blank" rel="noopener">应用程序逻辑错误总结</a></p>
+<p><a href="http://cb.drops.wiki/drops/papers-345.html" target="_blank" rel="noopener">在线支付逻辑漏洞总结</a></p>
+<p><a href="http://www.freebuf.com/vuls/112339.html" target="_blank" rel="noopener">Web安全测试中常见逻辑漏洞解析（实战篇）</a></p>
+<p><a href="http://www.mottoin.com/87224.html" target="_blank" rel="noopener">密码逻辑漏洞小总结</a></p>
+<p><a href="http://wyb0.com/posts/logical-loophole/" target="_blank" rel="noopener">逻辑漏洞</a></p>
+<p><a href="http://lyx.dropsec.xyz/2016/04/18/%E5%8D%81%E5%A4%A7%E6%BC%8F%E6%B4%9E%E4%B9%8B%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">十大漏洞之逻辑漏洞</a></p>
+<h4 id="PHP-反序列化"><a href="#PHP-反序列化" class="headerlink" title="PHP 反序列化"></a>PHP 反序列化</h4><p>漏洞成因是程序没有对用户输入的反序列化字符串进行检测，导致反序列化过程的数据被恶意控制，造成代码执行等一些漏洞。</p>
+<p><a href="https://secure.php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">PHP里面的魔术方法。</a></p>
+<p>PHP 将所有以 <code>__</code>（两个下划线）开头的类方法保留为魔术方法。</p>
+<pre><code>__construct() 方法在每次创建新对象时会被自动调用
+
+__destruct() 方法在使用 exit() 终止脚本运行时也会被自动调用
+
+__toString() 方法在一个类被当成字符串时应怎样回应。例如 echo $obj; 应该显示些什么。
+</code></pre><p>可控点，魔术方法的里面的具体操作。序列化<code>payload</code>，反序列化执行。</p>
+<p><a href="http://www.notyeat.com/2018/03/26/php-unserialize/" target="_blank" rel="noopener">最通俗易懂的PHP反序列化分析</a></p>
+<p><a href="https://chybeta.github.io/2017/06/17/%E6%B5%85%E8%B0%88php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">浅谈php反序列化漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/86452" target="_blank" rel="noopener">PHP反序列化漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/84705" target="_blank" rel="noopener">神奇的php反序列化</a></p>
+<p><a href="https://www.anquanke.com/post/id/84922" target="_blank" rel="noopener">PHP反序列化漏洞成因及漏洞挖掘技巧与案例</a></p>
+<p><a href="https://paper.seebug.org/39/" target="_blank" rel="noopener">SugarCRM v6.5.23 PHP反序列化对象注入漏洞分析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/32553774" target="_blank" rel="noopener">PHP反序列化漏洞详细教程及实例（上）</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/32601669" target="_blank" rel="noopener">PHP反序列化漏洞详细教程及实例（下） Typecho 反序列化漏洞分析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33426188" target="_blank" rel="noopener">由Typecho 深入理解PHP反序列化漏洞</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E8%BF%94%E5%9B%9E%E5%AF%BC%E5%90%91%E7%BC%96%E7%A8%8B" target="_blank" rel="noopener">ROP 面向返回编程</a></p>
+<p><a href="http://spd.dropsec.xyz/2016/12/02/ROP%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3/" target="_blank" rel="noopener">ROP系统攻击思想</a></p>
+<p><a href="https://www.owasp.org/images/9/9e/Utilizing-Code-Reuse-Or-Return-Oriented-Programming-In-PHP-Application-Exploits.pdf" target="_blank" rel="noopener">PPT-Utilizing Code Reuse/ROP in PHP Application Exploits - owasp</a></p>
+<p><a href="https://www.insomniasec.com/downloads/publications/Practical%20PHP%20Object%20Injection.pdf" target="_blank" rel="noopener">PPT–Practical PHP Object Injection - Insomnia Security</a></p>
+<h4 id="Java反序列化"><a href="#Java反序列化" class="headerlink" title="Java反序列化"></a>Java反序列化</h4><p><a href="https://zhuanlan.zhihu.com/p/30045174" target="_blank" rel="noopener">Java 反序列化原理及漏洞利用</a></p>
+<p><a href="https://www.cnblogs.com/alert123/p/5124637.html" target="_blank" rel="noopener">Java反序列化漏洞研究</a></p>
+<p><a href="http://www.polaris-lab.com/index.php/archives/447/" target="_blank" rel="noopener">Java反序列化漏洞学习实践一：从Serializbale接口开始，先弹个计算器</a></p>
+<p><a href="https://github.com/Cryin/Paper/blob/master/%E6%B5%85%E8%B0%88Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88.md" target="_blank" rel="noopener">浅谈Java反序列化漏洞修复方案.md</a></p>
+<p><a href="http://drops.xmd5.com/static/drops/papers-14317.html" target="_blank" rel="noopener">java反序列化工具ysoserial分析</a></p>
+<p><a href="http://www.hollischuang.com/archives/1140" target="_blank" rel="noopener">深入分析Java的序列化与反序列化</a></p>
+<p><a href="http://www.runoob.com/java/java-serialization.html" target="_blank" rel="noopener">Java 序列化</a></p>
+<p><a href="http://www.cnblogs.com/xdp-gacl/p/3777987.html" target="_blank" rel="noopener">Java对象的序列化和反序列化</a></p>
+<p><a href="https://xz.aliyun.com/t/2041" target="_blank" rel="noopener">Java反序列化漏洞从入门到深入</a></p>
+<h4 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h4><p><a href="https://chybeta.github.io/2017/08/08/php%E4%BB%A3%E7%A0%81-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">php代码/命令执行漏洞</a></p>
+<h4 id="一句话和菜刀"><a href="#一句话和菜刀" class="headerlink" title="一句话和菜刀"></a>一句话和菜刀</h4><p><a href="https://www.ohlinge.cn/kali/kali_webshell.html" target="_blank" rel="noopener">Kali下常见webshell管理工具汇总</a></p>
+<p><a href="https://blog.csdn.net/SmalOSnail/article/details/53010483" target="_blank" rel="noopener">Weevely（php菜刀）工具使用详解</a></p>
+<p><a href="https://www.secpulse.com/archives/47940.html" target="_blank" rel="noopener">中国菜刀20160620初体验</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/27187537" target="_blank" rel="noopener">如何编写webshell管理工具菜刀</a></p>
+<p><a href="https://www.secfree.com/article-149.html" target="_blank" rel="noopener">Webshell进化史与中国菜刀</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/24722552" target="_blank" rel="noopener">如何全面防御Webshell？</a></p>
+<p><a href="https://www.anquanke.com/post/id/85083" target="_blank" rel="noopener">php webshell分析和绕过waf技巧</a></p>
+<p><a href="https://www.anquanke.com/post/id/98889" target="_blank" rel="noopener">一类混淆变形的Webshell分析</a></p>
+<p><a href="http://cb.drops.wiki/drops/papers-10807.html" target="_blank" rel="noopener">Webshell安全检测篇</a></p>
+<p><a href="http://cb.drops.wiki/drops/papers-12598.html" target="_blank" rel="noopener">Webshell-Part1&amp;Part2</a></p>
+<p><a href="http://ris.sic.gov.cn/CN/abstract/abstract221.shtml" target="_blank" rel="noopener">基于语义分析的Webshell检测技术研究</a></p>
+<p><a href="http://tanjiti.lofter.com/post/1cc6c85b_10c4e356" target="_blank" rel="noopener">webshell检测－日志分析</a></p>
+<p><a href="https://bbs.ichunqiu.com/thread-26365-1-1.html?from=sec" target="_blank" rel="noopener">php一句话学习</a></p>
+<p><a href="https://www.sec-wiki.com/news/search?wd=webshell" target="_blank" rel="noopener">Secwiki——Webshell</a></p>
+<p><a href="https://www.uedbox.com/good-php-door/" target="_blank" rel="noopener">那些强悍的PHP一句话后门</a></p>
+<p><a href="http://www.vuln.cn/8395" target="_blank" rel="noopener">浅析一句话后门中eval与assert执行条件与原理</a></p>
+<p><a href="http://www.vuln.cn/8314" target="_blank" rel="noopener">php一句话后门的几种变形分析[preg_replace函数]</a></p>
+<p><a href="http://blog.topsec.com.cn/ad_lab/audit-defanse-2/" target="_blank" rel="noopener">php代码审计之preg_replace引发的phpmyadmin(4.3.0-4.6.2)命令执行漏洞</a></p>
+<p><a href="https://www.t00ls.net/articles-40874.html" target="_blank" rel="noopener">打造自己的中国菜刀</a></p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=28388" target="_blank" rel="noopener">菜刀工作原理分析</a></p>
+<p><a href="https://www.t00ls.net/thread-25587-1-1.html" target="_blank" rel="noopener">菜刀（Chopper）的通信协议分析</a></p>
+<h4 id="安全会议PPT"><a href="#安全会议PPT" class="headerlink" title="安全会议PPT"></a>安全会议PPT</h4><p><a href="https://www.blackhat.com/us-17/briefings.html" target="_blank" rel="noopener">Black Hat USA 2017 议题PPT下载(部分)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/中缀前缀后缀/" rel="next" title="中缀前缀和后缀">
+                <i class="fa fa-chevron-left"></i> 中缀前缀和后缀
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/18/Weblogic反序列化漏洞(CVE-2018-2628)/" rel="prev" title="Weblogic反序列化漏洞(CVE-2018-2628)">
+                Weblogic反序列化漏洞(CVE-2018-2628) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#他山之石"><span class="nav-number">1.</span> <span class="nav-text">他山之石</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑漏洞资料"><span class="nav-number">2.</span> <span class="nav-text">逻辑漏洞资料</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP-反序列化"><span class="nav-number">3.</span> <span class="nav-text">PHP 反序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java反序列化"><span class="nav-number">4.</span> <span class="nav-text">Java反序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码执行"><span class="nav-number">5.</span> <span class="nav-text">代码执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一句话和菜刀"><span class="nav-number">6.</span> <span class="nav-text">一句话和菜刀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全会议PPT"><span class="nav-number">7.</span> <span class="nav-text">安全会议PPT</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

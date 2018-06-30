@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Django搭建小博客。">
+<meta name="keywords" content="Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 搭建小Blog">
+<meta property="og:url" content="http://yoursite.com/2017/05/12/Django4/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Django搭建小博客。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-13/96859950-file_1494667208371_7f84.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/3631910-file_1494930833165_9494.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/79155408-file_1494931997616_941f.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/52070534-file_1494932210980_4e48.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/62259153-file_1494932434730_c3d8.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/1822432-file_1494932462004_1f77.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/62791115-file_1494933636107_6b74.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/83058915-file_1494934176067_d524.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/36144841-file_1494934205777_152c4.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/74592015-file_1494935556807_17e0d.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/61288311-file_1494935655252_8bf1.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/97038282-file_1494935734788_6d18.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/74062942-file_1494935838895_15dd6.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/36144841-file_1494934205777_152c4.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/84321378-file_1494938617461_122ea.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-16/36144841-file_1494934205777_152c4.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/95752806-file_1495019124002_7d00.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/43933525-file_1495019200917_a510.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/6459609-file_1495019309637_15cd4.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/25266863-file_1495020456772_fcf.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/68180731-file_1495020649433_d6d5.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/96829333-file_1495020669057_13288.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/36506424-file_1495021590840_cc53.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-17/20644843-file_1495021525002_16ae0.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/98103695-file_1495094336534_4a05.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/9637440-file_1495094513530_71e2.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/99531679-file_1495095001466_2ac3.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/38122510-file_1495095090864_483e.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/18181117-file_1495095201551_8ce6.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/6702209-file_1495095434948_b441.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/43213503-file_1495095912746_8f83.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/66828190-file_1495096074709_6487.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/25290306-file_1495096242626_8cd2.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/80400500-file_1495096426202_1266b.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/89432856-file_1495097103299_a5c9.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/94289424-file_1495098079620_c019.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/59438614-file_1495098120284_d581.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/51946545-file_1495098337792_10110.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/29016641-file_1495098426792_2e40.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/90453396-file_1495098589677_98a2.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/72668470-file_1495099023973_182c6.png">
+<meta property="og:updated_time" content="2018-02-05T07:10:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django 搭建小Blog">
+<meta name="twitter:description" content="Django搭建小博客。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-13/96859950-file_1494667208371_7f84.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/12/Django4/"/>
+
+
+
+
+
+  <title>Django 搭建小Blog | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/12/Django4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django 搭建小Blog</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T15:54:24+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Web开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Django</code>搭建小博客。</p>
+<a id="more"></a>
+<p>创建项目 </p>
+<pre><code>django-admin startproject myblog
+
+
+
+  root@Ubuntu:~/imooc/myblog# tree
+  .
+  ├── manage.py
+  └── myblog
+  ├── __init__.py
+  ├── settings.py
+  ├── urls.py
+  └── wsgi.py
+</code></pre><p>创建应用</p>
+<pre><code>python manage.py startapp blog
+</code></pre><p>添加应用到<code>settings.py</code>中的<code>INSTALLED_APPS</code>里面。</p>
+<pre><code>root@Ubuntu:~/imooc/myblog/blog# tree
+
+.
+├── admin.py
+├── admin.pyc
+├── __init__.py
+├── __init__.pyc
+├── migrations
+│   ├── __init__.py
+│   └── __init__.pyc
+├── models.py
+├── models.pyc
+├── tests.py
+└── views.py
+</code></pre><p><code>migrations</code>: 数据移植<code>(迁移)</code>模块</p>
+<p><code>admin.py</code>: 该应用的后台管理系统配置</p>
+<p><code>apps.py</code> 该应用的一些配置，Django-1.9以后自动生成</p>
+<p><code>models.py</code> 数据模块，使用ORM框架</p>
+<p><code>tests.py</code> 自动化测试模块，Django提供了自动化测试功能</p>
+<p><code>views.py</code> 执行响应代码所在模块、代码逻辑处理的主要地点、项目中大部分代码均在这里编写</p>
+<p>#####创建第一个页面</p>
+<p><code>/blog/views.py</code>    </p>
+<p>首先引入 </p>
+<pre><code>`from django.http import HttpResponse`
+</code></pre><p><code>index</code> 函数</p>
+<p>每个响应对应一个函数，函数必须返回一个响应</p>
+<p>函数必须存在一个参数，一般约定为request</p>
+<p>每一个响应对应一个URL</p>
+<pre><code>1 from django.shortcuts import render
+2 from django.http import HttpResponse
+3 # Create your views here.
+4 
+5 def index(request):
+6 return HttpResponse(&quot;Hello World&quot;)
+</code></pre><p> 在 <code>/myblog/urls.py</code> 中添加 </p>
+<p>每个URL都以url的形式写出来</p>
+<p>url函数放在urlpatterns列表中</p>
+<p>url函数三个参数：URL(正则)、对应方法、名称。</p>
+<p><code>import blog.views as bv</code> 导入模块并命名bv</p>
+<pre><code> 1 from django.conf.urls import patterns, include, url
+ 2 from django.contrib import admin
+ 3 
+ 4 import blog.views as bv
+ 5 
+ 6 urlpatterns = patterns(&apos;&apos;,
+ 7 # Examples:
+ 8 # url(r&apos;^$&apos;, &apos;myblog.views.home&apos;, name=&apos;home&apos;),
+ 9 # url(r&apos;^blog/&apos;, include(&apos;blog.urls&apos;)),
+10 
+11 url(r&apos;^admin/&apos;, include(admin.site.urls)),
+12 url(r&apos;^index/&apos;,bv.index),
+13 )
+</code></pre><p> 流程</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-13/96859950-file_1494667208371_7f84.png" alt=""></p>
+<p><strong>第二种URL配置</strong></p>
+<pre><code>Including another URLconf
+13 1. Import the include() function: from django.conf.urls import url, include
+14 2. Add a URL to urlpatterns:  url(r&apos;^blog/&apos;, include(&apos;blog.urls&apos;))
+</code></pre><p>修改 /myblog/urls.py<br>添加 include</p>
+<pre><code>16 from django.conf.urls import url,include
+17 from django.contrib import admin
+18 
+19 urlpatterns = [
+20 url(r&apos;^admin/&apos;, admin.site.urls),
+21 url(r&apos;^index/$&apos;,include(&apos;blog.urls&apos;))
+22 ]
+</code></pre><p>在项目blog下面创建一个urls.py 写入以下代码</p>
+<pre><code>1 from django.conf.urls import url
+2 from . import views
+3 urlpatterns = [
+4 
+5 url(r&apos;^index/$&apos;,view.index),
+6  ]
+</code></pre><p>访问 <code>http://192.168.145.230:9000/index/index/</code> 才出现 Hello World.</p>
+<p>因为在/myblog/urls.py 是 /blog/urls.py的根目录。。</p>
+<p>如果想要一个，可以修改根目录的urls，或者修改/blog/urls.py.</p>
+<p>修改blog/urls.py。</p>
+<p>这样可以直接访问<code>http://192.168.145.230:9000/index/</code>，可以出现Hello World</p>
+<pre><code>1 from django.conf.urls import url
+2 from . import views
+3 urlpatterns = [
+4 
+5 url(r&apos;&apos;,views.index),
+6  ]
+</code></pre><p>包含其他URL</p>
+<p>在跟urls.py中引入include</p>
+<p>在APP目录下创建urls.py文件，格式与跟urls.py相同</p>
+<p>跟<code>urls.py</code>中url函数自二个参数改为</p>
+<pre><code>`include(&apos;blog.urls&apos;)`
+</code></pre><p>注意事项</p>
+<p>跟<code>urls.py</code>针对APP配置的URL名称，是该APP所有URL的总路径</p>
+<p>配置URL时注意正则表达式结尾符号 <code>$和/</code></p>
+<p>#####Templates介绍</p>
+<p>HTML文件</p>
+<p>Django模版语言(Django Template Language DTL)</p>
+<p>可以使用第三方模版(如Jinja2)</p>
+<ol>
+<li>在APP的根目录下创建名叫Templates的目录</li>
+<li>在该目录下创建HTML文件</li>
+<li><p>在views.py中返回render()</p>
+<p> <code>index.html</code></p>
+</li>
+</ol>
+<pre><code> 1 &lt;!DOCTYPE html&gt;
+ 2 &lt;html&gt;
+ 3 &lt;head&gt;
+ 4 &lt;meta charset=&quot;UTF-8&quot;&gt;
+ 5 &lt;title&gt;Title&lt;/title&gt;
+ 6 &lt;/head&gt;
+ 7 &lt;body&gt;
+ 8 &lt;h1&gt;Hello,Blog&lt;/h1&gt;
+ 9 &lt;/body&gt;
+10 &lt;/html&gt;
+</code></pre><p>在<code>views.py</code>中修改</p>
+<pre><code>1 from django.shortcuts import render
+2 from django.http import HttpResponse
+3 # Create your views here.
+4 
+5 def index(request):
+6 return render(request,&apos;index.html&apos;)
+</code></pre><p>访问 <code>http://192.168.145.230:9000/blog/index/</code>，可以看到界面。</p>
+<p><strong>DTL初步使用</strong></p>
+<p>render()函数中支持一个dict类型参数</p>
+<p>该字典是后台传递到模版的参数，键为参数名</p>
+<pre><code>在模版中使用`{{ 参数名 }}`来直接使用
+</code></pre><p>render第三个参数dict类型</p>
+<pre><code>  1 from django.shortcuts import render
+  2 from django.http import HttpResponse
+  3 # Create your views here.
+  4 
+  5 def index(request):
+  6 return render(request,&apos;index.html&apos;, {&apos;hello&apos;: &apos;Hello, Blog!&apos;})
+
+
+在前端index.html中。。使用`{{}}`获取值。`{{ hello }}`
+
+
+  1 &lt;!DOCTYPE html&gt;
+  2 &lt;html&gt;
+  3 &lt;head&gt;
+  4 &lt;meta charset=&quot;UTF-8&quot;&gt;
+  5 &lt;title&gt;Title&lt;/title&gt;
+  6 &lt;/head&gt;
+  7 &lt;body&gt;
+  8 &lt;h1&gt;{{ hello }}&lt;/h1&gt;
+  9 &lt;/body&gt;
+ 10 &lt;/html&gt;
+</code></pre><p>#####Templates注意事项</p>
+<p>新建一个应用blog2</p>
+<pre><code>├── blog
+│   ├── admin.py
+│   ├── admin.pyc
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── migrations
+│   │   ├── __init__.py
+│   │   └── __init__.pyc
+│   ├── models.py
+│   ├── models.pyc
+│   ├── templates
+│   │   └── index.html
+│   ├── tests.py
+│   ├── urls.py
+│   ├── urls.pyc
+│   ├── views.py
+│   └── views.pyc
+├── blog2
+│   ├── admin.py
+│   ├── admin.pyc
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── migrations
+│   │   ├── __init__.py
+│   │   └── __init__.pyc
+│   ├── models.py
+│   ├── models.pyc
+│   ├── templates
+│   │   └── index.html
+│   ├── tests.py
+│   ├── urls.py
+│   ├── urls.pyc
+│   ├── views.py
+│   └── views.pyc
+├── db.sqlite3
+</code></pre><p>blog2/views.py</p>
+<pre><code>1 from django.shortcuts import render
+2 from django.http import HttpResponse
+3 # Create your views here.
+4 
+5 def index(request):
+6 return render(request,&apos;index.html&apos;)
+</code></pre><p>blog2/urls.py</p>
+<pre><code>1 from django.conf.urls import url
+2 from . import views
+3 urlpatterns = [
+4 
+5 url(r&apos;^index/$&apos;,views.index),
+6  ]
+</code></pre><p>blog2/templates/index.html</p>
+<pre><code> 1 &lt;!DOCTYPE html&gt;
+ 2 &lt;html&gt;
+ 3 &lt;head&gt;
+ 4 &lt;meta charset=&quot;UTF-8&quot;&gt;
+ 5 &lt;title&gt;Title&lt;/title&gt;
+ 6 &lt;/head&gt;
+ 7 &lt;body&gt;
+ 8 &lt;h1&gt;Hello, Blog2! &lt;/h1&gt;
+ 9 &lt;/body&gt;
+10 &lt;/html&gt;
+</code></pre><p>myblog/urls.py </p>
+<pre><code>urlpatterns = [
+21 url(r&apos;^admin/&apos;, admin.site.urls),
+22 url(r&apos;^blog/&apos;,include(&apos;blog.urls&apos;)),
+23 url(r&apos;^blog2/&apos;,include(&apos;blog2.urls&apos;)),
+24 ]
+</code></pre><p>访问 </p>
+<pre><code>`http://192.168.145.230:9000/blog2/index/` `http://192.168.145.230:9000/blog/index/` 
+</code></pre><p>出现的结果都是一样的，为什么blog2的页面没有出现？</p>
+<p>Django按照INSTALLED_APPS 中添加顺序查找Templates，如果不同应用下的模版相同，就会出现冲突。解决办法，把每个应用下的模版都用不同的名字，太麻烦。</p>
+<p>解决Templates冲突方案：</p>
+<p>在APP的TEmplates目录下创建以APP名为为名称的目录</p>
+<p>将html文件放入新创建的目录下。同时修改views.py 中的路径。</p>
+<pre><code>root@kali:~/django/myblog/blog2/templates# tree
+.
+└── blog2
+└── index.html
+
+1 directory, 1 file
+</code></pre><p>同时修改 views.py中的render参数的路径</p>
+<pre><code>def index(request):
+  6 return render(request,&apos;blog2/index.html&apos;)
+</code></pre><p>#####Models</p>
+<p>通常，一个Model对应数据库的一张数据表</p>
+<p>Django中Models以类的形式表现</p>
+<p>它包含了一些基本字段以及数据的一些行为</p>
+<p>ORM 对象关系映射(Object Relation Mapping)</p>
+<p>实现了对象和数据库之间的映射</p>
+<p>隐藏了数据访问的细节，不需要编写SQL语句</p>
+<pre><code> 1 from __future__ import unicode_literals
+ 2 
+ 3 from django.db import models
+ 4 
+ 5 # Create your models here.
+ 6 
+ 7 class Article(models.Model):
+ 8     title = models.CharField(max_length=32,default=&apos;Title&apos;)
+9     content = models.TextField(null=True)
+</code></pre><p><strong>生成数据表</strong></p>
+<p>命令行进入manage.py同级目录</p>
+<p>执行python manage.py makemigrations app(可选)    数据迁移</p>
+<p>执行 python manage.py migrate 迁移动作</p>
+<pre><code>root@kali:~/django/myblog# python manage.py makemigrations
+Migrations for &apos;blog&apos;:
+  blog/migrations/0001_initial.py:
+- Create model Article
+root@kali:~/django/myblog# python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying blog.0001_initial... OK
+  Applying sessions.0001_initial... OK
+</code></pre><p>会自动给添加主键。。。</p>
+<p>页面呈现数据</p>
+<p>后台步骤</p>
+<p>views.py中    </p>
+<pre><code>import models
+
+article = models.Article.objects.get(pk=1)
+
+render(request,page, {&apos;article&apos;:article})
+
+  1 from django.shortcuts import render
+  2 from django.http import HttpResponse
+  3 from . import models
+  4 # Create your views here.
+  5 
+  6 def index(request):
+  7     article = models.Article.objects.get(pk=1)
+  8     return render(request,&apos;blog/index.html&apos;,{&apos;article&apos;:article})
+</code></pre><p>前端操作</p>
+<p>模版可直接使用对象以及对象的. 操作</p>
+<pre><code>   {{ article.title }}
+
+ 1 &lt;!DOCTYPE html&gt;
+ 2 &lt;html&gt;
+ 3 &lt;head&gt;
+ 4 &lt;meta charset=&quot;UTF-8&quot;&gt;
+ 5 &lt;title&gt;Title&lt;/title&gt;
+ 6 &lt;/head&gt;
+ 7 &lt;body&gt;
+ 8 &lt;h1&gt;{{ article.title }}&lt;/h1&gt;
+ 9 &lt;h3&gt; {{ article.content }}&lt;/h3&gt;
+10 &lt;/body&gt;
+11 &lt;/html&gt;
+</code></pre><p>访问可以看到内容</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/3631910-file_1494930833165_9494.png" alt=""></p>
+<p>在数据库中，添加的内容。</p>
+<pre><code>root@kali:~/django/myblog# python manage.py shell
+Python 2.7.9 (default, Mar  1 2015, 12:57:24) 
+[GCC 4.9.2] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+(InteractiveConsole)
+&gt;&gt;&gt; from blog.models import Article
+&gt;&gt;&gt; Article.objects.create(title=&apos;Hello World&apos;,content=&apos;Come on&apos;)
+</code></pre><p>#####Admin</p>
+<p>admin/admin888</p>
+<pre><code>root@kali:~/django/myblog# python manage.py createsuperuser
+Username (leave blank to use &apos;root&apos;): admin
+Email address: 12344@sina.com
+Password: 
+Password (again): 
+The password is too similar to the email address.
+This password is too short. It must contain at least 8 characters.
+This password is too common.
+This password is entirely numeric.
+Password: 
+Password (again): 
+Superuser created successfully.
+</code></pre><p>设置settings.py的LANGUAGE_CODE 为 zh-Hans可以后台为中文。。</p>
+<p><strong>细心 zh-Hans 而不是 zh_Hans</strong> </p>
+<p>配置应用</p>
+<p>在应用下项目blog/admin.py中引用自身的models模块</p>
+<p>编辑</p>
+<pre><code>admin.py: admin.site.register(models.Article)
+
+1 from django.contrib import admin
+2 from models import Article
+3 # Register your models here.
+4 
+5 admin.site.register(Article)
+</code></pre><p>数据库中的内容显示在了后台</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/79155408-file_1494931997616_941f.png" alt=""></p>
+<p>看下图不方便</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/52070534-file_1494932210980_4e48.png" alt=""></p>
+<p>修改数据默认显示名称</p>
+<p>在Article类下添加一个方法</p>
+<p>根据Python版本选择</p>
+<pre><code>__str__(self) 或__unicode__(self)
+</code></pre><p>return self.title</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/62259153-file_1494932434730_c3d8.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/1822432-file_1494932462004_1f77.png" alt=""></p>
+<p>####博客页面设计</p>
+<p>#####页面概要</p>
+<p>######博客主页面<br>主页面内容：文章标题列表，超链接。发表博客按钮（超链接）</p>
+<p><strong>列表编写思路</strong></p>
+<ol>
+<li><p>取出数据库中所有文章对象 </p>
+</li>
+<li><p>将文章对象打包成列表，传递到前端</p>
+</li>
+<li><p>前端页面把文章以标题超链接的形式逐个列出</p>
+</li>
+</ol>
+<p>模版For循环</p>
+<pre><code>{% for xx in xxs %}
+	    
+	    HTML语句
+	    
+	    {% endfor %}
+</code></pre><p>######博客文章内容页面</p>
+<p>######博客撰写页面</p>
+<p>后台代码</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/62791115-file_1494933636107_6b74.png" alt=""></p>
+<p>前端代码</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/83058915-file_1494934176067_d524.png" alt=""></p>
+<p>访问，可以看到相应的博客文章已经显示出来。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/36144841-file_1494934205777_152c4.png" alt=""></p>
+<p>文章显示出来了，但是没有链接，点击其中要看到全部的文章。。</p>
+<p>超链接的目的地。。</p>
+<p>#####博客文章页面</p>
+<p>######页面内容</p>
+<p><strong>标题<br>文章内容<br>修改文章按钮（超链接）</strong></p>
+<p><strong>URL参数的传递</strong><br>参数写在响应函数中的request后，可以有默认值</p>
+<p>URL正则表达式：</p>
+<pre><code>r&apos;^/article/(?P&lt;article_id&gt;[0-9]+)/$&apos;
+</code></pre><p>URL正则中的组名必须和参数名一致</p>
+<p>首先视图函数</p>
+<p>/blog/views.py</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/74592015-file_1494935556807_17e0d.png" alt=""></p>
+<p>然后模版 article_page.html</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/61288311-file_1494935655252_8bf1.png" alt=""></p>
+<p>最后 urls.py设置</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/97038282-file_1494935734788_6d18.png" alt=""></p>
+<p>现在可以看到每一个文章的具体标题以及内容了，但是必须知道具体位置。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/74062942-file_1494935838895_15dd6.png" alt=""></p>
+<p>#####博客中超链接设置</p>
+<p>比如新文章 new blog到编辑页面的链接</p>
+<p>文章到article_page页面的链接。</p>
+<p>超链接如何编写。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/36144841-file_1494934205777_152c4.png" alt=""></p>
+<p><strong>Django中超链接</strong></p>
+<p>超链接目标地址</p>
+<p>href后面是目标地址</p>
+<p>template中可以用</p>
+<pre><code>&quot;{% url 'app_name:url_name' param %}&quot;
+</code></pre><p>其中app_name和url_name都在url中配置。。</p>
+<p><strong>url函数的名称参数</strong></p>
+<p>跟urls，写在include()的第二个参数位置，<code>namespace = &#39;blog&#39;</code></p>
+<p>应用下则写在url()的第三个参数位置，<code>name = &#39;article&#39;</code></p>
+<p>主要取决于是否使用include引用了另一个url配置文件。。我们的这种情况使用了include引用了另一个url配置文件。。</p>
+<p>/myblog/urls.py </p>
+<p>第三个参数 namespace=’blog’</p>
+<pre><code>url(r&apos;^blog/&apos;,include(&apos;blog.urls&apos;,namespace=&apos;blog&apos;)),
+</code></pre><p>在项目 /blog/urls.py中第三个参数 name</p>
+<pre><code> `url(r&apos;^article/(?P&lt;article_id&gt;[0-9]+)$&apos;,views.article_page,name=&apos;article_page&apos;),`
+
+
+修改index.html中的`&lt;a&gt;`标签里的，`href`
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/84321378-file_1494938617461_122ea.png" alt=""></p>
+<p>比如我们点击，名为 “第一篇文章”的标题就会直接跳转到具体的文章页面</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-16/36144841-file_1494934205777_152c4.png" alt=""></p>
+<p>#####博客编辑页面</p>
+<p>######页面内容<br><strong>标题编辑栏，文章内容编辑区域、提交按钮</strong></p>
+<p>先是templates创建edit_page.html</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/95752806-file_1495019124002_7d00.png" alt=""></p>
+<p>然后views.py视图函数</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/43933525-file_1495019200917_a510.png" alt=""></p>
+<p>最后urls.py</p>
+<pre><code>url(r&apos;^edit/$&apos;,views.edit_page),
+</code></pre><p>访问页面</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/6459609-file_1495019309637_15cd4.png" alt=""></p>
+<p>表单响应函数</p>
+<p>编辑响应函数</p>
+<pre><code>使用request.POST[&apos;参数名&apos;] 获取表单数据
+
+models.Article.objects.create(title,content) 创建对象
+</code></pre><p>views.py 修改文章的函数，返回的页面为博客的主页。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/25266863-file_1495020456772_fcf.png" alt=""></p>
+<p>urls.py的设置</p>
+<pre><code> url(r&apos;^edit/action$&apos;,views.edit_action,name=&apos;edit_action&apos;),
+
+
+edit_page.html 其中的`{% csrf_token %}` 防止csrf攻击，在每个表单中都要加入。
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/68180731-file_1495020649433_d6d5.png" alt=""></p>
+<p>可以看到新添加的文章</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/96829333-file_1495020669057_13288.png" alt=""></p>
+<p>新文章的链接</p>
+<p>点击主页的新文章链接，可以直接跳转到</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/36506424-file_1495021590840_cc53.png" alt=""></p>
+<p>index.html</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-17/20644843-file_1495021525002_16ae0.png" alt=""></p>
+<p>#####修改文章链接</p>
+<p>思路两个编辑页面：新文章为空。。。 修改文章有内容，且修改之后返回自己的页面。。</p>
+<p>修改文章页面有文章对象，文章的ID，传递文章ID，后台代码根据ID进行修改。。</p>
+<p>新建文章的ID设置为0,文章的ID是从1开始的，修改的时候判断一下，修改文章的时候，判断ID为0.</p>
+<p>先修改响应函数 views.py</p>
+<p>edit_page函数，加入了判断 article_id，并判断。。是否等于 0</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/98103695-file_1495094336534_4a05.png" alt=""></p>
+<p>然后修改 urls.py 中的edit</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/9637440-file_1495094513530_71e2.png" alt=""></p>
+<p>修改前端页面，article_page.html..修改文章的超链接。点击该链接来挑战到修改文章的页面，并且该页面还要显示该文章的具体内容。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/99531679-file_1495095001466_2ac3.png" alt=""></p>
+<p>修改index.html 中的 添加一个0， 新文章显示的为0</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/38122510-file_1495095090864_483e.png" alt=""></p>
+<p>在主页点击新文章直接跳转到 /edit/0</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/18181117-file_1495095201551_8ce6.png" alt=""></p>
+<p>现在主页面的可以添加新文章了，但是在文章页面如何来修改文章。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/6702209-file_1495095434948_b441.png" alt=""></p>
+<p>需要在edit_page.html中，添加一个判断，根据什么判断呢，就是根据article_id是不是0,0就是添加新文章，不是0就是修改已有的文章。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/43213503-file_1495095912746_8f83.png" alt=""></p>
+<pre><code>把article_id放在一个隐藏的`&lt;input&gt;`标签里。。
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/66828190-file_1495096074709_6487.png" alt=""></p>
+<p>修改views.py中的edit_action</p>
+<p>判断article_id 等于0，就是创建一个新的对象。不是0就是修改文章。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/25290306-file_1495096242626_8cd2.png" alt=""></p>
+<p>在文章页面点击修改文章时候，就直接可以跳转到如下界面。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/80400500-file_1495096426202_1266b.png" alt=""></p>
+<p>#####Templates过滤器</p>
+<pre><code>模版中 `{{ value|filter }}`
+</code></pre><p>修改之前的edit_page.html  去除了 else判断。。添加红色的内容。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/89432856-file_1495097103299_a5c9.png" alt=""></p>
+<p>#####Admin</p>
+<p>创建admin配置类</p>
+<pre><code>class ArticleAdmin(admin.ModelAdmin)
+</code></pre><p>注册 admin.site.register(ArticleAdmin)</p>
+<p>在后台界面，显示其他字段</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/94289424-file_1495098079620_c019.png" alt=""></p>
+<p>在后台中，其他的字段可以显示了。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/59438614-file_1495098120284_d581.png" alt=""></p>
+<p>修改models.py</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/51946545-file_1495098337792_10110.png" alt=""></p>
+<p>数据移植</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/29016641-file_1495098426792_2e40.png" alt=""></p>
+<p>还有要在admin.py中加入显示时间字段。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/90453396-file_1495098589677_98a2.png" alt=""></p>
+<p>后台admin的过滤器、<br>admin.py中添加</p>
+<pre><code>list_filter = (&apos;pub_time&apos;,)
+</code></pre><p>在后台中，可以选择时间。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/72668470-file_1495099023973_182c6.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/22/WAF_1/" rel="next" title="科普 WAF">
+                <i class="fa fa-chevron-left"></i> 科普 WAF
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/18/Django-xadmin/" rel="prev" title="Django+xadmin Web 项目学习">
+                Django+xadmin Web 项目学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

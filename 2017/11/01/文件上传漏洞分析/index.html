@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PHP文件上传漏洞的浅析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP文件上传漏洞浅析">
+<meta property="og:url" content="http://yoursite.com/2017/11/01/文件上传漏洞分析/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="PHP文件上传漏洞的浅析。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-26/45126086.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-26/2238421.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-30/40661043.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-12/79648453.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-12/83332319.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-12/86380888.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/70842861.jpg">
+<meta property="og:updated_time" content="2018-01-15T08:47:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP文件上传漏洞浅析">
+<meta name="twitter:description" content="PHP文件上传漏洞的浅析。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-26/45126086.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/01/文件上传漏洞分析/"/>
+
+
+
+
+
+  <title>PHP文件上传漏洞浅析 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/文件上传漏洞分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP文件上传漏洞浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-01T13:20:46+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>PHP</code>文件上传漏洞的浅析。</p>
+<a id="more"></a>
+<h4 id="文件上传简介"><a href="#文件上传简介" class="headerlink" title="文件上传简介"></a>文件上传简介</h4><p>在一个正常的网站中，通常都会存在一些允许用户上传文件的地方。但是有一些上传功能的地方没有对用户上传的内容进行过滤，导致会上传木马到服务器并执行命令，甚至控制服务器的权限。</p>
+<p><strong>文件上传实现</strong></p>
+<p>前端代码。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;File uploads&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;dofile.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    请选择上传的文件:
+    &lt;input type=&quot;file&quot; name=&quot;myfile&quot; /&gt;&lt;br/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;上传文件&quot; /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>服务器端代码。</p>
+<pre><code>&lt;?php
+// 通过$_FILES文件上传变量接收上传文件信息
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+$fileinfo = $_FILES[&apos;myfile&apos;];
+$filename = $fileinfo[&apos;name&apos;];
+$type = $fileinfo[&apos;type&apos;];
+$tmp_name = $fileinfo[&apos;tmp_name&apos;];
+$size = $fileinfo[&apos;size&apos;];
+$error = $fileinfo[&apos;error&apos;];
+
+//判断错误号
+if($error==UPLOAD_ERR_OK){
+    if(move_uploaded_file($tmp_name,&quot;uploads/&quot;.$filename)){
+        echo &apos;文件&apos;.$filename.&apos;上传成功&apos;;
+    }else{
+        echo &apos;文件&apos;.$filename.&apos;上传失败&apos;;
+    }
+
+}
+</code></pre><p>上面是实现文件上传的测试代码，对上传文件没有进行任何的限制，可以进行任意文件的上传，比如以下上传一个<code>php</code>文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-26/45126086.jpg" alt=""></p>
+<p>上传一个php文件，会显示文件test.php上传成功。然后访问该文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-26/2238421.jpg" alt=""></p>
+<p>上面是只是一个理想的测试环境，来实现一下由于文件上传存在的一些漏洞。可能在实际环境中有多种的限制，比如对上传文件黑/白名单的限制、上传后文件名的重命名、可写目录没有执行权限等。</p>
+<p>接下来复现<code>phpCollab 2.5.1</code>任意文件上传的漏洞，学习一下其中的原理。</p>
+<p><strong>phpCollab 2.5.1 - Arbitrary File Upload</strong></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-30/40661043.jpg" alt=""></p>
+<p>下载对应的版本，安装。登录后台里面。在客户–&gt;客户组织–&gt;标志处，上传文件的地方存在任意文件上传漏洞。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-12/79648453.jpg" alt=""></p>
+<p>在标志处可以进行任意文件上传，我们上传一个<code>php</code>后缀的文件，然后通过前端调试分析，可知上传后的文件路径以及名字。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-12/83332319.jpg" alt=""></p>
+<p>最后，可以访问到上传后的文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-12/86380888.jpg" alt=""></p>
+<p>其中漏洞点在<code>/clients/editclient.php</code>文件的第63~70行。</p>
+<pre><code>$extension = strtolower( substr( strrchr($_FILES[&apos;upload&apos;][&apos;name&apos;], &quot;.&quot;) ,1) ); // 后缀名字 substr(string,start,length)
+
+        if(@move_uploaded_file($_FILES[&apos;upload&apos;][&apos;tmp_name&apos;], &quot;../logos_clients/&quot;.$id.&quot;.$extension&quot;)) 
+            //move_uploaded_file() 函数将上传的文件移动到新位置。
+        {
+            chmod(&quot;../logos_clients/&quot;.$id.&quot;.$extension&quot;,0666);
+            $tmpquery = &quot;UPDATE &quot;.$tableCollab[&quot;organizations&quot;].&quot; SET extension_logo=&apos;$extension&apos; WHERE id=&apos;$id&apos;&quot;;
+            connectSql(&quot;$tmpquery&quot;);
+        }
+</code></pre><p>从代码中可以看到没有对上传的文件进行任何的验证，直接通过<code>move_uploaded_file</code>来完成上传操作，并保存在<code>logos_clients</code>文件夹下。</p>
+<p>接下来翻译一篇关于文件上传安全测试的文章，来具体学习一下如何来进行测试。</p>
+<h5 id="技术翻译-文件上传"><a href="#技术翻译-文件上传" class="headerlink" title="(技术翻译)文件上传"></a><a href="https://www.aptive.co.uk/blog/unrestricted-file-upload-testing/" target="_blank" rel="noopener">(技术翻译)文件上传</a></h5><p>Web应用程序中的允许用户上传文件的函数处，有时候没有对上传内容其进行严格的过滤和验证，可能会导致攻击者利用此漏洞进行攻击。本文进行概述利用文件上传的功能进行渗透测试，将会介绍一些小技巧来绕过黑名单的过滤和一些实用的检测方法。</p>
+<h5 id="寻找上传点"><a href="#寻找上传点" class="headerlink" title="寻找上传点"></a>寻找上传点</h5><p>文件上传功能非常容易验证和利用，一般在个人信息图片、文件上传和文件导入处。当你测试的时候，Burp被动扫描也会去验证存在上传功能的入口。</p>
+<h5 id="测试文件上传类型"><a href="#测试文件上传类型" class="headerlink" title="测试文件上传类型"></a>测试文件上传类型</h5><p>一般的Web应用程序都会设置一个黑名单来过滤和验证用户上传的内容，但是有时候百密一疏，一些其他的后缀名会绕过黑名单。另外一种是白名单，只允许用户上传特定的文件。</p>
+<p>这个时候需要测试一下允许上传的文件后缀名。</p>
+<h6 id="使用Burp-测试文件上传类型"><a href="#使用Burp-测试文件上传类型" class="headerlink" title="使用Burp 测试文件上传类型"></a>使用Burp 测试文件上传类型</h6><blockquote>
+<ol>
+<li>手工测试一个请求，该请求会收到拒绝上传此类型之类等错误响应。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>发送这个请求到Burp intruder模块<blockquote>
+<ol start="3">
+<li><p>清除其中默认的选项</p>
+</li>
+<li><p>选择文件上传类型的点</p>
+</li>
+<li><p>选择不同的文件名，比如php.jpg,asp.jpg等</p>
+</li>
+<li><p>在选项中，配置grep匹配在第一步中响应出现的字符串。</p>
+</li>
+<li><p>开始进行测试，那些没有匹配到错误响应字符串的后缀，需要进一步的验证和测试，是否可以上传成功。</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>关键点</p>
+<p>使用Burp Intruder测试所有的后缀，使用Grep功能处理结果</p>
+<p>一些不常见的后缀名可能会绕过黑名单，比如.php，.php5，.phtml</p>
+</blockquote>
+<h5 id="使用Burp测试文件上传的Content-Type"><a href="#使用Burp测试文件上传的Content-Type" class="headerlink" title="使用Burp测试文件上传的Content-Type"></a>使用Burp测试文件上传的Content-Type</h5><p>识别那些文件上传的<code>Content-Type</code>能被应用程序接受</p>
+<p>和测试上传文件后后缀一样，同样是使用Burp Intruder进行爆破。这次修改的是<code>Content-Type</code>字段。参考上面的7个步骤即可。</p>
+<blockquote>
+<p>关键点</p>
+<p>使用Burp Intruder测试所有的Content-Type，使用Grep功能处理结果</p>
+<p>尝试将Content-Type更改为支持的文件类型，但是其中包含Web服务器/Web应用程序要处理的后缀名</p>
+<p>一些不常见Content-Type可能会绕过黑名单</p>
+</blockquote>
+<h5 id="文件名和扩展模糊测试"><a href="#文件名和扩展模糊测试" class="headerlink" title="文件名和扩展模糊测试"></a>文件名和扩展模糊测试</h5><p>文件名和扩展应该在输入验证时测试，当文件的名字为<code>XSS</code>,<code>SQLi</code>,<code>LDAP</code>或者一个命令注入载荷的时候会发生什么。</p>
+<p>还是使用<code>Burp Intruder</code>进行测试，原理和测试文件上传类型类似，可以参考上面的七个步骤。</p>
+<h5 id="文件上传黑名单绕过"><a href="#文件上传黑名单绕过" class="headerlink" title="文件上传黑名单绕过"></a>文件上传黑名单绕过</h5><p><strong>Windows IIS 文件上传黑名单绕过</strong></p>
+<blockquote>
+<p>1：配合服务器解析漏洞，在黑名单加一个分号以及正常的文件名，例如shell.asp;.jpg</p>
+<p>2：目录解析。folder.asp\file.txt，其中asp文件夹里面的任何扩展名文件都被IIS当作asp文件来执行。</p>
+<p>3：环境是IIS,PHP时，&lt; &gt; 和 . 可以转换为 ? * .</p>
+<p>4：使用可以替换文件的字符。比如&gt;&gt;可以替换 web.config</p>
+<p>5：尝试在文件名后面使用空格或点。比如 foo.asp…. .. . . . .</p>
+<p>6：file.asax:.jpg</p>
+<p>7：尝试在文件名中加入禁止的字符，| %&lt; * ? “，来得到错误信息。</p>
+</blockquote>
+<p><strong>Windows Apache 环境黑名单绕过</strong></p>
+<blockquote>
+<p>1：Windows8.3 一个特征允许短文件名替换已经存在的文件。比如<code>web.config</code>可以被<code>web~config.con</code>替代，或者<code>.htaccess</code>可以被<code>HTACESS~1</code>替代。</p>
+<p>2：尝试上传<code>a.file</code>，如果上传函数的根目录在<code>www/uploads</code>，将会创建一个<code>uploads</code>文件在上述目录。</p>
+</blockquote>
+<p><strong>其他绕过技术</strong></p>
+<blockquote>
+<p>1：确定那些字符被过滤了。使用<code>Burp</code>在特定位置插入元字符表。</p>
+<p>2：确保你的列表中包括一些不常见的扩展名，比如<code>.php5</code>，<code>.php3</code>，<code>.phtml</code></p>
+<p>3：测试防御机制。如果是过滤一些文件名，可能会被绕过。比如<code>shell.ph.phpp</code>，如果是过滤了<code>php</code>，之后名字后缀可能会变成<code>.php</code></p>
+<p>4：使用%00截断。比如<code>shell.php%00.jpg, shell.php%0delete0.jpg</code>。</p>
+<p>5：双扩展名：如果应用程序过滤或者重命名扩展名。如果给它两个扩展名会发生什么？比如<code>shell.php.php</code>或者<code>shell.txt.jog.png.asp</code>。</p>
+<p>6：尝试上传一个超长文件名，比如<code>supermassivelongfileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeename.php</code></p>
+<p>7：尝试上传<code>test.asp\</code>，<code>test.asp.\</code>。</p>
+<p>8：上传flash XSS攻击载荷，然后命名a.jpg</p>
+<p>9：尝试以前的技术，但使用PDF或Silverlight代替</p>
+<p>10：同样，尝试滥用<code>crossdomain.xml</code>或<code>clientaccesspolicy.xml</code>文件。</p>
+<p>11：尝试使用编码绕过。比如URL，HTML，Unicode或者双重编码</p>
+<p>12：结合以上所有的绕过技术。</p>
+<p>13：尝试替换HTTP请求方法。使用<code>POST</code>替换<code>PUT</code>或者<code>GET</code>(反之亦然)。</p>
+<p>14：确保所有的输入点进行模糊测试。</p>
+</blockquote>
+<h5 id="绕过文件上传白名单"><a href="#绕过文件上传白名单" class="headerlink" title="绕过文件上传白名单"></a>绕过文件上传白名单</h5><blockquote>
+<p>1：枚举出白名单并测试允许的扩展名来利用</p>
+<p>2：测试文件内容正在验证中</p>
+<p>3：测试扩展重命名技术，如<code>shell.php.png</code></p>
+</blockquote>
+<h5 id="绕过文件大小上传机制"><a href="#绕过文件大小上传机制" class="headerlink" title="绕过文件大小上传机制"></a>绕过文件大小上传机制</h5><p><strong>恶意文件内容</strong></p>
+<p>测试上传任何文件上传的内容是否被应用程序处理。比如你可以将XSS载荷写入到<code>Excel</code>，<code>CSV</code>，<code>txt</code>文件中，稍后看是否会由应用程序呈现。使用<code>Burp repwater</code>和<code>intruder</code>尝试在文件导入和上传功能函数中注入各种的载荷，测试应用程序的响应。</p>
+<p><strong>图像数据</strong></p>
+<p>可以在图像EXIF数据内注入反向shell吗？</p>
+<p>在<code>Kali</code>安装</p>
+<pre><code>apt-get install exiftool
+</code></pre><p>在图像文件中注入代码后，只需上传文件，并使用校验和验证文件是否相同(以下是详细步骤)</p>
+<hr>
+<p><strong>用Burp注入请求</strong></p>
+<p>这是与上述EXIF方法类似的技术，但是你要将代码直接粘贴到打包请求中。</p>
+<blockquote>
+<p>1：使用burp上传一个合法的图片，且验证上传成功</p>
+<p>2：发送之前的请求到<code>repeater</code>模块</p>
+<p>3：在请求中的合法图像数据之后，尝试注入有效载荷（注入有效载荷或反向shell）</p>
+<p>4：提交这个请求</p>
+<p>5：从目标服务器上下载上传的我呢件，验证它是否包含有效的载荷。是否在目标服务器上能成功执行。</p>
+</blockquote>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/70842861.jpg" alt=""></p>
+<p><strong>验证上传文件</strong></p>
+<p>不管你在上一步使用什么方法(EXIF或修改Burp请求)，校验一个本地上传的和上传到目标服务器的文件，是否匹配。</p>
+<h5 id="服务器端命令执行技术"><a href="#服务器端命令执行技术" class="headerlink" title="服务器端命令执行技术"></a>服务器端命令执行技术</h5><p>如果能成功上传一个<code>shell</code>到目标的web服务器上，你可以尝试以下技术来执行上传的<code>shell</code>。</p>
+<blockquote>
+<p>1：Apache MIME Types: 尝试上传重命名文件，比如<code>shell.php.jpg</code>或者<code>shell.asp;.jpg</code>，并且评估一下Web服务器是否会利用Apache MIME types。</p>
+<p>2：空子节：使用一个空子节<code>%00</code>在文件名末尾，或者这样，<code>shell.php%0delete0.jpg</code>。观察应用程序的响应。</p>
+<p>3：可以上传点文件。如果可以上传<code>.htaccess</code>文件，利用<code>AddType</code>:<code>AddType application/x-httpd-php .foo</code> 。</p>
+<p>4：注意上传文件的任何处理 比如：可以在稍后由后端备份脚本，处理的文件名中使用命令注入？</p>
+<p>5：注意服务器处理的上传文件。如果压缩文件允许上传，应用程序是否会提取其中的内容。反之亦然。</p>
+<p>6：服务器防病毒是否处理上传了文件？尝试上传压缩文件类型如.zip，.rar等，如果服务器端防病毒易受攻击，可以利用并获得命令执行。</p>
+</blockquote>
+<h5 id="任意文件上传防御"><a href="#任意文件上传防御" class="headerlink" title="任意文件上传防御"></a>任意文件上传防御</h5><ol>
+<li>对上传文件格式限制，只允许某些格式文件上传。使用白名单</li>
+<li>对文件格式进行校验，前端和服务器端都需要校验。</li>
+<li>将上传文件的目录，设置权限。一般上传的都是静态文件，所以需要对其目录设置禁止执行权限。</li>
+<li>将上传的文件的名字进行随机命名。</li>
+</ol>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="https://www.aptive.co.uk/blog/unrestricted-file-upload-testing/" target="_blank" rel="noopener">https://www.aptive.co.uk/blog/unrestricted-file-upload-testing/</a></p>
+<p><a href="https://www.exploit-db.com/exploits/42934/" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/42934/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/26/php-file-uploads/" rel="next" title="PHP 文件处理">
+                <i class="fa fa-chevron-left"></i> PHP 文件处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/07/HTTP/" rel="prev" title="HTTP 学习">
+                HTTP 学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件上传简介"><span class="nav-number">1.</span> <span class="nav-text">文件上传简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#技术翻译-文件上传"><span class="nav-number">1.1.</span> <span class="nav-text">(技术翻译)文件上传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找上传点"><span class="nav-number">1.2.</span> <span class="nav-text">寻找上传点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试文件上传类型"><span class="nav-number">1.3.</span> <span class="nav-text">测试文件上传类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#使用Burp-测试文件上传类型"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用Burp 测试文件上传类型</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用Burp测试文件上传的Content-Type"><span class="nav-number">1.4.</span> <span class="nav-text">使用Burp测试文件上传的Content-Type</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件名和扩展模糊测试"><span class="nav-number">1.5.</span> <span class="nav-text">文件名和扩展模糊测试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件上传黑名单绕过"><span class="nav-number">1.6.</span> <span class="nav-text">文件上传黑名单绕过</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绕过文件上传白名单"><span class="nav-number">1.7.</span> <span class="nav-text">绕过文件上传白名单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绕过文件大小上传机制"><span class="nav-number">1.8.</span> <span class="nav-text">绕过文件大小上传机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器端命令执行技术"><span class="nav-number">1.9.</span> <span class="nav-text">服务器端命令执行技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#任意文件上传防御"><span class="nav-number">1.10.</span> <span class="nav-text">任意文件上传防御</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">1.11.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

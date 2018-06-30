@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python异常处理学习。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 异常处理">
+<meta property="og:url" content="http://yoursite.com/2017/07/19/Python错误异常处理/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Python异常处理学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/86330832.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/93205306.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/2074392.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/15304830.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/63844858.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/80586903.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/97288280.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/75246145.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/16512962.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/59541946.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/7307467.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/83141630.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/94052699.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/76575654.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/11837013.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/35033059.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/93566498.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/86527961.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/34870286.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/2319377.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/22018523.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/20839219.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/81567658.jpg">
+<meta property="og:updated_time" content="2018-02-05T09:38:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 异常处理">
+<meta name="twitter:description" content="Python异常处理学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-19/86330832.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/19/Python错误异常处理/"/>
+
+
+
+
+
+  <title>Python 异常处理 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/Python错误异常处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 异常处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T13:20:46+08:00">
+                2017-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Python</code>异常处理学习。</p>
+<a id="more"></a>
+<p>2017/7/19</p>
+<p><a href="http://www.imooc.com/learn/457" target="_blank" rel="noopener">Python错误和异常</a></p>
+<h4 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h4><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/86330832.jpg" alt=""></p>
+<p>错误</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/93205306.jpg" alt=""></p>
+<p>异常</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/2074392.jpg" alt=""></p>
+<p>错误和异常区别</p>
+<p>编写的代码出现语法错误或者逻辑错误，程序是不能正常运行的。异常是在程序运行后，碰到特殊情况而是程序不能继续运行。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/15304830.jpg" alt=""></p>
+<h4 id="python常见错误"><a href="#python常见错误" class="headerlink" title="python常见错误"></a>python常见错误</h4><ul>
+<li>a: <strong>NameError</strong></li>
+</ul>
+<p>变量没有定义就被使用</p>
+<pre><code>In [1]: a
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-1-60b725f10c9c&gt; in &lt;module&gt;()
+----&gt; 1 a
+
+NameError: name &apos;a&apos; is not defined
+</code></pre><ul>
+<li>if True <strong>SyntaxError</strong></li>
+</ul>
+<p>语法错误。。</p>
+<pre><code>In [2]: if a
+  File &quot;&lt;ipython-input-2-73bf85fc5fba&gt;&quot;, line 1
+    if a
+        ^
+SyntaxError: invalid syntax
+</code></pre><ul>
+<li>f = open(‘1.txt’) : <strong>IOError</strong></li>
+</ul>
+<p>文件处理错误</p>
+<pre><code>In [4]: f = open(&apos;test1.txt&apos;)
+---------------------------------------------------------------------------
+IOError                                   Traceback (most recent call last)
+&lt;ipython-input-4-2659d8b9b5b7&gt; in &lt;module&gt;()
+----&gt; 1 f = open(&apos;test1.txt&apos;)
+
+IOError: [Errno 2] No such file or directory: &apos;test1.txt&apos;
+</code></pre><ul>
+<li>10/0 <strong>ZeroDivisionError</strong></li>
+</ul>
+<p>除数为0的错误</p>
+<pre><code>In [5]: 10 / 0
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+&lt;ipython-input-5-3e699e72a4ab&gt; in &lt;module&gt;()
+----&gt; 1 10 / 0
+
+ZeroDivisionError: integer division or modulo by zero
+</code></pre><ul>
+<li>a = int(‘dd’) <strong>ValueError</strong></li>
+</ul>
+<p>类型错误</p>
+<pre><code>In [8]: a = int(&apos;a100&apos;)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+&lt;ipython-input-8-c5ee1e4f90b8&gt; in &lt;module&gt;()
+----&gt; 1 a = int(&apos;a100&apos;)
+
+ValueError: invalid literal for int() with base 10: &apos;a100&apos;
+</code></pre><ul>
+<li><p>Ctrl+c 错误 <strong>KeyboardInterrupt</strong> </p>
+<p>  In [9]: import time</p>
+<p>  In [10]: for i in range(10):</p>
+<pre><code>....:     time.sleep(2)
+....:     
+</code></pre><p>  ^C—————————————————————————<br>  KeyboardInterrupt                         Traceback (most recent call last)<br>  <ipython-input-10-ab722fa29748> in <module>()</module></ipython-input-10-ab722fa29748></p>
+<pre><code>1 for i in range(10):
+</code></pre><p>  —-&gt; 2     time.sleep(2)</p>
+<pre><code>3 
+</code></pre><p>  KeyboardInterrupt: </p>
+</li>
+</ul>
+<h4 id="try-–-except-异常处理"><a href="#try-–-except-异常处理" class="headerlink" title="try – except 异常处理"></a>try – except 异常处理</h4><p>使用try捕获要处理的代码，其中except用来处理异常。。<br>自己可以设置，是那些类型的异常，来进行处理。。Exception可以设置。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/63844858.jpg" alt=""></p>
+<pre><code>1 #!/usr/bin/python
+2 
+3 a
+4 print &quot;come on&quot;
+</code></pre><p>运行结果，可以看到出现了,NameError的错误。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+Traceback (most recent call last):
+  File &quot;error.py&quot;, line 3, in &lt;module&gt;
+    a
+NameError: name &apos;a&apos; is not defined
+</code></pre><p>捕获一下异常</p>
+<pre><code>1 #!/usr/bin/python
+2 try:
+3     a
+4 except NameError,e:
+5     print &quot;catch Error:&quot;, e
+6 
+7 print &quot;come on&quot;
+</code></pre><p>可以看到运行结果，把异常捕获到，进行处理，后面的内容还是可以进行运行的。<br>其中的e就是捕获到的异常错误信息。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+catch Error: name &apos;a&apos; is not defined
+come on
+</code></pre><p>这个异常的是因为a没有被定义，现在定义一个a。</p>
+<pre><code>1 #!/usr/bin/python
+2 a = 0
+3 try:
+4     a
+5 except NameError,e:
+6     print &quot;catch Error:&quot;, e
+7 
+8 print &quot;come on&quot;
+</code></pre><p>运行结果，就不会出现捕获的异常了。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+come on
+</code></pre><ul>
+<li>try-except 捕获异常分析</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/80586903.jpg" alt=""></p>
+<pre><code>1 try:
+2     undef
+3 except:
+4     print &quot;catch error&quot;
+</code></pre><p>结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+catch error
+
+
+  1 try:
+  2    if  undef
+  3 except:
+  4     print &quot;catch error&quot;
+</code></pre><p>这次不能捕获到异常了。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+  File &quot;error2.py&quot;, line 2
+    if  undef
+            ^
+SyntaxError: invalid syntax
+</code></pre><p>case1： 可以捕获异常，因为是运行时错误</p>
+<p>case2：不能捕获异常，因为是语法错误，运行前错误。。</p>
+<p>py文件生成字节码，，</p>
+<ul>
+<li>try–except 捕获异常分析</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/97288280.jpg" alt=""></p>
+<p>设置错误的类型。。</p>
+<pre><code>1 try:
+2    undef
+3 except NameError, e:
+4     print &quot;catch error&quot;, e
+</code></pre><p>设置的错误类型是名字没有被定义。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+catch error name &apos;undef&apos; is not defined
+</code></pre><p>设置的捕获错误类型为IOError</p>
+<pre><code>1 try:
+2    undef
+3 except IOError, e:
+4     print &quot;catch error&quot;, e
+</code></pre><p>但是捕获不到。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+Traceback (most recent call last):
+  File &quot;error2.py&quot;, line 2, in &lt;module&gt;
+    undef
+NameError: name &apos;undef&apos; is not defined
+</code></pre><p>case 3: 可以捕获异常，因为设置捕获NameError异常</p>
+<p>case4: 不能捕获异常，因为设置IOError，不会处理NameError。。</p>
+<p><strong>关于异常的处理，首先这个程序能够正常运行，异常捕获需要程序先能运行为前提。捕获的类型也要一一对应，，比如IOError不能处理NameError的异常。。</strong></p>
+<ul>
+<li>try–except 用例</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/75246145.jpg" alt=""></p>
+<p>这个例子，会出现问题。</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 
+ 3 import random
+ 4 
+ 5 num = random.randint(0,100)
+ 6 
+ 7 while True:
+ 8     guess = int(raw_input(&quot;Enter 1~100: &quot;))
+ 9     if guess &gt; num:
+10         print &quot;guess Bigger:&quot;, guess
+11     elif guess &lt; num:
+12         print &quot;guess Smaller:&quot;, guess
+13     else:
+14         print &quot;Guess OK, Game Over&quot;
+15         break
+16     print &quot;\n&quot;
+</code></pre><p>输入 89a 的时候</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+Enter 1~100: 80
+guess Bigger: 80
+
+
+Enter 1~100: 89a
+Traceback (most recent call last):
+  File &quot;error2.py&quot;, line 8, in &lt;module&gt;
+    guess = int(raw_input(&quot;Enter 1~100: &quot;))
+ValueError: invalid literal for int() with base 10: &apos;89a&apos;
+</code></pre><p>如何处理这个异常问题。。</p>
+<p>加入一个异常处理，还是出现了 guess Bigger 80,为了美观，需要添加continue</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 
+ 3 import random
+ 4 
+ 5 num = random.randint(0,100)
+ 6 
+ 7 while True:
+ 8     try:
+ 9         guess = int(raw_input(&quot;Enter 1~100: &quot;))
+10     except ValueError, e:
+11         print &quot;Enter 1~100&quot;
+12     if guess &gt; num:
+13         print &quot;guess Bigger:&quot;, guess
+14     elif guess &lt; num:
+15         print &quot;guess Smaller:&quot;, guess
+16     else:
+17         print &quot;Guess OK, Game Over&quot;
+18         break
+19     print &quot;\n&quot;
+</code></pre><p>运行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+Enter 1~100: 80
+guess Bigger: 80
+
+
+Enter 1~100: 70a
+Enter 1~100
+guess Bigger: 80
+
+
+Enter 1~100: 
+</code></pre><p>加入continue</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 
+ 3 import random
+ 4 
+ 5 num = random.randint(0,100)
+ 6 
+ 7 while True:
+ 8     try:
+ 9         guess = int(raw_input(&quot;Enter 1~100: &quot;))
+10     except ValueError, e:
+11         print &quot;Enter 1~100&quot;
+12         continue
+13     if guess &gt; num:
+14         print &quot;guess Bigger:&quot;, guess
+15     elif guess &lt; num:
+16         print &quot;guess Smaller:&quot;, guess
+17     else:
+18         print &quot;Guess OK, Game Over&quot;
+19         break
+20     print &quot;\n&quot;
+</code></pre><p>加入continue之后。。后面的代码就不执行了。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error2.py 
+Enter 1~100: 90
+guess Bigger: 90
+
+
+Enter 1~100: 45a
+Enter 1~100
+Enter 1~100: 45
+guess Smaller: 45
+</code></pre><ul>
+<li>try-except 处理多个异常</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/16512962.jpg" alt=""></p>
+<pre><code>1 #!/usr/bin/python
+2 try:
+3     f = open(&apos;1.txt&apos;)
+4     line = f.read(2)
+5     num = int(line)
+6     print &quot;read num=%d&quot; % num
+7 except IOError,e:
+8     print &quot;catch Error:&quot;, e
+</code></pre><p>不能存在1.txt，运行。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+catch Error: [Errno 2] No such file or directory: &apos;1.txt&apos;
+</code></pre><p>添加一个<code>1.txt</code>，可以运行成功。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+read num=11
+</code></pre><p>把1.txt的内容改变一下。。<code>aa11111</code></p>
+<p>运行时报错。。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+Traceback (most recent call last):
+  File &quot;error.py&quot;, line 5, in &lt;module&gt;
+    num = int(line)
+ValueError: invalid literal for int() with base 10: &apos;aa&apos;
+</code></pre><p>多个捕获异常</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 try:
+ 3     f = open(&apos;1.txt&apos;)
+ 4     line = f.read(2)
+ 5     num = int(line)
+ 6     print &quot;read num=%d&quot; % num
+ 7 except IOError,e:
+ 8     print &quot;catch Error:&quot;, e
+ 9 except ValueError, e:
+10     print &quot;catch Error:&quot;, e
+</code></pre><p>可以看到能捕获到异常</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+catch Error: invalid literal for int() with base 10: &apos;aa&apos;
+</code></pre><p>使用多个except可以处理多个异常类</p>
+<ul>
+<li>try-except–else使用</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/59541946.jpg" alt=""></p>
+<p>如果没有异常，执行else语句中的代码。。</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 try:
+ 3     f = open(&apos;1.txt&apos;)
+ 4     line = f.read(2)
+ 5     num = int(line)
+ 6     print &quot;read num=%d&quot; % num
+ 7 except IOError,e:
+ 8     print &quot;catch Error:&quot;, e
+ 9 except ValueError, e:
+10     print &quot;catch Error:&quot;, e
+11 else:
+12     print &quot;No Error&quot;
+</code></pre><p>再修改1.txt里面的内容，执行结果。。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+read num=11
+No Error
+</code></pre><ul>
+<li>try–finally 语句</li>
+</ul>
+<p>finally语句会被执行的。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/7307467.jpg" alt=""></p>
+<pre><code>1 try:
+2     f = open(&apos;1.txt&apos;)
+3     print int(f.read())
+4 finally:
+5     print &quot;file close&quot;
+6     f.close()
+</code></pre><p>执行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+1111111
+file close
+</code></pre><p>修改 1.txt中的内容 qq11111</p>
+<p>再次执行程序。。可以看到finally的语句被执行了。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+file close
+Traceback (most recent call last):
+  File &quot;error.py&quot;, line 3, in &lt;module&gt;
+    print int(f.read())
+ValueError: invalid literal for int() with base 10: &apos;qq1111111\n&apos;
+</code></pre><p><code>try--finally的作用</code></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/83141630.jpg" alt=""></p>
+<ul>
+<li>try–except–finally</li>
+</ul>
+<p>无论如何都是要执行finally的。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/94052699.jpg" alt=""></p>
+<pre><code> 1 try:
+ 2     f = open(&apos;1.txt&apos;)
+ 3     line = f.read(2)
+ 4     num = int(line)
+ 5     print &quot;read num=%d&quot; % num
+ 6 except IOError, e:
+ 7     print &quot;catch IOError:&quot;, e
+ 8 except ValueError, e:
+ 9     print &quot;catch ValueError:&quot;, e
+10 finally:
+11     print &quot;close file&quot;
+12     f.close()
+</code></pre><p>运行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+catch ValueError: invalid literal for int() with base 10: &apos;qq&apos;
+close file
+</code></pre><p>这次运行一下，<code>2.txt</code>不存在。。</p>
+<pre><code> 1 try:
+ 2     f = open(&apos;2.txt&apos;)
+ 3     line = f.read(2)
+ 4     num = int(line)
+ 5     print &quot;read num=%d&quot; % num
+ 6 except IOError, e:
+ 7     print &quot;catch IOError:&quot;, e
+ 8 except ValueError, e:
+ 9     print &quot;catch ValueError:&quot;, e
+10 finally:
+11     print &quot;close file&quot;
+12     f.close()
+</code></pre><p>出现的结果。。捕获到了异常，但是<code>f.close()</code>有异常，因为<code>open(&#39;2.txt&#39;)</code>异常后，没有对f进行赋值。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+catch IOError: [Errno 2] No such file or directory: &apos;2.txt&apos;
+close file
+Traceback (most recent call last):
+  File &quot;error.py&quot;, line 12, in &lt;module&gt;
+    f.close()
+NameError: name &apos;f&apos; is not defined
+</code></pre><p>解决方案，在添加一个异常处理。。</p>
+<pre><code> 1 try:
+ 2     f = open(&apos;2.txt&apos;)
+ 3     line = f.read(2)
+ 4     num = int(line)
+ 5     print &quot;read num=%d&quot; % num
+ 6 except IOError, e:
+ 7     print &quot;catch IOError:&quot;, e
+ 8 except ValueError, e:
+ 9     print &quot;catch ValueError:&quot;, e
+10 finally:
+11     try:
+12         print &quot;close file&quot;
+13         f.close()
+14     except NameError, e:
+15         print &quot;catch Error:&quot;, e
+</code></pre><p>对f没有打开情况，进行一个异常处理。。捕获两个错误。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+catch IOError: [Errno 2] No such file or directory: &apos;2.txt&apos;
+close file
+catch Error: name &apos;f&apos; is not defined
+</code></pre><ul>
+<li>try–except–else–finally</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/76575654.jpg" alt=""></p>
+<pre><code> 1 try:
+ 2     f = open(&apos;1.txt&apos;)
+ 3     line = f.read(2)
+ 4     num = int(line)
+ 5     print &quot;read num=%d&quot; % num
+ 6 except IOError, e:
+ 7     print &quot;catch IOError:&quot;, e
+ 8 except ValueError, e:
+ 9     print &quot;catch ValueError:&quot;, e
+10 else:
+11     print &quot;No Error&quot;
+12 finally:
+13     try:
+14         print &quot;close file&quot;
+15         f.close()
+16     except NameError, e:
+17         print &quot;catch Error:&quot;, e
+</code></pre><p>执行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+read num=11
+No Error
+close file
+</code></pre><ul>
+<li>with 语句</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/11837013.jpg" alt=""></p>
+<p>with 对一个文件进行操作</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/35033059.jpg" alt=""></p>
+<p>实例演习，with和open一个文件</p>
+<pre><code> 1 try:
+ 2     f = open(&apos;1.txt&apos;)
+ 3     print &quot;in try f.read():&quot;, f.read(2)
+ 4 except IOError, e:
+ 5     print &quot;catch IOError:&quot;, e
+ 6 except ValueError, e:
+ 7     print &quot;catch ValueError:&quot;, e
+ 8 finally:
+ 9     f.close()
+10 print &quot;try-finally:&quot;,f.closed
+11 
+12 with open(&apos;1.txt&apos;) as f1:
+13     print &quot;in with f1.read:&quot;, f1.read(2)
+14 
+15 print &quot;with :&quot;, f1.closed
+</code></pre><p>运行结果，关闭状态。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+in try f.read(): 11
+try-finally: True
+in with f1.read: 11
+with : True
+</code></pre><p>with虽然可以关闭文件，但对关闭文件的错误异常没有处理。。</p>
+<pre><code> 1 import os
+ 2 try:
+ 3     f = open(&apos;1.txt&apos;)
+ 4     print &quot;in try f.read():&quot;, f.read(2)
+ 5     f.seek(-10,os.SEEK_SET)
+ 6 except IOError, e:
+ 7     print &quot;catch IOError:&quot;, e
+ 8 except ValueError, e:
+ 9     print &quot;catch ValueError:&quot;, e
+10 finally:
+11     f.close()
+12 print &quot;try-finally:&quot;,f.closed
+13 
+14 with open(&apos;1.txt&apos;) as f1:
+15     print &quot;in with f1.read:&quot;, f1.read(2)
+16     f.seek(-10,os.SEEK_SET)
+17 
+18 print &quot;with :&quot;, f1.closed
+</code></pre><p>可以看到运行的异常</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+in try f.read(): 11
+catch IOError: [Errno 22] Invalid argument
+try-finally: True
+in with f1.read: 11
+Traceback (most recent call last):
+  File &quot;error.py&quot;, line 16, in &lt;module&gt;
+    f.seek(-10,os.SEEK_SET)
+ValueError: I/O operation on closed file
+</code></pre><p>虽然with可以关闭文件，但对关闭的异常没有进行处理。。。</p>
+<pre><code>import os
+
+try:
+    f = open(&apos;1.txt&apos;)
+    print &quot;in try f.read():&quot;, f.read(2)
+    f.seek(-10,os.SEEK_SET)
+except IOError, e:
+    print &quot;catch IOError:&quot;, e
+except ValueError, e:
+    print &quot;catch ValueError:&quot;, e
+finally:
+    f.close()
+print &quot;try-finally:&quot;,f.closed
+
+try:
+    with open(&apos;1.txt&apos;) as f1:
+        print &quot;in with f1.read:&quot;, f1.read(2)
+        f.seek(-10,os.SEEK_SET)
+except ValueError, e:
+    print &quot;in with catch  ValueError:&quot;, e
+    print &quot;with :&quot;, f1.closed
+</code></pre><p>运行结果。。。</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python error.py 
+in try f.read(): 11
+catch IOError: [Errno 22] Invalid argument
+try-finally: True
+in with f1.read: 11
+in with catch  ValueError: I/O operation on closed file
+with : True
+</code></pre><p>with语句实质是上下文管理</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/93566498.jpg" alt=""></p>
+<p>编写一个类实现with</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 
+ 3 class Mycontex(object):
+ 4     def __init__(self,name):
+ 5         self.name = name
+ 6 
+ 7     def __enter__(self):
+ 8         print &quot;__enter__&quot;
+ 9         return self
+10 
+11     def do_self(self):
+12         print &quot;do_self&quot;
+13 
+14     def __exit__(self,exc_type,exc_value,traceback):
+15         print &quot;__exit__&quot;
+16         print &quot;Error:&quot;, exc_type, &quot;info:&quot;, exc_value
+17 
+18 if __name__ == &apos;__main__&apos;:
+19     with Mycontex(&apos;test context&apos;) as f:
+20         print f.name
+21         f.do_self()
+</code></pre><p>运行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python with.py 
+__enter__
+test context
+do_self
+__exit__
+Error: None info: None
+</code></pre><p>with的使用</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/86527961.jpg" alt=""></p>
+<ul>
+<li>raise 和 assert</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/34870286.jpg" alt=""></p>
+<p>assert 语句</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/2319377.jpg" alt=""></p>
+<ul>
+<li>标准异常和自定义异常</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/22018523.jpg" alt=""></p>
+<p>Built-in Exceptions</p>
+<ul>
+<li>自定义异常</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/20839219.jpg" alt=""></p>
+<p>自定义异常示例</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-19/81567658.jpg" alt=""></p>
+<pre><code>In [5]: class FileError(IOError):
+   ...:     pass
+   ...: 
+
+In [6]: raise FileError, &quot;Test FileError&quot;
+---------------------------------------------------------------------------
+FileError                                 Traceback (most recent call last)
+&lt;ipython-input-6-822ad3f0675d&gt; in &lt;module&gt;()
+----&gt; 1 raise FileError, &quot;Test FileError&quot;
+
+FileError: Test FileError
+
+In [7]: try:
+   ...:     raise FileError, &quot;Test FileError&quot;
+   ...: except FileError, e:
+   ...:     print e
+   ...:     
+Test FileError
+</code></pre><p><a href="https://docs.python.org/2/library/exceptions.html?highlight=exception#module-exceptions" target="_blank" rel="noopener">内建异常</a></p>
+<p>产生异常，抛出异常、捕获异常。。分析异常。。</p>
+<pre><code> 1 #!/usr/bin/python
+ 2 
+ 3 class CustomError(Exception):
+ 4     def __init__(self,info):
+ 5         Exception.__init__(self)
+ 6         self.errorinfo = info
+ 7         print id(self)
+ 8 
+ 9     def __str__(self):
+10         return &quot;CustionError: %s&quot; % self.errorinfo
+11 try:
+12     raise CustomError(&quot;test CustomError&quot;)
+13 except CustomError, e:
+14     print &quot;ErrorInfo:%d,%s&quot; %(id(e),e)
+</code></pre><p>运行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach# python except.py 
+3071267020
+ErrorInfo:3071267020,CustionError: test CustomError
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/09/Github/" rel="next" title="Git学习记录">
+                <i class="fa fa-chevron-left"></i> Git学习记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/26/python文件处理/" rel="prev" title="Python 文件处理">
+                Python 文件处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误和异常"><span class="nav-number">1.</span> <span class="nav-text">错误和异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python常见错误"><span class="nav-number">2.</span> <span class="nav-text">python常见错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#try-–-except-异常处理"><span class="nav-number">3.</span> <span class="nav-text">try – except 异常处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

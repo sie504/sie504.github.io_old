@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Github和Git的学习。">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git学习记录">
+<meta property="og:url" content="http://yoursite.com/2017/07/09/Github/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Github和Git的学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-3/51261492.jpg">
+<meta property="og:updated_time" content="2018-04-09T02:31:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git学习记录">
+<meta name="twitter:description" content="Github和Git的学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-3/51261492.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/09/Github/"/>
+
+
+
+
+
+  <title>Git学习记录 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/09/Github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git学习记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-09T18:47:07+08:00">
+                2017-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术研究/" itemprop="url" rel="index">
+                    <span itemprop="name">技术研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Github</code>和<code>Git</code>的学习。</p>
+<a id="more"></a>
+<h4 id="GitHub使用"><a href="#GitHub使用" class="headerlink" title="GitHub使用"></a>GitHub使用</h4><p>学习一个新技能，遇见问题是正常的。遇见问题解决问题，一点点的来，不急不躁。耐心，坚持！</p>
+<p>Git是由Linux之父Linus Tovalds 为了更好的管理linux内核开发而创立的分布式版本控制/软件配置管理软件。<br>Git是一个管理你的代码的历史记录的工具。</p>
+<h5 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h5><ol>
+<li>下载  <a href="https://github-windows.s3.amazonaws.com/GitHubSetup.exe" target="_blank" rel="noopener">github for windows</a></li>
+<li>注册  <a href="https://github.com/" target="_blank" rel="noopener">github帐号</a></li>
+<li>登录到github for windows。</li>
+</ol>
+<h4 id="创建第一个代码库"><a href="#创建第一个代码库" class="headerlink" title="创建第一个代码库"></a>创建第一个代码库</h4><p>点击左上角的+号，建立一个仓库。</p>
+<h5 id="Add-功能"><a href="#Add-功能" class="headerlink" title="Add 功能"></a>Add 功能</h5><p>如果本地有工程，就可以使用Add添加</p>
+<h5 id="Clone-功能"><a href="#Clone-功能" class="headerlink" title="Clone 功能"></a>Clone 功能</h5><p>克隆的意思。<br>如何使用Clone功能，就是将在浏览器上已经创建好的项目导入本地，换句话就是下载到本地。</p>
+<h5 id="Create-功能"><a href="#Create-功能" class="headerlink" title="Create 功能"></a>Create 功能</h5><p>创建一个代码库。<br>Name填写你的仓库名字，Local path写在你要保存到本地路径。</p>
+<p>这里填写First，来创建第一个我们的respository。</p>
+<h4 id="开始使用第一个代码库"><a href="#开始使用第一个代码库" class="headerlink" title="开始使用第一个代码库"></a>开始使用第一个代码库</h4><h5 id="修改第一个代码库中的内容"><a href="#修改第一个代码库中的内容" class="headerlink" title="修改第一个代码库中的内容"></a>修改第一个代码库中的内容</h5><p>来到刚刚创建的代码库在本地的位置，就是刚刚在local path的地址路径。<br>右键选择Open in Exploer。这样就可以转到刚刚的路径下。<br>在里面新建一个文档。在里面编辑。<br>此时的github就会变成这个样子(Changes)</p>
+<p>你会发现此时的github会出现刚刚编辑的内容<br>并且前面会有蓝色标识，这个蓝色标识是什么作用呢？<br>其实这个蓝色标识是提示你会上传改变的文本。(蓝色提示你要改变的内容)</p>
+<p>Summary：改动的总结，可以理解为标题，必填<br>Description：可以理解详细概况，选填</p>
+<p>这次我们只选择第一个修改对象，也就是学习Github，这行修改，之后点击Commit to master.<br>summary为修改标题<br>Description：描述</p>
+<p>切换到History目录下</p>
+<p>会发现改变了。<br>这次把第二行Git添加上去。。</p>
+<p>会在History目录下发生这样的改变，会在History目录下形成一天时间线，来指出修改的标题和内容。同时会把修改的内容用绿色标识标出。</p>
+<p>打开本地的文本，删除第一行的内容。此时github发生了变化。</p>
+<p>此时的红色标识标识删除。<br>填好Summary和Description并点击Commit to master<br>这样就会删除了一行。同时在History目录下多了一条时间轴。红色标识。</p>
+<p>####上传与同步</p>
+<h5 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h5><p>此时，当我们打开github网页，就会发现此时你修改的内容并没有出现在这里，这是因为你没有进行同步。只是在本地进行了修改。此时我们需要点击右上角的publish.</p>
+<p>此时就可以把本地的内容上传到网页上。</p>
+<h5 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h5><p>当你的代码上传后就会发现，原理的publish变为了Sync.<br>点击Sync同步代码库。<br>5/3/2017 3:36:14 PM </p>
+<h4 id="分支的使用"><a href="#分支的使用" class="headerlink" title="分支的使用"></a>分支的使用</h4><h5 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h5><p>创建第一个分支取名为“new masterh”，点击Create new branch创建第一个分支。</p>
+<p>发现此时的分支已经切换到了我们刚刚创建的分支new masterch</p>
+<p>来修改new masterch分支上的内容。<br>我们依然打开test.txt进行编辑，输入以下内容。<br><code>创建第一个分支</code><br>打开github进行，填写Summary和Description<br>之后点击Commit to new-masterh<br>在History目录下，可以看到两条主线，分别是master和new-masterh，并且在new-masterh的分支下又出现一个蓝色的实线空心圈和一个虚线空心圈。<br>实心圈表示当前的节点，空心圈表示下一次修改时的节点。</p>
+<p>红线表示的部分就是当前的分支</p>
+<h5 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h5><p>点击红色画线部分就会出现分支的列表。<br>点击master就会切换到master分支。</p>
+<p>#####上传/同步分支<br>这个操作和同步仓库是一个操作，点击Publish/Sync上传或同步分支。</p>
+<h5 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h5><p>首先把分支切换到你要删除的分支下，如要删除new masterh,将分支切换到new masterh点击右上角齿轮就会出现Delete new masterh。</p>
+<p>点击Delete new masterh就会出现一个对话框，询问删除的内容</p>
+<p>第一个是yes,Delete both是将本地与网页全部删除<br>第二个是Delete local only 仅仅是删除本地<br>第三个是取消</p>
+<h5 id="合并两个分支"><a href="#合并两个分支" class="headerlink" title="合并两个分支"></a>合并两个分支</h5><p>将一个分支与master分支进行合并。<br>首先把分支切换到master下，点击Update from new-branch进行分支的合并。</p>
+<p>此时查看history目录发现</p>
+<h5 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h5><ol>
+<li>一个小技巧。 fork,在阅读别人的项目的时候，点击这个fork按钮，就可以把别人的项目变成自己的。在自己的目录下，可以任意修改。便于标记记录。</li>
+<li>删除项目。进入项目里面，选择设置，然后delete this repository</li>
+<li><p>测试Github</p>
+<p> root@Ubuntu:~/learngit# ssh <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a><br> PTY allocation request failed on channel 0<br> Hi sie504! You’ve successfully authenticated, but GitHub does not provide shell access.<br> Connection to github.com closed.</p>
+</li>
+<li><p>设置Git全局用户配置</p>
+<p> fatal: 远程 origin 已经存在。<br> git remote rm origin</p>
+</li>
+</ol>
+<p>全局配置的时候记得配置上自己github的账户以及邮箱。。。</p>
+<ol>
+<li>fork：创建源项目代码库的分支，并拷贝到自己的帐号中</li>
+<li>star 关注别人项目更新<br>3.</li>
+</ol>
+<h4 id="git-基本操作"><a href="#git-基本操作" class="headerlink" title="git 基本操作"></a>git 基本操作</h4><p>Git是分布式版本控制系统。<br>版本控制系统？如果你用Word编写一个文档，向删除一个段落，又怕将来想恢复找不回怎么办？有办法，先把当前文件另存为一个新的Word文件，改到一定程度，再另存一个新文件，这样一直改下去。</p>
+<p>Git分布式系统版本控制系统，集中式版本控制系统和分布式控制系统的区别。。</p>
+<p>问题1. <code>fatal: pathspec &#39;readme.txt&#39; did not match any files</code></p>
+<p>路径的问题，你应该将路径cd到仓库的路径。</p>
+<h5 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h5><p>版本库又叫仓库，repository，可以简单理解为一个目录，这个目录里的所有文件都可以被Git管理，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以跟踪历史，或者在将来某个时刻还原。</p>
+<p>选择一个合适的地方，创建一个空目录：<br><figure class="highlight plain"><figcaption><span>mkdir learngit</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@Ubuntu:~# cd learngit/</span><br><span class="line">root@Ubuntu:~/learngit# pwd</span><br><span class="line">/root/learngit</span><br></pre></td></tr></table></figure></p>
+<p>第二步，通过git init命令把这个目录变为Git可以管理的仓库：<br><figure class="highlight plain"><figcaption><span>git init</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">初始化空的 Git 版本库于 /root/learngit/.git/</span><br></pre></td></tr></table></figure></p>
+<p>在learngit目录下，创建一个readme.txt文件，内容如下：</p>
+<figure class="highlight plain"><figcaption><span>is a version control system.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 Git is free software.</span><br></pre></td></tr></table></figure>
+<p><strong>第一步</strong>:用<code>git add</code>告诉Git，把文件添加到仓库：</p>
+<p><code># git add readme.txt</code></p>
+<p>执行上面的命令，没有任何显示，这就对了。Unix的哲学是”没有消息就是好消息” </p>
+<p><strong>第二步</strong> 用命令 <code>git commit -m &quot;&quot;</code>告诉Git，把文件提交到仓库。</p>
+<p>工作区和暂存区</p>
+<p><strong>第三步</strong> 推送 <code>git push</code>  从远程获取 <code>git pull</code></p>
+<p><a href="">http://www.liaoxuefeng.com</a></p>
+<p><a href="http://www.yiibai.com/git/git_fetch.html" target="_blank" rel="noopener">http://www.yiibai.com/git/git_fetch.html</a></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<li><p>无法推送一些引用到 <a href="mailto:&#39;git@github.com" target="_blank" rel="noopener">&#39;git@github.com</a>:sie504/Something_py.git’<br>提示：更新被拒绝，因为远程版本库包含您本地尚不存在的提交。这通常是因为另外<br>提示：一个版本库已向该引用进行了推送。再次推送前，您可能需要先整合远程变更<br>提示：（如 ‘git pull …’）。<br>提示：详见 ‘git push –help’ 中的 ‘Note about fast-forwards’ 小节。</p>
+<p> <a href="http://www.it610.com/article/4921283.htm" target="_blank" rel="noopener">http://www.it610.com/article/4921283.htm</a></p>
+</li>
+</ol>
+<ol>
+<li>请输入一个提交信息以解释此合并的必要性，尤其是将一个更新后的上游分支<br>合并到主题分支。<br>以 ‘#’ 开头的行将被忽略，而且空提交说明将会终止提交。</li>
+</ol>
+<ol>
+<li>您的分支领先 ‘origin/master’ 共 2 个提交。<br>（使用 “git push” 来发布您的本地提交）</li>
+</ol>
+<p><a href="http://blog.csdn.net/gonghuiyun19910610/article/details/46673897" target="_blank" rel="noopener">github本地修改与远程同步</a></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-3/51261492.jpg" alt=""></p>
+<p><a href="http://blog.csdn.net/stormbjm/article/details/14455903" target="_blank" rel="noopener">Fork + Pull模式</a></p>
+<h4 id="GIT学习"><a href="#GIT学习" class="headerlink" title="GIT学习"></a><a href="http://www.imooc.com/learn/208" target="_blank" rel="noopener">GIT学习</a></h4><p>2017/7/18</p>
+<p>版本管理工具。。</p>
+<p>发展 <code>cvs--svn---git---github</code></p>
+<p>git的下载和安装</p>
+<pre><code>git clone 
+</code></pre><p>提交     git status 状态</p>
+<p>关于代码的冲突、、冲突是怎么造成的。。</p>
+<p>同一时间，同一代码。你也改了，我也改了代码。。</p>
+<p>更新被拒绝。。git pull 合并冲突。。</p>
+<p>git diff 查看差别。。</p>
+<p>回到过去</p>
+<pre><code>git log 
+git reset --hard
+git reflog
+</code></pre><p>建立里程碑</p>
+<p>分支开发之分支合并</p>
+<p>分支开发到master。。</p>
+<p>多人合作的一些经验</p>
+<p>整理好自己的工作区。。。</p>
+<p>并行的项目，使用分支开发</p>
+<p>遇到冲突的时候，搞明白冲突的原因，千万不要随意修改别人的代码</p>
+<p>产品发布后，记得打tag。。</p>
+<hr>
+<p>20170914</p>
+<p>GIT技能书</p>
+<p><a href="https://codingstyle.cn/topics/51" target="_blank" rel="noopener">闯过这 54 关，点亮你的 Git 技能树</a></p>
+<p><strong>test</strong></p>
+<blockquote>
+<p>Github新建一个项目<br>git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:sie504/Django_mooc.git 下载下来</p>
+<p>git add readme.txt</p>
+<p>git commit -m “”告诉Git</p>
+<p>推送 git push </p>
+<p>git pull</p>
+</blockquote>
+<p><strong>回滚某个版本</strong></p>
+<p>首先把项目<code>clone</code>到其他文件夹下。</p>
+<pre><code>git clone git@github.com:spring-guides/gs-messaging-stomp-websocket.git
+</code></pre><p>进入该项目的文件夹下面</p>
+<p>回滚到某个版本</p>
+<pre><code>git checkout 6958af0b02bf05282673826b73cd7a85e84c12d3
+</code></pre><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>2017/7/17 慕课 github</p>
+<p>版本控制系统</p>
+<p>初始化项目的时候，创建一个readme.md</p>
+<p>commit 做一个版本。。 版本信息。。</p>
+<pre><code>1 parent ad75b54 commit 41664494fdf29df404539965c7c5efba74956c7f    版本号
+</code></pre><p>分支操作介绍</p>
+<p>一个新的版本，在主分支边上的。。。</p>
+<p><a href="http://gitbeijing.com/merge.html" target="_blank" rel="noopener">合并分支</a></p>
+<p>gitbeijing.com</p>
+<p>合并分支的冲突问题。。。修改了通过一个地方。。。</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;HEAD
+冲突标记符
+========
+</code></pre><p><a href="http://gitbeijing.com/flow/" target="_blank" rel="noopener">团队协作流程</a></p>
+<p>给一个队友添加写权限。。<br>在settings–collaborators—</p>
+<p><a href="http://gitbeijing.com/fork_flow.html" target="_blank" rel="noopener">贡献开源项目</a></p>
+<p>fork一下，</p>
+<p>wiki知识库</p>
+<p><a href="http://gitbeijing.com/pages.html" target="_blank" rel="noopener">github搭建网站</a></p>
+<p>gitlab可以下载源码进行安装</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.zhihu.com/question/20070065" target="_blank" rel="noopener">https://www.zhihu.com/question/20070065</a></p>
+<p><a href="http://blog.csdn.net/tangbin330/article/details/9128765" target="_blank" rel="noopener">http://blog.csdn.net/tangbin330/article/details/9128765</a></p>
+<p><a href="http://youngxhui.github.io/2016/05/03/GitHub-for-Windows%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B(%E4%B8%80" target="_blank" rel="noopener">http://youngxhui.github.io/2016/05/03/GitHub-for-Windows%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B(%E4%B8%80)/</a>/)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/18/Django-xadmin/" rel="next" title="Django+xadmin Web 项目学习">
+                <i class="fa fa-chevron-left"></i> Django+xadmin Web 项目学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/19/Python错误异常处理/" rel="prev" title="Python 异常处理">
+                Python 异常处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub使用"><span class="nav-number">1.</span> <span class="nav-text">GitHub使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建第一个代码库"><span class="nav-number">2.</span> <span class="nav-text">创建第一个代码库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Add-功能"><span class="nav-number">2.1.</span> <span class="nav-text">Add 功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clone-功能"><span class="nav-number">2.2.</span> <span class="nav-text">Clone 功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Create-功能"><span class="nav-number">2.3.</span> <span class="nav-text">Create 功能</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始使用第一个代码库"><span class="nav-number">3.</span> <span class="nav-text">开始使用第一个代码库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#修改第一个代码库中的内容"><span class="nav-number">3.1.</span> <span class="nav-text">修改第一个代码库中的内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#上传"><span class="nav-number">3.2.</span> <span class="nav-text">上传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步"><span class="nav-number">3.3.</span> <span class="nav-text">同步</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分支的使用"><span class="nav-number">4.</span> <span class="nav-text">分支的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建分支"><span class="nav-number">4.1.</span> <span class="nav-text">创建分支</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#切换分支"><span class="nav-number">4.2.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除分支"><span class="nav-number">4.3.</span> <span class="nav-text">删除分支</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#合并两个分支"><span class="nav-number">4.4.</span> <span class="nav-text">合并两个分支</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小技巧"><span class="nav-number">4.5.</span> <span class="nav-text">小技巧</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-基本操作"><span class="nav-number">5.</span> <span class="nav-text">git 基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建版本库"><span class="nav-number">5.1.</span> <span class="nav-text">创建版本库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GIT学习"><span class="nav-number">7.</span> <span class="nav-text">GIT学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">8.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

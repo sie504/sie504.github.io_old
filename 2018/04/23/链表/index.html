@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/链表/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="链表">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/31746043.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/24815513.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/76992209.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/81111431.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-24/88381927.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-24/27846423.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-24/41288287.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-24/87583412.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-20/12828367.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-20/4515939.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/5045021.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/52984968.jpg">
+<meta property="og:updated_time" content="2018-04-24T09:51:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="链表">
+<meta name="twitter:description" content="链表">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-23/31746043.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/23/链表/"/>
+
+
+
+
+
+  <title>链表 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">链表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T13:20:46+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>链表</p>
+<a id="more"></a>
+<p><a href="https://www.youtube.com/watch?v=h0ck9gbkmOY&amp;index=18&amp;list=PLC664nq_h8b_q8Hjq_q8fbst1TO1AKKz-" target="_blank" rel="noopener">视频</a></p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>链表的实现</p>
+<p>数据区+链接区</p>
+<p>链接区，下一个节点的位置</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-23/31746043.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-23/24815513.jpg" alt=""></p>
+<p>单链表操作</p>
+<pre><code>is_empty() 链表是否为空
+length() 链表长度
+travel() 遍历整个链表
+add(item) 链表头部添加元素
+append(item) 链表尾部添加元素
+insert(pos,item) 指定位置添加元素
+search(item)     查找节点是否存在
+</code></pre><p>单链表结点</p>
+<p>python交换两个变量</p>
+<pre><code>a = 10  //产生一个变量 a 把 10放在里面
+b = 20
+a,b = b,a
+</code></pre><p>地址指向</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-23/76992209.jpg" alt=""></p>
+<p>指向的地址。</p>
+<pre><code>a = 10  
+// a 代表的是内存，它内存中保存的是一个地址，地址指向什么，a的变量就是谁的
+</code></pre><p><code>PYthon</code>变量的本质</p>
+<p><a href="https://my.oschina.net/leejun2005/blog/145911" target="_blank" rel="noopener">python基础（5）：深入理解 python 中的赋值、引用、拷贝、作用域</a></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-23/81111431.jpg" alt=""></p>
+<p>结点串到链表上。</p>
+<p>两个类，链表类和结点类。</p>
+<p>这两个类之间的关系。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-24/88381927.jpg" alt=""></p>
+<p><strong>为空</strong></p>
+<pre><code>def is_empty(self):
+        #链表是否为空,self对象属性
+        return self._head == None #返回和None的值，相等就为空，true
+</code></pre><p><strong>长度</strong></p>
+<p>链表中存在多少个结点。</p>
+<p>current 指针，当前的位置。</p>
+<pre><code>def length(self):
+        #链表长度
+        # cur 游标，用来移动遍历节点
+        cur = self._head  #指向起始节点
+        # count 记录数量
+        count = 0 
+        while cur != None:     #判断最后的位置 cur.next == None
+            count += 1 
+            cur = cur.next
+        return count 
+</code></pre><p><strong>遍历</strong></p>
+<pre><code>def travel(self): 
+        #遍历整个链表
+        cur = self._head
+        while cur != None:
+            print cur.elem
+            cur = cur.next
+</code></pre><p><strong>头部添加结点</strong></p>
+<p>一开始</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-24/27846423.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-24/41288287.jpg" alt=""></p>
+<pre><code>def add(self, item):
+
+    # 链表头部添加元素 头插法
+    # 插入的新节点的next 指向 _head 指向的 next,然后 head 指向插入的新节点
+    # 考虑空链表
+    node = Node(item)     #初始化一个节点
+    node.next = self._head
+    self._head = node
+</code></pre><p><strong>指定位置添加</strong></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-24/87583412.jpg" alt=""></p>
+<pre><code>def insert(self,pos,item):
+
+    #指定位置添加元素
+    # pos 参数 from 0 insert(2,400) node(400)
+    # pre ，指定位置的前一个元素
+    if pos &lt; 0:
+        # 设置为头插法
+        self.add(item)
+    elif pos &gt; self.length()-1:
+        #设置尾部添加
+        self.append(item)
+    else:
+
+        pre = self._head  # 指向的结点，赋予 pre
+        count = 0
+        while count &lt; (pos-1):
+            count = count + 1
+            pre = pre.next
+        #循环退出后，pre 指向 pos -1
+        node = Node(item)
+        node.next = pre.next
+        pre.next = node
+</code></pre><p>测试</p>
+<pre><code> ll.append(1)
+print ll.is_empty()
+print ll.length()
+ll.append(2)
+ll.add(8)
+ll.append(3)
+ll.append(4)
+# 8 1 2 3 4
+ll.insert(-1,9)
+ll.travel()
+ll.insert(3,10)
+ll.travel()
+ll.insert(14, 12)
+ll.travel()
+</code></pre><p>结果</p>
+<pre><code>True
+0
+False
+1
+9 8 1 2 3 4 
+9 8 1 10 2 3 4 
+9 8 1 10 2 3 4 12 
+</code></pre><p><strong>查找</strong></p>
+<p>一个游标从头结点开始，进行比对。</p>
+<pre><code>def search(self,item):
+    # 查找节点是否存在
+    cur = self._head
+    while cur != None:
+        if cur.elem == item:
+            return True
+        else:
+            cur = cur.next
+    return False
+</code></pre><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code># -*- coding:utf-8 -*-
+__author__ = &apos;504&apos;
+__date__ = &apos;2018/4/24 14:36&apos;
+
+class Node(object):
+    # 结点类
+    def __init__(self, elem):
+        # 构造函数初始化 item
+        self.elem = elem  # 结点一个属性，保存数据
+        self.next = None  # 结点位置初始为空，链接域为空
+
+class SingleLinkList(object):
+    # 链表
+    def __init__(self,node=None):  # 构造函数
+        self._head = node  # 私有属性，初始化
+
+    def is_empty(self):
+        # 链表是否为空,self对象属性
+        return self._head == None  #返回和None的值，相等就为空，true
+
+    def length(self):  # 链表长度
+
+        # cur 游标，用来移动遍历节点
+        cur = self._head
+        # 指向头节点
+        # count 记录数量
+        count = 0
+        while cur != None:  # 判断最后的位置 cur.next == None
+            count += 1
+            cur = cur.next
+        return count
+
+    def travel(self):
+
+        # 遍历整个链表
+        cur = self._head
+        while cur != None:
+            print cur.elem,
+            cur = cur.next
+        print &quot;&quot;
+
+    def add(self, item):
+
+        # 链表头部添加元素 头插法
+        # 插入的新节点的next 指向 _head 指向的 next,然后 head 指向插入的新节点
+        # 考虑空链表
+        node = Node(item)     #初始化一个节点
+        node.next = self._head
+        self._head = node
+
+
+
+    def append(self, item):
+        # 链表尾部添加元素,尾插法
+
+
+        node = Node(item)
+        if self.is_empty():
+            self._head = node
+        else:
+            cur = self._head  # None
+            while cur.next != None:
+                cur = cur.next
+            cur.next = node
+
+    def insert(self,pos,item):
+
+        #指定位置添加元素
+        # pos 参数 from 0 insert(2,400) node(400)
+        # pre ，指定位置的前一个元素
+        if pos &lt; 0:
+            # 设置为头插法
+            self.add(item)
+        elif pos &gt; self.length()-1:
+            #设置尾部添加
+            self.append(item)
+        else:
+
+            pre = self._head  # 指向的结点，赋予 pre
+            count = 0
+            while count &lt; (pos-1):
+                count = count + 1
+                pre = pre.next
+            #循环退出后，pre 指向 pos -1
+            node = Node(item)
+            node.next = pre.next
+            pre.next = node
+
+
+
+    def remove(self, item):
+        # 删除节点
+        # pre.next = cur.next
+        cur = self._head
+        pre = None
+        while cur != None:
+            if cur.elem == item:
+                #删除结点
+                #先判断此结点是否是头结点
+                if cur == self._head:
+                    self._head = cur.next
+
+                else:
+                    pre.next = cur.next
+                break  # 删除后退出循环
+            else:
+                pre = cur
+                cur = cur.next
+
+
+    def search(self,item):
+        # 查找节点是否存在
+        cur = self._head
+        while cur != None:
+            if cur.elem == item:
+                return True
+            else:
+                cur = cur.next
+        return False
+
+
+if __name__ == &quot;__main__&quot;:
+    ll = SingleLinkList()  # 构造对象
+    print ll.is_empty()
+    print ll.length()
+
+    ll.append(1)
+    print ll.is_empty()
+    print ll.length()
+    ll.append(2)
+    ll.add(8)
+    ll.append(3)
+    ll.append(4)
+    # 8 1 2 3 4
+    ll.insert(-1,9)
+    ll.travel()
+    ll.insert(3,10)
+    ll.travel()
+    ll.insert(14, 12)
+    ll.travel()
+    ll.remove(12)
+    ll.travel()
+</code></pre><p>结果</p>
+<pre><code>True
+0
+False
+1
+9 8 1 2 3 4 
+9 8 1 10 2 3 4 
+9 8 1 10 2 3 4 12 
+9 8 1 10 2 3 4 
+
+Process finished with exit code 0
+</code></pre><h4 id="实现无序列表：链表"><a href="#实现无序列表：链表" class="headerlink" title="实现无序列表：链表"></a><a href="https://facert.gitbooks.io/python-data-structure-cn/3.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.21.%E5%AE%9E%E7%8E%B0%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8%EF%BC%9A%E9%93%BE%E8%A1%A8/" target="_blank" rel="noopener">实现无序列表：链表</a></h4><h4 id="Implementing-an-Unordered-List-Linked-Lists"><a href="#Implementing-an-Unordered-List-Linked-Lists" class="headerlink" title="Implementing an Unordered List: Linked Lists"></a><a href="https://interactivepython.org/runestone/static/pythonds/BasicDS/ImplementinganUnorderedListLinkedLists.html#lst-isempty" target="_blank" rel="noopener">Implementing an Unordered List: Linked Lists</a></h4><p>一些项被随机的放置，如果在每一项中保持一些明确的信息，即下一项的位置。每个项的相对位置可以通过简单地从一个项到下一个项的链接来表示。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-20/12828367.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-20/4515939.jpg" alt=""></p>
+<p>指定链表中的第一个位置，一旦知道第一项在哪里，第一项可以告诉我们第二项是什么。外部引用通常被称为链表的头，最后一项需要知道没有下一项。</p>
+<h4 id="Node-类"><a href="#Node-类" class="headerlink" title="Node 类"></a>Node 类</h4><p>链表实现的基本构造是节点。每个节点对象必须保存两个信息，节点必须包含列表项本身，将这个称为节点的数据字段。每个节点必须保存对下一个节点的引用。</p>
+<p>要构造一个节点，需要提供该节点的初始数据值。</p>
+<pre><code>#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+class Node:
+    def __init__(self,initdata):
+        self.data = initdata      #初始化
+        self.next = None    # None 在 Node类和链表本身发挥重要作用，引用None代表没有下一个节点
+
+    def getData(self):
+        return self.data  #获取该位置值
+
+    def getNext(self):
+        return self.next
+
+    def setData(self,newdata):
+        self.data = newdata
+
+    def setNext(self,newnext):
+        self.next = newnext
+
+
+class UnorderedList:
+    def __init__(self):
+        self.head = None
+
+
+
+temp = Node(93)
+print temp.getData()      
+</code></pre><p>赋值语句将产生一个包含值93的节点对象。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-23/5045021.jpg" alt=""></p>
+<p>会用下图表示一个节点对象。Node类还包括访问、修改数据和访问下一个引用的常用方法。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-23/52984968.jpg" alt=""></p>
+<h4 id="Unordered-List-类"><a href="#Unordered-List-类" class="headerlink" title="Unordered List 类"></a>Unordered List 类</h4><p>无序列表将从一个节点构建，每个节点通过显示引用链接到下一个节点。</p>
+<h4 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h4><p><a href="https://baagee.vip/index/article/id/100.html" target="_blank" rel="noopener">Python实现数据结构中的单链表，循环单链表，双链表</a></p>
+<p><a href="https://zhaochj.github.io/2016/05/12/2016-05-12-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/#" target="_blank" rel="noopener">python数据结构-链表</a></p>
+<p><a href="https://www.cnblogs.com/king-ding/p/pythonchaintable.html" target="_blank" rel="noopener">python数据结构之链表（一）</a></p>
+<p><a href="https://baike.baidu.com/item/%E9%93%BE%E8%A1%A8" target="_blank" rel="noopener">链表</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/18/Weblogic反序列化漏洞(CVE-2018-2628)/" rel="next" title="Weblogic反序列化漏洞(CVE-2018-2628)">
+                <i class="fa fa-chevron-left"></i> Weblogic反序列化漏洞(CVE-2018-2628)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/27/recursion_digui/" rel="prev" title="递归">
+                递归 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#链表"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现无序列表：链表"><span class="nav-number">3.</span> <span class="nav-text">实现无序列表：链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Implementing-an-Unordered-List-Linked-Lists"><span class="nav-number">4.</span> <span class="nav-text">Implementing an Unordered List: Linked Lists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-类"><span class="nav-number">5.</span> <span class="nav-text">Node 类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unordered-List-类"><span class="nav-number">6.</span> <span class="nav-text">Unordered List 类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章"><span class="nav-number">7.</span> <span class="nav-text">文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

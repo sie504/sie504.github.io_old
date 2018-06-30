@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python文件操作学习。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 文件处理">
+<meta property="og:url" content="http://yoursite.com/2017/07/26/python文件处理/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Python文件操作学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/64221742.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/17910483.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/80429679.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/78191643.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/90575233.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/46833136.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/78603138.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/5103583.jpg">
+<meta property="og:updated_time" content="2018-02-05T09:57:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 文件处理">
+<meta name="twitter:description" content="Python文件操作学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-26/64221742.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/26/python文件处理/"/>
+
+
+
+
+
+  <title>Python 文件处理 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/26/python文件处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 文件处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-26T13:20:46+08:00">
+                2017-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Python</code>文件操作学习。</p>
+<a id="more"></a>
+<p>时间 2017/7/26</p>
+<p>文件：python中文件是对象</p>
+<p>一切设备都可以称对象</p>
+<p>文件的打开方式</p>
+<p>open</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/64221742.jpg" alt=""></p>
+<p>读</p>
+<p>read([size])方法         读取文件，读取size字节</p>
+<p>readline([size])      读取一行</p>
+<p>readlines([size])    读取完文件，返回每一行所组成的列表</p>
+<p>文件写入方式</p>
+<p>write(str) 将字符串写入文件</p>
+<p>writelines()      写多行到文本</p>
+<p>文件打开方式</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/17910483.jpg" alt=""></p>
+<p>write写的时候，如果文件不存在可以创建。。</p>
+<pre><code>In [4]: f = open(&apos;1.txt&apos;)
+
+In [5]: c = f.read()
+
+In [6]: c
+Out[6]: &apos;111111111\n2222222\n333333333\n\n&apos;
+
+In [7]: f.write(&quot;test&quot;)
+---------------------------------------------------------------------------
+IOError                                   Traceback (most recent call last)
+&lt;ipython-input-7-ea377aa808ac&gt; in &lt;module&gt;()
+----&gt; 1 f.write(&quot;test&quot;)
+
+IOError: File not open for writing
+
+In [8]: f = open(&apos;2.txt&apos;,&apos;w&apos;)
+
+In [9]: f.write(&quot;test for write&quot;)
+
+In [10]: f.close()
+
+In [11]: ls
+1.txt  2.txt
+</code></pre><p>如果存在这个文件的话，以<code>w</code>的方式写的话，之前的内容会被清空。。。<br>追加的方式打开，之前的内容还会存在。。。</p>
+<pre><code>In [16]: f = open(&apos;1.txt&apos;,&apos;a&apos;)
+
+In [17]: f.write(&quot;test&quot;)
+
+In [18]: f.close()
+
+In [19]: cat 1.txt
+111111111
+2222222
+333333333
+
+test
+</code></pre><p>r+/w+ 即可读又可写</p>
+<pre><code>In [21]: f = open(&apos;1.txt&apos;,&apos;w+&apos;)
+
+In [22]: f.read()
+Out[22]: &apos;&apos;
+
+In [23]: f.write(&apos;write and read&apos;)
+
+In [24]: f.close()
+
+In [25]: cat 1.txt
+write and read
+In [26]: f = open(&apos;1.txt&apos;,&apos;r+&apos;)
+
+In [27]: f.read()
+Out[27]: &apos;write and read&apos;
+
+In [28]: f.write(&apos;2222222&apos;)
+
+In [29]: f.read()
+Out[29]: &apos;&apos;
+
+In [30]: f.close()
+In [31]: cat 1.txt
+write and read2222222
+</code></pre><p>二进制打开。。打开、读取、写入文件。。。</p>
+<ul>
+<li><p>文件的读取方式</p>
+<p>  readline(size)         len(line) &gt; size   return size</p>
+<pre><code>len(line) &lt; size   return len(line)
+</code></pre></li>
+</ul>
+<pre><code>In [47]: f = open(&apos;1.txt&apos;)
+
+In [48]: c = f.readlines()
+
+In [49]: c
+Out[49]: [&apos;write and read2222222111111111\n&apos;, &apos;222222222\n&apos;, &apos;3333333333\n&apos;]
+</code></pre><p>readlines() 读取缓存的</p>
+<p>iter跌代器对文件进行操作，一行的进行操作</p>
+<pre><code>In [1]: f = open(&apos;1.txt&apos;)
+
+In [2]: iter_f = iter(f)
+
+In [3]: lines = 0
+
+In [4]: for line in iter_f:
+   ...:     lines += 1
+   ...:     
+
+In [5]: lines
+Out[5]: 3
+</code></pre><p>文件的写入</p>
+<pre><code>In [7]: f = open(&apos;i.txt&apos;,&apos;w&apos;)
+
+In [8]: f.write(&apos;test write&apos;)
+
+In [9]: f.close()
+
+In [10]: cat i.txt
+test write
+In [11]: f = open(&apos;i.txt&apos;,&apos;w&apos;)
+
+In [12]: f.writelines(&apos;123456&apos;)
+
+In [13]: f.writelines((1,2,3,4,5))
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-13-5997f36e60df&gt; in &lt;module&gt;()
+----&gt; 1 f.writelines((1,2,3,4,5))
+
+TypeError: writelines() argument must be a sequence of strings
+
+In [14]: f.writelines((&apos;1&apos;,&apos;2&apos;,&apos;3&apos;))
+
+In [15]: f.writelines([&apos;1&apos;,&apos;2&apos;,&apos;3&apos;])
+</code></pre><p>写入的时候，要close()或者flush方法。。。</p>
+<p>写文件的过程</p>
+<pre><code>In [18]: f = open(&apos;i.txt&apos;,&apos;w&apos;)
+
+In [19]: f.write(&apos;test for write&apos;)
+
+In [20]: cat i.txt
+
+In [21]: f.flush()
+
+In [22]: cat i.txt
+test for write
+In [23]: f.close()
+</code></pre><p>缓冲的大小</p>
+<ul>
+<li>文件的关闭</li>
+</ul>
+<p>将缓存同步到磁盘</p>
+<p>Linux系统中每个进程打开文件的个数是有限的</p>
+<ul>
+<li>文件写入和读取问题</li>
+</ul>
+<p>写入文件后，必须打开才能读取写入内容</p>
+<p>读取文件后，无法重新再次读取读过的内容</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/80429679.jpg" alt=""></p>
+<ul>
+<li><p>python文件指针操作</p>
+<p>  seek(offset,[,whence]): 移动文件指针</p>
+<pre><code>offset 偏移量，可以为负数
+whence:偏移相对位置
+os.SEEK_SET 相对文件起始位置  0
+os.SEEK_CUR 相对文件当前位置    1
+os.SEEK_END 相对文件结尾位置   2
+</code></pre></li>
+</ul>
+<p>tell()读取所在位置。。。</p>
+<pre><code>In [2]: f = open(&apos;1.txt&apos;,&apos;w&apos;)
+
+In [3]: f.write(&apos;0123456789abcdef&apos;)
+
+In [4]: f.close()
+
+In [5]: cat 1.txt
+0123456789abcdef
+In [6]: import os
+
+In [7]: f = open(&apos;1.txt&apos;,&apos;r+&apos;)
+
+In [8]: f.tell()
+Out[8]: 0L
+
+In [9]: f.read(3)
+Out[9]: &apos;012&apos;
+
+In [10]: f.read(3)
+Out[10]: &apos;345&apos;
+
+In [11]: f.tell()
+Out[11]: 6L
+In [13]: f.seek(0,os.SEEK_SET)
+
+In [14]: f.tell()
+Out[14]: 0L
+</code></pre><ul>
+<li><p>文件属性</p>
+<p>  file.fileno()   文件描述符<br>  file.mode()    文件打开权限<br>  file.encoding:文件编码格式<br>  file.closed:文件是否关闭<br>  文件标准输入： sys.stdin<br>  文件标准输出： sys.stdout<br>  文件标准错误： sys.stderr</p>
+<p>  In [22]: f = open(‘1.txt’)</p>
+<p>  In [23]: f.fileno<br>  Out[23]: <function fileno=""></function></p>
+<p>  In [24]: f.fileno()<br>  Out[24]: 7</p>
+<p>  In [25]: f.mode<br>  Out[25]: ‘r’</p>
+<p>  In [26]: f.closed<br>  Out[26]: False</p>
+</li>
+</ul>
+<pre><code>In [28]: import sys
+
+In [29]: type(sys.stdin)
+Out[29]: file
+
+In [30]: sys.stdin.mode
+Out[30]: &apos;r&apos;
+
+In [31]: sys.stdin.fileno()
+Out[31]: 0
+
+In [32]: a = raw_input(&quot;:&quot;)
+:00000
+
+In [33]: a
+Out[33]: &apos;00000&apos;
+
+In [34]: sys.stdout.mode
+Out[34]: &apos;w&apos;
+
+In [35]: sys.stdout.write(&apos;1000&apos;)
+1000
+In [36]: print &apos;1111111&apos;
+</code></pre><p>文件命令行参数</p>
+<pre><code>  1 #!/usr/bin/python
+  2 
+  3 import sys
+  4 if __name__ == &apos;__main__&apos;:
+  5     print len(sys.argv)
+  6     for arg in sys.argv:
+  7         print arg
+
+
+root@Ubuntu:~/show_me_code/XTeach/file# python arg.py 0 1 2 3
+5
+arg.py
+0
+1
+2
+3
+</code></pre><p>把汉字转换为utf-8,进行写入文件，，，</p>
+<pre><code>In [1]: a = unicode.encode(u&apos;木了&apos;,&apos;utf-8&apos;)
+
+In [2]: a
+Out[2]: &apos;\xe6\x9c\xa8\xe4\xba\x86&apos;
+</code></pre><p>使用codecs模块提供方法创建指定编码格式文件。。</p>
+<pre><code>open(fname,mode,encoding,errors,buffering):
+使用指定编码格式打开文件。。
+
+In [3]: import codecs
+
+In [4]: f = codecs.open(&apos;test.txt&apos;,&apos;w&apos;,&apos;utf-8&apos;)
+
+In [5]: f.write(u&apos;米&apos;)
+
+In [6]: f.close()
+
+In [7]: cat test.txt
+米
+</code></pre><ul>
+<li>Linux文件系统简介</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/78191643.jpg" alt=""></p>
+<p>open、write、read</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/90575233.jpg" alt=""></p>
+<ul>
+<li>os模块打开文件</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/46833136.jpg" alt=""></p>
+<pre><code>In [8]: import os
+
+In [9]: fd = os.open(&apos;immo.txt&apos;,os.O_CREAT | os.O_RDWR)
+
+In [10]: ls
+1.txt  2.txt  arg.py  immo.txt*  i.txt  test.txt
+
+In [11]: n = os.write(fd,&apos;immo&apos;)
+
+In [12]: l = os.lseek(fd,0,os.SEEK_SET)
+
+In [13]: l
+Out[13]: 0L
+
+In [14]: str = os.read(fd,5)
+
+In [15]: str
+Out[15]: &apos;immo&apos;
+
+In [16]: os.close(fd)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/78603138.jpg" alt=""></p>
+<p>os模块可以创建文件以及目录，类似底层命令的操作。。。</p>
+<ul>
+<li>os.path模块方法</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-26/5103583.jpg" alt=""></p>
+<ul>
+<li>练习</li>
+</ul>
+<p><code>ConfigParser</code></p>
+<pre><code>In [26]: import ConfigParser
+
+In [27]: ConfigParser.
+ConfigParser.ConfigParser
+ConfigParser.DEFAULTSECT
+ConfigParser.DuplicateSectionError
+ConfigParser.Error
+ConfigParser.InterpolationDepthError
+ConfigParser.InterpolationError
+ConfigParser.InterpolationMissingOptionError
+ConfigParser.InterpolationSyntaxError
+ConfigParser.MAX_INTERPOLATION_DEPTH
+ConfigParser.MissingSectionHeaderError
+ConfigParser.NoOptionError
+ConfigParser.NoSectionError
+ConfigParser.ParsingError
+ConfigParser.RawConfigParser
+ConfigParser.SafeConfigParser
+ConfigParser.re
+
+In [27]: cfg = ConfigParser.ConfigParser()
+
+In [28]: cfg.
+cfg.OPTCRE          cfg.getfloat        cfg.read
+cfg.OPTCRE_NV       cfg.getint          cfg.readfp
+cfg.SECTCRE         cfg.has_option      cfg.remove_option
+cfg.add_section     cfg.has_section     cfg.remove_section
+cfg.defaults        cfg.items           cfg.sections
+cfg.get             cfg.options         cfg.set
+cfg.getboolean      cfg.optionxform     cfg.write
+
+In [28]: cfg.
+</code></pre><p>例子</p>
+<pre><code>In [30]: import ConfigParser
+
+In [31]: cfg = ConfigParser.ConfigParser()
+
+In [32]: cat 1.txt
+[userinfo]
+name = zhangsan
+pwd = abo
+
+[study]
+python_base = 15
+linux_base = 15
+
+
+In [33]: cfg.read(&apos;1.txt&apos;)
+Out[33]: [&apos;1.txt&apos;]
+In [35]: cfg.sections()
+Out[35]: [&apos;userinfo&apos;, &apos;study&apos;]
+
+In [36]: for se in cfg.sections():
+   ....:     print se
+   ....:     print cfg.items(se)
+   ....:     
+userinfo
+[(&apos;name&apos;, &apos;zhangsan&apos;), (&apos;pwd&apos;, &apos;abo&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+</code></pre><p>修改内容</p>
+<pre><code>In [37]: cfg.set(&apos;userinfo&apos;,&apos;pwd&apos;,&apos;123456&apos;)
+
+In [38]: for se in cfg.sections():
+    print se
+    print cfg.items(se)
+   ....:     
+userinfo
+[(&apos;name&apos;, &apos;zhangsan&apos;), (&apos;pwd&apos;, &apos;123456&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+</code></pre><p>可以插入。删除。。</p>
+<pre><code>In [39]: cfg.set(&apos;userinfo&apos;,&apos;email&apos;,&apos;123456@sina.com&apos;)
+
+In [40]: for se in cfg.sections():
+    print se
+    print cfg.items(se)
+   ....:     
+userinfo
+[(&apos;name&apos;, &apos;zhangsan&apos;), (&apos;pwd&apos;, &apos;123456&apos;), (&apos;email&apos;, &apos;123456@sina.com&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+</code></pre><p>删除</p>
+<pre><code>In [41]: cfg.remove_option(&apos;userinfo&apos;,&apos;email&apos;)
+Out[41]: True
+
+In [42]: for se in cfg.sections():
+    print se
+    print cfg.items(se)
+   ....:     
+userinfo
+[(&apos;name&apos;, &apos;zhangsan&apos;), (&apos;pwd&apos;, &apos;123456&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+</code></pre><p>一个小例子</p>
+<pre><code>1 [userinfo]
+2 name = mulibo
+3 pwd = 123456
+4 
+5 [study]
+6 python_base = 15
+7 linux_base = 15
+8 
+</code></pre><p>代码</p>
+<pre><code>#!/usr/bin/python
+# -*- coding:utf-8 -*-
+import os
+import os.path
+import ConfigParser
+
+&apos;&apos;&apos;
+1: dump ini
+2: del section
+3: del item
+4: modify item
+5: add section
+6: save modify
+&apos;&apos;&apos;
+
+class student_info(object):
+    def __init__(self,recordfile):
+        self.logfile = recordfile      #记录文件名字
+        self.cfg = ConfigParser.ConfigParser()   
+        #使用ConfigParser操作文件，创建对象
+
+    def cfg_load(self):
+        self.cfg.read(self.logfile)      
+
+    def cfg_dump(self):
+        se_list = self.cfg.sections()    #通过section把文件显示出来
+        print &quot;===============&gt;&quot;
+        for se in se_list:
+            print se
+            print self.cfg.items(se)
+        print &quot;&lt;================&quot;
+
+    def delete_item(self,section,key):
+        #删除一个条目
+        self.cfg.remove_option(section,key)
+
+    def delete_section(self,section):
+        #删除一个section
+        self.cfg.remove_section(section)
+
+    def add_section(self,section):
+        self.cfg.add_section(section)
+
+    def set_item(self,section,key,value):
+        self.cfg.set(section,key,value)
+
+    def save(self):
+        #保存文件
+        fp = open(self.logfile,&apos;w&apos;)
+        self.cfg.write(fp)
+        fp.close()
+
+if __name__ == &apos;__main__&apos;:
+    info = student_info(&apos;1.txt&apos;)
+    info.cfg_load()
+    info.cfg_dump()
+    info.set_item(&apos;userinfo&apos;,&apos;pwd&apos;,&apos;abc&apos;)
+    info.cfg_dump()
+    info.add_section(&apos;login&apos;)
+    info.set_item(&apos;login&apos;,&apos;2017-0726&apos;,&apos;20&apos;)
+    info.cfg_dump()
+    info.save()
+</code></pre><p>运行结果</p>
+<pre><code>root@Ubuntu:~/show_me_code/XTeach/file# python file.py 
+===============&gt;
+userinfo
+[(&apos;name&apos;, &apos;mulibo&apos;), (&apos;pwd&apos;, &apos;123456&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+&lt;================
+===============&gt;
+userinfo
+[(&apos;name&apos;, &apos;mulibo&apos;), (&apos;pwd&apos;, &apos;abc&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+&lt;================
+===============&gt;
+userinfo
+[(&apos;name&apos;, &apos;mulibo&apos;), (&apos;pwd&apos;, &apos;abc&apos;)]
+study
+[(&apos;python_base&apos;, &apos;15&apos;), (&apos;linux_base&apos;, &apos;15&apos;)]
+login
+[(&apos;2017-0726&apos;, &apos;20&apos;)]
+&lt;================
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/19/Python错误异常处理/" rel="next" title="Python 异常处理">
+                <i class="fa fa-chevron-left"></i> Python 异常处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/31/Flask_movie/" rel="prev" title="Flask 构建微电影">
+                Flask 构建微电影 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

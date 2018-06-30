@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python类学习。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 类">
+<meta property="og:url" content="http://yoursite.com/2017/09/19/python_class/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Python类学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-29/98230404.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-30/24835246.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-9-18/75762696.jpg">
+<meta property="og:updated_time" content="2018-05-25T02:22:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 类">
+<meta name="twitter:description" content="Python类学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-29/98230404.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/19/python_class/"/>
+
+
+
+
+
+  <title>Python 类 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/19/python_class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-19T13:20:46+08:00">
+                2017-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Python</code>类学习。</p>
+<a id="more"></a>
+<h4 id="Python面向对象"><a href="#Python面向对象" class="headerlink" title="Python面向对象"></a>Python面向对象</h4><h5 id="面向对象是一种抽象"><a href="#面向对象是一种抽象" class="headerlink" title="面向对象是一种抽象"></a>面向对象是一种抽象</h5><p>类、对象(个体)</p>
+<p>属性、方法</p>
+<p>封装、继承、多态</p>
+<h5 id="用python定义类"><a href="#用python定义类" class="headerlink" title="用python定义类"></a>用python定义类</h5><p><code>def __init__</code>   构造函数</p>
+<p><code>dir()</code>返回对象属性</p>
+<p><code>type()</code>获取对象类型</p>
+<h5 id="老式类和新式类-继承Object"><a href="#老式类和新式类-继承Object" class="headerlink" title="老式类和新式类(继承Object)"></a>老式类和新式类(继承Object)</h5><pre><code>class OldStyle:
+    def __init__(self,name,description):
+        self.name = name
+        self.description = description
+
+class NewStyle(object):
+    def __init__(self,name,description):
+        self.name = name
+        self.description = description
+
+if __name__ == &apos;__main__&apos;:
+    old = OldStyle(&apos;old&apos;,&apos;Old style class&apos;)
+    print old
+    print type(old)
+    print dir(old)
+    print &apos;---------------------------------------------------&apos;
+    new = NewStyle(&apos;new&apos;,&apos;New style class&apos;)
+    print new
+    print type(new)
+    print dir(new)
+
+
+    运行结果
+
+    &lt;__main__.OldStyle instance at 0x000000000281F988&gt;
+    &lt;type &apos;instance&apos;&gt;
+    [&apos;__doc__&apos;, &apos;__init__&apos;, &apos;__module__&apos;, &apos;description&apos;, &apos;name&apos;]
+    ---------------------------------------------------
+    &lt;__main__.NewStyle object at 0x000000000281ACC0&gt;
+    &lt;class &apos;__main__.NewStyle&apos;&gt;
+    [&apos;__class__&apos;, &apos;__delattr__&apos;, &apos;__dict__&apos;, &apos;__doc__&apos;, &apos;__format__&apos;, &apos;__getattribute__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__module__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;__weakref__&apos;, &apos;description&apos;, &apos;name&apos;]
+</code></pre><h5 id="定义类的属性"><a href="#定义类的属性" class="headerlink" title="定义类的属性"></a>定义类的属性</h5><p>直接在类里定义</p>
+<pre><code>class Programer(object):
+    sex = &apos;male&apos;
+</code></pre><p>在构造函数里定义</p>
+<p>每个对象中属性的值可以不一样。。。</p>
+<pre><code>class Programer(object):
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+</code></pre><p>python没提供私有属性的功能</p>
+<pre><code>class Programer(object):
+    def __init__(self,name,age):
+        self.name = name     #公有属性
+        self._age = age    #私有属性
+        self.__weight = weight  #实现部分私有属性
+</code></pre><p>一个实例</p>
+<pre><code>class Programer(object):
+    hobby = &apos;Play Computer&apos;
+
+    def __init__(self,name,age,weight):
+        #三个属性在构造函数里面定义的
+        self.name = name
+        self._age = age
+        self.__weight = weight
+
+    #定义一个方法，获取__weight属性
+    def get_weight(self):
+        return self.__weight
+
+if __name__ == &apos;__main__&apos;:
+    programer = Programer(&apos;mlb504&apos;,25,60)      #实例化
+    print dir(programer)           #所有属性打印一下
+    print programer.__dict__        #从构造函数里面获得的属性
+    print programer.get_weight()      #调用get_weight()
+    print programer._Programer__weight     #访问其私有属性
+
+    运行结果，从结果的第二行可以看出它的私有属性  _Programer__weight
+    [&apos;_Programer__weight&apos;, &apos;__class__&apos;, &apos;__delattr__&apos;, &apos;__dict__&apos;, &apos;__doc__&apos;, &apos;__format__&apos;, &apos;__getattribute__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__module__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;__weakref__&apos;, &apos;_age&apos;, &apos;get_weight&apos;, &apos;hobby&apos;, &apos;name&apos;]
+
+    {&apos;_age&apos;: 25, &apos;_Programer__weight&apos;: 60, &apos;name&apos;: &apos;mlb504&apos;}
+    60
+    60
+</code></pre><h5 id="定义类的方法"><a href="#定义类的方法" class="headerlink" title="定义类的方法"></a>定义类的方法</h5><p>函数和方法</p>
+<p>函数是直接用函数名调用的</p>
+<p>方法是类的一部分</p>
+<p>类的方法也是类的属性</p>
+<pre><code>&gt;&gt;&gt; class Test(object):
+...     def test(self):
+...             pass
+... 
+&gt;&gt;&gt; a = Test()
+&gt;&gt;&gt; a.test
+&lt;bound method Test.test of &lt;__main__.Test object at 0xb710bd4c&gt;&gt;
+&gt;&gt;&gt; a.test = &apos;123&apos;
+&gt;&gt;&gt; a.test 
+&apos;123&apos;
+
+
+
+@classmethod 调用的时候用类名，而不是某个对象
+
+@property 像访问属性一样调用方法，不用加括号
+</code></pre><p>定义类的方法，通过三种方式进行定义的。。</p>
+<pre><code>class Programer(object):
+    hobby = &apos;Play Computer&apos;
+
+    def __init__(self,name,age,weight):
+        #三个属性在构造函数里面定义的
+        self.name = name
+        self._age = age
+        self.__weight = weight
+
+    @classmethod      #@classmethod 调用的时候用类名，而不是某个对象
+    def get_hobby(cls):
+        return cls.hobby
+
+    @property        #@property 像访问属性一样调用方法，不用加括号
+    def get_weight(self):
+        return self.__weight
+
+    def self_introduction(self):
+        print &apos;My Name is %s \nI am %s years old\n&apos; % (self.name,self._age)
+
+if __name__ == &apos;__main__&apos;:
+    programer = Programer(&apos;mlb504&apos;,25,60)
+    print dir(programer)
+    print Programer.get_hobby()
+    print programer.get_weight      #访问其中的方法就像访问属性一样
+    programer.self_introduction()
+
+    运行结果。。。。
+
+    [&apos;_Programer__weight&apos;, &apos;__class__&apos;, &apos;__delattr__&apos;, &apos;__dict__&apos;, &apos;__doc__&apos;, &apos;__format__&apos;, &apos;__getattribute__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__module__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;__weakref__&apos;, &apos;_age&apos;, &apos;get_hobby&apos;, &apos;get_weight&apos;, &apos;hobby&apos;, &apos;name&apos;, &apos;self_introduction&apos;]
+    Play Computer
+    60
+    My Name is mlb504 
+    I am 25 years old
+</code></pre><h5 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h5><p>继承的子类</p>
+<ul>
+<li>会继承父类的属性和方法</li>
+<li>也可以自己定义，覆盖父类的属性</li>
+</ul>
+<p>用<code>super()</code>调用父类的方法</p>
+<pre><code>class A(object):
+    def method(self,arg):
+        pass
+
+class B(A):
+    def method(self.arg):
+        super(B,self).method(arg)
+</code></pre><p>用类名调用父类的方法（没能很好的体现父类的继承。。）</p>
+<pre><code>class A(object):
+    def method(self,arg):
+        pass
+
+class B(A):
+    def method(self,arg):
+        A.method(arg)
+</code></pre><p>子类的类型判断</p>
+<ul>
+<li>isinstance 判断父类</li>
+<li>issubclass  判断子类</li>
+</ul>
+<p>一个继承的实例</p>
+<pre><code>class Programer(object):
+    hobby = &apos;Play Computer&apos;
+
+    def __init__(self,name,age,weight):
+        #三个属性在构造函数里面定义的
+        self.name = name
+        self._age = age
+        self.__weight = weight
+
+    @classmethod
+    def get_hobby(cls):
+        return cls.hobby
+
+    @property 
+    def get_weight(self):
+        return self.__weight
+
+    def self_introduction(self):
+        print &apos;My Name is %s \nI am %s years old\n&apos; % (self.name,self._age)
+
+
+class BackendProgramer(Programer):       #继承Programer
+    def __init__(self,name,age,weight,language):
+        super(BackendProgramer,self).__init__(name,age,weight)
+        self.language = language
+
+
+if __name__ == &apos;__main__&apos;:
+    programer = BackendProgramer(&apos;mlb504&apos;,25,60,&apos;python&apos;)
+    print dir(programer)
+    print programer.__dict__
+    print type(programer)
+    print isinstance(programer,Programer)    #属于它的父类
+</code></pre><h5 id="类的多态"><a href="#类的多态" class="headerlink" title="类的多态"></a>类的多态</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-29/98230404.jpg" alt=""></p>
+<p>多态的要素</p>
+<ul>
+<li>继承</li>
+<li><p>方法重写</p>
+<pre><code>class Programer(object):
+    hobby = &apos;Play Computer&apos;
+
+    def __init__(self,name,age,weight):
+        #三个属性在构造函数里面定义的
+        self.name = name
+        self._age = age
+        self.__weight = weight
+
+    @classmethod
+    def get_hobby(cls):
+        return cls.hobby
+
+    @property 
+    def get_weight(self):
+        return self.__weight
+
+    def self_introduction(self):
+        print &apos;My Name is %s \nI am %s years old\n&apos; % (self.name,self._age)
+</code></pre></li>
+</ul>
+<pre><code>class BackendProgramer(Programer):       #继承Programer
+    def __init__(self,name,age,weight,language):
+        super(BackendProgramer,self).__init__(name,age,weight)
+        self.language = language
+
+
+    def self_introduction(self):
+        print &apos;My name is %s\nMy favorite language is %s&apos; % (self.name,self.language)
+
+
+def introduce(programer):
+    if isinstance(programer,Programer):   #是否是父对象
+        programer.self_introduction()
+
+if __name__ == &apos;__main__&apos;:
+    programer = Programer(&apos;cly&apos;,24,55)
+    backend_programer = BackendProgramer(&apos;mlb504&apos;,25,60,&apos;python&apos;)
+    introduce(programer)
+    introduce(backend_programer)
+
+
+
+My Name is cly 
+I am 24 years old
+
+My name is mlb504
+My favorite language is python
+</code></pre><h5 id="Python-Magic-Method"><a href="#Python-Magic-Method" class="headerlink" title="Python Magic Method"></a>Python Magic Method</h5><p>Magic Method给类添加魔法。。</p>
+<p>比如方法名的前后有两个下划线<code>def __init__(self):</code></p>
+<h5 id="Python面向对象-对象的实例化"><a href="#Python面向对象-对象的实例化" class="headerlink" title="Python面向对象- 对象的实例化"></a>Python面向对象- 对象的实例化</h5><p>对象的创建和实例化</p>
+<p>常用的类定义</p>
+<pre><code>class Person(object):
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+
+person = Person(&apos;mlb&apos;,25)
+</code></pre><p>对象实例化的过程</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-30/24835246.jpg" alt=""></p>
+<p>回收对象</p>
+<p><strong>del</strong>()、</p>
+<p>首先调用new方法，用来返回一个Programer对象，然后将对象交给<strong>init</strong>进行设置，，</p>
+<pre><code>class Programer(object):
+
+    def __new__(cls,*args,**kwargs):
+        print &apos;call __new__ method&apos;
+        print args
+        return super(Programer,cls).__new__(cls,*args,**kwargs)
+
+    def __init__(self,name,age):
+        print &apos;call __init__ method&apos;
+        self.name = name
+        self.age = age
+
+if __name__ == &apos;__main__&apos;:
+    programer = Programer(&apos;mlb&apos;,25)
+    print programer.__dict__
+
+    运行结果
+
+    call __new__ method
+    (&apos;mlb&apos;, 25)
+    call __init__ method
+    {&apos;age&apos;: 25, &apos;name&apos;: &apos;mlb&apos;}
+</code></pre><h5 id="Python面向对象-类与运算符"><a href="#Python面向对象-类与运算符" class="headerlink" title="Python面向对象- 类与运算符"></a>Python面向对象- 类与运算符</h5><p>比较运算符</p>
+<pre><code>__cmp__(self,other)
+__ep__(self,other)
+__lt__(self,other)
+__gt__(self,other)
+</code></pre><p>数字运算符</p>
+<pre><code>__add__(self,other)
+__sub__(self,other)
+__mul__(self.other)
+__div__(self,other)
+</code></pre><p>逻辑运算符</p>
+<pre><code>__or__(self,other)
+__and__(self,other)
+
+一个实例
+
+class Programer(object):
+
+    def __init__(self,name,age):
+        self.name = name
+        if isinstance(age,int):
+            self.age = age
+        else:
+            raise Exception(&apos;age must be int&apos;)
+
+    def __eq__(self,other):
+        if isinstance(other,Programer):
+            if self.age == other.age:
+                return True
+            else:
+                return False
+        else:
+            raise Exception(&apos;The type of object must be Programer&apos;)
+
+    def __add__(self,other):
+        if isinstance(other,Programer):
+            return self.age + other.age
+        else:
+            raise Exception(&apos;The type of object must be Programer&apos;)
+
+
+if __name__ == &apos;__main__&apos;:
+    p1 = Programer(&apos;mlb&apos;,24)
+    p2 = Programer(&apos;hcx&apos;,22)
+    print p1 == p2
+    print p1 + p2
+
+运行结果
+
+False
+46
+</code></pre><h5 id="Python面向对象-类的展现"><a href="#Python面向对象-类的展现" class="headerlink" title="Python面向对象- 类的展现"></a>Python面向对象- 类的展现</h5><p>转换为字符串</p>
+<pre><code>__str__、__repr__、__unicode__
+</code></pre><p>展现对象属性</p>
+<pre><code>__dir__
+</code></pre><p>python的大多数内建函数由魔术方法支持的。。。</p>
+<pre><code>class Programer(object):
+
+    def __init__(self,name,age):
+        self.name = name
+        if isinstance(age,int):
+            self.age = age
+        else:
+            raise Exception(&apos;age must be int&apos;)
+
+    def __str__(self):
+        return &apos;%s is %s years old&apos; %(self.name,self.age)
+
+    def __dir__(self):
+        return self.__dict__.keys()
+
+
+if __name__ == &apos;__main__&apos;:
+    p = Programer(&apos;mlb&apos;,25)
+    print p
+    print dir(p)
+
+
+mlb is 25 years old
+[&apos;age&apos;, &apos;name&apos;]
+</code></pre><h5 id="Python面向对象-类的属性"><a href="#Python面向对象-类的属性" class="headerlink" title="Python面向对象- 类的属性"></a>Python面向对象- 类的属性</h5><h5 id="类和实例"><a href="#类和实例" class="headerlink" title="类和实例"></a>类和实例</h5><p>数据的封装</p>
+<h5 id="类的学习"><a href="#类的学习" class="headerlink" title="类的学习"></a>类的学习</h5><p><a href="https://zhuanlan.zhihu.com/p/26617823" target="_blank" rel="noopener">Python的类和对象 入门级讲解（简单粗暴）</a></p>
+<pre><code>a = 2
+</code></pre><p>a作为标签，挂在对象(数值2)上。。</p>
+<p>对象 2  object</p>
+<p>类     class</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-9-18/75762696.jpg" alt=""></p>
+<p><strong>self 参数</strong></p>
+<p><a href="https://www.youtube.com/watch?v=BhBeVfrMh_g" target="_blank" rel="noopener">Pythons self parameter</a></p>
+<pre><code>class DemoClass:
+    def demo_method(self):
+        print(&quot;test&quot;)
+        print(id(self))
+
+my_object = DemoClass()
+print(id(my_object))
+my_object.demo_method()
+</code></pre><p>结果</p>
+<pre><code>40086088
+test
+40086088
+</code></pre><p>定义一个类，实例化，并调用其中的方法。</p>
+<pre><code>class DemoClass:
+    def demo_method():
+        print(&quot;test&quot;)
+my_object = DemoClass()
+my_object.demo_method()
+</code></pre><p>出现错误。<code>my_object.demo_method()</code>不需要参数，但是给了1个。</p>
+<pre><code> my_object.demo_method()
+TypeError: demo_method() takes no arguments (1 given)
+</code></pre><p><strong>self代表类的实例，而非类</strong></p>
+<pre><code>class DemoClass:
+    def demo_method(self):
+       print(self)
+       print(self.__class__)
+
+t = DemoClass()
+t.demo_method()
+</code></pre><p>结果</p>
+<pre><code>&lt;__main__.DemoClass instance at 0x00000000024EAA48&gt;
+__main__.DemoClass
+</code></pre><p>其实也可以不必写成<code>self</code>，改为其他字符也可以。</p>
+<pre><code>class DemoClass:
+    def demo_method(this):
+       print(this)
+       print(this.__class__)
+
+t = DemoClass()
+t.demo_method()
+</code></pre><p>替换为<code>this</code>，一样可以运行成功。</p>
+<p><strong>self不写的结果</strong></p>
+<p>定义一个类，实例化，并调用其中的方法。</p>
+<pre><code>class DemoClass:
+    def demo_method():
+        print(&quot;test&quot;)
+my_object = DemoClass()
+my_object.demo_method()
+</code></pre><p>出现错误。<code>my_object.demo_method()</code>不需要参数，但是给了1个。</p>
+<pre><code> my_object.demo_method()
+TypeError: demo_method() takes no arguments (1 given)
+</code></pre><p>没有定义参数但是却传入了一个参数。</p>
+<p>类的实例以及调用方法的两种形式。</p>
+<pre><code>class DemoClass:
+    def demo_method(self):
+       print(self)
+
+
+t = DemoClass()
+t.demo_method()
+#上面两个和下面的性质一致的
+DemoClass.demo_method(t)
+</code></pre><p><strong>self类的实例</strong></p>
+<pre><code>Class A:
+    def methodA(self,arg1,arg2):
+        #do something
+</code></pre><p>and <code>ObjectA</code> 是类的一个实例。</p>
+<pre><code>ObjectA = A()
+ObjectA.methodA(arg1,arg2)
+
+== 等价于
+ClassA.methodA(ObjectA,arg1,arg2)
+</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cnblogs.com/jessonluo/p/4717140.html" target="_blank" rel="noopener">Python中self的含义</a></p>
+<p><a href="https://stackoverflow.com/questions/2709821/what-is-the-purpose-of-self?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa" target="_blank" rel="noopener">What is the purpose of self?</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/11/PHP反序列化/" rel="next" title="PHP反序列化">
+                <i class="fa fa-chevron-left"></i> PHP反序列化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/21/Tomcat/" rel="prev" title="Tomcat CVE-2017-12615 远程代码执行漏洞">
+                Tomcat CVE-2017-12615 远程代码执行漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python面向对象"><span class="nav-number">1.</span> <span class="nav-text">Python面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#面向对象是一种抽象"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象是一种抽象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用python定义类"><span class="nav-number">1.2.</span> <span class="nav-text">用python定义类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#老式类和新式类-继承Object"><span class="nav-number">1.3.</span> <span class="nav-text">老式类和新式类(继承Object)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义类的属性"><span class="nav-number">1.4.</span> <span class="nav-text">定义类的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义类的方法"><span class="nav-number">1.5.</span> <span class="nav-text">定义类的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类的继承"><span class="nav-number">1.6.</span> <span class="nav-text">类的继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类的多态"><span class="nav-number">1.7.</span> <span class="nav-text">类的多态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-Magic-Method"><span class="nav-number">1.8.</span> <span class="nav-text">Python Magic Method</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python面向对象-对象的实例化"><span class="nav-number">1.9.</span> <span class="nav-text">Python面向对象- 对象的实例化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python面向对象-类与运算符"><span class="nav-number">1.10.</span> <span class="nav-text">Python面向对象- 类与运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python面向对象-类的展现"><span class="nav-number">1.11.</span> <span class="nav-text">Python面向对象- 类的展现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python面向对象-类的属性"><span class="nav-number">1.12.</span> <span class="nav-text">Python面向对象- 类的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类和实例"><span class="nav-number">1.13.</span> <span class="nav-text">类和实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类的学习"><span class="nav-number">1.14.</span> <span class="nav-text">类的学习</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

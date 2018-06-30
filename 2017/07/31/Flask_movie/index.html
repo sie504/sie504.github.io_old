@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flask," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flask微电影网站学习过程">
+<meta name="keywords" content="Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask 构建微电影">
+<meta property="og:url" content="http://yoursite.com/2017/07/31/Flask_movie/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Flask微电影网站学习过程">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-31/56279982.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-31/76205052.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-1/29004914.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-4/61839159.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-4/98881381.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-4/89167512.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-4/27828109.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/94122699.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/93483568.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/54990449.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/97985107.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/39177381.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/66157786.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/63362936.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-7/70002630.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-11/46920605.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-8-14/61408317.jpg">
+<meta property="og:updated_time" content="2018-02-05T09:33:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask 构建微电影">
+<meta name="twitter:description" content="Flask微电影网站学习过程">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-7-31/56279982.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/31/Flask_movie/"/>
+
+
+
+
+
+  <title>Flask 构建微电影 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/Flask_movie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flask 构建微电影</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-31T15:54:24+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Web开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Flask</code>微电影网站学习过程</p>
+<a id="more"></a>
+<p>时间 2017/07/31</p>
+<p><a href="https://www.shiyanlou.com/courses/29" target="_blank" rel="noopener">Flask</a></p>
+<p><a href="http://flask.pocoo.org/" target="_blank" rel="noopener">官网</a></p>
+<p><a href="http://dormousehole.readthedocs.io/en/latest/" target="_blank" rel="noopener">中文</a></p>
+<p><a href="https://zhuanlan.zhihu.com/flask" target="_blank" rel="noopener">知乎专栏flask</a></p>
+<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>按照<a href="http://coding.imooc.com/class/124.html" target="_blank" rel="noopener">Python Flask 构建微电影视频网站</a>，一步步的来学习使用<code>Flask</code>编写一个简单的Web应用，记录一下学习的过程。</p>
+<p>断断续续算是做了下了，源码上传到<code>github</code>。<a href="https://github.com/sie504/A-movie-of-flask" target="_blank" rel="noopener">下载地址</a></p>
+<h5 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h5><ul>
+<li>virtualenv      </li>
+</ul>
+<p>安装virtualenv</p>
+<pre><code>apt-get install python-virtualenv  
+</code></pre><p>创建项目</p>
+<pre><code>root@Ubuntu:~# mkdir myproject
+root@Ubuntu:~# cd myproject/
+root@Ubuntu:~/myproject# virtualenv venv
+New python executable in venv/bin/python
+Installing setuptools, pip...done.
+</code></pre><p>激活相应环境</p>
+<pre><code>root@Ubuntu:~/myproject# . venv/bin/activate
+(venv)root@Ubuntu:~/myproject# 
+</code></pre><p>激活virtualenv中的flask</p>
+<pre><code>$ git clone https://github.com/shiyanlou/flask
+Initialized empty Git repository in ~/dev/flask/.git/
+$ cd flask
+$ virtualenv venv --distribute
+New python executable in venv/bin/python
+Installing distribute............done.
+$ . venv/bin/activate
+$ python setup.py develop
+...
+Finished processing dependencies for Flask
+</code></pre><h4 id="Flask运行及调试模式"><a href="#Flask运行及调试模式" class="headerlink" title="Flask运行及调试模式"></a>Flask运行及调试模式</h4><p>简单访问</p>
+<pre><code>1 from flask import Flask
+2 app = Flask(__name__)
+3 
+4 @app.route(&apos;/&apos;)
+5 def hello_world():
+6     return &apos;Hello world!&apos;
+7 
+8 if __name__ == &apos;__main__&apos;:
+9     app.run()
+</code></pre><p>访问</p>
+<pre><code>(venv)root@Ubuntu:~/myproject/flask# python hello.py 
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+127.0.0.1 - - [31/Jul/2017 16:22:04] &quot;GET / HTTP/1.1&quot; 200 -
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-31/56279982.jpg" alt=""></p>
+<p>这段代码的做了什么？</p>
+<ol>
+<li>首先导入了类Flask。这个类的实例化将会是我们WSGI应用。第一个参数是应用模块的名称。如果使用的是单一的模块，第一个参数应该使用<code>__name__</code>。因为如果它已单独应用启动或作为模块导入，名称将会不同。</li>
+<li>接着创建一个该类的实例，我们传递给它模块或包的名称，这样Flask才会知道去哪里寻找模版、静态文件等等。</li>
+<li>接着使用装饰器<code>route()</code>告诉Flask哪个URL才能触发我们的函数</li>
+<li>定义一个函数，该函数也是用来给待定函数生成URLs，并且返回我们想要显示在用户浏览器上的信息。</li>
+<li>最后用<code>run()</code>启动本地服务器来运行我们的应用。<code>if __name__ == &#39;__main__&#39;</code>确保服务器只会在该脚本被Python解析器直接执行的时候才会运行，而不是作为模块导入的时候。。</li>
+</ol>
+<ul>
+<li><p>外部可见服务器</p>
+<p>  需要修改 app.run(host=’0.0.0.0’)</p>
+</li>
+</ul>
+<ul>
+<li>调试模式</li>
+</ul>
+<p>run()方法十分适用启动一个本地开发服务器。。</p>
+<p>开启调试模式</p>
+<pre><code>app.debug = True
+app.run()
+</code></pre><p>或者</p>
+<pre><code>app.run(debug=True)
+</code></pre><h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p><code>route</code>装饰器是用于把一个函数绑定到一个URL上。类似与Django的urls的设置。。直接在一个文件里面了，路由和函数。。</p>
+<pre><code> 1 from flask import Flask
+ 2 app = Flask(__name__)
+ 3 
+ 4 @app.route(&apos;/&apos;)
+ 5 def hello_world():
+ 6     return &apos;Hello world!&apos;
+ 7 
+ 8 @app.route(&apos;/hello&apos;)
+ 9 def hello():
+10     return &apos;flask&apos;
+11 
+12 if __name__ == &apos;__main__&apos;:
+13     app.run(host=&apos;0.0.0.0&apos;)
+</code></pre><p>访问</p>
+<pre><code>http://192.168.145.226:5000/hello
+</code></pre><p>变量规则</p>
+<pre><code>为了给URL增加变量的部分，需要把一些特定的字段标记成`&lt;variable_name&gt;`。这些特定的字段作为参数传入到函数中。也可以指定转换器通过规则`&lt;converter:variable_name&gt;`将变量转换为特定的数据类型。
+
+  #! -*- coding:utf-8 -*-
+  2 from flask import Flask
+  3 app = Flask(__name__)
+
+ 13 @app.route(&apos;/user/&lt;username&gt;&apos;)
+ 14 def show_user_profile(username):
+ 15     #显示用户的名称
+ 16     return &apos;User %s&apos; % username
+ 17 
+ 18 @app.route(&apos;/post/&lt;int:post_id&gt;&apos;)
+ 19 def show_post(post_id):
+ 20     #显示提交整型的用户&quot;id&quot;的结果，注意&quot;int&quot;将输入的字符串转换为整型数据
+ 21     return &apos;Post %d&apos; % post_id
+ 22 if __name__ == &apos;__main__&apos;:
+ 23     app.run(host=&apos;0.0.0.0&apos;)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-7-31/76205052.jpg" alt=""></p>
+<ul>
+<li><p>唯一URLs 重定向行为 </p>
+<p>  当用户访问url时，后面最好不要写入/</p>
+</li>
+<li><p>构造URL</p>
+</li>
+</ul>
+<p>使用函数<code>url_for()</code>来针对一个特定的函数构造一个URL，它能够接受函数作为第一个参数，以及一些关键字参数，每一个攻击者参数对应与URL规则的变量部分。</p>
+<pre><code>&gt;&gt;&gt; from flask import Flask,url_for
+&gt;&gt;&gt; app = Flask(__name__)
+&gt;&gt;&gt; @app.route(&apos;/&apos;)
+... def index(): pass
+... 
+&gt;&gt;&gt; @app.route(&apos;/login&apos;)
+... def login(): pass
+... 
+&gt;&gt;&gt; @app.route(&apos;/user/&lt;username&gt;&apos;)
+... def profile(username): pass
+... 
+&gt;&gt;&gt; with app.test_request_context():
+...     print url_for(&apos;index&apos;)
+...     print url_for(&apos;login&apos;)
+...     print url_for(&apos;login&apos;,next=&apos;/&apos;)
+...     print url_for(&apos;profile&apos;,username=&apos;mlb&apos;)
+... 
+/
+/login
+/login?next=%2F
+/user/mlb
+</code></pre><ul>
+<li>HTTP方法</li>
+</ul>
+<p>默认情况下路由只会响应GET请求，但是能够通过给route()装饰器提供methods参数来改变。。</p>
+<h4 id="静态啊文件及渲染模块"><a href="#静态啊文件及渲染模块" class="headerlink" title="静态啊文件及渲染模块"></a>静态啊文件及渲染模块</h4><ul>
+<li>静态文件</li>
+</ul>
+<p>动态的web应用需要静态文件，比如html、css、javascript文件。在包中或模块旁边创建一个名为static的文件夹，在应用中使用<code>/static</code>即可访问。</p>
+<p>给静态文件生成URL，使用特殊的static端点名：</p>
+<pre><code>url_for(&apos;static&apos;,filename=&apos;style.css&apos;)
+</code></pre><p>这个文件应该存储在文件系统的<code>static/style.css</code></p>
+<ul>
+<li>渲染模块</li>
+</ul>
+<p>可以使用方法<code>render_template()</code>来渲染模版，所有需要做的就是提供模版的名称以及你想要作为关键字参数传入模版的变量。</p>
+<pre><code>#! -*- coding:utf-8 -*-
+from flask import Flask
+from flask import render_template
+
+app = Flask(__name__)
+
+@app.route(&apos;/hello/&apos;)
+@app.route(&apos;/hello/&lt;name&gt;&apos;)
+
+def hello(name=None):
+    return render_template(&apos;hello.html&apos;,name=name)
+
+if __name__ == &apos;__main__&apos;:
+    app.run(host=&apos;0.0.0.0&apos;)
+</code></pre><p>vim templates/hello.html</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;title&gt;Hello from Flask&lt;/title&gt;
+{% if name %}
+		    <h1>Hello {{ name }}!</h1>
+		{% else %}
+		    <h1>Hello World<h1>
+		{% endif %}
+</h1></h1></code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-1/29004914.jpg" alt=""></p>
+<p>静态文件放在 static目录中，模板文件放在templates目录下。</p>
+<h4 id="重定向、响应、会话和扩展"><a href="#重定向、响应、会话和扩展" class="headerlink" title="重定向、响应、会话和扩展"></a>重定向、响应、会话和扩展</h4><h4 id="Flask-项目1"><a href="#Flask-项目1" class="headerlink" title="Flask 项目1"></a>Flask 项目1</h4><p>0803</p>
+<p><code>render_template</code>引用html，传递相应的参数到前端。。。</p>
+<p>templates  html脚本，同样一些简单的逻辑。。</p>
+<p>static 静态文件</p>
+<p>模版的一些继承，，</p>
+<pre><code>{% extends "base.html" %}
+{% block content %}
+	{% endblock %}
+</code></pre><p>配置文件 <code>config.py</code></p>
+<pre><code>CSRF_ENABLED = True 
+SECRET_KEY = &apos;...&apos;  #配置CSRF激活的时候使用，一个加密的令牌
+</code></pre><p>表单。。</p>
+<p>Form的子类。。把表单的域定义成类的变量。其中的意思就是把表单中一些变量设置为类中的变量，比如用户名，密码，邮箱，</p>
+<p>从wtforms中导入字段类型，比如TextField、PasswordField。。</p>
+<pre><code>form.hidden_tag()模板参数将被替换一个隐藏字段，用来实现在配置中激活的CSRF保护
+</code></pre><p>在html模版中，调用在表单类中的字段。。</p>
+<p>表单、模版，通过视图将表单的数据传递到模版，即前端。。。</p>
+<p>数据库</p>
+<p>同样是在<code>config.py</code>中进行设置。。</p>
+<p>数据库模型设计</p>
+<p>存储在数据库中的数据以类的集合显示。。ORM层做的是将这些类创建的对象映射到适合的数据库表的行。。</p>
+<p>类，继承<code>db.Model</code></p>
+<p>0804</p>
+<h4 id="Flask-构建微电影视频网站"><a href="#Flask-构建微电影视频网站" class="headerlink" title="Flask 构建微电影视频网站"></a>Flask 构建微电影视频网站</h4><ul>
+<li>学会使用整型、浮点型、路径型、字符串型正则表达式路由转化器</li>
+<li>学会时候post、get请求、上传文件、cookie获取与响应，404处理</li>
+<li>学会使用模版自动转义、定义过滤器、定义全局上下文处理器、Jinja2语法、包含、继承、定义宏</li>
+<li>使用flask-wtf定义表单模型、字段类型、字段验证、视图处理表单、模版使用表单</li>
+<li>使用flask-sqlachemy定义数据库模型、添加数据。修改数据、查询数据、删除数据、数据库事件、数据迁移</li>
+<li>使用蓝图优化项目结构，实现前台和后台业务逻辑</li>
+<li>flask的部署方法</li>
+<li></li>
+</ul>
+<h5 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-4/61839159.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-4/98881381.jpg" alt=""></p>
+<p>目录结构分析</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-4/89167512.jpg" alt=""></p>
+<p>蓝图构建项目目录</p>
+<p>flask-sqlalchemy </p>
+<h5 id="3章：数据库的设置"><a href="#3章：数据库的设置" class="headerlink" title="3章：数据库的设置"></a>3章：数据库的设置</h5><p>数据库的日志</p>
+<p>继承db.Model</p>
+<p>都是分析功能，设置数据库。。外键的关联。。。</p>
+<p>用户表，日志表，标签、电影、预告、评论、电影收藏、权限以及角色数据模型设计。。</p>
+<p>定义角色数据模型设置</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-4/27828109.jpg" alt=""></p>
+<pre><code>&lt;hr/&gt;
+</code></pre><p>####环境的配置</p>
+<p>虚拟化环境的安装</p>
+<pre><code>C:\Users\Administrator&gt;python3 -m pip install virtualenv
+</code></pre><p>创建虚拟环境</p>
+<pre><code>C:\Users\Administrator&gt;python3 -m virtualenv test
+</code></pre><p>激活虚拟环境</p>
+<pre><code>C:\Users\Administrator&gt;cd C:\Users\Administrator\test\Scripts
+
+C:\Users\Administrator\test\Scripts&gt;activate.bat
+
+(test) C:\Users\Administrator\test\Scripts&gt;
+</code></pre><p>虚拟环境使用</p>
+<pre><code>创建虚拟环境 virtualenv venv
+激活虚拟环境 source venv/bin/activate
+退出虚拟环境    deactivate
+</code></pre><p>flask的安装</p>
+<pre><code>安装前检测 pip freeze
+安装flask pip install flask
+</code></pre><p>创建flask项目</p>
+<p>5-2 视频的重音</p>
+<p>20170807</p>
+<h4 id="前后台项目目录分析"><a href="#前后台项目目录分析" class="headerlink" title="前后台项目目录分析"></a>前后台项目目录分析</h4><h5 id="前台-home"><a href="#前台-home" class="headerlink" title="前台(home)"></a>前台(home)</h5><ul>
+<li>数据模型: models.py</li>
+<li>表单处理： home/forms.py</li>
+<li>模版目录 templates/home</li>
+<li>静态目录 static</li>
+</ul>
+<h5 id="后台-admin"><a href="#后台-admin" class="headerlink" title="后台(admin)"></a>后台(admin)</h5><ul>
+<li>数据模型: models.py</li>
+<li>表单处理： home/forms.py</li>
+<li>模版目录 templates/home</li>
+<li>静态目录 static</li>
+</ul>
+<p>项目文件的分布</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/94122699.jpg" alt=""></p>
+<p>把所有的目录建立在了一个app下面，里面包括前后端的各自目录，以及静态文件的划分。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/93483568.jpg" alt=""></p>
+<h4 id="蓝图构建项目目录"><a href="#蓝图构建项目目录" class="headerlink" title="蓝图构建项目目录"></a><a href="http://docs.jinkan.org/docs/flask/blueprints.html" target="_blank" rel="noopener">蓝图构建项目目录</a></h4><p>蓝图：一个应用中或跨应用制作应用组件和支持通用的模式</p>
+<p>蓝图作用：将不同的功能模块化、构建大型应用、优化项目目录、增强可读性。易于维护。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/54990449.jpg" alt=""></p>
+<p>便于管理不同功能模块，以及和路由的对应。。</p>
+<p> 首先是定义</p>
+<pre><code>`/admin/__init__.py`
+
+    from flask import Blueprint
+
+    admin  = Blueprint(&quot;admin&quot;,__name__)
+
+    import app.admin.views
+</code></pre><p>然后注册</p>
+<p>在<code>app/__init__.py</code>中注册</p>
+<pre><code>from app.admin import admin  as admin_blueprint
+app.register_blueprint(admin_blueprint,url_prefix=&quot;/admin/&quot;)
+</code></pre><p>调用</p>
+<p>在 <code>admin/views.py</code> 中写函数</p>
+<pre><code>from . import admin
+
+@admin.route(&quot;/&quot;)
+def index():
+    return &quot;&lt;h1 style=&apos;color:red&apos;&gt;This is admin&lt;/h1&gt;&quot;
+</code></pre><p>在入口文件中启动</p>
+<p><code>manage.py</code></p>
+<pre><code>from app import app
+
+if __name__ == &apos;__main__&apos;:
+    app.run()
+</code></pre><h4 id="数据库-SQLAlchemy"><a href="#数据库-SQLAlchemy" class="headerlink" title="数据库 SQLAlchemy"></a><a href="http://www.pythondoc.com/flask-sqlalchemy/" target="_blank" rel="noopener">数据库 SQLAlchemy</a></h4><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/97985107.jpg" alt=""></p>
+<p>安装数据库连接依赖包、定义mysql数据库连接</p>
+<pre><code>`__tablename__` 定义数据库的名称
+
+
+pip install flask-sqlalchemy    安装模块
+</code></pre><p>打开<code>models.py</code></p>
+<pre><code>class User(db.Model):
+    __tablename__ = &quot;user&quot;
+    id = db.Column(db.Integer,primary_key=True) #编号
+    name = db.Column(db.String(100),unique=True) #昵称
+    pwd = db.Column(db.String(100)) #密码
+    email = db.Column(db.String(100),unique=True) #邮箱
+    phone = db.Column(db.String(11),unique=True) #手机
+    info = db.Column(db.Text) #个性简介
+    face = db.Column(db.String(255),unique=True,default=datetime.utcnow)
+    uuid = db.Column(db.String(255),unique=True) #唯一标志符
+
+    def __repr__(self):
+        return &quot;&lt;User %r&gt;&quot; % self.name
+</code></pre><p>外键关系的关联。。。</p>
+<p>首先在一个数据库中。。</p>
+<p>关联的一个用户</p>
+<pre><code>user_id = db.Column(db.Integer, db.ForeignKey(&apos;user.id&apos;))  # 所属用户
+</code></pre><p>在该表中进行设计</p>
+<pre><code>moviecols = db.relationship(&quot;Moviecol&quot;, backref=&apos;user&apos;)  # 电影收藏外联关系       Moviecol是和和其关联的表
+</code></pre><h4 id="前台页面"><a href="#前台页面" class="headerlink" title="前台页面"></a>前台页面</h4><p>在前台引入静态文件以及路由等其他资源。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/39177381.jpg" alt=""></p>
+<p>静态文件引入 </p>
+<pre><code>`{{ url_for('static',filename='文件路径')}}`
+</code></pre><h5 id="会员登录页面的搭建"><a href="#会员登录页面的搭建" class="headerlink" title="会员登录页面的搭建"></a>会员登录页面的搭建</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/66157786.jpg" alt=""></p>
+<h5 id="会员注册页面的搭建"><a href="#会员注册页面的搭建" class="headerlink" title="会员注册页面的搭建"></a>会员注册页面的搭建</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/63362936.jpg" alt=""></p>
+<h4 id="会员中心页面搭建"><a href="#会员中心页面搭建" class="headerlink" title="会员中心页面搭建"></a>会员中心页面搭建</h4><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-7/70002630.jpg" alt=""></p>
+<pre><code>{% include "home/menu.html" %}  引用包括其他的html
+</code></pre><p>前端里面的 active 激活。。。  用到了javascript的一些代码，</p>
+<h4 id="电影列表页面搭建"><a href="#电影列表页面搭建" class="headerlink" title="电影列表页面搭建"></a>电影列表页面搭建</h4><h4 id="搜索布局"><a href="#搜索布局" class="headerlink" title="搜索布局"></a>搜索布局</h4><h4 id="电影详情页面"><a href="#电影详情页面" class="headerlink" title="电影详情页面"></a>电影详情页面</h4><h4 id="后台页面"><a href="#后台页面" class="headerlink" title="后台页面"></a>后台页面</h4><p>设计路由的时候</p>
+<p>0811</p>
+<p>激活的操作</p>
+<p>点击某个链接的激活状态。。</p>
+<ul>
+<li>标签管理页面搭建</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-11/46920605.jpg" alt=""></p>
+<p>一段script代码，显示激活状态</p>
+<pre><code>&lt;script&gt;
+    $(document).ready(function () {
+        $(&quot;#g-8&quot;).addClass(&quot;active&quot;);
+        $(&quot;#g-8-2&quot;).addClass(&quot;active&quot;);
+    })
+&lt;/script&gt;
+</code></pre><p>以上只是对页面的一个展示，让html和后台或者前台的结合，接下来要进入正式的学习了，业务的真正处理。。<br>20170811</p>
+<p>20170814</p>
+<p>如何将写的代码生成数据库表。。</p>
+<p>在最后加入</p>
+<pre><code>if __name__ ==&quot;__main__&quot;:
+    db.create_all()
+</code></pre><p>使用pymysql模块。。。</p>
+<p>执行        python3 models.py 就会在数据库中生成对应的表</p>
+<p>密码生成 </p>
+<pre><code>from werkzeug.security import generate_password_hash
+</code></pre><p>和数据库的链接。。</p>
+<pre><code>import pymysql
+app.config[&quot;SQLALCHEMY_DATABASE_URI&quot;] = &quot;mysql+pymysql://root:@127.0.0.1:3306/movie&quot;
+
+if __name__ ==&quot;__main__&quot;:
+    db.create_all()
+</code></pre><ul>
+<li>错误页面的显示设置</li>
+</ul>
+<p>同样是一个html文件，需要在app的init里面设置。。。</p>
+<pre><code>@app.errorhandler(404)
+def page_not_found(error):
+    return render_template(&quot;home/404.html&quot;),404
+</code></pre><ul>
+<li>管理员登录</li>
+</ul>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-8-14/61408317.jpg" alt=""></p>
+<p>模型admin、表单LoginForm、请求方法 GET、POST、访问控制 无</p>
+<pre><code>http://127.0.0.1:5000/admin/login/
+</code></pre><p>验证的字段有那些，帐号和密码。。</p>
+<p>使用表单认证。。。</p>
+<ul>
+<li>表单认证 flask_wtf。。。这个需要学习</li>
+</ul>
+<p><a href="http://www.ttlsa.com/python/python-flask-wtf-and-wtforms/" target="_blank" rel="noopener">1</a></p>
+<p><a href="https://wtforms.readthedocs.io/en/latest/" target="_blank" rel="noopener">手册</a></p>
+<p>比如定义一个登录的表单。。其中的class 和html中的一致。。</p>
+<pre><code>from flask_wtf import FlaskForm
+from wtforms import StringField,PasswordField,SubmitField #表单类型
+from wtforms.validators import DataRequired  #验证字段
+
+class LoginForm(FlaskForm):      #定义表单类
+    &quot;&quot;&quot;管理员登录表单&quot;&quot;&quot;
+    account = StringField(
+        label=&quot;帐号&quot;,
+        validators=[
+            DataRequired(&quot;请输入帐号!&quot;)
+        ],
+        description=&quot;帐号&quot;,
+        render_kw={
+            &quot;class&quot;:&quot;form-control&quot;,
+            &quot;placeholder&quot;:&quot;请输入账号&quot;,
+            &quot;required&quot;:&quot;required&quot;
+        }
+
+    )
+    pwd = PasswordField(
+        label=&quot;密码&quot;,
+        validators=[
+            DataRequired(&quot;请输入密码!&quot;)
+        ],
+        render_kw={
+            &quot;class&quot;: &quot;form-control&quot;,
+            &quot;placeholder&quot;: &quot;请输入密码&quot;,
+            &quot;required&quot;: &quot;required&quot;
+        }
+    )
+    submit = SubmitField(
+        &apos;登录&apos;,
+        render_kw = {
+            &quot;class&quot;:&quot;btn btn-primary btn-block btn-flat&quot;,
+        }
+    )
+</code></pre><p>把表单处理好之后，需要在view里面进行设置、、</p>
+<p>首先导入，实例化，和html的相结合。。</p>
+<p>首先html中的input可以去掉。。用什么替换。。</p>
+<pre><code>{{ form.account }}
+</code></pre><p>访问表单可以自动生成</p>
+<pre><code>&lt;input class=&quot;form-control&quot; id=&quot;account&quot; name=&quot;account&quot; placeholder=&quot;请输入账号&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+</code></pre><p>在表单下添加</p>
+<pre><code>{{ form.csrf_token }}
+</code></pre><p>在前端访问时候可以看到 csrf的保护</p>
+<pre><code>&lt;input id=&quot;csrf_token&quot; name=&quot;csrf_token&quot; type=&quot;hidden&quot; value=&quot;IjM5Mjk5NmU4NWRkMDc1NWFlMzhkYmJjNTM1MWU2YmMwMTFkNjBiNmIi.DHMAfA.aNKDXI2d9tXTwoFJ5H7mmcXEaqc&quot;&gt;
+</code></pre><p>定义好之后，视图的处理，在view中</p>
+<p>显示错误信息。。</p>
+<p>验证登录密码之类的信息。。</p>
+<pre><code>flash是一个消息的闪现
+
+登录密码错误的话，显示密码错误，重新返回登录页面。。
+正确的话，建立一个session会话。。
+</code></pre><ul>
+<li>标签管理 0816</li>
+</ul>
+<p>首先定义表单</p>
+<pre><code>class TagForm(FlaskForm):
+    name = StringField(
+        label=&quot;名称&quot;,
+        validators=[
+            DataRequired(&apos;请输入标签!&apos;)
+        ],
+        description=&quot;标签&quot;,
+        render_kw={
+            &quot;class&quot;: &quot;form-control&quot;,
+            &quot;id&quot;: &quot;input_name&quot;,
+            &quot;placeholder&quot;: &quot;请输入标签名称！&quot;
+        }
+    )
+
+    submit = SubmitField(
+        &apos;添加&apos;,
+        render_kw={
+            &quot;class&quot;: &quot;btn btn-primary&quot;,
+        }
+    )
+</code></pre><p>然后传入view中<br>先实例化，然后传入到参数中。</p>
+<p>在前端的input进行修改，进行表单的实现。</p>
+<p>有表单的地方，可能就会和数据库的结合。</p>
+<pre><code>#数据的获取
+if form.validate_on_submit():
+    data = form.data
+</code></pre><p>在前端的错误信息的显示。。</p>
+<pre><code>{% for err in form.name.errors %}
+                        <div class="col-md-12">
+                        <font style="color:red">{{ err }}</font>
+                    </div>
+
+
+错误信息
+
+	{% for err in form.字段.errors %}
+
+	<div class="col-md-12">
+                        <font style="color:red">{{ err }}</font>
+                    </div>
+	{% endfor %}
+</code></pre><p>这个错误信息，是在表单定义中的</p>
+<pre><code>validators=[
+           DataRequired(&apos;请输入标签!&apos;)
+       ],
+</code></pre><p>唯一性的确认</p>
+<pre><code>tag = Tag.query.filter_by(name=data[&quot;name&quot;]).count() #数量的统计
+        if tag == 1:
+            flash(&quot;名称已经存在&quot;)
+            return redirect(url_for(&apos;admin.tag_add&apos;))
+</code></pre><p><a href="http://docs.jinkan.org/docs/flask/patterns/flashing.html" target="_blank" rel="noopener">flash 消息闪现</a></p>
+<p> 闪烁，对结果的一个提示，这个也会在前端显示出来。。get_flashed_messages()</p>
+<pre><code>{% for msg in get_flashed_messages() %}
+	 {% endfor %}      
+</code></pre><p>入库</p>
+<pre><code>tag = Tag(
+        name=data[&quot;name&quot;]
+    )
+    db.session.add(tag)
+    db.session.commit()
+    flash(&quot;添加标签成功！&quot;, &quot;ok&quot;)
+    return redirect(url_for(&apos;admin.tag_add&apos;))
+</code></pre><h4 id="表单，提取数据，判断，前端错误消息显示、入库"><a href="#表单，提取数据，判断，前端错误消息显示、入库" class="headerlink" title="表单，提取数据，判断，前端错误消息显示、入库"></a>表单，提取数据，判断，前端错误消息显示、入库</h4><p>这几个基本的操作步骤要理解了，这样碰见其他的类似操作，流程化就可以来了。。</p>
+<p>1：根据前端具体的表单，定义表单类。。其中的name、label、validators、description、render_kw（样式内容）</p>
+<p>2：在views对应的视图导入表单类，实例化，在前端进行替换，使用定义的表单生成相应的input，csrf的防御。</p>
+<p>3:进行数据的验证，是否重复等一些列逻辑的处理</p>
+<p>4：入库</p>
+<p>5：后端处理，在前端的错误信息的提示，时刻存在的。</p>
+<h4 id="标签的管理，增删改查、分页。。"><a href="#标签的管理，增删改查、分页。。" class="headerlink" title="标签的管理，增删改查、分页。。"></a>标签的管理，增删改查、分页。。</h4><p>对于没有涉及到表单的地方，但是对数据库内容要进行删除或者修改，这里和数据库的操作。</p>
+<p>对于一些页面的显示，多少页以及分页的操作。。分页技术的实现。。</p>
+<p>在标签列表里面进行操作，分页的操作。。</p>
+<p>在views中</p>
+<pre><code>#标签列表
+@admin.route(&quot;/tag/list/&lt;int:page&gt;/&quot;,methods=[&quot;GET&quot;])
+@admin_login_req
+def tag_list(page=None):
+    if page is None:
+        page = 1
+    page_data = Tag.query.order_by(
+        Tag.addtime.desc()
+    ).paginate(page=page,prt_page=1)       #paginate分页操作
+
+    return render_template(&quot;admin/tag_list.html&quot;,page_data=page_data) #page_data传入模版中
+</code></pre><p>修改的问题，修改的是内容已经在数据库中了。。</p>
+<p>如果去判断的话，那名字一定存在。。。</p>
+<pre><code>#编辑标签
+@admin.route(&quot;/tag/edit/&lt;int:id&gt;/&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+@admin_login_req
+def tag_edit(id):
+    form = TagForm()
+    tag = Tag.query.get_or_404(id)
+
+    if form.validate_on_submit():
+        data = form.data
+        tag_count = Tag.query.filter_by(name=data[&quot;name&quot;]).count()  # 数量的统计
+        if  tag.name != data[&quot;name&quot;] and tag_count == 1:     #多了一个判断，必须要修改一下
+            flash(&quot;名称已经存在&quot;, &quot;err&quot;)
+            return redirect(url_for(&apos;admin.tag_edit&apos;))
+        tag.name = data[&quot;name&quot;]
+        db.session.add(tag)
+        db.session.commit()
+        flash(&quot;修改标签成功！&quot;, &quot;ok&quot;)
+        return redirect(url_for(&apos;admin.tag_edit&apos;))
+
+    return render_template(&quot;admin/tag_edit.html&quot;, form=form,tag=tag)
+</code></pre><p>多一个判断。。。</p>
+<pre><code>tag_count = Tag.query.filter_by(name=data[&quot;name&quot;]).count()  # 数量的统计
+        if  tag.name != data[&quot;name&quot;] and tag_count == 1:  
+</code></pre><h4 id="电影管理"><a href="#电影管理" class="headerlink" title="电影管理"></a>电影管理</h4><p>添加电影，同样是根据后台的界面，设置表单，表单传入view中 ，设置html，以及读取数据，报错信息。。</p>
+<p>上传的设置。。。</p>
+<p>表单的上传。。</p>
+<p>添加电影、电影列表。。</p>
+<p>这个和之前的标签管理挺类似的，只不过添加电影多了一个对文件的处理，因为添加电影的时候，一些大的文件不适合存入到数据库中，可以存在服务器上的某一个文件中。。。处理文件的上传。。</p>
+<p>对于涉及到参数的地方 </p>
+<pre><code>`/movie/list/&lt;int:page&gt;/`
+
+    def tag_list(page=None):     定义一个参数
+</code></pre><p>删除的时候 id。。。</p>
+<p>关联的删除。。。</p>
+<ul>
+<li>添加电影</li>
+</ul>
+<p>文件那个input type=”file”    就是上传文件的。。</p>
+<ul>
+<li>列表 删除 编辑</li>
+</ul>
+<p>电影列表细节问题</p>
+<pre><code>page_data = Movie.query.join(Tag).filter(    #对表的一个关联。。。
+        Tag.id == Movie.tag_id
+    ).order_by(                     
+        Movie.addtime.desc()
+    ).paginate(page=page,per_page=10)
+</code></pre><p>对电影的修改，即编辑。对已有的数据库进行修改，需要进行一些判断，首先是数据库中数据的改变，然后涉及到文件的改变。。</p>
+<pre><code>if form.validate_on_submit():
+    data = form.data
+    movie_count = Movie.query.filter_by(title=data[&quot;title&quot;]).count()
+    if movie_count == 1 and movie.title != data[&quot;title&quot;]:   #判断片名以及数目
+        flash(&quot;片名已经存在&quot;,&quot;err&quot;)
+        return redirect(url_for(&apos;admin.movie_edit&apos;, id=id))
+
+
+movie.star = data[&quot;star&quot;]
+    movie.tag_id = data[&quot;tag_id&quot;]
+    movie.info = data[&quot;info&quot;]
+    movie.title = data[&quot;title&quot;]
+    movie.area = data[&quot;area&quot;]
+    movie.length = data[&quot;length&quot;]
+    movie.release_time = data[&quot;release_time&quot;]
+    db.session.add(movie)
+    db.session.commit()
+    flash(&quot;修改电影成功!&quot;,&quot;ok&quot;)
+    return redirect(url_for(&apos;admin.movie_edit&apos;,id=id))
+return render_template(&quot;admin/movie_edit.html&quot;, form=form,movie=movie)
+</code></pre><h4 id="预告管理-0823"><a href="#预告管理-0823" class="headerlink" title="预告管理 0823"></a>预告管理 0823</h4><p>这个功能和电影管理类似，也是上传文件，编辑，修改等这些操作，异曲同工。会了电影管理的逻辑，这个逻辑自然也应该可以的。。</p>
+<p>表单实现过程</p>
+<ol>
+<li>首先根据表单，设置表单类。。</li>
+<li>在view中，导入数据库类以及表单类</li>
+<li>相应的逻辑函数中，实例化表单，然后传递到html中</li>
+<li>判断表单提交，获取数据</li>
+<li>前端html中修改表单标签，使用定义的类来定义</li>
+<li>错误信息的显示</li>
+<li>form的设置，如果有上传文件，<code>method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;</code></li>
+</ol>
+<p>表单实现完之后，逻辑的处理。涉及到数据库。。表单的上传。。</p>
+<ol>
+<li>获取HTTP数据</li>
+<li>传入数据库</li>
+<li>就这两步，但其中需要的逻辑判断。。(逻辑判断。。。)</li>
+</ol>
+<p>删除和编辑</p>
+<p>删除其实很好删除，从数据库中查找该数据，直接删除就可以了。</p>
+<pre><code>preview = Preview.query.get_or_404(int(id))
+db.session.delete(preview)
+db.session.commit()
+</code></pre><p>不理解的地方，对其中取出的数据内容的定义。。</p>
+<pre><code>preview = Preview.query.get_or_404(int(id)) //preview 就是表类的一个实例化
+form.title.data = preview.title  #修改标题名字
+</code></pre><p>案例</p>
+<pre><code>from app.models import Admin, Tag, Movie,Preview
+preview = Preview.query.get_or_404(9)
+preview
+&lt;Preview &apos;testr2&apos;&gt;
+preview.id
+9
+preview.title
+&apos;testr2&apos;
+preview.logo
+&apos;2017082318021088e33b3370bd4ea39541e8ee60e28685.png&apos;
+</code></pre><h4 id="会员管理-0824"><a href="#会员管理-0824" class="headerlink" title="会员管理 0824"></a>会员管理 0824</h4><h4 id="评论管理"><a href="#评论管理" class="headerlink" title="评论管理"></a>评论管理</h4><p>表的关联 join 表的过滤 filter 排序 order_by</p>
+<pre><code>page_data = Comment.query.join(
+        Movie
+    ).join(
+        User
+    ).filter(
+        Movie.id == Comment.movie_id,
+        User.id == Comment.user_id
+    ).order_by(
+        Comment.addtime.desc()
+    )
+</code></pre><h4 id="后台管理员的管理以及访问控制-7-3-4"><a href="#后台管理员的管理以及访问控制-7-3-4" class="headerlink" title="后台管理员的管理以及访问控制 7-3-4"></a>后台管理员的管理以及访问控制 7-3-4</h4><h4 id="0827-评论管理-收藏管理"><a href="#0827-评论管理-收藏管理" class="headerlink" title="0827 评论管理 收藏管理"></a>0827 评论管理 收藏管理</h4><h4 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h4><p>定义表单，然后在view实例化表单，在前端重置表单。。</p>
+<p>表单数据，和数据库的交互。</p>
+<p>验证旧密码，在表单定义一个方法。。验证旧密码的一个函数。。</p>
+<p>在表单里面对旧密码的验证。。</p>
+<pre><code>def validate_old_pwd(self,field):
+    from flask import session
+    pwd = field.data
+    name = session[&quot;admin&quot;]
+    admin = Admin.query.filter_by(
+        name=name
+    ).first()
+    if not admin.check_pwd(pwd):
+        raise ValidationError(&quot;旧密码错误&quot;)
+</code></pre><p>在view里面实现密码的改变。。使用加密函数。。从表单中获取的对应的用户，以及对其密码的修改，从表单中获取新密码,data..</p>
+<pre><code>form = PwdForm()
+    if form.validate_on_submit():
+        data = form.data
+        admin = Admin.query.filter_by(name=session[&quot;admin&quot;]).first()
+        from werkzeug.security import generate_password_hash
+        admin.pwd = generate_password_hash(data[&quot;new_pwd&quot;])
+        db.session.add(admin)
+        db.session.commit()
+        flash(&quot;修改密码成功，请重新登录！&quot;,&quot;ok&quot;)
+        redirect(url_for(&apos;admin.logout&apos;))
+    return render_template(&quot;admin/pwd.html&quot;,form=form)
+</code></pre><h4 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h4><p>上下文处理器。。将模版中的内容全局展示。。</p>
+<p>时间管理上下文</p>
+<pre><code># 上下文处理器
+@admin.context_processor
+def tpl_extra():
+    data = dict(
+        online_time=datetime.datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)
+    )
+    return data
+</code></pre><ul>
+<li>操作日志</li>
+</ul>
+<p>flask 获取ip地址</p>
+<ul>
+<li>前台会员注册 0831</li>
+</ul>
+<ul>
+<li>0902 基于角色的访问控制</li>
+</ul>
+<p>权限管理 。。</p>
+<p>第七章添加角色这里除出了很多的错误，一个是前端页面的错误信息显示不出来，重新拷贝一份后，可以显示错误信息了。但是添加数据的时候，又不能添加到数据库中。是什么原因？在这里卡了一个下午，好好思考找到这个问题的原因并解决这个问题。细节，原理。。。</p>
+<p>数据库错误信息。。。数据库添加错误的原因是，你设置的数据库的为整数型，而输入的为字符型。。</p>
+<pre><code>sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1062, &quot;Duplicata du champ &apos;0-0&apos; pour la clef &apos;PRIMARY&apos;&quot;) [SQL: &apos;INSERT INTO auth (name, url, addtime) VALUES (%(name)s, %(url)s, %(addtime)s)&apos;] [parameters: {&apos;name&apos;: &apos;list&apos;, &apos;url&apos;: &apos;/admin/add/list&apos;, &apos;addtime&apos;: datetime.datetime(2017, 9, 2, 17, 22, 55, 50462
+</code></pre><p>学会看错误信息，不要心急。。<code>sqlalchemy.exc.IntegrityError:</code></p>
+<p>错误信息没有显示的原因：</p>
+<pre><code>if form.validate_on_submit(): 先进性这个判断。。
+</code></pre><p>需要学习的内容，错误信息的展示，为什么会有错误信息，<code>DataRequired</code>。什么时候这个才会提示，表单的处理是如何进行的。</p>
+<p><code>DataRequired</code> 验证器只是简单地检查相应域提交的数据是否是空</p>
+<h4 id="0906"><a href="#0906" class="headerlink" title="0906"></a>0906</h4><p>涉及到多选项的表单，取出的数据要进行字符类型的转换。。字符串和列表的转换。。</p>
+<pre><code>&apos;1,2,3&apos; ---&gt; [1,2,3]
+
+如何来进行转换
+&gt;&gt;&gt; a = &apos;1,2,3&apos;
+&gt;&gt;&gt; type(a)
+&lt;type &apos;str&apos;&gt;
+&gt;&gt;&gt; b = a.split(&apos;,&apos;)
+&gt;&gt;&gt; b
+[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;]
+&gt;&gt;&gt; type(a)
+&lt;type &apos;str&apos;&gt;
+&gt;&gt;&gt; type(b)
+&lt;type &apos;list&apos;&gt;
+&gt;&gt;&gt; map(lambda v:int(v),b)
+[1, 2, 3]
+</code></pre><h4 id="添加管理员，验证重复密码。。"><a href="#添加管理员，验证重复密码。。" class="headerlink" title="添加管理员，验证重复密码。。"></a>添加管理员，验证重复密码。。</h4><p>form里面有专门的字段验证。EqualTo</p>
+<p>数据库的关联。。</p>
+<h4 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h4><p>定义权限装饰器</p>
+<p>角色对应的权限。。</p>
+<p>auths 权限</p>
+<p>role 角色   什么角色对应什么样的权限。。</p>
+<h4 id="0906-会员的注册"><a href="#0906-会员的注册" class="headerlink" title="0906 会员的注册"></a>0906 会员的注册</h4><p>表单的字段，选择器 有选择字段，提交有提交字段等</p>
+<p>表单信息的验证：密码两次是否相等Equalto、数据字段的验证等。。邮箱的验证 email</p>
+<h4 id="0909-会员登录"><a href="#0909-会员登录" class="headerlink" title="0909 会员登录"></a>0909 会员登录</h4><p>登录进来其中，会话机制，session..</p>
+<p>退出  session  研究 session 的用法</p>
+<pre><code>session.pop(user,None)
+</code></pre><p>登录的装饰器</p>
+<p>8-4-5 修改密码，会员登录日志</p>
+<p>0911</p>
+<p>学习9章 电影模块的实现</p>
+<p>0914 实现分页</p>
+<p>模糊查询。。。</p>
+<pre><code>movie_count = Movie.query.filter(
+        Movie.title.ilike(&apos;%&apos; + key + &apos;%&apos;)
+    ).count()
+    page_data = Movie.query.filter(
+        Movie.title.ilike(&apos;%&apos; + key + &apos;%&apos;)
+    ).order_by(
+        Movie.addtime.desc()
+    ).paginate(page=page, per_page=5)
+</code></pre><p>一个单词的错误，session</p>
+<p><strong>0919</strong></p>
+<pre><code>{{ v.content | safe }}  safe的用途
+</code></pre><p><strong>0920</strong></p>
+<p>电影的弹幕</p>
+<p>article/19536</p>
+<p><a href="http://www.imooc.com/article/19536" target="_blank" rel="noopener">动手实战实现Redis数据库主从同步</a></p>
+<pre><code>`dplayer.js.org`
+</code></pre><p>关键字搜索，保留关键字。。。</p>
+<p>#####问题</p>
+<p>python items</p>
+<p>flask-sqlalchemy.api.html#id4</p>
+<p>class=disabled</p>
+<p>对于其中出现字符串的内容一定要添加 单引号或者双引号。。</p>
+<p>下上文处理器。。。</p>
+<hr>
+<p><a href="https://stackoverflow.com/questions/17739264/count-number-of-rows-in-flask-templates" target="_blank" rel="noopener">count number of rows in flask templates</a></p>
+<p>轮播图哪一节</p>
+<p><a href="http://www.cnblogs.com/harrychinese/p/flask_tips.html" target="_blank" rel="noopener">flask request对象</a></p>
+<p>0920</p>
+<p>遇到的问题，在收藏电影的时候，用户的个人页面里面，显示不了电影收藏的情况。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flask/" rel="tag"># Flask</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/python文件处理/" rel="next" title="Python 文件处理">
+                <i class="fa fa-chevron-left"></i> Python 文件处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/03/Html/" rel="prev" title="HTML 基础知识">
+                HTML 基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境安装"><span class="nav-number">2.</span> <span class="nav-text">环境安装</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flask运行及调试模式"><span class="nav-number"></span> <span class="nav-text">Flask运行及调试模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由"><span class="nav-number"></span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态啊文件及渲染模块"><span class="nav-number"></span> <span class="nav-text">静态啊文件及渲染模块</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Hello {{ name }}!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Hello World
+		{% endif %}
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">
+		{% endif %}
+</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重定向、响应、会话和扩展"><span class="nav-number"></span> <span class="nav-text">重定向、响应、会话和扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flask-项目1"><span class="nav-number"></span> <span class="nav-text">Flask 项目1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flask-构建微电影视频网站"><span class="nav-number"></span> <span class="nav-text">Flask 构建微电影视频网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#结构"><span class="nav-number">1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3章：数据库的设置"><span class="nav-number">2.</span> <span class="nav-text">3章：数据库的设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前后台项目目录分析"><span class="nav-number"></span> <span class="nav-text">前后台项目目录分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前台-home"><span class="nav-number">1.</span> <span class="nav-text">前台(home)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后台-admin"><span class="nav-number">2.</span> <span class="nav-text">后台(admin)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#蓝图构建项目目录"><span class="nav-number"></span> <span class="nav-text">蓝图构建项目目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库-SQLAlchemy"><span class="nav-number"></span> <span class="nav-text">数据库 SQLAlchemy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前台页面"><span class="nav-number"></span> <span class="nav-text">前台页面</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#会员登录页面的搭建"><span class="nav-number">1.</span> <span class="nav-text">会员登录页面的搭建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#会员注册页面的搭建"><span class="nav-number">2.</span> <span class="nav-text">会员注册页面的搭建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会员中心页面搭建"><span class="nav-number"></span> <span class="nav-text">会员中心页面搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电影列表页面搭建"><span class="nav-number"></span> <span class="nav-text">电影列表页面搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索布局"><span class="nav-number"></span> <span class="nav-text">搜索布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电影详情页面"><span class="nav-number"></span> <span class="nav-text">电影详情页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台页面"><span class="nav-number"></span> <span class="nav-text">后台页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单，提取数据，判断，前端错误消息显示、入库"><span class="nav-number"></span> <span class="nav-text">表单，提取数据，判断，前端错误消息显示、入库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标签的管理，增删改查、分页。。"><span class="nav-number"></span> <span class="nav-text">标签的管理，增删改查、分页。。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电影管理"><span class="nav-number"></span> <span class="nav-text">电影管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#预告管理-0823"><span class="nav-number"></span> <span class="nav-text">预告管理 0823</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会员管理-0824"><span class="nav-number"></span> <span class="nav-text">会员管理 0824</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#评论管理"><span class="nav-number"></span> <span class="nav-text">评论管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台管理员的管理以及访问控制-7-3-4"><span class="nav-number"></span> <span class="nav-text">后台管理员的管理以及访问控制 7-3-4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0827-评论管理-收藏管理"><span class="nav-number"></span> <span class="nav-text">0827 评论管理 收藏管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改密码"><span class="nav-number"></span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志管理"><span class="nav-number"></span> <span class="nav-text">日志管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0906"><span class="nav-number"></span> <span class="nav-text">0906</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加管理员，验证重复密码。。"><span class="nav-number"></span> <span class="nav-text">添加管理员，验证重复密码。。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问权限控制"><span class="nav-number"></span> <span class="nav-text">访问权限控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0906-会员的注册"><span class="nav-number"></span> <span class="nav-text">0906 会员的注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0909-会员登录"><span class="nav-number"></span> <span class="nav-text">0909 会员登录</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

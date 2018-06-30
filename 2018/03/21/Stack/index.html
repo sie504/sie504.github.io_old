@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python数据结构–栈。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="栈">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/Stack/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Python数据结构–栈。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-23/16438349.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-23/67345560.jpg">
+<meta property="og:updated_time" content="2018-03-27T10:55:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="栈">
+<meta name="twitter:description" content="Python数据结构–栈。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-23/16438349.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/21/Stack/"/>
+
+
+
+
+
+  <title>栈 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/Stack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">栈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T13:20:46+08:00">
+                2018-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python数据结构–栈。</p>
+<a id="more"></a>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a><a href="https://interactivepython.org/courselib/static/pythonds/BasicDS/TheStackAbstractDataType.html" target="_blank" rel="noopener">栈</a></h4><p>栈是一种特殊的列表，插入和删除都在末尾进行。所谓的先进后出，后进先出的操作。</p>
+<p>栈的基本操作有<code>push</code>(入栈)和<code>pop</code>(出栈)。</p>
+<pre><code>Stack()    建立一个空的栈对象
+push()     把一个元素添加到栈的最顶层
+pop()      删除栈最顶层的元素，并返回这个元素
+peek()     返回最顶层的元素，并不删除它
+isEmpty()  判断栈是否为空
+size()     返回栈中元素的个数
+</code></pre><p>用列表来表示栈</p>
+<pre><code>&gt;&gt;&gt; stack = [3,4,5]
+&gt;&gt;&gt; stack.append(6)
+&gt;&gt;&gt; stack.append(7)
+&gt;&gt;&gt; stack
+[3, 4, 5, 6, 7]
+&gt;&gt;&gt; stack.pop()
+7
+&gt;&gt;&gt; stack
+[3, 4, 5, 6]
+&gt;&gt;&gt; stack.pop()
+6
+&gt;&gt;&gt; stack
+[3, 4, 5]
+</code></pre><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>#!/usr/bin/python
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def push(self,item): #插入一个元素
+        self.items.append(item)
+
+    def pop(self):
+        #这个可以添加一个异常判断
+        return self.items.pop()
+
+    def peek(self):      #返回最后一个元素，但不删除
+        return self.items[-1]
+
+    def size(self):      #长度
+        return len(self.items)
+
+s=Stack()
+
+print(s.isEmpty())
+s.push(4)
+s.push(&apos;dog&apos;)
+print(s.peek())
+s.push(True)
+print(s.size())
+print(s.isEmpty())
+s.push(8.4)
+print(s.pop())
+print(s.pop())
+print(s.size())      
+</code></pre><p>结果</p>
+<pre><code>C:\Users\Administrator\Desktop\Algo&gt;python3 stack.py
+True
+dog
+3
+False
+8.4
+True
+2
+</code></pre><h4 id="栈应用实例"><a href="#栈应用实例" class="headerlink" title="栈应用实例"></a>栈应用实例</h4><p>了解栈的基本概念之后，看几个应用实例。</p>
+<h5 id="括号匹配1"><a href="#括号匹配1" class="headerlink" title="括号匹配1"></a>括号匹配1</h5><p>这个略简单。至匹配一种括号。使用了上面定义的栈类。</p>
+<pre><code>#! -*- coding:utf-8 -*-
+
+from stack import Stack
+
+def parChecker(symbolString):
+    s = Stack()
+    balanced = True
+    index = 0
+    while index &lt; len(symbolString) and balanced:
+        symbol = symbolString[index]
+        if symbol == &quot;(&quot;:
+            s.push(symbol)    #入栈
+        else:
+            if s.isEmpty():
+                balanced = False 
+            else:
+                s.pop()   #出栈
+
+        index = index + 1 
+
+    if balanced and s.isEmpty():
+        return True 
+    else:
+        return False 
+
+print(parChecker(&apos;((()))&apos;))
+print(parChecker(&apos;(()&apos;))        
+</code></pre><p>这个函数<code>parChecker</code>假定一个Stack类可用，并返回一个布尔值来确定括号字符串是否平衡。注意，平衡布尔变量初始化为True，因为在开始的时候没有其他项目。如果当前符号为<code>(</code>，那么就入栈。<code>pop</code>是从堆栈中移除一个符号，返回值没有被使用。只要表达式是平衡的并且堆栈已经完全移除，字符串就是平衡的括号序列。</p>
+<h5 id="括号匹配2"><a href="#括号匹配2" class="headerlink" title="括号匹配2"></a>括号匹配2</h5><p>这次匹配多个符号，<code>([{}])</code>。</p>
+<p>唯一的变化是 16 行，我们称之为辅助函数匹配。必须检查栈中每个删除的符号，以查看它是否与当前结束符号匹配。如果不匹配，则布尔变量 balanced 被设置为 False。</p>
+<p>一个Matches函数。</p>
+<pre><code>#! -*- coding:utf-8 -*-
+
+from stack import Stack
+
+def parChecker(symbolString):
+    s = Stack()
+    balanced = True
+    index = 0
+    while index &lt; len(symbolString) and balanced:
+        symbol = symbolString[index]
+        if symbol in &quot;([{&quot;:
+            s.push(symbol)    #入栈
+        else:
+            if s.isEmpty():
+                balanced = False 
+            else:
+                top = s.pop()   #出栈，调用自定义函数 matches
+                if not matches(top,symbol):
+                    balanced = False
+
+        index = index + 1 
+
+    if balanced and s.isEmpty():
+        return True 
+    else:
+        return False 
+
+def matches(open,close):    #matches 函数
+    opens = &quot;([{&quot;
+    closers = &quot;)]}&quot;
+    return opens.index(open) == closers.index(close)   #查找的位置一样 1
+    # index 返回查找字符串的位置
+
+print parChecker(&apos;{{([][])}()}&apos;)
+print parChecker(&apos;[{()]&apos;)
+</code></pre><h5 id="括号匹配3"><a href="#括号匹配3" class="headerlink" title="括号匹配3"></a>括号匹配3</h5><pre><code>&gt;&gt;&gt; ord(&apos;(&apos;),ord(&apos;)&apos;)
+(40, 41)
+&gt;&gt;&gt; ord(&apos;[&apos;),ord(&apos;]&apos;)
+(91, 93)
+&gt;&gt;&gt; ord(&apos;{&apos;),ord(&apos;}&apos;)
+(123, 125)
+</code></pre><p>假设一个表达式包含三种括号<code>()</code>、<code>[]</code>、<code>{}</code>，嵌套顺序是任意的。</p>
+<p><strong>正确格式</strong></p>
+<pre><code>{()[()]},[{({})}]
+</code></pre><p><strong>错误格式</strong></p>
+<pre><code>[(]),[()),(()}
+</code></pre><p>编写一个函数，判断一个表达式字符串，括号匹配是否正确。</p>
+<ol>
+<li>创建一个空栈，用来存储尚未找到的左括号；</li>
+<li>遍历字符串，遇到左括号则压栈，遇到右括号则出栈一个左括号进行匹配；</li>
+<li>在第二步骤过程中，如果空栈情况下遇到右括号，说明缺少左括号，不匹配；</li>
+<li>在第二步骤遍历结束时，栈不为空，说明缺少右括号，不匹配；</li>
+</ol>
+<p>代码</p>
+<pre><code># -*- coding:utf-8 -*-
+
+LEFT = {&apos;(&apos;,&apos;[&apos;,&apos;{&apos;}   #左括号
+RIGHT = {&apos;)&apos;,&apos;]&apos;,&apos;}&apos;}  #右括号
+#注意：这个比较的字符串必须是对称的，例如[{({})}]，从最里面的{}进行左右分隔
+# 如果不是对称的，在其中的左右边一定先会有一对匹配的括号且它们中间没有其他符号
+def match(expr):
+    &apos;&apos;&apos;    
+    :param expr:  检测的字符串
+    :return: 返回结果
+    &apos;&apos;&apos;
+    stack = [] #创建一个栈
+    for b in expr:   #迭代传过来的所有字符串。遍历完之后，会结束这个for循环，执行return not stack
+        if b in LEFT:   #如果当前字符串在左括号内
+            stack.append(b)  #把当前符号b进行入栈
+        elif b in RIGHT:   #如果在右括号
+            if not stack:
+                return False
+            # a = ord(b) - ord(stack[-1])
+            # print a
+            if not stack or not 1 &lt;= ord(b) - ord(stack[-1]) &lt;=2:
+                # 如果当前栈为空
+                # 如果右括号的减去左括号的值不是小于等于2，大于等于1。匹配的括号的ASCII值，右减左两种情况，1，2
+                return False
+            stack.pop() #删除左括号
+    return not stack
+result = match(&apos;[(}){()}]&apos;)
+print result
+</code></pre><h5 id="迷宫"><a href="#迷宫" class="headerlink" title="迷宫"></a>迷宫</h5><p>用一个二维数组表示一个简单的迷宫，用0表示通路，用1表示阻断，老鼠在每个点上可以移动相邻的东南西北四个点，设计一个算法，模拟老鼠走迷宫，找到从入口到出口的一条路径。</p>
+<p>如图所示</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-23/16438349.jpg" alt=""></p>
+<p>出去的正确线路如图中的红线所示</p>
+<p>思路</p>
+<ol>
+<li>用一个栈来记录老鼠从入口到出口的路径</li>
+<li>走到某点后，将该点左边压栈，并把该点值置为1，表示走过了；</li>
+<li>从临近的四个点中可到达的点中任意选取一个，走到该点；</li>
+<li>如果在到达某点后临近的4个点都不走，说明已经走入死胡同，此时退栈，退回一步尝试其他点；</li>
+<li>反复执行第二、三、四步骤直到找到出口；</li>
+</ol>
+<p>代码</p>
+<pre><code>&gt;&gt;&gt; maze = [[0]*7 for _ in range(7)]
+&gt;&gt;&gt; maze
+[[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0,
+0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]
+]
+&gt;&gt;&gt; walls = [
+... (1,3),
+... (2,1),(2,5),
+... (3,3),(3,4),
+... (4,2),
+... (5,4)
+... ]
+&gt;&gt;&gt; for i,j in walls:
+...     print i,j
+...
+1 3
+2 1
+2 5
+3 3
+3 4
+4 2
+5 4
+&gt;&gt;&gt; for i in range(7):
+...     maze[i][0] = maze[i][-1] = 1
+...     maze[0][i] = maze[-1][i] = 1
+...
+&gt;&gt;&gt; maze
+[[1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1], [1, 0, 0,
+0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 1, 1]
+]
+&gt;&gt;&gt; for i,j in walls:
+...     maze[i][j] = 1
+...
+&gt;&gt;&gt; maze
+[[1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 1, 0, 0, 1], [1, 1, 0, 0, 0, 1, 1], [1, 0, 0,
+1, 1, 0, 1], [1, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 1, 0, 1], [1, 1, 1, 1, 1, 1, 1]
+]
+</code></pre><p>maze</p>
+<pre><code>[1, 1, 1, 1, 1, 1, 1]
+[1, 0, 0, 1, 0, 0, 1]
+[1, 1, 0, 0, 0, 1, 1]
+[1, 0, 0, 1, 1, 0, 1]
+[1, 0, 1, 0, 0, 0, 1] 
+[1, 0, 0, 0, 1, 0, 1]
+[1, 1, 1, 1, 1, 1, 1]
+</code></pre><p>里面被包围的才是迷宫。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-23/67345560.jpg" alt=""></p>
+<pre><code>#!/usr/bin/python
+# -*- coding:utf-8 -*-
+def initMaze():
+    maze = [[0] * 7 for _ in range(5+2)] #用列表解析创建一个7*7的二维数组
+    walls = [   #记录墙的位置
+        (1,3),
+        (2,1),(2,5),
+        (3,3),(3,4),
+        (4,2),
+        (5,4)
+    ]
+
+    for i in range(7):  #把迷宫的四周设置为墙
+        maze[i][0] = maze[i][-1] = 1
+        maze[0][i] = maze[-1][i] = 1 
+
+    for i,j in walls:  #把所有墙的点设置为1
+        maze[i][j] = 1
+    return maze
+
+
+def path(maze,start,end):
+    &apos;&apos;&apos;
+    param maze：迷宫
+    param start: 起始点
+    param end: 结束点
+    return: 行走的每个点
+    &apos;&apos;&apos;
+
+    i,j = start # 分解起始点的坐标
+    ei, ej = end  #分解结束点的左边
+    stack = [(i,j)] #创建一个栈，并让老鼠站在起始点的位置
+    maze[i][j] = 1 #走过的路置为1
+    while stack:    #栈不为空的时候继续走，否则退出
+        i,j = stack[-1] #获取当前老鼠所在的位置
+        if(i,j) == (ei,ej): #如果老鼠找到了出口
+            break      
+        for di,dj in [(0,-1),(0,1),(-1,0),(1,0)]: #左右上下
+            if maze[i+di][j+dj] == 0:   #如果当前点可走
+                maze[i+di][j+dj] = 1 #把当前点置为1
+                stack.append((i+di,j+dj))  #把当前的位置添加到栈里面
+                break
+        else:  #如果所有的点都不能走
+            stack.pop()    #退回上一步
+    return stack
+
+Maze = initMaze() #初始化迷宫
+result = path(maze=Maze,start=(1,1),end=(5,5)) #老鼠开始走迷宫
+print result
+</code></pre><p> 结果</p>
+<pre><code>[(1, 1), (1, 2), (2, 2), (3, 2), (3, 1), (4, 1), (5, 1), (5, 2), (5, 3), (4, 3),
+ (4, 4), (4, 5), (5, 5)]
+</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://segmentfault.com/a/1190000003937981" target="_blank" rel="noopener">Python数据结构——栈</a></p>
+<p><a href="https://docs.python.org/2/tutorial/datastructures.html#more-on-lists" target="_blank" rel="noopener">Data Structures</a></p>
+<p><a href="http://python.jobbole.com/87581/" target="_blank" rel="noopener">Python算法实战系列之栈</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/SQLi_Mysql/" rel="next" title="SQLi MySQL基础知识">
+                <i class="fa fa-chevron-left"></i> SQLi MySQL基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/21/SQLi_MSSQL/" rel="prev" title="SQLi MSSQL基础知识">
+                SQLi MSSQL基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈应用实例"><span class="nav-number">3.</span> <span class="nav-text">栈应用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#括号匹配1"><span class="nav-number">3.1.</span> <span class="nav-text">括号匹配1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#括号匹配2"><span class="nav-number">3.2.</span> <span class="nav-text">括号匹配2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#括号匹配3"><span class="nav-number">3.3.</span> <span class="nav-text">括号匹配3</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#迷宫"><span class="nav-number">3.4.</span> <span class="nav-text">迷宫</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

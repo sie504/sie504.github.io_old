@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="归并排序算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="归并排序算法">
+<meta property="og:url" content="http://yoursite.com/2018/02/02/归并排序法/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="归并排序算法。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-31/7402822.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-31/11023043.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-31/38798855.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-31/47616140.jpg">
+<meta property="og:updated_time" content="2018-02-02T10:03:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="归并排序算法">
+<meta name="twitter:description" content="归并排序算法。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-31/7402822.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/02/归并排序法/"/>
+
+
+
+
+
+  <title>归并排序算法 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/归并排序法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">归并排序算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-02T13:20:46+08:00">
+                2018-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>归并排序算法。</p>
+<a id="more"></a>
+<h5 id="归并排序法"><a href="#归并排序法" class="headerlink" title="归并排序法"></a>归并排序法</h5><p>归并排序算法，原理容易理解。但是到代码实现以及单步调试的时候，不是很明白了。<br>nlogn</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-31/7402822.jpg" alt=""></p>
+<p>当计算的值越大时，所需要的时间的比较。</p>
+<p>把一个数组分成块，然后再进行分块，最后分成了一个一个的，然后再向上归并。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-31/11023043.jpg" alt=""></p>
+<pre><code>1 2 3 4 5 6 7 8
+2 3 6 8 1 4 5 7
+6 8 2 3 1 5 4 7
+8 6 2 3 1 5 7 4
+</code></pre><p>二分法，递归的方法</p>
+<p>时间效率比空间效率重要。</p>
+<p>两个已经排好序的元素数组，来比较数组头部的元素，谁更小，就放到头部。</p>
+<p>i和j要比较的元素，k要放的位置，归并结束要放的最后一个元素的位置。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-31/38798855.jpg" alt=""></p>
+<p>来自维基百科的图片讲解</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-31/47616140.jpg" alt=""></p>
+<p>拆分排序和合并排序</p>
+<p><strong>拆分</strong></p>
+<pre><code>&gt;&gt;&gt; a = range(1,10)
+&gt;&gt;&gt; a
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; len(a)
+9
+&gt;&gt;&gt; mid = len(a) / 2
+&gt;&gt;&gt; mid
+4
+&gt;&gt;&gt; a[:mid]
+[1, 2, 3, 4]
+&gt;&gt;&gt; a[mid:]
+[5, 6, 7, 8, 9]
+</code></pre><p>拆分两部分之后，还需要继续拆分，直到不能再分为止。</p>
+<pre><code>#递归拆分
+def split(lists):
+    #递归退出条件
+    length = len(lists)  #长度
+    if length &lt;= 1:
+        return lists
+
+    #取中间值
+    mid = length // 2
+    left = lists[:mid]
+    right = lists[mid:]
+
+
+    #递归拆分
+    split(left)
+    split(right)
+
+
+if __name__ == &apos;__main__&apos;:
+    a = [3]
+    print split(a)  
+</code></pre><p>除了列表结果为1的时候，会返回结果，其他时候都返回<code>None</code>。拆分之后没有做后续处理，需要将拆分的列表合并和排序。</p>
+<p>每次排序都是基于上次合并排序的结果。按照顺序抽取两个list的元素判断大小，并添加到新的列表中，完成合并排序的步骤。</p>
+<pre><code>def merge(left,right):
+    i = 0 
+    j = 0 
+    result = []
+    length_left = len(left)
+    length_right = len(right)
+
+    while i &lt; length_left and j &lt; length_right:
+        #逐个比较两个列表的元素
+        #小的添加到列表，大的留下继续比较
+        if left[i] &lt;= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j +=1 
+    #最后加上未比较的元素
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+</code></pre><p>最终的代码：参考写出的。</p>
+<pre><code># -*- coding:utf-8 -*-
+
+def split(lists):
+    #递归退出条件判断
+    length = len(lists)
+    if length &lt;= 1:
+        return lists
+
+    #取整
+    mid = length // 2 
+    left = lists[:mid]
+    right = lists[mid:]
+
+    #递归拆分
+    split(left)
+    split(right)
+
+    return merge(left,right)
+
+def merge(left,right):
+    i = 0 
+    j = 0 
+    result = []
+    length_left = len(left)
+    length_right = len(right)
+
+    while i &lt; length_left and j &lt; length_right:
+        #逐个比较两个列表的元素
+        #小的添加到列表，大的留下继续比较
+        if left[i] &lt;= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j +=1 
+    #最后加上未比较的元素
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+def merge_sort(lists):
+    #递归退出条件判断
+    length = len(lists)
+    if length &lt;= 1:
+        return lists
+
+    #递归拆分，取整
+    mid = length // 2
+    left = merge_sort(lists[:mid])
+    right = merge_sort(lists[mid:])
+
+    #合并排序
+    return merge(left,right)
+
+if __name__ == &apos;__main__&apos;:
+    a = [6,7,8,5,4,3,2,9,10,1]
+    print &apos;排序前&apos;,a
+
+    print &apos;排序后&apos;,merge_sort(a)
+</code></pre><p>运行。        </p>
+<pre><code> C:\Users\Administrator\Desktop\Algo&gt;python2 spitsort1.py
+排序前 [6, 7, 8, 5, 4, 3, 2, 9, 10, 1]
+排序后 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]   
+</code></pre><p><strong>合并和排序</strong></p>
+<pre><code># -*- coding:utf-8 -*-
+
+def merge1(left,right):
+    i = 0 
+    j = 0 
+    result = []
+    length_left = len(left)
+    length_right = len(right)
+
+    while i &lt; length_left and j &lt; length_right:
+        #逐个比较两个列表的元素
+        #小的添加到新的列表，大的留下继续排序
+        if left[i] &lt;= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    #最后加上未比较的元素
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result
+
+if __name__ == &apos;__main__&apos;:
+    a = [6,7,8,5,4]
+    b = [3,2,9,10,1]
+    print merge1(a,b)
+</code></pre><p>结果</p>
+<pre><code>C:\Users\Administrator\Desktop\Algo&gt;python2 merge.py
+[3, 2, 6, 7, 8, 5, 4, 9, 10, 1]
+</code></pre><p>把上面的函数简单合并一下。</p>
+<pre><code># -*- coding:utf-8 -*-
+
+def merge(left,right):
+    #合并和排序
+    i = 0 
+    j = 0 
+    result = []
+    length_left = len(left)
+    length_right = len(right)
+
+    while i &lt; length_left and j &lt; length_right:
+        #逐个比较两个列表的元素
+        #小的添加进新的列表，大的留下继续比较
+        if left[i] &lt;= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    #最后加上未比较的元素
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+def merge_sort(lists):
+    #递归退出条件判断
+    length = len(lists)
+    if length &lt;= 1:
+        return lists 
+
+    #递归拆分，取整
+    mid = length // 2
+    left = merge_sort(lists[:mid])
+    right = merge_sort(lists[mid:])
+
+    #归并排序
+    return merge(left,right)
+
+if __name__ == &apos;__main__&apos;:
+    a = [6,7,8,5,4,3,2,9,10,1]
+    print &apos;排序前&apos;,a
+
+    print &apos;排序后&apos;,merge_sort(a)    
+</code></pre><p>结果       </p>
+<pre><code>C:\Users\Administrator\Desktop\Algo&gt;python2 splitsort2.py
+排序前 [6, 7, 8, 5, 4, 3, 2, 9, 10, 1]
+排序后 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a></p>
+<p><a href="http://bubkoo.com/2014/01/15/sort-algorithm/merge-sort/" target="_blank" rel="noopener">常见排序算法 - 归并排序 (Merge Sort)</a></p>
+<p><a href="http://yshblog.com/blog/171" target="_blank" rel="noopener">Python实现归并排序算法</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/30/插入排序/" rel="next" title="插入排序算法">
+                <i class="fa fa-chevron-left"></i> 插入排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/06/快速排序/" rel="prev" title="快速排序算法">
+                快速排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#归并排序法"><span class="nav-number">1.</span> <span class="nav-text">归并排序法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

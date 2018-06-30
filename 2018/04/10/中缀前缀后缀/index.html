@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="栈的应用，中缀前缀和后缀。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中缀前缀和后缀">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/中缀前缀后缀/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="栈的应用，中缀前缀和后缀。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-10/62655936.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-10/41825358.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-10/47250640.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-10/5765312.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/4499705.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-17/7460087.jpg">
+<meta property="og:updated_time" content="2018-04-19T05:14:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中缀前缀和后缀">
+<meta name="twitter:description" content="栈的应用，中缀前缀和后缀。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-4-10/62655936.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/10/中缀前缀后缀/"/>
+
+
+
+
+
+  <title>中缀前缀和后缀 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/中缀前缀后缀/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">中缀前缀和后缀</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T13:20:46+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>栈的应用，中缀前缀和后缀。</p>
+<a id="more"></a>
+<h4 id="中缀、前缀、后缀表达式"><a href="#中缀、前缀、后缀表达式" class="headerlink" title="中缀、前缀、后缀表达式"></a><a href="https://interactivepython.org/runestone/static/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html#conversion-of-infix-expressions-to-prefix-and-postfix" target="_blank" rel="noopener">中缀、前缀、后缀表达式</a></h4><h4 id="中缀、前缀、后缀表达式-1"><a href="#中缀、前缀、后缀表达式-1" class="headerlink" title="中缀、前缀、后缀表达式"></a><a href="https://github.com/facert/python-data-structure-cn/tree/master/3.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.9.%E4%B8%AD%E7%BC%80%E5%89%8D%E7%BC%80%E5%92%8C%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">中缀、前缀、后缀表达式</a></h4><p>20180410</p>
+<p>优先级高的运算符在优先级低的运算符之前使用，唯一改变的是括号的存在。先乘除后加减。</p>
+<p>正常的运算符在两个字符之间，称为中缀。 <code>A+B</code></p>
+<p>把运算符向前移，前缀。 <code>+ A B</code></p>
+<p>运算符向后移动，后缀。 <code>A B +</code></p>
+<p>前缀表达式符号要求所有运算符在它们处理的两个操作数之前。另一方面，后缀表达式要求其操作符在相应的操作数之后。</p>
+<p><strong>案例1</strong></p>
+<pre><code>中缀  A+B*C
+前缀  +A*BC  过程 *优先于+  A+(*BC) -&gt; +A*BC
+后缀  ABC*+    过程 *优先于+   A+(BC*) (BC*)整体 -&gt; ABC*+
+</code></pre><p><strong>案例2</strong></p>
+<p>存在括号。</p>
+<pre><code>中缀 (A+B)*C
+前缀 (+AB)*C -&gt; *+ABC
+后缀 (AB+)*C -&gt; AB+C*
+</code></pre><h5 id="中缀表达式转换前缀和后缀"><a href="#中缀表达式转换前缀和后缀" class="headerlink" title="中缀表达式转换前缀和后缀"></a>中缀表达式转换前缀和后缀</h5><p>使用特定方法可以让中缀转换为前缀和后缀。考虑使用算法来执行转换，允许任何复杂表达式转换。</p>
+<p>使用的方法是用完全括号表达式的概念。比如 <code>A + B * C</code>写成 <code>(A + (B * C))</code>，明确标识乘法优先于加法。每个括号对还表示操作数对的开始和结束，中间有相应的运算符。</p>
+<p>看到 <code>(B * C)</code>的右括号。将乘法移到那个位置，并删除对应的左括号。得到 <code>B C *</code>，实际上已经将其转换为后缀符号。如果加法运算符也移动到相应的位置并且删除匹配的左括号，将得到后缀表达式。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-10/62655936.jpg" alt=""></p>
+<p>如果不是将符号移动到右括号的位置，将其向左移动，得到前缀符号。圆括号的位置实际是包含的运算符的最终位置的线索。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-10/41825358.jpg" alt=""></p>
+<p>为了转换表达式，无论对前缀还是后缀，先根据操作的顺序把表达式转换成完全括号表达式。然后将包含的运算符移到左或右括号的位置，取决于需要前缀或后缀符号。</p>
+<p>这里面有个更复杂的例子, <code>(A + B) * C - (D - E) * (F + G)</code> ， 以下显示了如何转换为后缀和前缀。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-10/47250640.jpg" alt=""></p>
+<h5 id="中缀转后缀通用法"><a href="#中缀转后缀通用法" class="headerlink" title="中缀转后缀通用法"></a>中缀转后缀通用法</h5><p>开发一个算法将任何中缀表达式转换为后缀表达式。</p>
+<p><code>A + B * C</code> 转换为后缀为 <code>A B C * +</code>。</p>
+<p>在后缀表达式中，+在结束位置，因为下一个运算符 *优先于加法。原始表达式中的运算符的顺序在生成的后缀表达式中相反。</p>
+<p>由于加法运算符在乘法运算符之前，并且具有较低的优先级，因此需要在使用乘法运算符之后出现。这种顺序的反转，考虑使用栈来保存运算符直到使用它们。</p>
+<p>带括号。</p>
+<p><code>(A + B) * C</code> 转换后缀表达式 <code>A B + C *</code>。</p>
+<p>括号的优先级高于 <code>*</code>，转换算法的过程，当看到左括号时，保存它，表示高优先级的另一个运算符将出现。运算符需要等到相应的右括号出现以表示其位置。当右括号出现，可以从栈中弹出运算符。</p>
+<p>从左到右扫描中缀表达式，将使用栈来保留运算符，栈堆的顶部将始终是最近保存的运算符。每当读取一个新的运算符时，需要考虑该运算符如何与已经在栈上的运算符(如果有的话)比较优先级。</p>
+<p>假设中缀表达式是由空格分隔的标记字符串。操作符标记是 <code>*,/,+ 和 -</code>，以及左右括号，操作树是 A,B,C等。以下步骤将后缀顺序生成一个字符串。</p>
+<ol>
+<li>创建一个名为 opstack的空栈以保存运算符。给输出创建一个空列表。</li>
+<li>通过使用字符串方法拆分将输入的中缀字符串转换为标记列表</li>
+<li><p>从左到右扫描标记列表</p>
+<ul>
+<li>如果是操作树，将其附加到输出列表的末尾</li>
+<li>如果是左括号，将其压到栈 opstack</li>
+<li>如果是右括号，则弹出 opstack，直到删除相应的左括号。将每个运算符附加到输出列表的末尾</li>
+<li>如果标记是运算符， <code>*,/,+ 或 -</code>,将其压入 <code>opstack</code>。但是，首先删除已经在<code>opstack</code>中具有更高或相等优先级的运算符，将其加入输出列表中。</li>
+</ul>
+</li>
+<li><p>当输入表达式被完全处理时，检查<code>opstack</code>,仍然在栈上的任何运算符都可以删除并加到输出列表的末尾。</p>
+</li>
+</ol>
+<p>对表达式<code>A * B + C * D</code> 的转换算法。注意，第一个 <em> 在看到 + 运算符时被删除。另外，当第二个 </em> 出现时， + 保留在栈中，因为乘法优先级高于加法。在中缀表达式的末尾，栈被弹出两次，删除两个运算符，并将 + 作为后缀表达式中的最后一个运算符。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-10/5765312.jpg" alt=""></p>
+<p>使用一个名为<code>prec</code>的字典来保存运算符的优先级。这个字典将每个运算符映射到一个整数，可以与其他运算符的优先级进行比较。左括号被赋予最低值。这样与其进行比较的任何运算符都将具有更高的优先级，将放置它的顶部。</p>
+<p>栈类</p>
+<pre><code># -*- coding:utf-8 -*-
+__author__ = &apos;504&apos;
+__date__ = &apos;2018/3/28 19:05&apos;
+
+
+# !/usr/bin/python
+# ！ -*- coding:utf-8 -*-
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if self.isEmpty():
+            raise IndexError
+        return self.items.pop()
+
+    def peek(self):
+        return self.items[len(self.items) - 1]  # 返回最后一个元素
+
+    def size(self):
+        return len(self.items)
+</code></pre><p>具体代码</p>
+<pre><code># -*- coding:utf-8 -*-
+__author__ = &apos;504&apos;
+__date__ = &apos;2018/3/28 19:05&apos;
+
+from stack import Stack
+
+
+def infixToPostfix(infixexpr):
+    prec = {}  # 字典存储运算符优先级
+    prec[&quot;*&quot;] = 3
+    prec[&quot;/&quot;] = 3
+    prec[&quot;+&quot;] = 2
+    prec[&quot;-&quot;] = 2
+    prec[&quot;(&quot;] = 1
+    opStack = Stack()  # 初始化栈
+    postfixList = []  # 后缀列表
+    tokenList = infixexpr.split()  # 中缀: 字符串--列表
+
+    for token in tokenList:  # 遍历中缀列表
+        if token in &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot; or token in &quot;0123456789&quot;:
+            postfixList.append(token)  # 操作数就入后缀列表
+        elif token == &apos;(&apos;:  # 遇到左括号入栈
+            opStack.push(token)
+        elif token == &apos;)&apos;:  # 遇到右括号出栈
+            topToken = opStack.pop()
+            while topToken != &apos;(&apos;:  # 当出栈不是左括号时,入后缀列表
+                postfixList.append(topToken)
+                topToken = opStack.pop()  # 出栈，直到是左括号
+
+        else:
+            while (not opStack.isEmpty()) and (prec[opStack.peek()] &gt;= prec[token]):  #opStack.peek() 栈最后一个元素
+                postfixList.append(opStack.pop())
+            opStack.push(token)
+
+    while not opStack.isEmpty():
+        postfixList.append(opStack.pop())
+    return &quot; &quot;.join(postfixList)
+
+
+print infixToPostfix(&quot;A * B + C * D&quot;)
+#print(infixToPostfix(&quot;( A + B ) * C - ( D - E ) * ( F + G )&quot;))    
+</code></pre><h5 id="后缀表达式求值"><a href="#后缀表达式求值" class="headerlink" title="后缀表达式求值"></a>后缀表达式求值</h5><p>每当在输入上看到运算符时，计算两个最近的操作数。</p>
+<p>后缀表达式  <code>4 5 6 * +</code></p>
+<p>首先的操作数是 4 和 5，此时不确定如何处理，直到看到下一个符号，将其放置到栈上，确保它们在下一个运算符出现时可用。</p>
+<p>4 和 5之后，下一个符号是操作数，放入栈中，压栈，并检测下一个符号，直到看到是 <code>*</code>，将栈中最近的操作数相乘。通过弹出两次栈，得到正确的操作数，然后执行乘法。 5 * 6 =30 </p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/4499705.jpg" alt=""></p>
+<p>稍微复杂的示例。</p>
+<p><code>7 8 + 3 2 + /</code><br>后缀表达式的运算符的顺序没有改变，只是位置变了。当用于除法的操作数从栈弹出时，它们需要反转。 <code>15/5</code>和<code>5/15</code>不同，必须保证操作数的顺序不会变。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-4-17/7460087.jpg" alt=""></p>
+<p>算法构思</p>
+<p>假设后缀表达式是一个由空格分隔的标记字符串。运算符为 <code>*,/,+和 -</code>，操作数假定为单个整数值，输出是一个整数结果。</p>
+<ol>
+<li>创建一个空栈 operandStack</li>
+<li>拆分字符串为标记列表</li>
+<li><p>从左到右扫描标记列表</p>
+<ul>
+<li>如果是数字，则转换为整数，入栈</li>
+<li>如果是 + - / * ，需要弹出栈中的两个数字，第一个弹出的为运算符右边的数字，第二个弹出的为左边。执行运算之后，将结果压入栈中</li>
+</ul>
+</li>
+<li><p>当输入的表达式被完全处理后，结果在栈上面，弹出即可。</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding:utf-8 --"></a>-<em>- coding:utf-8 -</em>-</h1><p> <strong>author</strong> = ‘504’<br> <strong>date</strong> = ‘2018/3/28 19:57’</p>
+<p> from stack import Stack</p>
+<p> def postfixEval(postfixExpr):</p>
+<pre><code>operandStack = Stack()
+tokenList = postfixExpr.split()
+
+for token in tokenList:
+    if token in &quot;0123456789&quot;:
+        operandStack.push(int(token))
+    else:
+        operand2 = operandStack.pop()
+        operand1 = operandStack.pop()
+        result = doMath(token,operand1,operand2)
+        operandStack.push(result)
+return operandStack.pop()
+</code></pre><h1 id="执行算术运算"><a href="#执行算术运算" class="headerlink" title="执行算术运算"></a>执行算术运算</h1><p> def doMath(op,op1,op2):</p>
+<pre><code>if op == &quot;*&quot;:
+    return op1 * op2
+elif op == &quot;/&quot;:
+    return  op1 / op2
+elif op == &quot;+&quot;:
+    return op1 + op2
+else:
+    return op1 - op2
+</code></pre><p> print postfixEval(‘7 8 + 3 2 + /‘)</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/09/CVE-2018-1270/" rel="next" title="CVE-2018-1270 - Spring messaging Spel 代码执行漏洞">
+                <i class="fa fa-chevron-left"></i> CVE-2018-1270 - Spring messaging Spel 代码执行漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/Web_collect/" rel="prev" title="Web安全资料汇集">
+                Web安全资料汇集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#中缀、前缀、后缀表达式"><span class="nav-number">1.</span> <span class="nav-text">中缀、前缀、后缀表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中缀、前缀、后缀表达式-1"><span class="nav-number">2.</span> <span class="nav-text">中缀、前缀、后缀表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#中缀表达式转换前缀和后缀"><span class="nav-number">2.1.</span> <span class="nav-text">中缀表达式转换前缀和后缀</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#中缀转后缀通用法"><span class="nav-number">2.2.</span> <span class="nav-text">中缀转后缀通用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后缀表达式求值"><span class="nav-number">2.3.</span> <span class="nav-text">后缀表达式求值</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding-utf-8"><span class="nav-number"></span> <span class="nav-text">-- coding:utf-8 --</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行算术运算"><span class="nav-number"></span> <span class="nav-text">执行算术运算</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

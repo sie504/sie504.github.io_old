@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="插入排序算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插入排序算法">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/插入排序/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="插入排序算法">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://interactivepython.org/courselib/static/pythonds/_images/insertionsort.png">
+<meta property="og:image" content="https://interactivepython.org/courselib/static/pythonds/_images/insertionpass.png">
+<meta property="og:updated_time" content="2018-03-07T07:01:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="插入排序算法">
+<meta name="twitter:description" content="插入排序算法">
+<meta name="twitter:image" content="https://interactivepython.org/courselib/static/pythonds/_images/insertionsort.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/30/插入排序/"/>
+
+
+
+
+
+  <title>插入排序算法 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/插入排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">插入排序算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-30T13:20:46+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>插入排序算法</p>
+<a id="more"></a>
+<h5 id="The-Insertion-Sort"><a href="#The-Insertion-Sort" class="headerlink" title="The Insertion Sort"></a><a href="https://interactivepython.org/courselib/static/pythonds/SortSearch/TheInsertionSort.html" target="_blank" rel="noopener">The Insertion Sort</a></h5><p>插入排序虽然仍是<code>O(n^2)</code>，但其工作方式稍有不同。它始终在列表的前端维护一个已经排序的列表。然后将每个新的项目”插入”到之前的子列表中，使得已排序好的子列表更大一个项目，下图展示了排序的过程。阴影部分表示算法每次传递的有序子列表。</p>
+<p><img src="https://interactivepython.org/courselib/static/pythonds/_images/insertionsort.png" alt=""></p>
+<p>我们首先假定包含一个项目(位置0)的列表已经排序，从1至<code>n-1</code>的每次排序中，这个当前检查的项目要和已经排序的列表比较。当我们回顾已经排序好的子列表时，我们把更大与插入的项目移到右侧，当我们小于要插入的项目时或者已经排序好列表的末尾时，可以插入当前项目。</p>
+<p>下图详细展示了第五个数排序过程。在该算法中，存在已经由17，26，54，77和93组成的五个的排序列表，我们想把31重新插入已经排序好的列表中，第一次和93比较，<code>93&gt;31</code>，导致93右移，77和54也是右移。当遇到26时，这个移动的过程将停止并且31被置于空余的位置。现在我们有了六个项目的排序列表。</p>
+<p><img src="https://interactivepython.org/courselib/static/pythonds/_images/insertionpass.png" alt=""></p>
+<p>排序n个项目需要n-1次，迭代顺序从位置1开始并移动到n-1，因为这些需要插入到已经排序好的列表中，执行移动操作，将列表中的某个值向上移动一个位置，使其后面的可以插入。请记住这并不是之前的算法那样完全交换。</p>
+<p>插入排序的比较次数最大是<code>n-1</code>个整数的总和。这时<code>O(n^2)</code>。但是最好的情况是，每次传递都进行一次比较，这将是一个已经排序的列表。</p>
+<p>关于转换和交换的一个注意事项，一般，一个转换操作需要交换大约三分之一的时间。在基准研究中，插入排序会显示的效果更好。</p>
+<p>代码</p>
+<pre><code>def insetSort(alist):
+    for index in range(1,len(alist)):
+        currentvalue = alist[index]
+        position = index 
+
+        while position&gt;0 and alist[position-1]&gt;currentvalue:
+            alist[position]=alist[position-1]
+            position = position-1
+
+        alist[position]=currentvalue
+
+alist = [54,26,93,17]
+insetSort(alist)
+print(alist)
+</code></pre><p>从后面依次向前比较。前面是已经排序好的列表，依次将后面的项目插入到前面。</p>
+<h5 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h5><p>一个无序的列表，按照顺序排列。一个元素的话，是有序的，<font color="red">后面的数字依次和前面的排序，</font>慢慢的前面的数字是有顺序的，然后依次进行排序，直到最后。</p>
+<pre><code>8 6 2 3 1 5 7 4
+6 8 2 3 1 5 7 4
+2 6 8 3 1 5 7 4
+2 3 6 8 1 5 7 4
+1 2 3 6 8 5 7 4
+1 2 3 5 6 8 7 4
+1 2 3 5 6 7 8 4
+1 2 3 4 5 6 7 8 
+</code></pre><p>插入排序的第二层可以提前结束的。</p>
+<p>代码1</p>
+<pre><code># -*- coding:utf-8 -*-
+def InsertSort(a):
+    n = len(a)
+    for i in range(1,n):
+        #前面的元素都是有序排列好的
+        for j in range(i,0,-1):
+            #如果比前面的小，则替换位置
+            if a[j] &lt; a[j-1]:
+                a[j],a[j-1] = a[j-1],a[j]
+            #否则比前面所有的元素都大，不需要移动    
+            else:
+                break
+
+if __name__ == &apos;__main__&apos;:
+    a = [10,4,5,1,2,3,9,8,7]
+    print(&quot;原始列表为: %s&quot; % a)
+    InsertSort(a)
+    print(&quot;排序后：%s&quot; % a)
+</code></pre><p>结果</p>
+<pre><code>C:\Users\Administrator\Desktop\Algo&gt;python2 InsertSort.py
+原始列表为: [10, 4, 5, 1, 2, 3, 9, 8, 7]
+排序后：[1, 2, 3, 4, 5, 7, 8, 9, 10]
+</code></pre><p>代码2</p>
+<pre><code>myList = [2,1,5,3,4,8,7]
+
+#从i=1(第二张牌开始)
+for i in range(1,len(myList)):
+    #要排序的牌
+    key = myList[i]
+    #手中左边的牌
+    j = i - 1
+    #与 手中的牌逐一比较
+    while j &gt;= 0 and myList[j] &gt; key:
+        #满足条件时,交换两张牌的顺序
+        myList[j+1] = myList[j]
+        j -= 1
+    #当不满足时,即该牌比手中所有牌都大,放在最右边
+    myList[j+1] = key
+
+print(myList)
+</code></pre><p>代码3</p>
+<p>和代码2的原理一样，可能这个方便理解一些</p>
+<pre><code># -*- coding:utf-8 -*-
+
+def Insert(a):
+    for i in range(1,len(a)):
+        # 寻找元素 a[i]合适插入位置
+        e = a[i]
+        # j保存元素e应该插入的位置
+        j = i;
+        while(j&gt;0 and a[j-1]&gt;e):
+            a[j] = a[j-1]
+            j -= 1
+        #否则的话，当前值比前面的都大，保存在本地    
+        a[j] = e 
+    return a 
+
+if __name__ == &apos;__main__&apos;:
+    a = [10,4,5,1,2,3,9,8,7]
+    print(&quot;原始列表为 %s&quot; % a)
+    Insert(a)
+    print(&quot;排序列表为 %s&quot; % a)
+</code></pre><p>结果</p>
+<pre><code>C:\Users\Administrator\Desktop\Algo&gt;python2 InsertSort3.py
+原始列表为 [10, 4, 5, 1, 2, 3, 9, 8, 7]
+排序后的列表为 [1, 2, 3, 4, 5, 7, 8, 9, 10]
+</code></pre><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://blog.csdn.net/u014745194/article/details/72783257" target="_blank" rel="noopener">Python插入排序算法</a></p>
+<p><a href="https://interactivepython.org/courselib/static/pythonds/SortSearch/TheInsertionSort.html" target="_blank" rel="noopener">5.9. The Insertion Sort</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/30826587" target="_blank" rel="noopener">用python实现插入排序算法</a>    </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/25/选择排序法/" rel="next" title="选择排序算法">
+                <i class="fa fa-chevron-left"></i> 选择排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/02/归并排序法/" rel="prev" title="归并排序算法">
+                归并排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Insertion-Sort"><span class="nav-number">1.</span> <span class="nav-text">The Insertion Sort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入排序"><span class="nav-number">2.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

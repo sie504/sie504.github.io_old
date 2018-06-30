@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HTTP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTTP学习，持续补充中。">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 学习">
+<meta property="og:url" content="http://yoursite.com/2017/11/07/HTTP/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="HTTP学习，持续补充中。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-28T04:41:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 学习">
+<meta name="twitter:description" content="HTTP学习，持续补充中。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/07/HTTP/"/>
+
+
+
+
+
+  <title>HTTP 学习 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/HTTP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP 学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-07T18:13:23+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>HTTP</code>学习，持续补充中。</p>
+<a id="more"></a>
+<h4 id="HTTP-概述"><a href="#HTTP-概述" class="headerlink" title="HTTP 概述"></a>HTTP 概述</h4><p>记录《HTTP权威指南》学习笔记。</p>
+<h5 id="Web客户端和服务器"><a href="#Web客户端和服务器" class="headerlink" title="Web客户端和服务器"></a>Web客户端和服务器</h5><p>Web内容都存储在Web服务器上的。Web服务器使用的是HTTP协议，因此经常被称为HTTP服务器。这些HTTP服务器存储了因特网中的数据，如果客户端发出请求，它们会提供数据。客户端向服务器发送HTTP请求，服务器会在HTTP响应中回送所请求的数据。</p>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><p>HTTP支持几种不同的请求命令，这些命令被称为HTTP方法。每条HTTP请求报文包含一个方法。这个方法告诉服务器执行什么动作。</p>
+<pre><code>GET   从服务器向客户端发送命名资源
+PUT   将来自客户端的数据存储到一个命名的服务器资源中去
+DELETE 从服务器删除命名资源
+POST   将客户端数据发送到一个服务器网关应用程序
+HEAD  仅发送命名资源响应中的HTTP首部
+</code></pre><h5 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a><a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank" rel="noopener">状态码</a></h5><p>每条HTTP响应报文返回时都会携带一个状态码。状态码是一个三位数字的代码，告知客户端是否请求成功或者是否需要其他动作。</p>
+<h5 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h5><p>HTTP报文是由一行一行的简单字符串组成的。HTTP报文都是纯文本，不是二进制代码，所以人们可以很方便的对其进行读写。</p>
+<h5 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h5><p>HTTP协议位于TCP之上，HTTP使用TCP来传输其报文数据。</p>
+<p>比如对一个<code>www.sec-note.com</code>发送请求。</p>
+<ol>
+<li>浏览器从URL中解析出服务器的主机名</li>
+<li>DNS 获取域名的IP地址 151.101.25.147</li>
+<li>获取 IP端口号</li>
+<li>TCP/IP 建立连接 IP:PORT</li>
+<li>发送一条HTTP GET请求</li>
+<li>从服务器读取HTTP响应</li>
+<li>关闭连接。浏览器显示文档。</li>
+</ol>
+<h4 id="URL和资源"><a href="#URL和资源" class="headerlink" title="URL和资源"></a>URL和资源</h4><h5 id="URL"><a href="#URL" class="headerlink" title="URL"></a><a href="https://www.oschina.net/translate/what-every-web-developer-must-know-about-url-encoding" target="_blank" rel="noopener">URL</a></h5><pre><code>http://www.sec-note.com/index.html
+方案     主机                 路径
+</code></pre><p>所有出现在不应出现位置的 保留符（例如路径片段——以文件名为例——可能包含”?”）必须被URL 编码。</p>
+<h5 id="编码机制"><a href="#编码机制" class="headerlink" title="编码机制"></a>编码机制</h5><p>编码机制，用来在URL中表示各种不安全的字符。编码机制是通过转义表示法表示不安全的字符，这种转义表示法包含一个百分号(%)，后面跟着两个表示字符ASCII码的十六进制数。</p>
+<h4 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a><a href="https://blog.csdn.net/u010256388/article/details/68491509" target="_blank" rel="noopener">HTTP 报文</a></h4><p>报文包括：</p>
+<ol>
+<li>起始行</li>
+<li>首部</li>
+<li>主体</li>
+</ol>
+<p>请求报文格式</p>
+<pre><code>&lt;method 方法&gt; &lt;request-URL 请求URL&gt; &lt;version&gt;版本
+&lt;headers&gt;   首部
+
+&lt;entity-body&gt; 请求体
+</code></pre><p>响应报文格式</p>
+<pre><code>&lt;version版本&gt; &lt;status 状态码&gt; &lt;reason-phrase 原因短语&gt;
+&lt;headers&gt;       首部
+
+&lt;entity-body&gt; 主体
+</code></pre><p><strong>HEAD</strong></p>
+<p>HEAD方法和GET方法的行为类似，但服务器在响应中只返回首部。不会返回实体的主体部分。</p>
+<ol>
+<li>在不获取资源的情况下了解资源的情况</li>
+<li>通过查看响应中的状态吗，查看某个对象是否存在</li>
+<li>通过查看首部，看资源是否被修改</li>
+</ol>
+<p><strong>TARCE</strong></p>
+<p>客户端发起一个请求时，这个请求可能会经过防火墙/代理/网关/或其他一些应用程序。每个中间节点都有可能修改原始的HTTP请求。TRACE方法允许客户端最终将请求发送给服务器时，看它变成什么样子。</p>
+<p><strong>OPTIONS</strong></p>
+<p>OPTIONS方法请求Web服务器告知其支持的功能。可以询问服务器支持那些方法。</p>
+<p><strong>通用首部</strong></p>
+<p>客户端和服务器端都可以使用的通用首部。比如Date首部就是一个通用首部，每一端都可以用它来说明构建报文的时间和日期。</p>
+<p><strong>请求首部</strong></p>
+<pre><code>Client-IP     提供了运行客户端的机器IP
+From            提供了客户端用户的E-mail地址
+Host          给出了接受请求的服务器的主机名和端口号
+Referer         提供了包含当前URI的文档的URL
+</code></pre><p><strong>Accept首部</strong></p>
+<pre><code>Accept     告诉服务器能够发送那些媒体类型
+Accept-Charset    告诉服务器发送那些字符集
+Accept-Encoding  告诉服务器发送那些编码方式
+Accept-Language  告诉服务器发送那些语言
+</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://blog.csdn.net/u010256388/article/details/68491509" target="_blank" rel="noopener">HTTP请求行、请求头、请求体详解</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/01/文件上传漏洞分析/" rel="next" title="PHP文件上传漏洞浅析">
+                <i class="fa fa-chevron-left"></i> PHP文件上传漏洞浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/Java学习笔记/" rel="prev" title="java 基础知识学习">
+                java 基础知识学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-概述"><span class="nav-number">1.</span> <span class="nav-text">HTTP 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Web客户端和服务器"><span class="nav-number">1.1.</span> <span class="nav-text">Web客户端和服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#状态码"><span class="nav-number">1.3.</span> <span class="nav-text">状态码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#报文"><span class="nav-number">1.4.</span> <span class="nav-text">报文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接"><span class="nav-number">1.5.</span> <span class="nav-text">连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL和资源"><span class="nav-number">2.</span> <span class="nav-text">URL和资源</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#URL"><span class="nav-number">2.1.</span> <span class="nav-text">URL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编码机制"><span class="nav-number">2.2.</span> <span class="nav-text">编码机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-报文"><span class="nav-number">3.</span> <span class="nav-text">HTTP 报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

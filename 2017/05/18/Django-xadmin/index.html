@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Django+xadmin的学习。">
+<meta name="keywords" content="Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django+xadmin Web 项目学习">
+<meta property="og:url" content="http://yoursite.com/2017/05/18/Django-xadmin/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="Django+xadmin的学习。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-14/4808993.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-14/48043457.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/98223542-file_1495111157811_10a14.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-18/42083593-file_1495111472688_14a8c.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-19/91022660-file_1495183644258_10440.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/11273807-file_1495430152109_12384.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/89334206-file_1495431631108_108e0.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/18537651-file_1495434427308_d6b8.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/90190901-file_1495437366883_4b40.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/12381592-file_1495437803230_3d31.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/22095926-file_1495437907404_11164.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/9062405-file_1495437962843_1a7.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/66698282-file_1495438052201_1458a.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/10021600-file_1495440358444_1306a.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/54859120-file_1495440372515_7aab.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/58193164-file_1495451652924_14442.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/97477669-file_1495454935346_709c.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/40104656-file_1495454995066_b8fe.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/22160738-file_1495455027303_11b4.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/91575917-file_1495455111375_175b8.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/98756619-file_1495455147154_bbb.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/97600057-file_1495455186946_18596.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-22/71999268-file_1495455231754_fcd0.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-23/86413304-file_1495517951876_81a4.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-23/21831040-file_1495530591065_13b71.png">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/85572886.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/94334736.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/96914339.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/95119231.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/84156983.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/56157267.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/96818477.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-24/51297554.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/93526408.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/47735557.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/83683344.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/74354467.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/34436735.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/20990902.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/43131305.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/23960851.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/7288776.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-5-25/19989099.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-5/16061124.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-6/57962898.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-6/95409888.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-7/8137189.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-7/36323117.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-8/97895571.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-12/50717424.jpg">
+<meta property="og:updated_time" content="2018-01-26T02:51:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django+xadmin Web 项目学习">
+<meta name="twitter:description" content="Django+xadmin的学习。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-6-14/4808993.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/18/Django-xadmin/"/>
+
+
+
+
+
+  <title>Django+xadmin Web 项目学习 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/Django-xadmin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django+xadmin Web 项目学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T15:54:24+08:00">
+                2017-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Web开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Django+xadmin</code>的学习。</p>
+<a id="more"></a>
+<p>2017/05/18</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-14/4808993.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-14/48043457.jpg" alt=""></p>
+<p>环境搭建</p>
+<pre><code>pycharm、navicat、mysql、python2.7
+</code></pre><p>virtualenv</p>
+<p>使不同应用开发环境独立</p>
+<p>环境升级不影响其他应用。也不会影响全局的python环境</p>
+<p>可以防止系统中出现包管理混乱和版本冲突</p>
+<p>使用pip命令</p>
+<pre><code>C:\Users\Administrator&gt;pip install virtualenv
+Collecting virtualenv
+Using cached virtualenv-15.1.0-py2.py3-none-any.whl
+Installing collected packages: virtualenv
+Successfully installed virtualenv-15.1.0
+</code></pre><p>创建virtualenv</p>
+<pre><code>C:\Users\Administrator&gt;virtualenv testvir
+New python executable in C:\Users\Administrator\testvir\Scripts\python.exe
+Installing setuptools, pip, wheel...done.
+
+
+C:\Users\Administrator\testvir\Scripts&gt;activate.bat
+
+(testvir) C:\Users\Administrator\testvir\Scripts&gt;
+
+
+deactivate.bat 退出虚拟环境
+</code></pre><p>安装另外一个软件</p>
+<pre><code>pip install virtualenvwrapper-win
+</code></pre><p>直接安装虚拟环境</p>
+<pre><code>C:\Users\Administrator\testvir\Scripts&gt;mkvirtualenv testvir2
+New python executable in C:\Users\Administrator\Envs\testvir2\Scripts\python.exe
+
+Installing setuptools, pip, wheel...done.
+
+(testvir2) C:\Users\Administrator\testvir\Scripts&gt;
+</code></pre><p>在虚拟环境安装</p>
+<pre><code>C:\Users\Administrator\testvir\Scripts&gt;workon testvir2
+(testvir2) C:\Users\Administrator\testvir\Scripts&gt;cd ..
+
+(testvir2) C:\Users\Administrator\testvir&gt;cd ..
+
+(testvir2) C:\Users\Administrator&gt;pip list
+DEPRECATION: The default format will switch to columns in the future. You can u
+e --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.co
+f under the [list] section) to disable this warning.
+appdirs (1.4.3)
+packaging (16.8)
+pip (9.0.1)
+pyparsing (2.2.0)
+setuptools (35.0.2)
+six (1.10.0)
+wheel (0.29.0)
+
+(testvir2) C:\Users\Administrator&gt;pip install requests
+Collecting requests
+</code></pre><p>开发基于以上的虚拟环境使用。。。</p>
+<p>Pycharm使用</p>
+<p>新建项目 create new project</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/98223542-file_1495111157811_10a14.png" alt=""></p>
+<p>查看创建的环境是否成功</p>
+<p>File–setting–，然后如下图</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-18/42083593-file_1495111472688_14a8c.png" alt=""></p>
+<p>点击Run–Run运行项目，下面显示成功，访问也可以。</p>
+<p>设置Ecipse的快捷键</p>
+<p>File–Setting–输入 keymap–Eclipse, 点击OK</p>
+<p>比如Ecipse的快捷键 Ctrl+h  全局搜索</p>
+<p>可以在Run–Edit设置</p>
+<p>目录文件设置 Mark Directoyry As  Sources Root 设置文件路径。这个设置不当会在编辑器运行的时候报错，找不到路径。。</p>
+<p>Navicat 可以从其他数据库的表复制到另一个</p>
+<p>#####新建项目</p>
+<p>Tools–Run manage.py as Task</p>
+<p>新建项目 startapp message</p>
+<p>新建static目录。。存放静态文件。。  js/css image</p>
+<p>新建log目录，存放日志文件</p>
+<p>新建用户上传文件的目录 media</p>
+<p>新建apps目录，存放所有的项目，因为app多了会乱。。。</p>
+<p>把新建的message项目拉到apps里面。。</p>
+<p>Settings–&gt;Editor–&gt;Colors &amp; Fonts–&gt;Font<br>然后在size那里调整。</p>
+<p>在manage.py中导入apps，如果下面的编写，需要把message设置为Root路径，但是在cmd下执行的时候，会报错。</p>
+<pre><code>from message import views
+
+
+(testvir2) C:\Users\Administrator\PycharmProjects\djangostart&gt;python manage.py r
+unserver
+Traceback (most recent call last):
+  File &quot;manage.py&quot;, line 5, in &lt;module&gt;
+from message import views
+ImportError: No module named message
+</code></pre><p>现在需要在settings.py中把项目路径apps设置为搜索路径。就不会报错。。</p>
+<p>Shift+Tab 向前缩进</p>
+<p>在static里面创建css文件，然后在css里面创建style.css保存样式。。</p>
+<p>配置settings.py连接数据库</p>
+<pre><code>DATABASES = {
+&apos;default&apos;: {
+&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
+&apos;NAME&apos;: &quot;testdjango&quot;,
+&apos;USER&apos;:&quot;root&quot;,
+&apos;PASSWORD&apos;:&quot;&quot;,
+&apos;HOST&apos;:&quot;127.0.0.1&quot;
+}
+}
+</code></pre><p>windows下安装mysql-python有错误。。。</p>
+<p>blog.csdn.net/u012882134/article/details/51934165</p>
+<p>坑</p>
+<p>setting.py 中 static 样式的路径</p>
+<pre><code>STATIC_URL = &apos;/static/&apos;
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR,&apos;static&apos;)
+]
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-19/91022660-file_1495183644258_10440.png" alt=""></p>
+<p>配置settings.py设置数据库，编写views.py,urls.py以及HTML与css的分离，地址的配置。。</p>
+<p>#####Models</p>
+<p>ORM:</p>
+<pre><code>def book_list(request):
+    db = MySQl.db.connect(user=&apos;root&apos;,db=&apos;mydb&apos;,password=&apos;root&apos;,host=&apos;localhost&apos;)
+    cussor = db.cursor()
+    cursor.execute(&apos;select name from books order by name&apos;)
+    names = [row[0] for row in cursor.fetchall()]
+    db.close()
+</code></pre><p>在views.py中，加.代表models和views同一目录</p>
+<pre><code>from .models import UserMessage
+</code></pre><p>之前在写入数据库中时候出现了一些配置错误，现在可以了。</p>
+<p>写入数据</p>
+<pre><code>def getform(request):
+# all_message = UserMessage.objects.filter()
+# for message in all_message:
+# print message.name
+user_meassage = UserMessage()
+user_meassage.name = &quot;booby&quot;
+user_meassage.message = &quot;hello&quot;
+user_meassage.address = &quot;上海&quot;
+user_meassage.email = &quot;201@sina.com&quot;
+user_meassage.object_id = &quot;hello&quot;
+user_meassage.save()
+</code></pre><p>#####学习了如何存入数据，删除数据</p>
+<pre><code> all_message = UserMessage.objects.filter(name=&apos;mlb&apos;,address=&apos;北京&apos;)
+#all_message.delete()
+for message in all_message:
+message.delete()
+   # print message.name
+# if request.method == &quot;POST&quot;:
+#     name = request.POST.get(&apos;name&apos;,&apos;&apos;)
+#     message = request.POST.get(&apos;message&apos;, &apos;&apos;)
+#     address = request.POST.get(&apos;address&apos;, &apos;&apos;)
+#     email = request.POST.get(&apos;email&apos;, &apos;&apos;)
+#     user_meassage = UserMessage()
+#     user_meassage.name = name
+#     user_meassage.message = message
+#     user_meassage.address = address
+#     user_meassage.email = email
+#     user_meassage.object_id = &quot;hello123&quot;
+#     user_meassage.save()
+
+return render(request,&apos;message_form.html&apos;)
+</code></pre><p>取出数据</p>
+<p>#####提取数据到页面</p>
+<p>在Template中展示后台数据。</p>
+<pre><code>&lt;input value={{ }}&gt;
+
+
+&lt;input id=&quot;address&quot; type=&quot;text&quot; value=&quot;{{ my_message.address }}&quot; name=&quot;address&quot; placeholder=&quot;请输入联系地址&quot;/&gt;
+
+message = None
+all_messages = UserMessage.objects.filter(name=&apos;booby&apos;)
+if all_messages:
+    message = all_messages[0]
+
+return render(request,&apos;message_form.html&apos;,{&quot;my_message&quot;:message})
+</code></pre><p>#####Template if 用法</p>
+<pre><code>&lt;input id=&quot;name&quot; type=&quot;text&quot; value=&quot;{% if my_message.name == 'booby'%}boobytest{% endif %}" 
+
+如果name为booby，就会变为 boobytest
+
+
+	value="{% if not my_message.name == 'booby'%}boobytest{% else %} booby not test{% endif %}&quot;
+</code></pre><p>#####URL配置技巧</p>
+<pre><code>url(r&apos;^form/$&apos;.getform,name=&apos;go_form&apos;)
+</code></pre><p>html中和urls配置中，name的设置。。name、go_form。。。。urls路由，给每一个都要起一个名字。。。在templates中容易引用。。。</p>
+<pre><code>&lt;form action=&quot;{% url 'go_form' %}&quot; method=&quot;post&quot; class=&quot;smart-green&quot;&gt;
+</code></pre><p>#####问题</p>
+<pre><code>Error fetching command &apos;collectstatic&apos;: You&apos;re using the staticfiles app without having set the STATIC_ROOT setting to a filesystem path.
+Command &apos;collectstatic&apos; skipped
+</code></pre><p>解决</p>
+<pre><code>STATIC_ROOT = &apos;C:\Users\Administrator\PycharmProjects\django1\static&apos;
+</code></pre><p>#####快捷键</p>
+<p>多行注释   Ctrl+/</p>
+<p>F6单步断点</p>
+<hr>
+<p>#####项目开发</p>
+<p>django app设计</p>
+<p>各app models设计</p>
+<p>数据表生成与修改</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/11273807-file_1495430152109_12384.png" alt=""></p>
+<p>配置虚拟环境，安装django</p>
+<pre><code>pip install virtualenvwrapper-win
+mkvirtualenv mxonline
+pip install django==1.9
+</code></pre><p>在PyCharm中新建项目，路径选好</p>
+<pre><code>C:\Users\Administrator\Envs\mxonline\Scripts
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/89334206-file_1495431631108_108e0.png" alt=""></p>
+<p>在开始Models和apps之前，先安装数据库驱动。。。</p>
+<pre><code>pip install mysql-python
+</code></pre><p>安装会出错，已经下载解决方案。。</p>
+<pre><code>(mxonline) E:\Download&gt;pip install MySQL_python-1.2.5-cp27-none-win_amd64.whl
+</code></pre><p>配置settings.py 的数据库</p>
+<pre><code>DATABASES = {
+&apos;default&apos;: {
+&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
+&apos;NAME&apos;: &apos;mxonline&apos;,
+&apos;USER&apos;: &apos;root&apos;,
+&apos;PASSWORD&apos;:&apos;&apos;,
+&apos;HOST&apos;:&quot;127.0.0.1&quot;
+}
+}
+</code></pre><p>在Naivate 新建数据库 mxonline</p>
+<p>在Pycharm生成默认数据表</p>
+<p>makemigration、migrate</p>
+<p>运行时，，Debug可以随时打断点。。</p>
+<p>新建app</p>
+<pre><code>startapp users
+</code></pre><p>第一步是修改Models.py</p>
+<p>user 表的内容</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/18537651-file_1495434427308_d6b8.png" alt=""></p>
+<p>可以继承默认的表的字段</p>
+<pre><code>from django.contrib.auth.models import AbstractUser
+</code></pre><p>需要新添加的字段，昵称，生日，性别、区域、手机、邮箱。。</p>
+<p>利用image的时候，需要安装pillow</p>
+<pre><code>&gt;pip install pillow
+</code></pre><p>makemigrations的时候，，遇到错误。。。</p>
+<pre><code>Error fetching command &apos;squashmigrations&apos;: expected an indented block (loader.py, line 160)
+Command &apos;squashmigrations&apos; skipped
+Error fetching command &apos;sqlmigrate&apos;: expected an indented block (loader.py, line 160)
+Command &apos;sqlmigrate&apos; skipped
+Error fetching command &apos;makemigrations&apos;: expected an indented block (loader.py, line 160)
+Command &apos;makemigrations&apos; skipped
+Error fetching command &apos;runserver&apos;: expected an indented block (loader.py, line 160)
+Command &apos;runserver&apos; skipped
+</code></pre><p>因为你在一个文件中，无意中插入了一个字母m，导致该文件报错。。</p>
+<p>扩展django默认的表</p>
+<pre><code>class UserProfile(AbstractUser):
+    nick_name = models.CharField(max_length=50,verbose_name=u&quot;昵称&quot;,default=&quot;&quot;)
+    birday = models.DateField(verbose_name=u&quot;生日&quot;,null=True,blank=True)
+    gender = models.CharField(max_length=5,choices=((&quot;male&quot;,u&quot;男&quot;),(&quot;female&quot;,&quot;女&quot;)),default=&quot;female&quot;)
+    address = models.CharField(max_length=100,default=u&quot;&quot;)
+    mobile = models.CharField(max_length=11,null=True,blank=True)
+    image = models.ImageField(upload_to=&quot;image/%Y/%m&quot;,default=u&quot;image/default.png&quot;,max_length=100)
+
+    class Meta:
+    verbose_name = &quot;用户信息&quot;
+    verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+    return self.username
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/90190901-file_1495437366883_4b40.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/12381592-file_1495437803230_3d31.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/22095926-file_1495437907404_11164.png" alt=""></p>
+<p>app设计</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/9062405-file_1495437962843_1a7.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/66698282-file_1495438052201_1458a.png" alt=""></p>
+<h5 id="新建另外一个app-courses-课程"><a href="#新建另外一个app-courses-课程" class="headerlink" title="新建另外一个app courses 课程"></a>新建另外一个app courses 课程</h5><p>课程和章节，一对多</p>
+<p>章节下可能有多个视频。。</p>
+<p>课程下有多个章节，一个章节下可能有多个视频。。</p>
+<p>课程下面有资源下载，一对多。。。</p>
+<p>四张表</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/10021600-file_1495440358444_1306a.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/54859120-file_1495440372515_7aab.png" alt=""></p>
+<p>数据库设计，一对一，一对多。。。</p>
+<h5 id="organization-mode"><a href="#organization-mode" class="headerlink" title="organization mode"></a>organization mode</h5><p>CourseOrg – 课程机构基本信息</p>
+<p>Teacher –教师基本信息</p>
+<p>CityDict 城市信息</p>
+<h5 id="operation"><a href="#operation" class="headerlink" title="operation"></a>operation</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/58193164-file_1495451652924_14442.png" alt=""></p>
+<p>建立python package，把几个app拉进去。。同时把apps设置为Source root</p>
+<p>在settings.py下面设置 apps路径</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/97477669-file_1495454935346_709c.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/40104656-file_1495454995066_b8fe.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/22160738-file_1495455027303_11b4.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/91575917-file_1495455111375_175b8.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/98756619-file_1495455147154_bbb.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/97600057-file_1495455186946_18596.png" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-22/71999268-file_1495455231754_fcd0.png" alt=""></p>
+<p>#####后台管理系统</p>
+<p>权限管理、少前端样式、快速开发、</p>
+<p>django admin也是一个app。。</p>
+<pre><code>manage.py@MxOnline &gt; createsuperuser
+</code></pre><p>用户名和密码登录。。。</p>
+<p>设置中文，setting.py…</p>
+<pre><code>LANGUAGE_CODE = &apos;zh-hans&apos;
+
+TIME_ZONE = &apos;Asia/Shanghai&apos;
+
+USE_TZ = False
+</code></pre><p>app，users中的admin.py注册到后台。。。</p>
+<pre><code>from django.contrib import admin
+
+# Register your models here.
+
+from .models import  UserProfile
+
+class UserProfileAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(UserProfile,UserProfileAdmin)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-23/86413304-file_1495517951876_81a4.png" alt=""></p>
+<p><strong>问题</strong>：通过以上就可以把自己写的用户信息的数据库注册到后台里面，在后台可以看到和设计数据库的字段一样的。。。</p>
+<p>在使用Django Admin后台添加用户时出现报错，在后台添加新的用户，报错。。这个问题你在网上找到了答案，可以测试的时候，没有测试成功。。细心和耐心不够。。。</p>
+<pre><code>IntegrityError at /admin/users/userprofile/add/
+(1452, &apos;Cannot add or update a child row: a foreign key constraint fails (`mxonline`.`django_admin_log`, CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`))&apos;)
+</code></pre><p>一个bug，在某些django版本中，使用自定义User后，在创建用户的时候，数据库中的django_admin_log不能正确的写入，原因是，这个表中有一个外键约束，针对的是auth_user表，但所由于自定义了User，使用的是自定义用户，则外键约束失败，解决方法是，删除外键约束，然后重新添加一个针对自定义User表id的约束即可</p>
+<p>  <code>CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES users_userprofile (id)</code></p>
+<p>在settings.py的DATABASES板块中添加以下代码取消外键检查。。</p>
+<pre><code>&apos;OPTIONS&apos;:{&apos;init_command&apos;:&apos;SET foreign_key_checks=0&apos;}
+</code></pre><h5 id="xadmin"><a href="#xadmin" class="headerlink" title="xadmin"></a>xadmin</h5><pre><code>pip install xadmin
+</code></pre><p>在settings.py中添加apps</p>
+<pre><code>&apos;xadmin&apos;,
+&apos;django-crispy-forms&apos;
+</code></pre><p>改变urls.py</p>
+<p>pip uninstall xadmin</p>
+<p><strong>源码安装</strong></p>
+<p>安装源码，将xadmin拷贝进去，并新建目录extra_apps&lt;将xadmin放进去，设置Source root..</p>
+<p>#####users app的model注册到xadmin后台</p>
+<p>新建py模版，settings–template–File and COde Template–Python </p>
+<p><strong>date</strong> - ‘$DATE $TIME’</p>
+<p>新建一个adminx.py把邮箱验证码添加进去。。。</p>
+<pre><code>import xadmin
+
+from .models import  EmailVerifyRecord
+
+class EmailVerifyRecordAdmin(object):
+    pass
+
+xadmin.site.register(EmailVerifyRecord,EmailVerifyRecordAdmin)
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-23/21831040-file_1495530591065_13b71.png" alt=""></p>
+<p>没有log表，因为新的xadmin的数据表没有迁移。。</p>
+<p>ImportError: No module named xadmin</p>
+<p>路径设置一下，，</p>
+<pre><code>sys.path.insert(0,os.path.join(BASE_DIR,&apos;extra_apps&apos;))
+</code></pre><p>adminx.py中的字段</p>
+<p>list_display列表显示、search_fields 搜索、、list_filter筛选字段、</p>
+<p>在每个app里面新建adminx.py,然后在里面把models注册到后台里面。<br>其中的字段就是models中定义的字段。。。</p>
+<p>apps：users、courses、operation、organization。</p>
+<p>把后台数据表注册到后台之后，可以看到相应的内容。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/85572886.jpg" alt=""></p>
+<h5 id="后台全局配置"><a href="#后台全局配置" class="headerlink" title="后台全局配置"></a>后台全局配置</h5><p>比如左上角以及最下面的名字修改。。。把app的名字改为中文，，，</p>
+<p>users/adminx.py 设置修改，添加代码。。。。 主题代码</p>
+<pre><code>from xadmin import views
+
+class BaseSetting(object):
+    enable_themes = True
+    use_bootswatch = True
+
+xadmin.site.register(views.BaseAdminView,BaseSetting)
+</code></pre><p>左上角</p>
+<pre><code>class GlobalSettings(object):
+    site_title = &quot;504后台管理系统&quot;
+    site_footer = &quot;504Comeon&quot;
+
+xadmin.site.register(views.CommAdminView,GlobalSettings)
+</code></pre><p>左侧导航栏。。</p>
+<pre><code>menu_style = &quot;accordion&quot;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/94334736.jpg" alt=""></p>
+<p>app下apps.py中修改中文名字。。</p>
+<pre><code>verbose_name = u&quot;用户操作&quot;
+</code></pre><p><strong>init</strong>.py 添加引用。。</p>
+<pre><code>default_app_config= &quot;operation.apps.OperationConfig&quot;
+</code></pre><p>可以看到，后台的名字为中文。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/96914339.jpg" alt=""></p>
+<p>主题的显示，在用户里面注册了一个主题。。</p>
+<h4 id="前台业务逻辑"><a href="#前台业务逻辑" class="headerlink" title="前台业务逻辑"></a>前台业务逻辑</h4><h4 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h4><p>首先前端的index.html放在template目录下面。。</p>
+<p>新建static文件，将静态文件拷贝进来。。</p>
+<p>配置urls.py</p>
+<pre><code>url(&apos;^$&apos;,TemplateView.as_view(template_name=&quot;index.html&quot;),name=&quot;index&quot;)
+</code></pre><p>前端的css找不到，需要在settings.py配置路径。。。</p>
+<pre><code>url(&apos;^$&apos;,TemplateView.as_view(template_name=&quot;index.html&quot;),name=&quot;index&quot;)  # template_name 指向静态文件
+</code></pre><p>问题，静态文件加载不了，500错误。元组，如果只有一个元素，一定加逗号。。</p>
+<pre><code>STATICFILES_DIRS  = (
+os.path.join(BASE_DIR,&quot;static&quot;),
+)
+</code></pre><h5 id="配置登录界面"><a href="#配置登录界面" class="headerlink" title="配置登录界面"></a>配置登录界面</h5><p>urls.py</p>
+<pre><code>url(&apos;login/^$&apos;,TemplateView.as_view(template_name=&quot;index.html&quot;),name=&quot;login&quot;)
+</code></pre><p>在index.html前端，修改登录 中的href 为login</p>
+<h5 id="登录进去"><a href="#登录进去" class="headerlink" title="登录进去"></a>登录进去</h5><h5 id="用户登录的后台逻辑"><a href="#用户登录的后台逻辑" class="headerlink" title="用户登录的后台逻辑"></a>用户登录的后台逻辑</h5><p>users/views.py</p>
+<pre><code>def login(request):
+    if request.method == &quot;POST&quot;:
+        pass
+    elif request.method == &quot;GET&quot;:
+        return  render(request,&quot;login.html&quot;, {})#{}字典那些变量需要传递也前端，空的时候，不做处理。
+</code></pre><p>urls.py</p>
+<pre><code>url(&apos;^login/$&apos;, login, name=&quot;login&quot;)
+</code></pre><p>打一个断点，看请求的变量。指向Url的地址。。。<br>当我们从主页面点击登录的时候，由于是get请求 ，所以会跳转到登录login.html页面。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/95119231.jpg" alt=""></p>
+<p>后台登录之前，login.html的input表单。。。</p>
+<p>action中的地址。/login/，表单中的 username以及password会传递到后台。。。</p>
+<p>但是点击击立刻登录的时候，已经输入用户名以及密码的时候，是post请求，可以看到断点。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/84156983.jpg" alt=""></p>
+<p>可以看到token的保护。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/56157267.jpg" alt=""></p>
+<p>数据发过来了，我们要取这个数据。。。然后验证一下数据是否合法。。</p>
+<pre><code>from django.contrib.auth import authenticate  认证、、
+</code></pre><p>当认证成功后，返回首页或者个人中心，这里没有个人中心，返回首页，需要修改首页的index.html源码。。。</p>
+<p>inedx.html有两个div。。</p>
+<p>一个登录和注册，一个判断用户登录之后显示。。可以看到现在这两个是同时存在的。。。<br>在返回html之前需要进行判断，显示那一段，，，html中不允许写入大量的逻辑。。。允许某个对象调用其中的方法。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/96818477.jpg" alt=""></p>
+<p>学会看错误，然后便于修改。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-24/51297554.jpg" alt=""></p>
+<p><a href="http://alanhou.org/django/" target="_blank" rel="noopener">http://alanhou.org/django/</a></p>
+<p>应该是数据库配置的问题，字段的设置错误。。。</p>
+<p><a href="https://stackoverflow.com/questions/1253459/mysql-error-1452-cannot-add-or-update-a-child-row-a-foreign-key-constraint-fa" target="_blank" rel="noopener">https://stackoverflow.com/questions/1253459/mysql-error-1452-cannot-add-or-update-a-child-row-a-foreign-key-constraint-fa</a></p>
+<p><a href="http://www.jianshu.com/p/8769329eed4d" target="_blank" rel="noopener">http://www.jianshu.com/p/8769329eed4d</a></p>
+<h5 id="用户邮箱登录"><a href="#用户邮箱登录" class="headerlink" title="用户邮箱登录"></a>用户邮箱登录</h5><p>自定义后台认证方法。。。<br>在setting.py  田间变量认证。。。</p>
+<pre><code>AUTHENTICATION_BACKENDS = (
+&apos;users.views.CustomBackend&apos;,
+)
+
+
+class CustomBackend(ModelBackend):  #继承backend类
+def authenticate(self, username=None, password=None, **kwargs):
+try:
+user = UserProfile.objects.get(username,username) #只查询 username
+if user.check_password(password):   #明文加密，user password作对比
+return user
+except Exception as e:
+return None
+</code></pre><p>重定义登录方式，用户名以及邮箱来进行登录。。。</p>
+<p>views.py</p>
+<pre><code>return render(request,&quot;login.html&quot;,{&quot;msg&quot;:&quot;用户名或者密码错误&quot;}) 
+</code></pre><p>login.html</p>
+<pre><code>&lt;div class=&quot;error btns login-form-tips&quot; id=&quot;jsLoginTips&quot;&gt;{{ msg }}&lt;/div&gt;
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/93526408.jpg" alt=""></p>
+<p>6-1，2，3问题</p>
+<p>index.html中.今天一下午对前台业务逻辑，怎么实现的，没有处理好，费了很多的时间来处理。比如元组的一个元素要加单引号，其他的一些后台和前台的结合的配置。。</p>
+<p>里面的<code>if</code>忘记写了，基础不牢固，把<code>templates</code>里面的python逻辑学精。。。。</p>
+<p>一个是inedx.html中{if 的判断}，当用户输入是真的时候返回那个页面，假的时候如何选择，其实这是基本的知识，但是由于自己不懂，才花费很多的时间来处理。。。。基础知识花时间多去学习。。。。</p>
+<p>6.3 主要是进行用户名和密码进行登录验证，可以登录进来，如有错误，会提示用户名或者密码错误。。。</p>
+<p>6.4 完善用户登录</p>
+<p>之前的配置是基于函数，这次要基于类，继承。。基于类来login。。</p>
+<p>在users下面创建forms.py 表单文件。。。</p>
+<p>6.5 登录的逻辑，通过form进行验证。。并在界面显示这个字段错误，或者用户名密码错误。。。</p>
+<p>完善login的用户提示。。。以下验证信息是form完成的。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/47735557.jpg" alt=""></p>
+<p>forms.py</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/83683344.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/74354467.jpg" alt=""></p>
+<p><strong>6.6</strong> Session和cookie</p>
+<p>Session和cookie</p>
+<p>cookie浏览器本地存储方式，，</p>
+<pre><code>{key,value}
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/34436735.jpg" alt=""></p>
+<p>服务器把id分配给用户，id=1，用户请求的时候，cookie中的id=1</p>
+<p>带上cookie就是有状态的请求。。</p>
+<p>cookie本地存储，把服务器给我们的信息保存到本地，请求的时候再给服务器。。。这样完成用户信息的保存。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/20990902.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/43131305.jpg" alt=""></p>
+<p>保存在数据库中的session</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/23960851.jpg" alt=""></p>
+<p>浏览器中的sessionid</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/7288776.jpg" alt=""></p>
+<p>当请求的时候，服务器不用判断用户名以及密码了。。。</p>
+<p>有一个django.contrib.sessions app对request,response来进行拦截。。到数据库进行查找。。默认配置好的。。。</p>
+<p>cookie本地存储的，浏览器的。。。<br>cookie不安全，不能把所有的信息保存到本地。。</p>
+<p><a href="http://www.freebuf.com/articles/web/10369.html" target="_blank" rel="noopener">Session的本质</a></p>
+<p>正是基于这个考虑，服务器返回id的时候，用到了session的机制，session的机制根据用户名和密码生成一段字符串，这个字段是有过期时间的，session是由服务器生成的，存储在服务器端，发给用户，用户把它存储在cookie当中，下一次的请求的时候，用户在cookie中带上这个sessionid，带回到服务器，服务器通过sessionid在数据库中查询这个用户是那个用户，就可以对这个用户做标记了。。</p>
+<p>6.7 用户注册</p>
+<p>首先urls.py 配置，把前端的注册代码拷贝到templates..</p>
+<p>在views.py写入类。。。</p>
+<pre><code>class RegisterView(View):
+    def get(self,request):
+        return render(request,&quot;register.html&quot;,{})
+</code></pre><p>把index.html中的注册链接，指向register..</p>
+<pre><code>&lt;a style=&quot;color:white&quot; class=&quot;fr registerbtn&quot; href=&quot;{% url 'register' %}&quot;&gt;注册&lt;/a&gt;
+</code></pre><p>点击首页的注册，就可以跳转到注册页面。。。</p>
+<pre><code>对之前的../改为 /static/css的时候，可以是使用{% %}来引用、、、
+</code></pre><p>首先在index.html中 </p>
+<pre><code>{% load staticfiles %}
+href=&quot;{% static 'css/reset.css' %}&quot;&gt;
+</code></pre><p>静态文件都这么做，，，</p>
+<p>点击注册，返回的页面。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-5-25/19989099.jpg" alt=""></p>
+<p>也是表单的提交。。。</p>
+<p>captcha,第三方插件验证码。。，安装。。。。下面的链接为设置验证码的。。</p>
+<p><a href="http://django-simple-captcha.readthedocs.io/en/latest/usage.html#installation" target="_blank" rel="noopener">http://django-simple-captcha.readthedocs.io/en/latest/usage.html#installation</a></p>
+<pre><code>pip install  django-simple-captcha==0.4.6
+</code></pre><p>犯错误的地方，render的参数，第三个参数，字典形式。。。</p>
+<pre><code>return render(request,&quot;register.html&quot;,{&apos;register_form&apos;:register_form})
+</code></pre><p>6.9，10 邮箱发送，，</p>
+<p>这个是注册页面，另外有邮箱激活功能，其实注册的时候逻辑和登录的类似，包括其中前端页面的修改，报错信息之类的。。views一些逻辑，forms表单，前端的错误信息显示..</p>
+<p>学到用户是否被激活、、、</p>
+<h5 id="授课机构-6-1号"><a href="#授课机构-6-1号" class="headerlink" title="授课机构    6/1号"></a>授课机构    6/1号</h5><p>共有头部底部的，template…</p>
+<pre><code>{%   include  %}
+</code></pre><p>模版继承的机制。。</p>
+<p>首先在template中新建一个base.html</p>
+<p>把课程机构拷贝过来。。。</p>
+<p>在base.html中加入</p>
+<pre><code>{% load staticfiles %}
+</code></pre><p>定义一个父模版，其中的头和底固定的。。。</p>
+<p>在title里面。。</p>
+<pre><code>&lt;title&gt;{% block title %}课程机构列表 - 慕学在线网{% endblock %}
+
+block的用处，，，静态文件有共有的。。。
+
+    {% block custom_css %}{% endblock %}用户可以加入自定义的css，也可以包含全局的。。。
+</code></pre><p>js也是这样的。。。</p>
+<pre><code>{% block custom_bread %}
+    <section>
+    <div class="wp">
+    <ul class="crumbs">
+    <li><a href="index.html">首页</a>></li>
+    <li>课程机构</li>
+    </ul>
+    </div>
+    </section>
+    {% endblock %}
+</code></pre><p>7-1 base页面的定制。。对html模版的引用以及定制。。。</p>
+<p>在org-list.html中继承模版。。。</p>
+<pre><code>{% extends 'base.html' %}
+{% block title %}课程机构列表 - 幕学在线网{% endblock %}
+	#{只替换其中的title，其他的保留下来#}
+    
+
+7-2 页面以及页尾的继承。。中间自己的内容需要自己编写。。。模版的继承
+
+
+7-3 课程列表的逻辑编写
+
+动态数据，从后台读取。编写view
+
+所在地区、
+
+数据models编写完之后，可以完善view
+
+每个课程机构都是一个dl
+
+7-4 将自己写的数据库里面的内容发送到前端，如何配置路径以及将数据库里的动态内容显示到前端。。。
+
+7-5 显示分页功能的设计。。。
+
+pure pagination
+
+    https://github.com/jamespacileo/django-pure-pagination     
+ 
+ 根据其中的文档写出自己的逻辑。来具体的怎么分页。。分页功能主要使用的是上面的那个库，根据这个文档的说明，来进行分析研究。。。
+
+7-6  筛选。。。
+
+城市的筛选，机构类别的筛选。。。
+
+
+	<a href="?order_by="><span class="active">全部</span></a>
+	
+	<a href="?ct=pxjg"><span class="">培训机构</span></a>
+	
+	<a href="?ct=gx"><span class="">高校</span></a>
+	
+	<a href="?ct=gr"><span class="">个人</span></a>
+
+
+在views里面和前端都需要修改。。。
+
+右侧的授课机构排名。。。
+
+![](http://opmi2ydgh.bkt.clouddn.com//17-6-1/24358973.jpg)
+
+排序关联，在选择北京市的时候，还可以进行课程数的选择。。。
+
+7-7
+
+表单提交的完成
+
+![](http://opmi2ydgh.bkt.clouddn.com//17-6-1/10796034.jpg)
+
+UserAsk表单的提交
+
+之前的是先创建一个forms.py，现在通过models.py来转换为forms。。
+
+其中的UserAsk在operation里面，但是填写表单在organization的里面。。。forms.py
+
+django url中的include使用。。在每个app可以自己配置url。。这个设置主要是根目录和相对目录。为了减少主urls.py的复杂，在相应的apps里面创建新的urls.py
+
+url的分发。。。
+
+ModelForm在一定条件下比Form方便。。。兼具了Model和Form的功能。。。内容可以直接存储到数据库。。
+
+在用户咨询表单添加内容。。。
+
+在我要学习咨询的表单中提交内容，可以在数据库中看到，利用script和ajax来响应。。。
+
+7-9 机构详情。。。
+
+点击课程--跳转到课程机构页面。。。
+
+点击这个图片，就可以跳转到对应的机构页面‘
+
+![](http://opmi2ydgh.bkt.clouddn.com//17-6-2/8380597.jpg)
+
+![](http://opmi2ydgh.bkt.clouddn.com//17-6-2/54891398.jpg)
+
+7-10 机构课程的页面显示
+
+7-11 机构介绍显示。。。一般都是左边的框架不同，所以这几个页面可以通过继续模版。。。
+
+面包屑的修改。。。
+
+
+	{% block page_path %}机构教师{% endblock %}
+</code></pre><p>7-12 收藏页面的设置</p>
+<p>页面的显示已经完成，在这一节做收藏的实现。。。</p>
+<p>收藏功能。异步完成，ajax…</p>
+<p>加url..</p>
+<pre><code>RemovedInDjango110Warning: django.core.context_processors is deprecated in favor of django.template.context_processors.
+  __import__(name)
+</code></pre><p>出现这个错误，遇到的问题，用户未登录的情况下，可以收藏成功。。。。</p>
+<p>这次的问题，主要是没有耐心听下去课程，遇到问题可以先放下，把这节的课程听完。</p>
+<p>收藏功能，各个页面都要显示出来是收藏。。。。</p>
+<p>8-1 公开课</p>
+<p>页面显示最新、最热、参与人数。。。。</p>
+<p>课程详情，开始学习下面的所有视频，章节和评论。。资料展示以及下载。。。</p>
+<p>把前端的页面拷贝过来。。。course-list.html,首先写url,,</p>
+<p>在主urls.py中，include..</p>
+<p>base.html的继承。。。course-list.html继承base的头和尾部的内容，然后其中的面包屑，以及内容需要独有的html。。。</p>
+<pre><code>{% block title %}公开课列表 - 幕学在线网{% endblock %}
+    {% block custom_bread %}
+    {% endblock %}
+{% block content %}
+    {% endblock %}
+
+
+
+让数据库中的数据动态的展示，需要在后台添加数据。。。在前台页面作展示。。。
+
+需要修改在页面显示数据的具体位置，比如\&lt;h2\&gt;等一些字段的显示。。。
+</code></pre><p>分页功能。。页面的分页，代码是通用的，首先在view中</p>
+<h6 id="对课程进行分页"><a href="#对课程进行分页" class="headerlink" title="对课程进行分页"></a>对课程进行分页</h6><pre><code>try:
+    page = request.GET.get(&apos;page&apos;, 1)
+except PageNotAnInteger:
+    page = 1
+
+p = Paginator(all_courses, 3, request=request)  # 5每页的数量
+
+courses = p.page(page)
+</code></pre><p>然后就是html</p>
+<pre><code>&lt;div class=&quot;pageturn&quot;&gt;
+&lt;ul class=&quot;pagelist&quot;&gt;
+{% if all_courses.has_previous %}
+	     <li class="long"><a href="?{{ all_courses.previous_page_number.querystring }}">上一页</a></li>
+	    {% endif %}
+
+{% for page in all_courses.pages %}
+	    {% if page %}
+	    {% ifequal page all_courses.number %}
+	     <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+	    {% else %}
+	     <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+	    {% endifequal %}
+	    {% else %}
+	    <li class="none"><a href="">...</a></li>
+	    {% endif %}
+	    {% endfor %}
+{% if all_courses.has_next %}
+	     <li class="long"><a href="?{{ all_courses.next_page_number.querystring }}">下一页</a></li>
+	    {% endif %}
+
+
+&lt;/ul&gt;
+&lt;/div&gt;
+</code></pre><p>排序功能和课程机构的类似。。。</p>
+<p>sort,</p>
+<p>公开课右边的热门课程推荐。。。</p>
+<pre><code>{{ hot_course.degree }}   难度的显示。。。但是难度是多选项，可以使用下面的这个显示。。。
+
+
+{{ hot_course.get_degree_display }} 专门针对choice显示的。。
+</code></pre><p>30min的视频—100min完成。。。         3倍呀。。。。。</p>
+<p>8-2 课程详情页</p>
+<p>首先 html的拷贝。。。</p>
+<p>在前端显示中没有章节数，如何统计。。可以在models中定义一个函数，def 章节数。。。</p>
+<p>课程点击之后，把其中的点击数量加一。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-5/16061124.jpg" alt=""></p>
+<p>8-3 课程详情下面的部分内容以及右部分，授课机构。。</p>
+<p>相关课程的推荐。。代码的编写。。。按照点击数做相关推荐。。首先在course.models字段里面添加一个tag..</p>
+<p>可以看到界面的收藏。。。需要js代码来完成。。。</p>
+<p>8-4-5 点击开始学习，进入学习页面，显示，章节，每一章的内容以及其中的具体学习内容。比如视频。。</p>
+<p>章节信息，评论信息。。</p>
+<p>把其中的html拷贝到template里面。。先考虑继承base.html</p>
+<p>其中的视频没有在页面显示的原因，是因为在models中添加def函数的时候，应该在对应的数据表中添加对应的def函数。。。</p>
+<p>在这个浪费了许多的时间，其中的原因还是不明白其中的原理，为什在在models下的加入def函数，可以显示数据。。。</p>
+<p>资源下载。。。</p>
+<p>view中是将数据取出来，并展示在页面。</p>
+<p>思考，课程的遍历 </p>
+<pre><code>{%  for a in aa %}  {% endfor %}
+</code></pre><p>把内容遍历出来后，利用数据库的一些属性a.b来将其显示在页面。。。</p>
+<pre><code>class CourseInfoView(View):
+    &quot;&quot;&quot;
+    课程章节信息
+    &quot;&quot;&quot;
+    def get(self,request,course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+        return render(request, &quot;course-video.html&quot;, {
+        &quot;course&quot;: course,
+        &quot;course_resources&quot;:all_resources
+
+})
+</code></pre><p>比如，在view中使用class来建立视图，取数据库中的数据 <code>course = Course.objects.get(id=int(course_id))</code> 然后将其显示在某个前端页面中</p>
+<pre><code>return render(request, &quot;course-video.html&quot;, {&quot;course&quot;: course,｝)
+</code></pre><p>字典形式，键是名字，值就是从数据库中取到的值。。因为取到的值是多个的，所以在前端需要进行遍历一个个的显示。。比如说取的是那一个数据库，就可以使用其中的属性，在页面来显示。。</p>
+<pre><code>如果数据库中一个字段是多选的，比如难易程度，在前端显示的时候 `{{ course.get_degree_display }}`
+</code></pre><p>需要 .get_字段_display</p>
+<p>8-6 课程评论。。。。</p>
+<p>首先配置 url</p>
+<pre><code>url(r&apos;^comment/(?P&lt;course_id&gt;\d+)/$&apos;,CourseInfoView.as_view(),name=&quot;course_info&quot;),
+</code></pre><p>写view，首先一个get方法、、、</p>
+<pre><code>class CommentsView(View):
+    def get(self,request,course_id):
+        return render(request,&quot;course-video.html&quot;,{})
+
+
+all_comments = CourseComments.objects.all()    取出数据库的全部字段
+all_comments = CourseComments.objects.get()      可能抛出异常
+all_comments = CourseComments.objects.filter()  这几个方法需要整理
+</code></pre><p>url 跳转的时候</p>
+<pre><code>href=&quot;{% url 'course:course_comments' course.id  %}&quot;    后面加入 course.id
+
+url(r&apos;^info/(?P&lt;course_id&gt;\d+)/$&apos;,CourseInfoView.as_view(),name=&quot;course_info&quot;), url配置的，(?P&lt;course_id&gt;\d+)
+</code></pre><p>你只是在后台把评论写了进来，在前端如何进行添加评论呢？傻了吧。。。新建view</p>
+<p>添加评论的view，先判断是否登录，然后取数据存入到数据库中。。。。</p>
+<pre><code>class AddCommentsView(View):
+    &quot;&quot;&quot;
+    用户添加课程评论
+    &quot;&quot;&quot;
+    def post(self,request):   #post方式来提交数据
+        if  not request.user.is_authenticated():
+            #判断用户登录状态
+            return HttpResponse(&apos;{&quot;status&quot;:&quot;fail&quot;,&quot;msg&quot;:&quot;用户未登录&quot;}&apos;, content_type=&quot;application/json&quot;)
+
+            course_id = request.POST.get(&quot;course_id&quot;,0)   #取出评论课程的id
+            commtents = request.POST.get(&quot;comments&quot;,&quot;&quot;)  #取出评论的内容
+            if course_id &gt; 0 and commtents: #判断评论的id存在吗和有内容吗，然后保存
+                course_comments = CourseComments() #实例化
+                course = Course.objects.get(id=int(course_id))
+                course_comments.course = course#评论课程
+                course_comments.comments = commtents   #把评论内容传递到数据库
+                course_comments.user = request.user  #那个人评论的
+                course_comments.save()   #保存到数据库中
+                return HttpResponse(&apos;{&quot;status&quot;:&quot;success&quot;,&quot;msg&quot;:&quot;添加成功&quot;}&apos;, content_type=&quot;application/json&quot;)
+
+        else:
+                return HttpResponse(&apos;{&quot;status&quot;:&quot;fail&quot;,&quot;msg&quot;:&quot;添加失败&quot;}&apos;, content_type=&quot;application/json&quot;)
+</code></pre><p>url的配置添加课程评论</p>
+<pre><code>url(r&apos;^add_comment/$&apos;,AddCommentsView.as_view(),name=&quot;add_comment&quot;), #不需要(?P&lt;course_id&gt;\d+)/，因为在post已经传递
+</code></pre><p>添加评论在前端需要ajax以及javascript的设置。。</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+//添加评论
+$(&apos;#js-pl-submit&apos;).on(&apos;click&apos;, function(){
+var comments = $(&quot;#js-pl-textarea&quot;).val()
+if(comments == &quot;&quot;){
+alert(&quot;评论不能为空&quot;)
+return
+}
+$.ajax({
+cache: false,
+type: &quot;POST&quot;,
+url:&quot;/course/add_comment/&quot;,
+data:{&apos;course_id&apos;:10, &apos;comments&apos;:comments},
+async: true,
+beforeSend:function(xhr, settings){
+xhr.setRequestHeader(&quot;X-CSRFToken&quot;, &quot;5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy&quot;);
+},
+success: function(data) {
+if(data.status == &apos;fail&apos;){
+if(data.msg == &apos;用户未登录&apos;){
+window.location.href=&quot;login.html&quot;;
+}else{
+alert(data.msg)
+}
+
+}else if(data.status == &apos;success&apos;){
+window.location.reload();//刷新当前页面.
+}
+},
+});
+});
+
+&lt;/script&gt;
+</code></pre><p>总结8.6用户，提交评论，如何来提交呢，首先有添加用户评论的url，在view设置函数来如何取数据，进行判断用户是否登录，等这些逻辑，取出数据存入到数据库中，然后根据前端页面JavaScript/ajax的动态结合，判断是否存入输入，用户输入不能为空等操作，这些完成之后，就是评论的在页面的展示，同样的原理，for循环，一个个的展示出来。。</p>
+<p>加油！</p>
+<p>8-7   右下角的，学习该课程的同学还学习过什么课程。 课程关联的设置。。。</p>
+<p>在view中，COurseInfoView中，课程章节信息中，</p>
+<p>有一个判断，在课程页面里，如果需要开始学习的话，需要进行验证，用户是否登录，没有登录直接返回到登录页面。。。</p>
+<p>总结。这个逻辑没有学好。关联一个用户学习的课程，比如学习了该课程，还学习了其他的课程也显示出来。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-6/57962898.jpg" alt=""></p>
+<p>关联课程，取到一个用户学习过课程的id，然后遍历取出来。。。</p>
+<pre><code>#取出所有课程id
+course_ids = [ user_couser.course.id for user_couser in all_user_courses]
+#获取学习过该课程的用户学习的其他课程
+releate_courses = Course.objects.filter(id__in=course_ids).order_by(&quot;-click_nums&quot;)[:5]
+</code></pre><p>8-8   课程播放页面</p>
+<p>video.js      课程js播放器     视频播放需要引用特地的js来在线播放。。。</p>
+<p>七牛云上传视频文件。。。。</p>
+<p>对象存储，新建存储空间，django_video,,内容管理，上传文件。。。</p>
+<p>9-1 课程教师</p>
+<p>页面的跳转，，以及将数据在页面显示出来。。。</p>
+<p>表的建立以及外键。。。。</p>
+<p>收藏的功能。。。</p>
+<p>分页功能，以及收藏功能，。代码可以共用、、、、<br>分页前端的代码可以共用。。。</p>
+<p>页面老师的排序功能的设置，，，在前端的参数里面 </p>
+<pre><code>sort = request.GET.get(&apos;sort&apos;, &quot;&quot;)
+if sort:
+    if sort == &quot;hot&quot;:
+        all_teachers = all_teachers.order_by(&quot;-click_nums&quot;)
+</code></pre><p>右侧的讲师排行榜</p>
+<p>另外对人气等一些选项之间的排序选中的，标记</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-6/95409888.jpg" alt=""></p>
+<pre><code>&lt;li {% if sort == '' %}class="active"{% endif %}><a href="?sort=">全部</a> 
+    <li {%="" if="" sort="=" 'hot'%}class="active" endif="" %}&gt;&lt;a="" href="&quot;?sort=hot&quot;&gt;人气" &amp;#8595;&lt;="" a&gt;&lt;="" li&gt;="" class="&quot;active&quot;" <="" code=""></li></code></pre><p>总结思考，view里面对需要排序内容字段的取出，排序，然后在前端显示出来。。</p>
+<p>对与分页，在前端有通用的代码。。。</p>
+<p>9-2 讲师详情页</p>
+<p>跳转入门的意思就是在href设置跳转到特定的url</p>
+<p>讲师排行榜。。。。</p>
+<p>点击讲师的时候往哪里跳转、点击课程的时候往那里跳转。。。  链接的跳转。。。</p>
+<p>最后一个授课讲师的一个收藏以及授课机构的一个收藏。。。</p>
+<p>后台的收藏逻辑通用。。。前端ajax使用</p>
+<p>比如课程详情以及教师详情中，会有收藏功能，需要js以及ajax通用。。。。</p>
+<p>已收藏刷新一下变为收藏，前端页面太容易变化，需要在view里面进行判断。。。。</p>
+<p>判断老师是否被收藏，has_teacher_faved需要被传递到前端</p>
+<pre><code>has_teacher_faved = False #定义是否收藏的默认值为False
+
+if UserFavorite.objects.filter(user=request.user,fav_type=3,fav_id=teacher.id): #如果查询到，就是收藏状态
+
+    has_teacher_faved = True
+</code></pre><p>在前端进行判断。。。</p>
+<pre><code>{% if  has_teacher_faved %}已收藏{% else %}收藏{% endif %}
+
+
+
+10-1 slice       配置全局导航。。。。
+
+pycharm 全局搜索快捷键 Ctrl+H
+
+首页的搜索功能。。。首页的跳转页面的href的设置。。。
+
+设置完之后，没有成为选中的状态。。。在base.html没有办法判断那个选中。。
+
+最简单的方法在view中传入、、、
+
+在view中 `current_nav = "teacher"`     传入前端 
+	
+	  "current_nav":current_nav
+	
+	
+	       <li {%="" if="" current_nav="=" 'teacher'="" %}class="active" endif="" %}&gt;="" &lt;a="" href="&quot;{%" url="" 'org:teacher_list'="" %}&quot;&gt;授课教师&lt;="" a&gt;="" <="" code=""></li></code></pre><p>通过Url链接来判断，<code>http://127.0.0.1:8000/org/teacher/list/</code> 进入了那个页面。。。</p>
+<p>request.path|slice    相对地址的前几位。。。</p>
+<pre><code>&lt;li {% if request.path|slice:'6' == 'course' %}class="active"{% endif %}>
+
+	
+	总结：全局配置功能的设置，通过href的跳转来完成的，，
+	`<a href="{% url 'index' %}">首页</a>`这种形式来进行跳转，因为之前在url里面配置了Url的正则，通过url配置的name来进行跳转。。
+
+
+10-2 首页的搜索功能的设置。。。。跳到各个链接。。。
+
+
+在url后面加入关键词值，
+
+ORM的like数据库功能，在数据表某个字段 比如 `name__icontains`           两个下划线。。。
+
+    from django.db.models import Q
+
+
+授课讲师搜索的时候，没有搜索成功。。。可以找到一条，但是找不全。。。。
+
+
+10-3 个人信息页面
+
+radio的选项
+
+    &nbsp;<input type="radio" name="gender" value="female" {%="" if="" request.user.gender="=" 'female'="" %}checked="checked" endif="" %}&gt;女&lt;="" label&gt;="" <="" code=""></code></pre><p>这一段代码是显示的那个X号，来退出修改。。。</p>
+<pre><code>&lt;div class=&quot;close jsCloseDialog&quot;&gt;&lt;img src=&quot;{% static 'images/dig_close.png' %}&quot;/&gt;&lt;/div&gt;
+</code></pre><p>10-4 修改头像和密码</p>
+<p>新建url,写class view，然后将 class导入，url中。。配置html。。。</p>
+<p>上传图片</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-7/8137189.jpg" alt=""></p>
+<p>总结：修改头像，表单的引用。。。。Model.form 可以直接保存，既有model又有form的功能。。。</p>
+<p>10-5 修改密码。。。</p>
+<pre><code>修改密码和重置密码的步骤类似
+
+js中的url必须是路径，不像html中的 {%  url  %}
+</code></pre><p>问题：当输入的密码小于5位的时候，没有显示必须输出的密码大于5位。。。</p>
+<p>django的最新xadmin源码有个重大bug 大家要注意 这个bug可能会引起某些地方的bug，<br>大家如果是下载的最新的xadmin源码 注意一下这个地方 如果使用的是django1.9可能会引起问题<br>大家可以先把这个地方的逻辑注释掉 或者直接将这个变量改为false</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-7/36323117.jpg" alt=""></p>
+<p>修改密码遇到的问题，当输入两个不一样的密码的时候，显示密码不一致。。<br>但是输入两个一样的密码的时候，就不能修改成功。。。</p>
+<pre><code>TypeError: &apos;SimpleLazyObject&apos; object is not callable，这个问题是方法的调用，比如request.user()、request.user的区别。。。
+</code></pre><p>10-5 总结，修改头像和密码，和头部的全局配置。。。</p>
+<p>10-6 修改邮箱。。。</p>
+<p>两个接口，点击获取验证码的时候，需要向用户新的邮箱发送验证码。。。和用户的邮箱和验证码是否匹配。。。</p>
+<p>获取验证码的接口。。。</p>
+<pre><code>class SendEmailCodeView(LoginRequiredMixin,View):
+</code></pre><p>总结 10-6 只是发送了验证码。。。</p>
+<p>10-7 进行修改邮箱的view修改</p>
+<pre><code>class UpdateEmailView(LoginRequiredMixin,View):
+</code></pre><p>接下来表单的提交。。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-8/97895571.jpg" alt=""></p>
+<pre><code>return HttpResponse(json.dumps(modify_form.errors), content_type=&quot;application/json&quot;)        json.dumps 不需要&apos;&apos; 包裹。。。。
+</code></pre><p>然后显示到页面上面。。。</p>
+<p>数据库的外键的作用。。。。继承其他数据表的内容。。。</p>
+<p>页面的跳转要学习，，那个要跳那个页面，以及后面显示的参数问题，id的选项。。。</p>
+<p>10-9 我的收藏</p>
+<p>比如课程机构，授课教师，公开课。。。</p>
+<pre><code>&lt;/div&gt;    &lt;span&gt;
+</code></pre><p>10-11 个人消息显示。。。。</p>
+<p>消息的显示，如果用户有什么消息，可以在页面的头部显示。。。但是现在没有。。。这段代码就是显示页面顶部的消息。</p>
+<pre><code>&lt;a href=&quot;&quot;&gt;
+&lt;div class=&quot;msg-num&quot;&gt;&lt;span id=&quot;MsgNum&quot;&gt;{{ requst.user.unread_nums }}&lt;/span&gt;&lt;/div&gt;
+  &lt;/a&gt;
+</code></pre><p>在user的models中显示的消息函数。。。</p>
+<pre><code>def unread_nums(self):
+    # 获取用户未读消息的数量
+    from operation.models import UserMessage
+    return UserMessage.objects.filter(user=self.id).count()
+</code></pre><p>11-1 登出和点击数以及收藏数完善</p>
+<p>课程点击数的收藏。。。</p>
+<p>现在的排序功能实现好了，可以根据其中的最热门以及参与人数来进行相应的排序了。后台对其中的大小。。</p>
+<p>收藏数量，有一个接口。。。</p>
+<p>取消收藏。。。。</p>
+<p>问题：：：授课机构的收藏有问题。。。。点击的收藏不能收藏进去。。。</p>
+<pre><code>&lt;li class=&quot;{% if forloop.counter|divisibleby:5 %}five{% endif %}&quot;&gt;    
+</code></pre><p>一行五个显示</p>
+<p>在debug=False的时候，第三方静态文件是通过服务器来代理的。。所以需要设置一下。。</p>
+<p>13章：xadmin的进阶开发</p>
+<p>注册以及权限管理。。。</p>
+<p>后台管理系统权限的使用。。。。</p>
+<p>图标，icons的修改。。。</p>
+<p>某些字段在后台只读。。。<code>readonly_fields</code></p>
+<p>在后台添加课程的时候，比如课程机构，进行搜索状态的。。</p>
+<p>13-4自定义列表返回数据，同一个model注册两个管理器。。</p>
+<p>新增课程的时候，添加章节。。。课程里面嵌套章节，只能一层嵌套。。。</p>
+<p>13-6  xadmin插件的开发。。。</p>
+<p>把富文本编辑器集成到后台。。</p>
+<p>xadmin.readthedoc.io</p>
+<p>写一个xadmin的插件。。在源代码中添加，plugins</p>
+<p>后台的富文本。。</p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-6-12/50717424.jpg" alt=""></p>
+<p>图片不能上传成功。。。</p>
+<pre><code>Forbidden (CSRF token missing or incorrect.): /ueditor/controller/
+[12/Jun/2017 20:02:58] &quot;POST /ueditor/controller/?imagePathFormat=courses%2Fueditor&amp;filePathFormat=courses%2Fueditor&amp;imageMaxSize=1204000&amp;action=uploadimage HTTP/1.1&quot; 403 2266
+</code></pre><p>插件二，excel</p>
+<p>14。。部署、、、</p>
+<p>nginx+uswgi</p>
+<p>href的跳转，以及对应的id的编写，，<code>是_还是.</code><br>跳转，如果后面有参数的话，比如具体那个数字，章节的问题，如何写href….</p>
+<h5 id="继承的机制"><a href="#继承的机制" class="headerlink" title="继承的机制"></a>继承的机制</h5><p>比如一些html的头部以及底部的内容有一样的地方，可以把共用的写为base.html..</p>
+<h5 id="子模版的重写"><a href="#子模版的重写" class="headerlink" title="子模版的重写"></a>子模版的重写</h5><p>不同页面继承base的时候，有的情况下，需要修改继承的内容，比如title的修改等等，，</p>
+<pre><code>&lt;title&gt;{% block title %}课程机构解表{% endblock %} 
+
+	重载
+	`css <% block="" custom_css="" %="">{% endblock %}`  同时可以包含已有的css
+</%></code></pre><p>js也是一样的道理</p>
+<pre><code>&lt;% block custom_js %&gt;{% endblock %}
+</code></pre><p>面包屑 </p>
+<pre><code>&lt;% block custom_bread %&gt;{% endblock %}
+</code></pre><p>content 内容的重载 </p>
+<pre><code>&lt;% block content %&gt;{% endblock %}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/12/Django4/" rel="next" title="Django 搭建小Blog">
+                <i class="fa fa-chevron-left"></i> Django 搭建小Blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/09/Github/" rel="prev" title="Git学习记录">
+                Git学习记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#新建另外一个app-courses-课程"><span class="nav-number">1.</span> <span class="nav-text">新建另外一个app courses 课程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#organization-mode"><span class="nav-number">2.</span> <span class="nav-text">organization mode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#operation"><span class="nav-number">3.</span> <span class="nav-text">operation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#xadmin"><span class="nav-number">4.</span> <span class="nav-text">xadmin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后台全局配置"><span class="nav-number">5.</span> <span class="nav-text">后台全局配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前台业务逻辑"><span class="nav-number"></span> <span class="nav-text">前台业务逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户登录"><span class="nav-number"></span> <span class="nav-text">用户登录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置登录界面"><span class="nav-number">1.</span> <span class="nav-text">配置登录界面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登录进去"><span class="nav-number">2.</span> <span class="nav-text">登录进去</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户登录的后台逻辑"><span class="nav-number">3.</span> <span class="nav-text">用户登录的后台逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户邮箱登录"><span class="nav-number">4.</span> <span class="nav-text">用户邮箱登录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#授课机构-6-1号"><span class="nav-number">5.</span> <span class="nav-text">授课机构    6/1号</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#对课程进行分页"><span class="nav-number">5.1.</span> <span class="nav-text">对课程进行分页</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#继承的机制"><span class="nav-number">6.</span> <span class="nav-text">继承的机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子模版的重写"><span class="nav-number">7.</span> <span class="nav-text">子模版的重写</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

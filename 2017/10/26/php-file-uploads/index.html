@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习一下PHP中文件上传的基本方法。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 文件处理">
+<meta property="og:url" content="http://yoursite.com/2017/10/26/php-file-uploads/index.html">
+<meta property="og:site_name" content="Sec-note">
+<meta property="og:description" content="学习一下PHP中文件上传的基本方法。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/27422064.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/89389181.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/50712806.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/90170854.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/34019909.jpg">
+<meta property="og:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/73731988.jpg">
+<meta property="og:updated_time" content="2018-01-15T08:32:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 文件处理">
+<meta name="twitter:description" content="学习一下PHP中文件上传的基本方法。">
+<meta name="twitter:image" content="http://opmi2ydgh.bkt.clouddn.com//17-10-25/27422064.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/26/php-file-uploads/"/>
+
+
+
+
+
+  <title>PHP 文件处理 | Sec-note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sec-note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/26/php-file-uploads/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sec-note">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sec-note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP 文件处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-26T13:20:46+08:00">
+                2017-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习一下<code>PHP</code>中文件上传的基本方法。</p>
+<a id="more"></a>
+<h5 id="文件上传原理"><a href="#文件上传原理" class="headerlink" title="文件上传原理"></a>文件上传原理</h5><p>将客户端的文件上传到服务器端，在将服务器端的临时文件移动到指定目录中。</p>
+<h5 id="文件上传设置"><a href="#文件上传设置" class="headerlink" title="文件上传设置"></a>文件上传设置</h5><p><strong>客户端配置</strong></p>
+<ol>
+<li>表单页面</li>
+<li>表单的发送方式</li>
+<li>添加 <code>enctype = &quot;multipart/form-data&quot;</code></li>
+</ol>
+<p>前端页面</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;File uploads&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;dofile.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    请选择上传的文件:
+    &lt;input type=&quot;file&quot; name=&quot;myfile&quot; /&gt;&lt;br/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;上传文件&quot; /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>后端接收代码</p>
+<pre><code>&lt;?php
+
+//$_FILE: 文件上传变量
+print_r($_FILES);
+</code></pre><p>打印出的参数，一个二维数组</p>
+<pre><code>Array
+(
+    [myfile] =&gt; Array
+        (
+            [name] =&gt; 3.drupal_attacks.conf.app
+            [type] =&gt; application/octet-stream
+            [tmp_name] =&gt; C:\Windows\Temp\php204A.tmp
+            [error] =&gt; 0
+            [size] =&gt; 37430
+        )
+
+)
+</code></pre><h5 id="FILES-HTTP文件上传变量"><a href="#FILES-HTTP文件上传变量" class="headerlink" title="$FILES:HTTP文件上传变量"></a>$FILES:HTTP文件上传变量</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/27422064.jpg" alt=""></p>
+<p>将临时文件移动到指定目录下</p>
+<p><code>move_uploaded_file</code></p>
+<p><code>copy()</code></p>
+<pre><code>&lt;?php
+
+//$_FILE: 文件上传变量
+print_r($_FILES);
+$filename = $_FILES[&apos;myfile&apos;][&apos;name&apos;];
+$type = $_FILES[&apos;myfile&apos;][&apos;type&apos;];
+$tmp_name = $_FILES[&apos;myfile&apos;][&apos;tmp_name&apos;];
+$size = $_FILES[&apos;myfile&apos;][&apos;size&apos;];
+$error = $_FILES[&apos;myfile&apos;][&apos;error&apos;];
+
+//将服务器上的临时文件移动到指定目录下
+// move_uploaded_file($tmp_name,$destination):将服务器上的临时文件移动到中指定目录下
+move_uploaded_file($tmp_name,&quot;uploads/&quot;.$filename);
+</code></pre><h5 id="文件上传配置以及解析"><a href="#文件上传配置以及解析" class="headerlink" title="文件上传配置以及解析"></a>文件上传配置以及解析</h5><p><code>php.ini</code>的配置。</p>
+<pre><code>file_uploads = On 支持HTTP上传
+upload_max_filesize = 2M 允许上传文件的大小
+</code></pre><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/89389181.jpg" alt=""></p>
+<h5 id="错误信息说明"><a href="#错误信息说明" class="headerlink" title="错误信息说明"></a>错误信息说明</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/50712806.jpg" alt=""></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/90170854.jpg" alt=""></p>
+<pre><code>&lt;?php
+// 通过$_FILES文件上传变量接收上传文件信息
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+$fileinfo = $_FILES[&apos;myfile&apos;];
+$filename = $fileinfo[&apos;name&apos;];
+$type = $fileinfo[&apos;type&apos;];
+$tmp_name = $fileinfo[&apos;tmp_name&apos;];
+$size = $fileinfo[&apos;size&apos;];
+$error = $fileinfo[&apos;error&apos;];
+
+//判断错误号
+if($error==UPLOAD_ERR_OK){
+    if(move_uploaded_file($tmp_name,&quot;uploads/&quot;.$filename)){
+        echo &apos;文件&apos;.$filename.&apos;上传成功&apos;;
+    }else{
+        echo &apos;文件&apos;.$filename.&apos;上传失败&apos;;
+    }
+
+}else{
+    //匹配错误信息
+    switch($error){
+    case 1:
+        echo &apos;上传文件超过PHP配置大小&apos;;
+        break;
+    case 2:
+        echo &apos;超过了表单限制的大小&apos;;
+        break;
+    case 3:
+        echo &apos;文件部分上传&apos;;
+        break;
+    case 4:
+        echo &apos;没有选择上传文件&apos;;
+        break;
+    case 6:
+        echo &apos;没有找到临时目录&apos;;
+        break;
+    case 7:
+    case 8:
+        echo &apos;系统错误&apos;;
+        break;
+    }  
+}
+</code></pre><p><strong>客户端限制</strong></p>
+<p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/34019909.jpg" alt=""></p>
+<p>type accept允许上传的类型</p>
+<h5 id="服务器端上传限制"><a href="#服务器端上传限制" class="headerlink" title="服务器端上传限制"></a>服务器端上传限制</h5><p><img src="http://opmi2ydgh.bkt.clouddn.com//17-10-25/73731988.jpg" alt=""></p>
+<p>进行上传文件名的重命名以及上传路径的判定，如果不存在则新建，等上传错误的判断。</p>
+<pre><code>&lt;?php
+header(&apos;content-type:text/html;charset=utf-8&apos;);
+$fileinfo = @$_FILES[&apos;myfile&apos;];
+$maxSize=2097152;
+$allowExt=array(&apos;jpg&apos;,&apos;png&apos;,&apos;gif&apos;);
+//判断错误号
+if($fileinfo[&apos;error&apos;]==0){
+    //判断上传文件的大小
+    if($fileinfo[&apos;size&apos;]&gt;$maxSize){
+        exit(&apos;上传文件过大&apos;);
+    }
+    //获取文件扩展名
+    //$ext = strtolower(end(explode(&apos;.&apos;,$fileinfo[&apos;name&apos;])));
+    $ext = pathinfo($fileinfo[&apos;name&apos;],PATHINFO_EXTENSION);
+    if(!in_array($ext,$allowExt)){
+        exit(&apos;非法文件类型&apos;);
+    }
+    //判断文件是否通过HTTP POST的方式上传来的
+    if(!is_uploaded_file($fileinfo[&apos;tmp_name&apos;])){
+        exit(&apos;文件不是通过HTTP POST方式上传来的&apos;);
+    }
+    //检测是否为真实的文件类型
+
+    $path = &apos;uploads&apos;;
+    //判断上传路径是否存在,不存在的话就创建目录
+    if(!file_exists($path)){
+        mkdir($path,0777,true);
+        chmod($path,0777);
+    }
+
+    //确保文件名唯一，防止重命名产生覆盖
+    $uniName=md5(uniqid(microtime(true),true)).&apos;.&apos;.$ext;
+    //echo $uniName;exit;
+    $destination=$path.&apos;/&apos;.$uniName;
+    if(move_uploaded_file($fileinfo[&apos;tmp_name&apos;],$destination)){
+        echo &apos;文件上传成功&apos;;
+    }else{
+        echo &apos;文件上传失败&apos;;
+    }
+
+}else{
+    //匹配错误信息
+    switch($fileinfo[&apos;error&apos;]){
+    case 1:
+        echo &apos;上传文件超过PHP配置大小&apos;;
+        break;
+    case 2:
+        echo &apos;超过了表单限制的大小&apos;;
+        break;
+    case 3:
+        echo &apos;文件部分上传&apos;;
+        break;
+    case 4:
+        echo &apos;没有选择上传文件&apos;;
+        break;
+    case 6:
+        echo &apos;没有找到临时目录&apos;;
+        break;
+    case 7:
+    case 8:
+        echo &apos;系统错误&apos;;
+        break;
+}
+}
+</code></pre><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://www.imooc.com/learn/219" target="_blank" rel="noopener">PHP实现文件上传与下载</a></p>
+<p><a href="http://blog.csdn.net/u012275531/article/details/16802127" target="_blank" rel="noopener">php 怎样实现单个文件上传</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/17/php_cookie/" rel="next" title="PHP 会话控制">
+                <i class="fa fa-chevron-left"></i> PHP 会话控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/01/文件上传漏洞分析/" rel="prev" title="PHP文件上传漏洞浅析">
+                PHP文件上传漏洞浅析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sec-note</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sie504" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#文件上传原理"><span class="nav-number">1.</span> <span class="nav-text">文件上传原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件上传设置"><span class="nav-number">2.</span> <span class="nav-text">文件上传设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FILES-HTTP文件上传变量"><span class="nav-number">3.</span> <span class="nav-text">$FILES:HTTP文件上传变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件上传配置以及解析"><span class="nav-number">4.</span> <span class="nav-text">文件上传配置以及解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#错误信息说明"><span class="nav-number">5.</span> <span class="nav-text">错误信息说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器端上传限制"><span class="nav-number">6.</span> <span class="nav-text">服务器端上传限制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sec-note</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
